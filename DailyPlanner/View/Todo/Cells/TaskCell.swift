@@ -26,6 +26,7 @@ class TaskCell: UITableViewCell {
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
         checkBox = UIButton()
         checkBox.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
@@ -48,6 +49,8 @@ class TaskCell: UITableViewCell {
         vStack.axis = .vertical
         
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        
+        selectionStyle = .none
         
         checkBox.addTarget(self, action: #selector(didTouchUpInsideCheckBox(_:)), for: .touchUpInside)
         textField.delegate = self
@@ -79,6 +82,26 @@ class TaskCell: UITableViewCell {
             }
             Database.save() // Is it possible to create a retain loop here?
         }
+    }
+    
+    func textHeight() -> CGSize {
+        
+        return .zero
+//        textField.size
+//        let size = textField.sizeThatFits(CGSize(width: textField.frame.size.width, height: .greatestFiniteMagnitude))
+//        return size
+        
+//        #define MAX_HEIGHT 2000
+//
+//        NSString *foo = @"Lorem ipsum dolor sit amet.";
+//        CGSize size = [foo sizeWithFont:[UIFont systemFontOfSize:14]
+//                      constrainedToSize:CGSizeMake(100, MAX_HEIGHT)
+//                          lineBreakMode:UILineBreakModeWordWrap];
+//
+//        and then you can use this with your UITextView:
+//
+//        [textView setFont:[UIFont systemFontOfSize:14]];
+//        [textView setFrame:CGRectMake(5, 30, 100, size.height + 10)];
     }
 }
 

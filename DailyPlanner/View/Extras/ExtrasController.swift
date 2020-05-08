@@ -14,6 +14,7 @@ class ExtrasController: UIViewController {
     
     required init?(coder: NSCoder = Coder()) {
         tableView = UITableView()
+        tableView.separatorStyle = .none
         
         super.init(coder: coder)
         
@@ -24,7 +25,10 @@ class ExtrasController: UIViewController {
         
         view = tableView
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(MealsCell.self, forCellReuseIdentifier: "mealsCell")
+        tableView.register(WaterCell.self, forCellReuseIdentifier: "waterCell")
+        tableView.register(PomodoroCell.self, forCellReuseIdentifier: "pomodoroCell")
+        tableView.register(NotesCell.self, forCellReuseIdentifier: "notesCell")
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,27 +46,61 @@ extension ExtrasController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Test"
-        return cell
+        
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mealsCell", for: indexPath)
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "waterCell", for: indexPath)
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "pomodoroCell", for: indexPath)
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
+            return cell
+        default:
+            break
+        }
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        cell.textLabel?.text = "Test"
+//        return cell
     }
     
 }
 
 extension ExtrasController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    // TODO: Copied from TodoController
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.font = UIFont.monospacedSystemFont(ofSize: 20, weight: .regular)
+        label.textColor = UIColor(named: "orange")
+        label.textAlignment = .center
+        
         switch section {
         case 0:
-            return "Meals"
+            label.text = "Meals"
         case 1:
-            return "Water"
+            label.text = "Water"
         case 2:
-            return "Pomodoro"
+            label.text = "Pomodoro"
         case 3:
-            return "Notes"
+            label.text = "Notes"
         default:
-            return nil
+            break
         }
+        
+        let vStack = UIStackView(arrangedSubviews: [UIView(), label])
+        vStack.axis = .vertical
+        
+        return vStack
     }
 }

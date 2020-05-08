@@ -17,6 +17,13 @@
 		035016452465B5C2006726BC /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016442465B5C2006726BC /* TaskCell.swift */; };
 		035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016462465B7BC006726BC /* UIView+Extensions.swift */; };
 		035016492465B974006726BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016482465B974006726BC /* TextField.swift */; };
+		0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0350164A2465BFD8006726BC /* ScheduleCell.swift */; };
+		0350164D2465C2CB006726BC /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0350164C2465C2CB006726BC /* TableView.swift */; };
+		0350164F2465C7AE006726BC /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0350164E2465C7AE006726BC /* String+Extensions.swift */; };
+		035016512465CF60006726BC /* MealsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016502465CF60006726BC /* MealsCell.swift */; };
+		035016532465CF67006726BC /* WaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016522465CF67006726BC /* WaterCell.swift */; };
+		035016552465CF6F006726BC /* PomodoroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016542465CF6E006726BC /* PomodoroCell.swift */; };
+		035016572465CF75006726BC /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016562465CF75006726BC /* NotesCell.swift */; };
 		03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B932465AE1900904DE1 /* Entity+Extensions.swift */; };
 		03680B962465AE7500904DE1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B952465AE7500904DE1 /* Database.swift */; };
 		039566612463315100C0F498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566602463315100C0F498 /* AppDelegate.swift */; };
@@ -58,6 +65,13 @@
 		035016442465B5C2006726BC /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		035016462465B7BC006726BC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		035016482465B974006726BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		0350164A2465BFD8006726BC /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
+		0350164C2465C2CB006726BC /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		0350164E2465C7AE006726BC /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		035016502465CF60006726BC /* MealsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsCell.swift; sourceTree = "<group>"; };
+		035016522465CF67006726BC /* WaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterCell.swift; sourceTree = "<group>"; };
+		035016542465CF6E006726BC /* PomodoroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroCell.swift; sourceTree = "<group>"; };
+		035016562465CF75006726BC /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		03680B932465AE1900904DE1 /* Entity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extensions.swift"; sourceTree = "<group>"; };
 		03680B952465AE7500904DE1 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		0395665D2463315100C0F498 /* DailyPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +138,10 @@
 		0350163F2465B5A0006726BC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				035016502465CF60006726BC /* MealsCell.swift */,
+				035016522465CF67006726BC /* WaterCell.swift */,
+				035016542465CF6E006726BC /* PomodoroCell.swift */,
+				035016562465CF75006726BC /* NotesCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -140,6 +158,7 @@
 		035016412465B5A9006726BC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				0350164A2465BFD8006726BC /* ScheduleCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -239,6 +258,8 @@
 				03956696246332BF00C0F498 /* Coder.swift */,
 				035016462465B7BC006726BC /* UIView+Extensions.swift */,
 				035016482465B974006726BC /* TextField.swift */,
+				0350164C2465C2CB006726BC /* TableView.swift */,
+				0350164E2465C7AE006726BC /* String+Extensions.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -385,10 +406,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0350164F2465C7AE006726BC /* String+Extensions.swift in Sources */,
+				035016552465CF6F006726BC /* PomodoroCell.swift in Sources */,
 				03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */,
+				035016572465CF75006726BC /* NotesCell.swift in Sources */,
 				03680B962465AE7500904DE1 /* Database.swift in Sources */,
 				0330F9362463590F00E07824 /* MainNavigationController.swift in Sources */,
+				035016512465CF60006726BC /* MealsCell.swift in Sources */,
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
+				0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */,
 				035016372465AF47006726BC /* Day+Extensions.swift in Sources */,
 				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
@@ -401,7 +427,9 @@
 				039566612463315100C0F498 /* AppDelegate.swift in Sources */,
 				035016492465B974006726BC /* TextField.swift in Sources */,
 				035016392465AFAE006726BC /* Task+Extensions.swift in Sources */,
+				035016532465CF67006726BC /* WaterCell.swift in Sources */,
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,
+				0350164D2465C2CB006726BC /* TableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,16 +10,21 @@ import UIKit
 
 extension UIView {
     
-    func embed(view: UIView, padding: UIEdgeInsets = .zero) {
+    typealias Constraint = NSLayoutConstraint
+    typealias Constraints = (top: Constraint, right: Constraint, bottom: Constraint, left: Constraint)
+    
+    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero) -> Constraints {
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(view)
         
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: topAnchor, constant: padding.top),
-            rightAnchor.constraint(equalTo: view.rightAnchor, constant: padding.right),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom),
-            view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left)
-        ])
+        let top = view.topAnchor.constraint(equalTo: topAnchor, constant: padding.top)
+        let right = trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding.right)
+        let bottom = bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom)
+        let leading = view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left)
+        
+        NSLayoutConstraint.activate([top, right, bottom, leading])
+        
+        return (top, right, bottom, leading)
     }
 }

@@ -11,11 +11,14 @@ import UIKit
 class ScheduleController: UIViewController {
     
     let tableView: UITableView
+//    var dismissTapGesture: UITapGestureRecognizer!
     
     required init?(coder: NSCoder = Coder()) {
         tableView = UITableView()
         
         super.init(coder: coder)
+        
+//        dismissTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDismissTapGesture(_:)))
         
         tabBarItem = UITabBarItem(
             title: "Schedule",
@@ -24,10 +27,23 @@ class ScheduleController: UIViewController {
         
         view = tableView
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ScheduleCell.self, forCellReuseIdentifier: "scheduleCell")
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.separatorStyle = .none
+        
+        tableView.keyboardDismissMode = .onDrag
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDismissTapGesture(_:)))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleDismissTapGesture(_ sender: UITapGestureRecognizer) {
+        // Dismisses the active responder
+        self.view.endEditing(false)
     }
 }
 
@@ -67,13 +83,41 @@ extension ScheduleController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "scheduleCell", for: indexPath)
         let hour = hourForRow(at: indexPath) ?? -1
-        cell.textLabel?.text = "\(hour)"
+        
+        if let scheduleCell = cell as? ScheduleCell {
+            scheduleCell.hourLabel.text = "\(hour)"
+            
+            if indexPath.row == 0 {
+                scheduleCell.meridiemLabel.text = "AM"
+            } else if indexPath.row == 7 {
+                scheduleCell.meridiemLabel.text = "PM"
+            }
+            
+            
+            scheduleCell.configure(with: nil, delegate: self)
+        }
+        
+//        cell.textLabel?.text = "\(hour)"
         return cell
     }
 }
 
 extension ScheduleController: UITableViewDelegate {
     
+}
+
+extension ScheduleController: CellTextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell) {
+        
+        // Should I use calls to `beginUpdates` and `endUpdates` instead?
+        tableView.performBatchUpdates({
+            UIView.animate(withDuration: 0.0) {
+                cell.contentView.setNeedsLayout()
+                cell.contentView.layoutIfNeeded()
+            }
+        }, completion: nil)
+    }
 }
