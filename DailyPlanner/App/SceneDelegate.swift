@@ -9,42 +9,19 @@
 import UIKit
 import CoreData
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, DayProvider {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
-    var _day: Day?
-    var day: Day {
-        get {
-            if let day = _day {
-                return day
-            }
-            
-            guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { fatalError() }
-            
-            let request: NSFetchRequest<Day> = Day.fetchRequest()
-            let first = try? context.fetch(request).first
-            
-            if let first = first {
-                _day = first
-                return _day!
-            } else {
-                _day = Day(context: context)
-                _day?.date = Date()
-                try? context.save()
-                return _day!
-            }
-        } set {
-            day = newValue
-        }
-    }
+    lazy var dayProvider: DayProvider = {
+        return DayProvider()
+    }()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
         
-        guard let tabBarController = MainTabBarController(dayProvider: self) else { return }        
+        guard let tabBarController = MainTabBarController(dayProvider: dayProvider) else { return }        
         let navigationController = MainNavigationController(rootViewController: tabBarController)
         
         window.rootViewController = navigationController
@@ -79,11 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, DayProvider {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        
-        // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        Database.save()
     }
-    
-    
 }
 

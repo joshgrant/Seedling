@@ -11,6 +11,14 @@
 		0330F9322463414000E07824 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9312463414000E07824 /* ScheduleController.swift */; };
 		0330F9342463414A00E07824 /* ExtrasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9332463414A00E07824 /* ExtrasController.swift */; };
 		0330F9362463590F00E07824 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9352463590F00E07824 /* MainNavigationController.swift */; };
+		035016372465AF47006726BC /* Day+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016362465AF47006726BC /* Day+Extensions.swift */; };
+		035016392465AFAE006726BC /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016382465AFAE006726BC /* Task+Extensions.swift */; };
+		0350163D2465B090006726BC /* DayProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0350163C2465B090006726BC /* DayProvider.swift */; };
+		035016452465B5C2006726BC /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016442465B5C2006726BC /* TaskCell.swift */; };
+		035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016462465B7BC006726BC /* UIView+Extensions.swift */; };
+		035016492465B974006726BC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016482465B974006726BC /* TextField.swift */; };
+		03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B932465AE1900904DE1 /* Entity+Extensions.swift */; };
+		03680B962465AE7500904DE1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B952465AE7500904DE1 /* Database.swift */; };
 		039566612463315100C0F498 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566602463315100C0F498 /* AppDelegate.swift */; };
 		039566632463315100C0F498 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566622463315100C0F498 /* SceneDelegate.swift */; };
 		0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 039566692463315100C0F498 /* DailyPlanner.xcdatamodeld */; };
@@ -44,6 +52,14 @@
 		0330F9312463414000E07824 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
 		0330F9332463414A00E07824 /* ExtrasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasController.swift; sourceTree = "<group>"; };
 		0330F9352463590F00E07824 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		035016362465AF47006726BC /* Day+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Extensions.swift"; sourceTree = "<group>"; };
+		035016382465AFAE006726BC /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
+		0350163C2465B090006726BC /* DayProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProvider.swift; sourceTree = "<group>"; };
+		035016442465B5C2006726BC /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		035016462465B7BC006726BC /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		035016482465B974006726BC /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		03680B932465AE1900904DE1 /* Entity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extensions.swift"; sourceTree = "<group>"; };
+		03680B952465AE7500904DE1 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		0395665D2463315100C0F498 /* DailyPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		039566602463315100C0F498 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		039566622463315100C0F498 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,9 +105,70 @@
 		0330F93724635BB000E07824 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				03680B952465AE7500904DE1 /* Database.swift */,
+				03680B922465AE0C00904DE1 /* Entities */,
 				039566692463315100C0F498 /* DailyPlanner.xcdatamodeld */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		0350163E2465B59B006726BC /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				0350163F2465B5A0006726BC /* Cells */,
+				0330F9332463414A00E07824 /* ExtrasController.swift */,
+			);
+			path = Extras;
+			sourceTree = "<group>";
+		};
+		0350163F2465B5A0006726BC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		035016402465B5A4006726BC /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				035016412465B5A9006726BC /* Cells */,
+				0330F9312463414000E07824 /* ScheduleController.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		035016412465B5A9006726BC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		035016422465B5AD006726BC /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				035016432465B5B3006726BC /* Cells */,
+				0330F92F2463413200E07824 /* TodoController.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		035016432465B5B3006726BC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				035016442465B5C2006726BC /* TaskCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		03680B922465AE0C00904DE1 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				03680B932465AE1900904DE1 /* Entity+Extensions.swift */,
+				035016362465AF47006726BC /* Day+Extensions.swift */,
+				035016382465AFAE006726BC /* Task+Extensions.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		039566542463315100C0F498 = {
@@ -117,6 +194,7 @@
 		0395665F2463315100C0F498 /* DailyPlanner */ = {
 			isa = PBXGroup;
 			children = (
+				0350163C2465B090006726BC /* DayProvider.swift */,
 				03956693246331D800C0F498 /* View */,
 				03956699246332D400C0F498 /* App */,
 				0330F93724635BB000E07824 /* Database */,
@@ -147,9 +225,9 @@
 			isa = PBXGroup;
 			children = (
 				039566942463327B00C0F498 /* MainTabBarController.swift */,
-				0330F92F2463413200E07824 /* TodoController.swift */,
-				0330F9312463414000E07824 /* ScheduleController.swift */,
-				0330F9332463414A00E07824 /* ExtrasController.swift */,
+				035016422465B5AD006726BC /* Todo */,
+				035016402465B5A4006726BC /* Schedule */,
+				0350163E2465B59B006726BC /* Extras */,
 				0330F9352463590F00E07824 /* MainNavigationController.swift */,
 			);
 			path = View;
@@ -159,6 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				03956696246332BF00C0F498 /* Coder.swift */,
+				035016462465B7BC006726BC /* UIView+Extensions.swift */,
+				035016482465B974006726BC /* TextField.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -305,14 +385,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */,
+				03680B962465AE7500904DE1 /* Database.swift in Sources */,
 				0330F9362463590F00E07824 /* MainNavigationController.swift in Sources */,
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
+				035016372465AF47006726BC /* Day+Extensions.swift in Sources */,
+				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
+				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
 				0330F9342463414A00E07824 /* ExtrasController.swift in Sources */,
 				0330F9322463414000E07824 /* ScheduleController.swift in Sources */,
+				035016452465B5C2006726BC /* TaskCell.swift in Sources */,
 				039566612463315100C0F498 /* AppDelegate.swift in Sources */,
+				035016492465B974006726BC /* TextField.swift in Sources */,
+				035016392465AFAE006726BC /* Task+Extensions.swift in Sources */,
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
