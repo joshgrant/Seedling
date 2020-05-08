@@ -46,6 +46,42 @@ class DayProvider {
             _day = newValue
         }
     }
+    
+    var tomorrow: Day {
+        guard let date = day.date else { return Day.make(date: Date()) }
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date > %@", date as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        fetchRequest.fetchLimit = 1
+        
+        let result = try? Database.context.fetch(fetchRequest)
+        
+        if let tomorrow = result?.first {
+            return tomorrow
+        } else {
+            let day = Day.make(date: date.addingTimeInterval(60 * 60 * 24))
+            Database.save()
+            return day
+        }
+    }
+    
+    var yesterday: Day {
+        guard let date = day.date else { return Day.make(date: Date()) }
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        
+        let result = try? Database.context.fetch(fetchRequest)
+        
+        if let yesterday = result?.first {
+            return yesterday
+        } else {
+            let day = Day.make(date: date.addingTimeInterval(-60 * 60 * 24))
+            Database.save()
+            return day
+        }
+    }
 }
 
 extension NSNotification.Name {

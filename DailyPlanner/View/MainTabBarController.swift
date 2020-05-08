@@ -12,7 +12,7 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Variables
     
-    weak var dayProvider: DayProvider?
+    unowned var dayProvider: DayProvider
     
 //    var date: Date
     
@@ -55,7 +55,7 @@ class MainTabBarController: UITabBarController {
     private func setNavigationTitle() {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        if let date = dayProvider?.day.date {
+        if let date = dayProvider.day.date {
             let title = formatter.string(from: date)
             navigationItem.title = title
         } else {
@@ -65,16 +65,12 @@ class MainTabBarController: UITabBarController {
     }
     
     @objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem) {
-        if let date = dayProvider?.day.date?.addingTimeInterval(-60 * 60 * 24) {
-            dayProvider?.day = Day.make(date: date)
-        }
+        dayProvider.day = dayProvider.yesterday
         setNavigationTitle()
     }
     
     @objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem) {
-        if let date = dayProvider?.day.date?.addingTimeInterval(60 * 60 * 24) {
-            dayProvider?.day = Day.make(date: date)
-        }
+        dayProvider.day = dayProvider.tomorrow
         setNavigationTitle()
     }
 }
