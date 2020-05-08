@@ -11,33 +11,47 @@ import UIKit
 class MealsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        selectionStyle = .none
         
         let breakfast = UIStackView(arrangedSubviews: [
             makeLabel(title: "Breakfast:"),
             makeTextView(placeholder: "None")])
         breakfast.axis = .vertical
+        breakfast.spacing = 6
         
         let lunch = UIStackView(arrangedSubviews: [
             makeLabel(title: "Lunch:"),
             makeTextView(placeholder: "None")
         ])
         lunch.axis = .vertical
+        lunch.spacing = 6
         
         let dinner = UIStackView(arrangedSubviews: [
             makeLabel(title: "Dinner:"),
             makeTextView(placeholder: "None")
         ])
+        
         dinner.axis = .vertical
+        dinner.spacing = 6
         
         let vStack = UIStackView(arrangedSubviews: [
             breakfast, lunch, dinner
         ])
+        vStack.spacing = 10
         
         vStack.axis = .vertical
         
-        contentView.embed(view: vStack)
+        let leftPadding = UIView()
+        leftPadding.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        let rightPadding = UIView()
+        rightPadding.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        let hStack = UIStackView(arrangedSubviews: [leftPadding, vStack, rightPadding])
+        
+        contentView.embed(view: hStack)
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +62,7 @@ class MealsCell: UITableViewCell {
         let label = UILabel()
         label.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
         label.textColor = UIColor(named: "text")
+        label.text = title
         return label
     }
     
@@ -56,6 +71,9 @@ class MealsCell: UITableViewCell {
         textView.textColor = UIColor(named: "emerald")
         textView.heightAnchor.constraint(equalToConstant: 54).isActive = true
         textView.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
+        textView.layer.borderColor = UIColor(named: "separator")?.cgColor
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 4
         return textView
     }
 }

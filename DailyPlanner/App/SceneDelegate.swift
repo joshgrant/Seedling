@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         guard let tabBarController = MainTabBarController(dayProvider: dayProvider) else { return }        
-        let navigationController = MainNavigationController(rootViewController: tabBarController)
+        let navigationController = UINavigationController(rootViewController: tabBarController)
         
         window.rootViewController = navigationController
         

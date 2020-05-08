@@ -37,6 +37,7 @@ class TodoController: UIViewController {
         tableView.separatorStyle = .none
         
         view = tableView
+        handleNotifications()
     }
     
     required init?(coder: NSCoder) {
@@ -110,5 +111,22 @@ extension TodoController: UITableViewDelegate {
         vStack.axis = .vertical
         
         return vStack
+    }
+}
+
+// MARK: - Notifications
+
+extension TodoController {
+    
+    func handleNotifications() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(dayProviderDidUpdateDay(_:)),
+            name: .dayProviderDidUpdateDay,
+            object: nil)
+    }
+    
+    @objc func dayProviderDidUpdateDay(_ notification: Notification) {
+        tableView.reloadData()
     }
 }

@@ -74,7 +74,7 @@ class ScheduleCell: UITableViewCell {
         let vStack = UIStackView(arrangedSubviews: [stackView, hStack])
         vStack.axis = .vertical
         
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
         

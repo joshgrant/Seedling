@@ -15,7 +15,7 @@ class DayProvider {
             NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["newDay": newValue as Any])
         }
         didSet {
-            NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["day": _day as Any])
+            NotificationCenter.default.post(name: .dayProviderDidUpdateDay, object: self, userInfo: ["day": _day as Any])
         }
     }
     

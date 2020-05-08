@@ -14,7 +14,7 @@ class MainTabBarController: UITabBarController {
     
     weak var dayProvider: DayProvider?
     
-    var date: Date
+//    var date: Date
     
     var todo: TodoController
     var schedule: ScheduleController
@@ -29,7 +29,7 @@ class MainTabBarController: UITabBarController {
         schedule = ScheduleController()!
         extras = ExtrasController()!
         
-        date = Date()
+//        date = Date()
         
         super.init(coder: Coder())
         
@@ -40,9 +40,9 @@ class MainTabBarController: UITabBarController {
         tabBar.isTranslucent = true
         tabBar.unselectedItemTintColor = .white
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.left.fill"), style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.left.fill"), style: .plain, target: self, action: #selector(didTouchUpInsideLeftButton(_:)))
         navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "emerald")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.right.fill"), style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.right.fill"), style: .plain, target: self, action: #selector(didTouchUpInsideRightButton(_:)))
         navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
         
         setNavigationTitle()
@@ -55,18 +55,26 @@ class MainTabBarController: UITabBarController {
     private func setNavigationTitle() {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        let title = formatter.string(from: date)
-        
-        navigationItem.title = title
+        if let date = dayProvider?.day.date {
+            let title = formatter.string(from: date)
+            navigationItem.title = title
+        } else {
+            let title = "Today"
+            navigationItem.title = title
+        }
     }
     
     @objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem) {
-        date = date.addingTimeInterval(-60 * 60 * 24)
+        if let date = dayProvider?.day.date?.addingTimeInterval(-60 * 60 * 24) {
+            dayProvider?.day = Day.make(date: date)
+        }
         setNavigationTitle()
     }
     
     @objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem) {
-        date = date.addingTimeInterval(60 * 60 * 24)
+        if let date = dayProvider?.day.date?.addingTimeInterval(60 * 60 * 24) {
+            dayProvider?.day = Day.make(date: date)
+        }
         setNavigationTitle()
     }
 }

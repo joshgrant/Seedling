@@ -48,7 +48,7 @@ class TaskCell: UITableViewCell {
         let vStack = UIStackView(arrangedSubviews: [hStack, hStack2])
         vStack.axis = .vertical
         
-        super.init(style: .default, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
         
@@ -68,9 +68,9 @@ class TaskCell: UITableViewCell {
         textField.text = task.content
         
         if task.completed {
-            checkBox.setImage(UIImage(named: "taskComplete"), for: .normal)
+            checkBox.setImage(UIImage(named: "orangeBubble"), for: .normal)
         } else {
-            checkBox.setImage(UIImage(named: "taskIncomplete"), for: .normal)
+            checkBox.setImage(UIImage(named: "clearBubble"), for: .normal)
         }
     }
     

@@ -25,6 +25,7 @@ class ExtrasController: UIViewController {
         
         view = tableView
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(MealsCell.self, forCellReuseIdentifier: "mealsCell")
         tableView.register(WaterCell.self, forCellReuseIdentifier: "waterCell")
         tableView.register(PomodoroCell.self, forCellReuseIdentifier: "pomodoroCell")
@@ -32,10 +33,27 @@ class ExtrasController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 
 extension ExtrasController: UITableViewDataSource {
+    
+    func cellIdentifier(for indexPath: IndexPath) -> String {
+        switch indexPath.section {
+        case 0:
+            return "mealsCell"
+        case 1:
+            return "waterCell"
+        case 2:
+            return "pomodoroCell"
+        case 3:
+            return "notesCell"
+        default:
+            return "cell"
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         4
@@ -47,26 +65,24 @@ extension ExtrasController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let identifier = cellIdentifier(for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "mealsCell", for: indexPath)
-            return cell
+//            (cell as! MealsCell).text
+            break
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "waterCell", for: indexPath)
-            return cell
+            break
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "pomodoroCell", for: indexPath)
-            return cell
+            break
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "notesCell", for: indexPath)
-            return cell
+            break
         default:
             break
         }
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.text = "Test"
-//        return cell
+        return cell
     }
     
 }
@@ -98,9 +114,31 @@ extension ExtrasController: UITableViewDelegate {
             break
         }
         
-        let vStack = UIStackView(arrangedSubviews: [UIView(), label])
+        let topSpacer = UIView()
+        let bottomSpacer = UIView()
+        
+        let vStack = UIStackView(arrangedSubviews: [
+            topSpacer,
+            label,
+            bottomSpacer])
         vStack.axis = .vertical
         
-        return vStack
+        topSpacer.heightAnchor.constraint(equalTo: bottomSpacer.heightAnchor).isActive = true
+        
+        let effect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: effect)
+        
+//        visualEffectView.embed(view: vStack)
+        visualEffectView.contentView.embed(view: vStack)
+        
+        return visualEffectView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 22
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
 }
