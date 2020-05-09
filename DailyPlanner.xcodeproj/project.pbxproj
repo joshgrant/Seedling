@@ -34,6 +34,15 @@
 		039566862463315200C0F498 /* DailyPlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566852463315200C0F498 /* DailyPlannerUITests.swift */; };
 		039566952463327B00C0F498 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566942463327B00C0F498 /* MainTabBarController.swift */; };
 		03956697246332BF00C0F498 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03956696246332BF00C0F498 /* Coder.swift */; };
+		03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6D2466E6A4003B420E /* TextView.swift */; };
+		03F3FE702466E753003B420E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6F2466E753003B420E /* Color.swift */; };
+		03F3FE722466E922003B420E /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE712466E922003B420E /* TextStyle.swift */; };
+		03F3FE742466EE4D003B420E /* TodoController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */; };
+		03F3FE762466EE5D003B420E /* TodoController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */; };
+		03F3FE782466EE6E003B420E /* TodoController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */; };
+		03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */; };
+		03F3FE7C2466EF12003B420E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */; };
+		03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +96,15 @@
 		039566872463315200C0F498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039566942463327B00C0F498 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03956696246332BF00C0F498 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
+		03F3FE6D2466E6A4003B420E /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		03F3FE6F2466E753003B420E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		03F3FE712466E922003B420E /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
+		03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+DataSource.swift"; sourceTree = "<group>"; };
+		03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+Delegate.swift"; sourceTree = "<group>"; };
+		03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+Notifications.swift"; sourceTree = "<group>"; };
+		03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+CellTextViewDelegate.swift"; sourceTree = "<group>"; };
+		03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +184,10 @@
 			children = (
 				035016432465B5B3006726BC /* Cells */,
 				0330F92F2463413200E07824 /* TodoController.swift */,
+				03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */,
+				03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */,
+				03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */,
+				03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -257,6 +279,11 @@
 				035016482465B974006726BC /* TextField.swift */,
 				0350164C2465C2CB006726BC /* TableView.swift */,
 				0350164E2465C7AE006726BC /* String+Extensions.swift */,
+				03F3FE6D2466E6A4003B420E /* TextView.swift */,
+				03F3FE6F2466E753003B420E /* Color.swift */,
+				03F3FE712466E922003B420E /* TextStyle.swift */,
+				03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */,
+				03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -411,17 +438,26 @@
 				035016512465CF60006726BC /* MealsCell.swift in Sources */,
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
 				0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */,
+				03F3FE762466EE5D003B420E /* TodoController+Delegate.swift in Sources */,
 				035016372465AF47006726BC /* Day+Extensions.swift in Sources */,
+				03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */,
 				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
+				03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */,
 				0330F9342463414A00E07824 /* ExtrasController.swift in Sources */,
 				0330F9322463414000E07824 /* ScheduleController.swift in Sources */,
 				035016452465B5C2006726BC /* TaskCell.swift in Sources */,
+				03F3FE722466E922003B420E /* TextStyle.swift in Sources */,
+				03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */,
+				03F3FE702466E753003B420E /* Color.swift in Sources */,
+				03F3FE782466EE6E003B420E /* TodoController+Notifications.swift in Sources */,
 				039566612463315100C0F498 /* AppDelegate.swift in Sources */,
+				03F3FE7C2466EF12003B420E /* UIImage+Extensions.swift in Sources */,
 				035016492465B974006726BC /* TextField.swift in Sources */,
+				03F3FE742466EE4D003B420E /* TodoController+DataSource.swift in Sources */,
 				035016392465AFAE006726BC /* Task+Extensions.swift in Sources */,
 				035016532465CF67006726BC /* WaterCell.swift in Sources */,
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,

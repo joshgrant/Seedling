@@ -109,10 +109,12 @@ extension ScheduleController: UITableViewDelegate {
 }
 
 extension ScheduleController: CellTextViewDelegate {
-    
+	
+	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell) {
+		//
+	}
+
     func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell) {
-        
-        // Should I use calls to `beginUpdates` and `endUpdates` instead?
         tableView.performBatchUpdates({
             UIView.animate(withDuration: 0.0) {
                 cell.contentView.setNeedsLayout()
@@ -120,4 +122,12 @@ extension ScheduleController: CellTextViewDelegate {
             }
         }, completion: nil)
     }
+	
+	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell) {
+		textView.resignFirstResponder()
+	}
+	
+	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool {
+		return true
+	}
 }

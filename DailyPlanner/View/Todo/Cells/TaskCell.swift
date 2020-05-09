@@ -8,21 +8,20 @@
 
 import UIKit
 
-class TaskCellModel {
-    
-}
-
 class TaskCell: UITableViewCell {
     
     let checkBox: UIButton
-    let textField: TextField
-//    let stackView: UIStackView
+    let textView: TextView
+    
+    weak var delegate: CellTextViewDelegate?
     
     var task: Task?
     
     override func prepareForReuse() {
         super.prepareForReuse()
         task = nil
+        
+        textView.text = nil
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -30,15 +29,16 @@ class TaskCell: UITableViewCell {
         checkBox = UIButton()
         checkBox.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
-        textField = TextField()
-        textField.font = UIFont.monospacedSystemFont(ofSize: 17, weight: .regular)
-        textField.textColor = UIColor(named: "text")
+        textView = TextView()
         
-        let hStack = UIStackView(arrangedSubviews: [checkBox, textField])
+        textView.textContainerInset = UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
+        textView.textContainer.lineFragmentPadding = 0
+        
+        let hStack = UIStackView(arrangedSubviews: [checkBox, textView])
         
         let lineSeparator = UIView()
         lineSeparator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        lineSeparator.backgroundColor = UIColor(named: "orange")
+		lineSeparator.backgroundColor = .type(.orange)
         
         let spacer = UIView()
         spacer.widthAnchor.constraint(equalToConstant: 48).isActive = true
@@ -53,9 +53,10 @@ class TaskCell: UITableViewCell {
         selectionStyle = .none
         
         checkBox.addTarget(self, action: #selector(didTouchUpInsideCheckBox(_:)), for: .touchUpInside)
-        textField.delegate = self
         
         contentView.embed(view: vStack)
+		
+		textView.configure(with: .textView, delegate: self)
     }
     
     required init?(coder: NSCoder) {
@@ -65,12 +66,12 @@ class TaskCell: UITableViewCell {
     func configure(with task: Task) {
         self.task = task
         
-        textField.text = task.content
+        textView.text = task.content
         
         if task.completed {
-            checkBox.setImage(UIImage(named: "orangeBubble"), for: .normal)
+			checkBox.setImage(.type(.orangeBubble), for: .normal)
         } else {
-            checkBox.setImage(UIImage(named: "clearBubble"), for: .normal)
+			checkBox.setImage(.type(.clearBubble), for: .normal)
         }
     }
     
@@ -83,40 +84,36 @@ class TaskCell: UITableViewCell {
             Database.save() // Is it possible to create a retain loop here?
         }
     }
-    
-    func textHeight() -> CGSize {
-        
-        return .zero
-//        textField.size
-//        let size = textField.sizeThatFits(CGSize(width: textField.frame.size.width, height: .greatestFiniteMagnitude))
-//        return size
-        
-//        #define MAX_HEIGHT 2000
-//
-//        NSString *foo = @"Lorem ipsum dolor sit amet.";
-//        CGSize size = [foo sizeWithFont:[UIFont systemFontOfSize:14]
-//                      constrainedToSize:CGSizeMake(100, MAX_HEIGHT)
-//                          lineBreakMode:UILineBreakModeWordWrap];
-//
-//        and then you can use this with your UITextView:
-//
-//        [textView setFont:[UIFont systemFontOfSize:14]];
-//        [textView setFrame:CGRectMake(5, 30, 100, size.height + 10)];
-    }
 }
 
-extension TaskCell: UITextFieldDelegate {
+extension TaskCell: UITextViewDelegate {
+	
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		delegate?.textViewDidBeginEditing(textView, in: self)
+	}
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    // Not called with programmatic changes, just fyi
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.textViewDidChange(textView, in: self)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    func textViewDidEndEditing(_ textView: UITextView) {
+		delegate?.textViewDidEndEditing(textView, in: self)
         Database.context.perform {
-            self.task?.content = textField.text
+            self.task?.content = textView.text
             Database.save()
         }
     }
+	
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//		print(textView.text)
+//		print(text)
+//		print(textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: text))
+		
+		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
+			return true
+		} else {
+			return false
+		}
+	}
 }
-

@@ -8,125 +8,74 @@
 
 import UIKit
 
-class TodoController: UIViewController {
+class TodoController: UIViewController
+{
+	// MARK: - Variables
+	
+	enum Section: Int {
+		case priorities
+		case todos
+	}
     
+	weak var dayProvider: DayProvider?
+	
     let tableView: UITableView
+	
+	var editingSection: Section?
+	
+	// MARK: - Initialization
     
-    weak var dayProvider: DayProvider?
-    
-    init?(dayProvider: DayProvider) {
+    init?(dayProvider: DayProvider)
+	{
         self.dayProvider = dayProvider
         
-        tableView = UITableView(frame: .zero, style: .grouped)
+		tableView = Self.makeTableView()
+		
         super.init(coder: Coder())
-        tabBarItem = UITabBarItem(
-            title: "To do",
-            image: UIImage(named: "todo"),
-            selectedImage: UIImage(named: "todoSelected"))
-        //        tabBarItem.landscapeImagePhone = UIImage(named: "todoCompact")
-        // Good for accessibility
-        //        tabBarItem.largeContentSizeImage
-        
-        tableView.backgroundColor = .white
-        
-        tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCell")
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.separatorStyle = .none
-        
-        view = tableView
+		
+		tabBarItem = Self.makeTabBarItem()
+		
+		configureView()
+		configureTableView()
+		
         handleNotifications()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension TodoController: UITableViewDataSource {
-    
-    func task(at indexPath: IndexPath) -> Task? {
-        switch indexPath.row {
-        case 0:
-            return dayProvider?.day.prioritiesArray[indexPath.row]
-        case 1:
-            return dayProvider?.day.todosArray[indexPath.row]
-        default:
-            return nil
-        }
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return dayProvider?.day.priorities?.count ?? 0
-        case 1:
-            return dayProvider?.day.todos?.count ?? 0
-        default:
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
-        configure(taskCell: cell, at: indexPath)
-        return cell
-    }
-    
-    func configure(taskCell: UITableViewCell, at indexPath: IndexPath) {
-        if let cell = taskCell as? TaskCell, let task = task(at: indexPath) {
-            cell.configure(with: task)
-        }
-    }
-}
-
-extension TodoController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.font = UIFont.monospacedSystemFont(ofSize: 20, weight: .regular)
-        label.textColor = UIColor(named: "orange")
-        label.textAlignment = .center
-        
-        switch section {
-        case 0:
-            label.text = "Priorities"
-        case 1:
-            label.text = "Todos"
-        default:
-            break
-        }
-        
-        let vStack = UIStackView(arrangedSubviews: [UIView(), label])
-        vStack.axis = .vertical
-        
-        return vStack
-    }
-}
-
-// MARK: - Notifications
-
-extension TodoController {
-    
-    func handleNotifications() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(dayProviderDidUpdateDay(_:)),
-            name: .dayProviderDidUpdateDay,
-            object: nil)
-    }
-    
-    @objc func dayProviderDidUpdateDay(_ notification: Notification) {
-        tableView.reloadData()
-    }
+    required init?(coder: NSCoder) { fatalError() }
+	
+	// MARK: - Factories
+	
+	private static func makeTableView() -> UITableView
+	{
+		return UITableView(frame: .zero, style: .grouped)
+	}
+	
+	private static func makeTabBarItem() -> UITabBarItem
+	{
+		//        tabBarItem.landscapeImagePhone = UIImage(named: "todoCompact")
+		// Good for accessibility
+		//        tabBarItem.largeContentSizeImage
+		return UITabBarItem(
+			title: "To do",
+			image: .type(.todo),
+			selectedImage: .type(.todoSelected))
+	}
+	
+	// MARK: - Configuration
+	
+	private func configureView() {
+		view = tableView
+	}
+	
+	private func configureTableView()
+	{
+		tableView.backgroundColor = .white
+		tableView.separatorStyle = .none
+		tableView.keyboardDismissMode = .interactive
+		
+		tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCell")
+		
+		tableView.dataSource = self
+		tableView.delegate = self
+	}
 }

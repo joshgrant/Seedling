@@ -10,6 +10,8 @@ import Foundation
 
 class Coder: NSCoder {
     
+    override var allowsKeyedCoding: Bool { true }
+    
     override func containsValue(forKey key: String) -> Bool { false }
     
     override func encode(_ object: Any?, forKey key: String) { }
@@ -23,6 +25,9 @@ class Coder: NSCoder {
     
     override func encodeValue(ofObjCType type: UnsafePointer<Int8>, at addr: UnsafeRawPointer) { }
     override func decodeValue(ofObjCType type: UnsafePointer<Int8>, at data: UnsafeMutableRawPointer) { }
+    
+    override func encode(_ value: Int64, forKey key: String) { }
+    override func decodeInt64(forKey key: String) -> Int64 { 0 }
     
     override func version(forClassName className: String) -> Int { 0 }
 }

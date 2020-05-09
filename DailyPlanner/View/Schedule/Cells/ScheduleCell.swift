@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol CellTextViewDelegate: class {
-    func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
-}
-
 class ScheduleCell: UITableViewCell {
     
     let meridiemLabel: UILabel

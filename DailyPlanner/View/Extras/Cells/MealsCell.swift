@@ -10,7 +10,12 @@ import UIKit
 
 class MealsCell: UITableViewCell {
     
+    var breakfastHeight: NSLayoutConstraint!
+    var lunchHeight: NSLayoutConstraint!
+    var dinnerHeight: NSLayoutConstraint!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
