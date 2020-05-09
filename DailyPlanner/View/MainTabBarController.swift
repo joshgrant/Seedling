@@ -27,7 +27,7 @@ class MainTabBarController: UITabBarController {
         
         todo = TodoController(dayProvider: dayProvider)!
         schedule = ScheduleController()!
-        extras = ExtrasController()!
+        extras = ExtrasController(dayProvider: dayProvider)!
         
 //        date = Date()
         

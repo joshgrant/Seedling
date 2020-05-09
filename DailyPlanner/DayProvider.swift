@@ -10,7 +10,7 @@ import CoreData
 
 class DayProvider {
     
-    var _day: Day? {
+    private var _day: Day? {
         willSet {
             NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["newDay": newValue as Any])
         }

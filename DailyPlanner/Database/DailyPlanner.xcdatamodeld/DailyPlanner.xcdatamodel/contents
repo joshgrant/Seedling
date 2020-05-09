@@ -31,7 +31,7 @@
     </entity>
     <entity name="Schedule" representedClassName="Schedule" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="hour" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="schedules" inverseEntity="Day"/>
     </entity>
     <entity name="Task" representedClassName="Task" parentEntity="Entity" syncable="YES" codeGenerationType="class">
@@ -51,7 +51,7 @@
         <element name="Note" positionX="-9" positionY="36" width="128" height="73"/>
         <element name="Pomodoro" positionX="36" positionY="81" width="128" height="73"/>
         <element name="Schedule" positionX="-18" positionY="27" width="128" height="88"/>
-        <element name="Water" positionX="18" positionY="63" width="128" height="73"/>
         <element name="Task" positionX="-9" positionY="54" width="128" height="103"/>
+        <element name="Water" positionX="18" positionY="63" width="128" height="73"/>
     </elements>
 </model>

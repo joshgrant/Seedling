@@ -43,6 +43,12 @@
 		03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */; };
 		03F3FE7C2466EF12003B420E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */; };
 		03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */; };
+		03F3FE802466FBD3003B420E /* Meal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7F2466FBD3003B420E /* Meal+Extensions.swift */; };
+		03F3FE822466FC18003B420E /* Note+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE812466FC18003B420E /* Note+Extensions.swift */; };
+		03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */; };
+		03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE852466FCCA003B420E /* Water+Extensions.swift */; };
+		03F3FE882466FD32003B420E /* Schedule+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE872466FD32003B420E /* Schedule+Extensions.swift */; };
+		03F3FE8A24670016003B420E /* ScheduleController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +111,12 @@
 		03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+CellTextViewDelegate.swift"; sourceTree = "<group>"; };
 		03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextViewDelegate.swift; sourceTree = "<group>"; };
+		03F3FE7F2466FBD3003B420E /* Meal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE812466FC18003B420E /* Note+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pomodoro+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE852466FCCA003B420E /* Water+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Water+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE872466FD32003B420E /* Schedule+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+Extensions.swift"; sourceTree = "<group>"; };
+		03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+DataSource.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +179,7 @@
 			children = (
 				035016412465B5A9006726BC /* Cells */,
 				0330F9312463414000E07824 /* ScheduleController.swift */,
+				03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -206,6 +219,11 @@
 				03680B932465AE1900904DE1 /* Entity+Extensions.swift */,
 				035016362465AF47006726BC /* Day+Extensions.swift */,
 				035016382465AFAE006726BC /* Task+Extensions.swift */,
+				03F3FE7F2466FBD3003B420E /* Meal+Extensions.swift */,
+				03F3FE812466FC18003B420E /* Note+Extensions.swift */,
+				03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */,
+				03F3FE852466FCCA003B420E /* Water+Extensions.swift */,
+				03F3FE872466FD32003B420E /* Schedule+Extensions.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -430,6 +448,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */,
+				03F3FE8A24670016003B420E /* ScheduleController+DataSource.swift in Sources */,
 				0350164F2465C7AE006726BC /* String+Extensions.swift in Sources */,
 				035016552465CF6F006726BC /* PomodoroCell.swift in Sources */,
 				03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */,
@@ -439,6 +459,7 @@
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
 				0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */,
 				03F3FE762466EE5D003B420E /* TodoController+Delegate.swift in Sources */,
+				03F3FE822466FC18003B420E /* Note+Extensions.swift in Sources */,
 				035016372465AF47006726BC /* Day+Extensions.swift in Sources */,
 				03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */,
 				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
@@ -452,6 +473,7 @@
 				035016452465B5C2006726BC /* TaskCell.swift in Sources */,
 				03F3FE722466E922003B420E /* TextStyle.swift in Sources */,
 				03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */,
+				03F3FE882466FD32003B420E /* Schedule+Extensions.swift in Sources */,
 				03F3FE702466E753003B420E /* Color.swift in Sources */,
 				03F3FE782466EE6E003B420E /* TodoController+Notifications.swift in Sources */,
 				039566612463315100C0F498 /* AppDelegate.swift in Sources */,
@@ -460,8 +482,10 @@
 				03F3FE742466EE4D003B420E /* TodoController+DataSource.swift in Sources */,
 				035016392465AFAE006726BC /* Task+Extensions.swift in Sources */,
 				035016532465CF67006726BC /* WaterCell.swift in Sources */,
+				03F3FE802466FBD3003B420E /* Meal+Extensions.swift in Sources */,
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,
 				0350164D2465C2CB006726BC /* TableView.swift in Sources */,
+				03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

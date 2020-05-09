@@ -8,9 +8,10 @@
 
 import Foundation
 
-extension Entity {
-    
-    var wrappedCreatedDate: Date {
+extension Entity
+{
+    var wrappedCreatedDate: Date
+	{
         return createdDate ?? Date()
     }
 }

@@ -8,12 +8,13 @@
 
 import Foundation
 
-extension Task {
- 
-    static func make(content: String) -> Task {
-        let todo = Task(context: Database.context)
-        todo.createdDate = Date()
-        todo.content = content
-        return todo
+extension Task
+{
+	static func make(content: String) -> Task
+	{
+        let task = Task(context: Database.context)
+        task.createdDate = Date()
+        task.content = content
+        return task
     }
 }

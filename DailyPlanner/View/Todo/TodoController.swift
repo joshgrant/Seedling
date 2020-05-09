@@ -35,8 +35,8 @@ class TodoController: UIViewController
 		
 		tabBarItem = Self.makeTabBarItem()
 		
-		configureView()
 		configureTableView()
+		configureView()
 		
         handleNotifications()
     }
