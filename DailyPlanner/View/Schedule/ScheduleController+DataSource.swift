@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension ScheduleController: UITableViewDelegate {
+	
+}
+
 extension ScheduleController: UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,11 +36,9 @@ extension ScheduleController: UITableViewDataSource {
 				scheduleCell.meridiemLabel.text = "PM"
 			}
 			
-			
-			scheduleCell.configure(with: nil, delegate: self)
+			scheduleCell.configure(with: schedule, delegate: self)
 		}
 		
-		//        cell.textLabel?.text = "\(hour)"
 		return cell
 	}
 }

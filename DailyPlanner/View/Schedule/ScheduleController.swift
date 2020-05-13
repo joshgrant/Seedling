@@ -26,6 +26,7 @@ class ScheduleController: UIViewController
 		super.init(coder: Coder())
 		
 		tabBarItem = Self.makeTabBarItem()
+		configureTableView()
 		configureView()
 	}
 	
@@ -65,10 +66,6 @@ class ScheduleController: UIViewController
 	}
 }
 
-extension ScheduleController: UITableViewDelegate {
-    
-}
-
 extension ScheduleController: CellTextViewDelegate {
 	
 	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell) {
@@ -85,6 +82,10 @@ extension ScheduleController: CellTextViewDelegate {
     }
 	
 	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell) {
+		if let indexPath = tableView.indexPath(for: cell), let schedule = dayProvider?.day.schedulesArray[indexPath.row] {
+			schedule.content = textView.text
+			Database.save()
+		}
 		textView.resignFirstResponder()
 	}
 	

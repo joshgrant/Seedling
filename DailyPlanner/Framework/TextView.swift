@@ -17,7 +17,8 @@ class TextView: UITextView
 		didSet
 		{
 			let textHeight = text.height(with: .textView, constrainedTo: frame.width)
-			height.constant = textHeight
+			// Unexpectedly found nil when switching tabs
+			height?.constant = textHeight
 		}
 	}
     

@@ -86,6 +86,8 @@ class ScheduleCell: UITableViewCell {
     func configure(with schedule: Schedule?, delegate: CellTextViewDelegate) {
         self.schedule = schedule
         self.delegate = delegate
+		
+		textView.text = schedule?.content
     }
 }
 

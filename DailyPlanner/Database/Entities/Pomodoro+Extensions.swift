@@ -12,7 +12,7 @@ extension Pomodoro
 {
 	static func make() -> Pomodoro
 	{
-		let pomodoro = Pomodoro()
+		let pomodoro = Pomodoro(context: Database.context)
 		pomodoro.createdDate = Date()
 		pomodoro.amount = 0
 		
