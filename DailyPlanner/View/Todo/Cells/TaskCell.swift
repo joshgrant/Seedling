@@ -98,11 +98,11 @@ extension TaskCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-		delegate?.textViewDidEndEditing(textView, in: self)
         Database.context.perform {
             self.task?.content = textView.text
             Database.save()
         }
+		delegate?.textViewDidEndEditing(textView, in: self)
     }
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -111,9 +111,9 @@ extension TaskCell: UITextViewDelegate {
 //		print(textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: text))
 		
 		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
-			return true
-		} else {
 			return false
+		} else {
+			return true
 		}
 	}
 }

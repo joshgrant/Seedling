@@ -10,7 +10,7 @@ import UIKit
 
 class TextView: UITextView
 {
-    var height: NSLayoutConstraint!
+    var height: NSLayoutConstraint?
     
     override var text: String!
 	{
@@ -18,13 +18,21 @@ class TextView: UITextView
 		{
 			let textHeight = text.height(with: .textView, constrainedTo: frame.width)
 			// Unexpectedly found nil when switching tabs
-			height?.constant = textHeight
+			if let height = height {
+				height.constant = textHeight
+			} else {
+				print("NO HEIGHT")
+			}
 		}
 	}
     
     init()
-    {
+	{
         super.init(coder: Coder())!
+		
+		height = heightAnchor.constraint(equalToConstant: 44)
+		height?.isActive = true
+		height?.priority = .defaultLow
     }
     
     required init?(coder: NSCoder) { fatalError() }
@@ -42,9 +50,6 @@ class TextView: UITextView
             bottom: style.verticalPadding,
             right: style.horizontalPadding)
         
-        height = heightAnchor.constraint(equalToConstant: 44)
-        height.isActive = true
-        height.priority = .defaultLow
         
 		self.delegate = delegate
     }

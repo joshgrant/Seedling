@@ -14,8 +14,8 @@
             filePath = "DailyPlanner/View/Schedule/ScheduleController+DataSource.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -39,17 +39,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "35C4EA57-C8EB-4417-9A21-2F9E4A3452AE"
-            shouldBeEnabled = "Yes"
+            uuid = "DF19CAB6-2883-4B18-B137-A36B5B7F99B1"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DailyPlanner/View/Extras/Cells/WaterCell.swift"
+            filePath = "DailyPlanner/View/Schedule/ScheduleController+Notifications.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "configure(with:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "keyboardWillHide(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DF19CAB6-2883-4B18-B137-A36B5B7F99B1 - 93b0e0543f29f184"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DailyPlanner.ScheduleController.keyboardWillHide(Foundation.Notification) -&gt; ()"
+                  moduleName = "DailyPlanner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josh/Applications/Xcode/Projects/DailyPlanner/DailyPlanner/View/Schedule/ScheduleController+Notifications.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "2524">
+               </Location>
+               <Location
+                  uuid = "DF19CAB6-2883-4B18-B137-A36B5B7F99B1 - 4e8cc7696e0f7392"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in DailyPlanner.ScheduleController.keyboardWillHide(Foundation.Notification) -&gt; ()"
+                  moduleName = "DailyPlanner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josh/Applications/Xcode/Projects/DailyPlanner/DailyPlanner/View/Schedule/ScheduleController+Notifications.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "110">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

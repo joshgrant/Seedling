@@ -34,9 +34,9 @@ class DayProvider {
             } else {
                 _day = Day.make(date: Date())
                 
-                _day?.addToTodos(Task.make(content: "Mow the lawn"))
-                _day?.addToTodos(Task.make(content: "Take out the trash"))
-                _day?.addToPriorities(Task.make(content: "Be awesome"))
+//                _day?.addToTodos(Task.make(content: "Mow the lawn"))
+//                _day?.addToTodos(Task.make(content: "Take out the trash"))
+//                _day?.addToPriorities(Task.make(content: "Be awesome"))
                 
                 Database.save()
                 

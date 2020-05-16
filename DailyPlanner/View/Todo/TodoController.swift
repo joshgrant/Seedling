@@ -47,7 +47,7 @@ class TodoController: UIViewController
 	
 	private static func makeTableView() -> UITableView
 	{
-		return UITableView(frame: .zero, style: .grouped)
+		return UITableView()
 	}
 	
 	private static func makeTabBarItem() -> UITabBarItem
@@ -71,7 +71,7 @@ class TodoController: UIViewController
 	{
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
-		tableView.keyboardDismissMode = .interactive
+//		tableView.keyboardDismissMode = .interactive
 		
 		tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCell")
 		

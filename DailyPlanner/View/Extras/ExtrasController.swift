@@ -62,7 +62,7 @@ class ExtrasController: UIViewController
 	func configureTableView()
 	{
 		tableView.separatorStyle = .none
-		tableView.keyboardDismissMode = .onDrag
+//		tableView.keyboardDismissMode = .
 		
 		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 		tableView.register(MealsCell.self, forCellReuseIdentifier: "mealsCell")
@@ -110,6 +110,7 @@ extension ExtrasController: UITableViewDataSource {
 //            (cell as! MealsCell).text
 			if let meal = dayProvider?.day.meal {
 				(cell as? MealsCell)?.configure(with: meal)
+				(cell as? MealsCell)?.delegate = self
 			} // Else create the meal?
 			// TODO: shouldn't creating a new day also create a new meal?
         case 1:
@@ -123,6 +124,7 @@ extension ExtrasController: UITableViewDataSource {
         case 3:
 			if let note = dayProvider?.day.note {
 				(cell as? NotesCell)?.configure(with: note)
+				(cell as? NotesCell)?.delegate = self
 			}
         default:
             break
@@ -134,6 +136,10 @@ extension ExtrasController: UITableViewDataSource {
 }
 
 extension ExtrasController: UITableViewDelegate {
+	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		view.endEditing(false)
+	}
     
     // TODO: Copied from TodoController
     
@@ -145,7 +151,7 @@ extension ExtrasController: UITableViewDelegate {
         let label = UILabel()
         label.font = UIFont.monospacedSystemFont(ofSize: 20, weight: .regular)
         label.textColor = UIColor(named: "orange")
-        label.textAlignment = .center
+        label.textAlignment = .left
         
         switch section {
         case 0:
@@ -160,21 +166,21 @@ extension ExtrasController: UITableViewDelegate {
             break
         }
         
-        let topSpacer = UIView()
+        let leftSpacer = UIView()
+		leftSpacer.widthAnchor.constraint(equalToConstant: 20).isActive = true
         let bottomSpacer = UIView()
         
         let vStack = UIStackView(arrangedSubviews: [
-            topSpacer,
-            label,
-            bottomSpacer])
-        vStack.axis = .vertical
+            leftSpacer,
+            label])
+            //bottomSpacer])
+//        vStack.axis = .vertical
         
-        topSpacer.heightAnchor.constraint(equalTo: bottomSpacer.heightAnchor).isActive = true
+//        topSpacer.heightAnchor.constraint(equalTo: bottomSpacer.heightAnchor).isActive = true
         
         let effect = UIBlurEffect(style: .regular)
         let visualEffectView = UIVisualEffectView(effect: effect)
         
-//        visualEffectView.embed(view: vStack)
         visualEffectView.contentView.embed(view: vStack)
         
         return visualEffectView
@@ -190,19 +196,28 @@ extension ExtrasController: UITableViewDelegate {
 }
 
 extension ExtrasController: CellTextViewDelegate {
-	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell) {
+	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell)
+	{
 		
 	}
 	
-	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell) {
+	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
+	{
+			tableView.performBatchUpdates({
+				UIView.animate(withDuration: 0.0) {
+					cell.contentView.setNeedsLayout()
+					cell.contentView.layoutIfNeeded()
+				}
+			}, completion: nil)
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell)
+	{
 		
 	}
 	
-	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell) {
-		
-	}
-	
-	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool {
+	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
+	{
 		// Perhaps edit the next cell?
 		// And when at dinner, dismiss?
 		

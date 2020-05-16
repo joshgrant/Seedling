@@ -11,7 +11,7 @@ import UIKit
 extension TodoController: UITableViewDataSource {
 	
 	func task(at indexPath: IndexPath) -> Task? {
-		switch indexPath.row {
+		switch indexPath.section {
 		case 0:
 			return dayProvider?.day.prioritiesArray[indexPath.row]
 		case 1:

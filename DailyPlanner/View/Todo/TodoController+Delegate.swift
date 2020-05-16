@@ -29,12 +29,52 @@ extension TodoController: UITableViewDelegate {
 			break
 		}
 		
-		let vStack = UIStackView(arrangedSubviews: [UIView(), label])
-		vStack.axis = .vertical
+		let leftSpacer = UIView()
+		leftSpacer.widthAnchor.constraint(equalToConstant: 20).isActive = true
 		
-		return vStack
+		let rightSpacer = UIView()
+		rightSpacer.widthAnchor.constraint(equalToConstant: 20).isActive = true
+		
+		let button = UIButton(type: .contactAdd)
+		button.tag = section + 1
+		button.addTarget(self, action: #selector(didTouchUpInsideAddButton(_:)), for: .touchUpInside)
+		button.tintColor = .type(.orange)
+		
+		let vStack = UIStackView(arrangedSubviews: [leftSpacer, label, UIView(), button, rightSpacer])
+		vStack.axis = .horizontal
+		
+		let effect = UIBlurEffect(style: .regular)
+		let visualEffectsView = UIVisualEffectView(effect: effect)
+		
+		visualEffectsView.contentView.embed(view: vStack)
+		
+		return visualEffectsView
 	}
 	
+	@objc func didTouchUpInsideAddButton(_ sender: UIButton) {
+		let section = sender.tag - 1
+		
+		if section == 0 {
+			tableView.performBatchUpdates({
+				let priorityCount = dayProvider?.day.prioritiesArray.count
+				let priority = Task.make(content: "")
+				dayProvider?.day.addToPriorities(priority)
+				tableView.insertRows(at: [IndexPath(item: priorityCount ?? 0, section: 0)], with: .automatic)
+			}, completion: { _ in
+				Database.save()
+			})
+		} else if section == 1 {
+			tableView.performBatchUpdates({
+				let todoCount = dayProvider?.day.todosArray.count // It matters when we create this variable
+				let todo = Task.make(content: "")
+				dayProvider?.day.addToTodos(todo)
+				tableView.insertRows(at: [IndexPath(item: todoCount ?? 0, section: 1)], with: .automatic)
+			}, completion: { _ in
+				Database.save()
+			})
+		}
+	}
+
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		return true
 	}
@@ -69,5 +109,9 @@ extension TodoController: UITableViewDelegate {
 		default:
 			break
 		}
+	}
+	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		view.endEditing(false)
 	}
 }

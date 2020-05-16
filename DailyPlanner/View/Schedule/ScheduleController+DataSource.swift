@@ -10,6 +10,10 @@ import UIKit
 
 extension ScheduleController: UITableViewDelegate {
 	
+	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+		view.endEditing(false)
+	}
+	
 }
 
 extension ScheduleController: UITableViewDataSource {

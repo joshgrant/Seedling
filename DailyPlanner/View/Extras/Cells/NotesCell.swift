@@ -12,14 +12,16 @@ class NotesCell: UITableViewCell {
 	
 	weak var delegate: CellTextViewDelegate?
 	
-	let textView: UITextView
+	let textView: TextView
 	
 	var note: Note?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-		textView = UITextView()
+		textView = TextView()
 		
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+		
+		textView.configure(with: .textView, delegate: self)
         
         selectionStyle = .none
         
@@ -29,16 +31,12 @@ class NotesCell: UITableViewCell {
         rightPadding.widthAnchor.constraint(equalToConstant: 36).isActive = true
         
         let leftBorder = UIView()
-        leftBorder.backgroundColor = UIColor(named: "orange")
+		leftBorder.backgroundColor = .type(.orange)
         leftBorder.widthAnchor.constraint(equalToConstant: 1).isActive = true
         
         let rightBorder = UIView()
-        rightBorder.backgroundColor = UIColor(named: "orange")
+		rightBorder.backgroundColor = .type(.orange)
         rightBorder.widthAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        textView.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
-        textView.textColor = UIColor(named: "text")
-		textView.delegate = self
         
         let hStack = UIStackView(arrangedSubviews: [
             leftPadding,
@@ -47,10 +45,6 @@ class NotesCell: UITableViewCell {
             rightBorder,
             rightPadding
         ])
-        
-        hStack.heightAnchor.constraint(equalToConstant: 400).isActive = true
-        
-//        leftPadding.widthAnchor.constraint(equalTo: rightPadding.widthAnchor).isActive = true
         
         contentView.embed(view: hStack)
     }

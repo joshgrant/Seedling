@@ -34,6 +34,11 @@ class ScheduleController: UIViewController
 	
 	required init?(coder: NSCoder) { fatalError() }
 	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		tableView.flashScrollIndicators()
+	}
+	
 	// MARK: - Factories
 	
 	static func makeTableView() -> UITableView
@@ -54,7 +59,10 @@ class ScheduleController: UIViewController
 	func configureTableView()
 	{
 		tableView.separatorStyle = .none
-		tableView.keyboardDismissMode = .onDrag
+//		tableView.keyboardDismissMode = .onDrag
+//		tableView.insetsContentViewsToSafeArea = true
+//		tableView.automaticallyAdjustsScrollIndicatorInsets = true
+//		tableView.indicator
 		
 		tableView.register(ScheduleCell.self, forCellReuseIdentifier: "scheduleCell")
 		

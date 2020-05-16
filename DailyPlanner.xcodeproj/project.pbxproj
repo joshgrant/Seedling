@@ -36,6 +36,7 @@
 		03956697246332BF00C0F498 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03956696246332BF00C0F498 /* Coder.swift */; };
 		03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */; };
 		03EC4DE02470227B007BB838 /* ScheduleController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */; };
+		03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DE124705F14007BB838 /* TabContentController.swift */; };
 		03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6D2466E6A4003B420E /* TextView.swift */; };
 		03F3FE702466E753003B420E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6F2466E753003B420E /* Color.swift */; };
 		03F3FE722466E922003B420E /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE712466E922003B420E /* TextStyle.swift */; };
@@ -106,6 +107,7 @@
 		03956696246332BF00C0F498 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
 		03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtrasController+Notifications.swift"; sourceTree = "<group>"; };
 		03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+Notifications.swift"; sourceTree = "<group>"; };
+		03EC4DE124705F14007BB838 /* TabContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentController.swift; sourceTree = "<group>"; };
 		03F3FE6D2466E6A4003B420E /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		03F3FE6F2466E753003B420E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		03F3FE712466E922003B420E /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				035016422465B5AD006726BC /* Todo */,
 				035016402465B5A4006726BC /* Schedule */,
 				0350163E2465B59B006726BC /* Extras */,
+				03EC4DE124705F14007BB838 /* TabContentController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
 				03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */,
+				03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
 				03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */,
