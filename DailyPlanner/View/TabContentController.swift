@@ -8,12 +8,22 @@
 
 import UIKit
 
+class TabContentDataSource: NSObject, UITableViewDataSource {
+	
+}
+
+class TabContentDelegate: NSObject, UITableViewDelegate {
+	
+}
+
 class TabContentController: UIViewController
 {
 	// MARK: - Variables
 	
 	weak var dayProvider: DayProvider?
 	
+	let delegate: TabContentDelegate
+	let dataSource: TabContentDataSource
 	let tableView: UITableView
 	
 	// MARK: - Initialization
@@ -31,7 +41,7 @@ class TabContentController: UIViewController
 		configureTableView()
 		configureView()
 		
-//		handleNotifications()
+		handleNotifications()
 	}
 	
 	required init?(coder: NSCoder = Coder()) { super.init(coder: coder) }
@@ -50,11 +60,11 @@ class TabContentController: UIViewController
 	
 	// MARK: - Configuration
 	
-	private func configureView() {
+	func configureView() {
 		view = tableView
 	}
 	
-	private func configureTableView()
+	func configureTableView()
 	{
 		tableView.backgroundColor = .white
 		tableView.separatorStyle = .none
@@ -65,4 +75,6 @@ class TabContentController: UIViewController
 		tableView.dataSource = self
 		tableView.delegate = self
 	}
+	
+	// MARK: - Notifications
 }
