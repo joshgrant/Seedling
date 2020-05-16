@@ -28,6 +28,8 @@ class ScheduleController: UIViewController
 		tabBarItem = Self.makeTabBarItem()
 		configureTableView()
 		configureView()
+		
+		handleNotifications()
 	}
 	
 	required init?(coder: NSCoder) { fatalError() }

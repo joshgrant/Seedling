@@ -133,7 +133,6 @@ extension MealsCell: UITextViewDelegate {
 	}
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		// Should the return statements be flipped?
 		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
 			return true
 		} else {

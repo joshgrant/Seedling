@@ -8,9 +8,14 @@
 
 import UIKit
 
-class WaterCell: UITableViewCell {
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+class WaterCell: UITableViewCell
+{
+	// MARK: - Initialization
+	
+	var water: Water?
+	
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
+	{
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         selectionStyle = .none
@@ -19,8 +24,8 @@ class WaterCell: UITableViewCell {
         let rightPadding = UIView()
         
         let vStack = UIStackView(arrangedSubviews: [
-            makeStackView(),
-            makeStackView()
+			makeStackView(tag: 1),
+			makeStackView(tag: 7) // Number of horizontal items from above...
         ])
         vStack.axis = .vertical
         vStack.spacing = 15
@@ -40,29 +45,72 @@ class WaterCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	// MARK: - Factories
     
-    func makeStackView() -> UIStackView {
+	func makeStackView(tag: Int) -> UIStackView
+	{
         let stackView = UIStackView(arrangedSubviews: [
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
+            makeButton(tag: tag + 0),
+            makeButton(tag: tag + 1),
+            makeButton(tag: tag + 2),
+            makeButton(tag: tag + 3),
+            makeButton(tag: tag + 4),
+            makeButton(tag: tag + 5),
         ])
         stackView.spacing = 15
         return stackView
     }
     
-    func makeButton() -> UIButton {
+	func makeButton(tag: Int) -> UIButton
+	{
         let button = UIButton()
-        button.setImage(UIImage(named: "clearBubble"), for: .normal)
+		button.setImage(UIImage.type(.clearBubble), for: .normal)
         button.addTarget(self, action: #selector(didTouchUpInsideBubble(_:)), for: .touchUpInside)
         // Why is the selector crossed out?
+		button.tag = tag
+		
+		button.isEnabled = tag == 1
+		
         return button
     }
+	
+	// MARK: - Actions
     
-    @objc func didTouchUpInsideBubble(_ sender: UIButton) {
-        sender.setImage(UIImage(named: "blueBubble"), for: .normal)
+    @objc func didTouchUpInsideBubble(_ sender: UIButton)
+	{
+		sender.setImage(UIImage.type(.blueBubble), for: .normal)
+		
+		water?.amount = Int32(sender.tag)
+		
+		let tag = sender.tag
+		let next = tag + 1
+		
+		let nextButton = viewWithTag(next) as? UIButton
+		
+		nextButton?.isEnabled = true
     }
+	
+	// MARK: - Configuration
+	
+	func configure(with water: Water)
+	{
+		self.water = water
+		
+		let amount = Int(water.amount) + 1
+		let numberOfWater = 12 + 1
+		for i in 1 ..< numberOfWater {
+			let button = viewWithTag(i) as? UIButton
+			if i < amount {
+				button?.setImage(UIImage.type(.blueBubble), for: .normal)
+				button?.isEnabled = true
+			} else if i == amount {
+				button?.isEnabled = true
+				button?.setImage(.type(.clearBubble), for: .normal)
+			} else {
+				button?.isEnabled = false
+				button?.setImage(.type(.clearBubble), for: .normal)
+			}
+		}
+	}
 }

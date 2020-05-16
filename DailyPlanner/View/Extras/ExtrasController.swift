@@ -30,6 +30,8 @@ class ExtrasController: UIViewController
 		
 		configureTableView()
 		configureView()
+		
+		handleNotifications()
 
         view = tableView
     }
@@ -110,13 +112,18 @@ extension ExtrasController: UITableViewDataSource {
 				(cell as? MealsCell)?.configure(with: meal)
 			} // Else create the meal?
 			// TODO: shouldn't creating a new day also create a new meal?
-            break
         case 1:
-            break
+			if let water = dayProvider?.day.water {
+				(cell as? WaterCell)?.configure(with: water)
+			}
         case 2:
-            break
+			if let pomodoro = dayProvider?.day.pomodoro {
+				(cell as? PomodoroCell)?.configure(with: pomodoro)
+			}
         case 3:
-            break
+			if let note = dayProvider?.day.note {
+				(cell as? NotesCell)?.configure(with: note)
+			}
         default:
             break
         }

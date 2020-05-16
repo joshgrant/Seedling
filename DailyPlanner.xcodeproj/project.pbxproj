@@ -34,6 +34,8 @@
 		039566862463315200C0F498 /* DailyPlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566852463315200C0F498 /* DailyPlannerUITests.swift */; };
 		039566952463327B00C0F498 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566942463327B00C0F498 /* MainTabBarController.swift */; };
 		03956697246332BF00C0F498 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03956696246332BF00C0F498 /* Coder.swift */; };
+		03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */; };
+		03EC4DE02470227B007BB838 /* ScheduleController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */; };
 		03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6D2466E6A4003B420E /* TextView.swift */; };
 		03F3FE702466E753003B420E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6F2466E753003B420E /* Color.swift */; };
 		03F3FE722466E922003B420E /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE712466E922003B420E /* TextStyle.swift */; };
@@ -102,6 +104,8 @@
 		039566872463315200C0F498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039566942463327B00C0F498 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03956696246332BF00C0F498 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
+		03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtrasController+Notifications.swift"; sourceTree = "<group>"; };
+		03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+Notifications.swift"; sourceTree = "<group>"; };
 		03F3FE6D2466E6A4003B420E /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		03F3FE6F2466E753003B420E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		03F3FE712466E922003B420E /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			children = (
 				0350163F2465B5A0006726BC /* Cells */,
 				0330F9332463414A00E07824 /* ExtrasController.swift */,
+				03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			children = (
 				035016412465B5A9006726BC /* Cells */,
 				0330F9312463414000E07824 /* ScheduleController.swift */,
+				03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */,
 				03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */,
 			);
 			path = Schedule;
@@ -465,6 +471,7 @@
 				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
+				03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
 				03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */,
@@ -486,6 +493,7 @@
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,
 				0350164D2465C2CB006726BC /* TableView.swift in Sources */,
 				03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */,
+				03EC4DE02470227B007BB838 /* ScheduleController+Notifications.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

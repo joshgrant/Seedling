@@ -9,6 +9,8 @@
 import UIKit
 
 class PomodoroCell: UITableViewCell {
+	
+	var pomodoro: Pomodoro?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,8 +21,12 @@ class PomodoroCell: UITableViewCell {
         let rightPadding = UIView()
         
         let vStack = UIStackView(arrangedSubviews: [
-            makeStackView(),
-            makeStackView()
+			// The tags need to start at 1 because
+			// everything has a tag of 0
+            makeStackView(tag: 1),
+            makeStackView(tag: 5),
+			makeStackView(tag: 9),
+			makeStackView(tag: 13)
         ])
         vStack.spacing = 12
         vStack.axis = .vertical
@@ -40,29 +46,60 @@ class PomodoroCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func makeButton() -> UIButton {
+	func makeButton(tag: Int) -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: "clearBubble"), for: .normal)
         button.addTarget(self, action: #selector(didTouchUpInsideBubble(sender:)), for: .touchUpInside)
+		button.tag = tag
+		
+		button.isEnabled = tag == 1
         return button
     }
     
     @objc func didTouchUpInsideBubble(sender: UIButton) {
         sender.setImage(UIImage(named: "orangeBubble"), for: .normal)
+		
+		pomodoro?.amount = Int32(sender.tag)
+		
+		let tag = sender.tag
+		let next = tag + 1
+		
+		let nextButton = viewWithTag(next) as? UIButton
+		
+		nextButton?.isEnabled = true
     }
     
-    func makeStackView() -> UIStackView {
+	func makeStackView(tag: Int) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton(),
-            makeButton()
+			makeButton(tag: tag + 0),
+            makeButton(tag: tag + 1),
+            makeButton(tag: tag + 2),
+            makeButton(tag: tag + 3),
         ])
         stackView.spacing = 10
         return stackView
     }
+	
+	// MARK: - Configuration
+	
+	func configure(with pomodoro: Pomodoro)
+	{
+		self.pomodoro = pomodoro
+		
+		let amount = Int(pomodoro.amount) + 1
+		let numberOfPomodoro = 16 + 1
+		for i in 1 ..< numberOfPomodoro {
+			let button = viewWithTag(i) as? UIButton
+			if i < amount {
+				button?.setImage(UIImage.type(.orangeBubble), for: .normal)
+				button?.isEnabled = true
+			} else if i == amount {
+				button?.isEnabled = true
+				button?.setImage(.type(.clearBubble), for: .normal)
+			} else {
+				button?.isEnabled = false
+				button?.setImage(.type(.clearBubble), for: .normal)
+			}
+		}
+	}
 }

@@ -99,5 +99,8 @@ extension ScheduleCell: UITextViewDelegate {
         textViewHeight.constant = height
         
         delegate?.textViewDidChange(textView, in: self)
+		
+		// Doesn't update with autocorrection...
+		self.schedule?.content = textView.text
     }
 }
