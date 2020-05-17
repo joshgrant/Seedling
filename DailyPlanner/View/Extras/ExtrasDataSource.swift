@@ -31,22 +31,27 @@ class ExtrasDataSource: TabContentDataSource
 		let identifier = cellIdentifier(for: indexPath)
 		let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 		
-		switch indexPath.section {
+		switch indexPath.section
+		{
 		case 0:
-			if let meal = dayProvider?.day.meal {
+			if let meal = dayProvider?.day.meal
+			{
 				(cell as? MealsCell)?.configure(with: meal)
 				(cell as? MealsCell)?.delegate = cellTextViewDelegate
 			}
 		case 1:
-			if let water = dayProvider?.day.water {
+			if let water = dayProvider?.day.water
+			{
 				(cell as? WaterCell)?.configure(with: water)
 			}
 		case 2:
-			if let pomodoro = dayProvider?.day.pomodoro {
+			if let pomodoro = dayProvider?.day.pomodoro
+			{
 				(cell as? PomodoroCell)?.configure(with: pomodoro)
 			}
 		case 3:
-			if let note = dayProvider?.day.note {
+			if let note = dayProvider?.day.note
+			{
 				(cell as? NotesCell)?.configure(with: note)
 				(cell as? NotesCell)?.delegate = cellTextViewDelegate
 			}
@@ -55,5 +60,23 @@ class ExtrasDataSource: TabContentDataSource
 		}
 		
 		return cell
+	}
+	
+	override func cellIdentifier(for indexPath: IndexPath) -> String
+	{
+		// TODO: Needs to be linked with the ones that are registered with the table view
+		switch indexPath.section
+		{
+		case 0:
+			return "mealsCell"
+		case 1:
+			return "waterCell"
+		case 2:
+			return "pomodoroCell"
+		case 3:
+			return "notesCell"
+		default:
+			fatalError()
+		}
 	}
 }

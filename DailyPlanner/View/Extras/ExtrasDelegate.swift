@@ -10,42 +10,21 @@ import UIKit
 
 class ExtrasDelegate: TabContentDelegate
 {
-	// MARK: - Variables
-	
-	/// The view that should resign first responder when scrolled
-	weak var view: UIView?
-}
-
-// MARK: - Table view delegate
-
-extension ExtrasDelegate
-{
-	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+	override func titleForHeader(in section: Int) -> String?
 	{
-		return 44
-	}
-	
-	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-	{
-		let content = [
-			0: "Meals",
-			1: "Water",
-			2: "Pomodoro",
-			3: "Notes"
-		][section] ?? ""
-		
-		let header = TabContentHeader(content: content)
-		return header
-	}
-	
-	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-	{
-		return 22
-	}
-	
-	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
-	{
-		return UIView()
+		switch section
+		{
+		case 0:
+			return "Meals"
+		case 1:
+			return "Water"
+		case 2:
+			return "Pomodoro"
+		case 3:
+			return "Notes"
+		default:
+			return nil
+		}
 	}
 }
 
@@ -55,6 +34,6 @@ extension ExtrasDelegate
 {
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
 	{
-		view?.endEditing(false)
+		scrollView.endEditing(false)
 	}
 }

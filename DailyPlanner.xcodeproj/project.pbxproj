@@ -12,6 +12,19 @@
 		0306CAA82471306000E45DFA /* Spacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAA72471306000E45DFA /* Spacer.swift */; };
 		0306CAAC24713AC200E45DFA /* ExtrasDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAAB24713AC200E45DFA /* ExtrasDataSource.swift */; };
 		0306CAAE24713AD900E45DFA /* ExtrasDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAAD24713AD900E45DFA /* ExtrasDelegate.swift */; };
+		0306CAB42471432800E45DFA /* NotesCell+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAB32471432800E45DFA /* NotesCell+UITextViewDelegate.swift */; };
+		0306CAB62471434600E45DFA /* MealsCell+UITextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAB52471434600E45DFA /* MealsCell+UITextViewDelegate.swift */; };
+		0306CAB82471440A00E45DFA /* NotifySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAB72471440A00E45DFA /* NotifySelector.swift */; };
+		0306CABA2471442500E45DFA /* KeyboardNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAB92471442500E45DFA /* KeyboardNotification.swift */; };
+		0306CABC2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CABB2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift */; };
+		0306CABE2471493D00E45DFA /* TabContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CABD2471493D00E45DFA /* TabContentDataSource.swift */; };
+		0306CAC02471495200E45DFA /* TabContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CABF2471495200E45DFA /* TabContentDelegate.swift */; };
+		0306CAC22471496A00E45DFA /* CellClassIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */; };
+		0306CAC424714A7100E45DFA /* ScheduleController+CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAC324714A7100E45DFA /* ScheduleController+CellTextViewDelegate.swift */; };
+		0306CAC624714CC900E45DFA /* TodoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0306CAC524714CC900E45DFA /* TodoDataSource.swift */; };
+		0307D056247151F4009671C8 /* TodoDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307D055247151F4009671C8 /* TodoDelegate.swift */; };
+		0307D05824715234009671C8 /* ScheduleDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307D05724715234009671C8 /* ScheduleDelegate.swift */; };
+		0307D05A2471523D009671C8 /* ScheduleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0307D0592471523D009671C8 /* ScheduleDataSource.swift */; };
 		0330F9302463413200E07824 /* TodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F92F2463413200E07824 /* TodoController.swift */; };
 		0330F9322463414000E07824 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9312463414000E07824 /* ScheduleController.swift */; };
 		0330F9342463414A00E07824 /* ExtrasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9332463414A00E07824 /* ExtrasController.swift */; };
@@ -39,15 +52,10 @@
 		039566862463315200C0F498 /* DailyPlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566852463315200C0F498 /* DailyPlannerUITests.swift */; };
 		039566952463327B00C0F498 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566942463327B00C0F498 /* MainTabBarController.swift */; };
 		03956697246332BF00C0F498 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03956696246332BF00C0F498 /* Coder.swift */; };
-		03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */; };
-		03EC4DE02470227B007BB838 /* ScheduleController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */; };
 		03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DE124705F14007BB838 /* TabContentController.swift */; };
 		03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6D2466E6A4003B420E /* TextView.swift */; };
 		03F3FE702466E753003B420E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6F2466E753003B420E /* Color.swift */; };
 		03F3FE722466E922003B420E /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE712466E922003B420E /* TextStyle.swift */; };
-		03F3FE742466EE4D003B420E /* TodoController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */; };
-		03F3FE762466EE5D003B420E /* TodoController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */; };
-		03F3FE782466EE6E003B420E /* TodoController+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */; };
 		03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */; };
 		03F3FE7C2466EF12003B420E /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */; };
 		03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */; };
@@ -56,7 +64,6 @@
 		03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */; };
 		03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE852466FCCA003B420E /* Water+Extensions.swift */; };
 		03F3FE882466FD32003B420E /* Schedule+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE872466FD32003B420E /* Schedule+Extensions.swift */; };
-		03F3FE8A24670016003B420E /* ScheduleController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +89,19 @@
 		0306CAA72471306000E45DFA /* Spacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacer.swift; sourceTree = "<group>"; };
 		0306CAAB24713AC200E45DFA /* ExtrasDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtrasDataSource.swift; path = DailyPlanner/View/Extras/ExtrasDataSource.swift; sourceTree = SOURCE_ROOT; };
 		0306CAAD24713AD900E45DFA /* ExtrasDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasDelegate.swift; sourceTree = "<group>"; };
+		0306CAB32471432800E45DFA /* NotesCell+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotesCell+UITextViewDelegate.swift"; sourceTree = "<group>"; };
+		0306CAB52471434600E45DFA /* MealsCell+UITextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealsCell+UITextViewDelegate.swift"; sourceTree = "<group>"; };
+		0306CAB72471440A00E45DFA /* NotifySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifySelector.swift; sourceTree = "<group>"; };
+		0306CAB92471442500E45DFA /* KeyboardNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardNotification.swift; sourceTree = "<group>"; };
+		0306CABB2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardNotification+CustomStringConvertible.swift"; sourceTree = "<group>"; };
+		0306CABD2471493D00E45DFA /* TabContentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentDataSource.swift; sourceTree = "<group>"; };
+		0306CABF2471495200E45DFA /* TabContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentDelegate.swift; sourceTree = "<group>"; };
+		0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellClassIdentifier.swift; sourceTree = "<group>"; };
+		0306CAC324714A7100E45DFA /* ScheduleController+CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+CellTextViewDelegate.swift"; sourceTree = "<group>"; };
+		0306CAC524714CC900E45DFA /* TodoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDataSource.swift; sourceTree = "<group>"; };
+		0307D055247151F4009671C8 /* TodoDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDelegate.swift; sourceTree = "<group>"; };
+		0307D05724715234009671C8 /* ScheduleDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDelegate.swift; sourceTree = "<group>"; };
+		0307D0592471523D009671C8 /* ScheduleDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDataSource.swift; sourceTree = "<group>"; };
 		0330F92F2463413200E07824 /* TodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoController.swift; sourceTree = "<group>"; };
 		0330F9312463414000E07824 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
 		0330F9332463414A00E07824 /* ExtrasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasController.swift; sourceTree = "<group>"; };
@@ -115,15 +135,10 @@
 		039566872463315200C0F498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039566942463327B00C0F498 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03956696246332BF00C0F498 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
-		03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExtrasController+Notifications.swift"; sourceTree = "<group>"; };
-		03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+Notifications.swift"; sourceTree = "<group>"; };
 		03EC4DE124705F14007BB838 /* TabContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentController.swift; sourceTree = "<group>"; };
 		03F3FE6D2466E6A4003B420E /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		03F3FE6F2466E753003B420E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		03F3FE712466E922003B420E /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
-		03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+DataSource.swift"; sourceTree = "<group>"; };
-		03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+Delegate.swift"; sourceTree = "<group>"; };
-		03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+Notifications.swift"; sourceTree = "<group>"; };
 		03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoController+CellTextViewDelegate.swift"; sourceTree = "<group>"; };
 		03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTextViewDelegate.swift; sourceTree = "<group>"; };
@@ -132,7 +147,6 @@
 		03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pomodoro+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE852466FCCA003B420E /* Water+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Water+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE872466FD32003B420E /* Schedule+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+Extensions.swift"; sourceTree = "<group>"; };
-		03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleController+DataSource.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +174,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0306CAAF2471430000E45DFA /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				035016562465CF75006726BC /* NotesCell.swift */,
+				0306CAB32471432800E45DFA /* NotesCell+UITextViewDelegate.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		0306CAB02471430A00E45DFA /* Pomodoro */ = {
+			isa = PBXGroup;
+			children = (
+				035016542465CF6E006726BC /* PomodoroCell.swift */,
+			);
+			path = Pomodoro;
+			sourceTree = "<group>";
+		};
+		0306CAB12471430F00E45DFA /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				035016522465CF67006726BC /* WaterCell.swift */,
+			);
+			path = Water;
+			sourceTree = "<group>";
+		};
+		0306CAB22471431200E45DFA /* Meals */ = {
+			isa = PBXGroup;
+			children = (
+				035016502465CF60006726BC /* MealsCell.swift */,
+				0306CAB52471434600E45DFA /* MealsCell+UITextViewDelegate.swift */,
+			);
+			path = Meals;
+			sourceTree = "<group>";
+		};
 		0330F93724635BB000E07824 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +224,6 @@
 				0350163F2465B5A0006726BC /* Cells */,
 				0330F9332463414A00E07824 /* ExtrasController.swift */,
 				0306CAAB24713AC200E45DFA /* ExtrasDataSource.swift */,
-				03EC4DDD2470226C007BB838 /* ExtrasController+Notifications.swift */,
 				0306CAAD24713AD900E45DFA /* ExtrasDelegate.swift */,
 			);
 			path = Extras;
@@ -185,10 +232,10 @@
 		0350163F2465B5A0006726BC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				035016502465CF60006726BC /* MealsCell.swift */,
-				035016522465CF67006726BC /* WaterCell.swift */,
-				035016542465CF6E006726BC /* PomodoroCell.swift */,
-				035016562465CF75006726BC /* NotesCell.swift */,
+				0306CAB22471431200E45DFA /* Meals */,
+				0306CAB12471430F00E45DFA /* Water */,
+				0306CAB02471430A00E45DFA /* Pomodoro */,
+				0306CAAF2471430000E45DFA /* Notes */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -198,8 +245,9 @@
 			children = (
 				035016412465B5A9006726BC /* Cells */,
 				0330F9312463414000E07824 /* ScheduleController.swift */,
-				03EC4DDF2470227B007BB838 /* ScheduleController+Notifications.swift */,
-				03F3FE8924670016003B420E /* ScheduleController+DataSource.swift */,
+				0306CAC324714A7100E45DFA /* ScheduleController+CellTextViewDelegate.swift */,
+				0307D05724715234009671C8 /* ScheduleDelegate.swift */,
+				0307D0592471523D009671C8 /* ScheduleDataSource.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -217,10 +265,9 @@
 			children = (
 				035016432465B5B3006726BC /* Cells */,
 				0330F92F2463413200E07824 /* TodoController.swift */,
-				03F3FE732466EE4D003B420E /* TodoController+DataSource.swift */,
-				03F3FE752466EE5D003B420E /* TodoController+Delegate.swift */,
-				03F3FE772466EE6E003B420E /* TodoController+Notifications.swift */,
 				03F3FE792466EE7F003B420E /* TodoController+CellTextViewDelegate.swift */,
+				0306CAC524714CC900E45DFA /* TodoDataSource.swift */,
+				0307D055247151F4009671C8 /* TodoDelegate.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -306,6 +353,8 @@
 				035016402465B5A4006726BC /* Schedule */,
 				0350163E2465B59B006726BC /* Extras */,
 				03EC4DE124705F14007BB838 /* TabContentController.swift */,
+				0306CABD2471493D00E45DFA /* TabContentDataSource.swift */,
+				0306CABF2471495200E45DFA /* TabContentDelegate.swift */,
 				0306CAA524712F7600E45DFA /* TabContentHeader.swift */,
 				0306CAA72471306000E45DFA /* Spacer.swift */,
 			);
@@ -326,6 +375,10 @@
 				03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */,
 				03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */,
 				0306CAA324712A7900E45DFA /* UILabel+Extensions.swift */,
+				0306CAB72471440A00E45DFA /* NotifySelector.swift */,
+				0306CAB92471442500E45DFA /* KeyboardNotification.swift */,
+				0306CABB2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift */,
+				0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -473,51 +526,58 @@
 			buildActionMask = 2147483647;
 			files = (
 				03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */,
-				03F3FE8A24670016003B420E /* ScheduleController+DataSource.swift in Sources */,
+				0306CABE2471493D00E45DFA /* TabContentDataSource.swift in Sources */,
 				0350164F2465C7AE006726BC /* String+Extensions.swift in Sources */,
 				035016552465CF6F006726BC /* PomodoroCell.swift in Sources */,
 				03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */,
 				0306CAA82471306000E45DFA /* Spacer.swift in Sources */,
 				035016572465CF75006726BC /* NotesCell.swift in Sources */,
 				0306CAA424712A7900E45DFA /* UILabel+Extensions.swift in Sources */,
+				0306CAC22471496A00E45DFA /* CellClassIdentifier.swift in Sources */,
 				03680B962465AE7500904DE1 /* Database.swift in Sources */,
+				0306CAB42471432800E45DFA /* NotesCell+UITextViewDelegate.swift in Sources */,
 				035016512465CF60006726BC /* MealsCell.swift in Sources */,
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
 				0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */,
-				03F3FE762466EE5D003B420E /* TodoController+Delegate.swift in Sources */,
+				0306CABA2471442500E45DFA /* KeyboardNotification.swift in Sources */,
 				03F3FE822466FC18003B420E /* Note+Extensions.swift in Sources */,
 				035016372465AF47006726BC /* Day+Extensions.swift in Sources */,
 				03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */,
 				0306CAAC24713AC200E45DFA /* ExtrasDataSource.swift in Sources */,
+				0306CAC624714CC900E45DFA /* TodoDataSource.swift in Sources */,
+				0306CABC2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift in Sources */,
 				0350163D2465B090006726BC /* DayProvider.swift in Sources */,
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
-				03EC4DDE2470226C007BB838 /* ExtrasController+Notifications.swift in Sources */,
 				0306CAA624712F7600E45DFA /* TabContentHeader.swift in Sources */,
 				03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
+				0306CAB82471440A00E45DFA /* NotifySelector.swift in Sources */,
 				03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */,
+				0307D05824715234009671C8 /* ScheduleDelegate.swift in Sources */,
 				0330F9342463414A00E07824 /* ExtrasController.swift in Sources */,
 				0330F9322463414000E07824 /* ScheduleController.swift in Sources */,
 				035016452465B5C2006726BC /* TaskCell.swift in Sources */,
+				0307D056247151F4009671C8 /* TodoDelegate.swift in Sources */,
 				03F3FE722466E922003B420E /* TextStyle.swift in Sources */,
+				0306CAB62471434600E45DFA /* MealsCell+UITextViewDelegate.swift in Sources */,
 				03F3FE7A2466EE7F003B420E /* TodoController+CellTextViewDelegate.swift in Sources */,
 				03F3FE882466FD32003B420E /* Schedule+Extensions.swift in Sources */,
 				03F3FE702466E753003B420E /* Color.swift in Sources */,
-				03F3FE782466EE6E003B420E /* TodoController+Notifications.swift in Sources */,
 				039566612463315100C0F498 /* AppDelegate.swift in Sources */,
+				0306CAC02471495200E45DFA /* TabContentDelegate.swift in Sources */,
 				03F3FE7C2466EF12003B420E /* UIImage+Extensions.swift in Sources */,
 				035016492465B974006726BC /* TextField.swift in Sources */,
-				03F3FE742466EE4D003B420E /* TodoController+DataSource.swift in Sources */,
 				035016392465AFAE006726BC /* Task+Extensions.swift in Sources */,
 				035016532465CF67006726BC /* WaterCell.swift in Sources */,
+				0307D05A2471523D009671C8 /* ScheduleDataSource.swift in Sources */,
 				03F3FE802466FBD3003B420E /* Meal+Extensions.swift in Sources */,
 				0306CAAE24713AD900E45DFA /* ExtrasDelegate.swift in Sources */,
 				039566632463315100C0F498 /* SceneDelegate.swift in Sources */,
 				0350164D2465C2CB006726BC /* TableView.swift in Sources */,
 				03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */,
-				03EC4DE02470227B007BB838 /* ScheduleController+Notifications.swift in Sources */,
+				0306CAC424714A7100E45DFA /* ScheduleController+CellTextViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

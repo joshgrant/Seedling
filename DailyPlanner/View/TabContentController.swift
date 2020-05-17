@@ -8,62 +8,6 @@
 
 import UIKit
 
-class TabContentDataSource: NSObject, UITableViewDataSource
-{
-	// MARK: - Variables
-	
-	weak var dayProvider: DayProvider?
-	
-	// MARK: - Initialization
-	
-	init(dayProvider: DayProvider)
-	{
-		self.dayProvider = dayProvider
-	}
-	
-	// MARK: - Data source
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-	{
-		preconditionFailure("Implement in subclasses")
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-	{
-		preconditionFailure("Implement in subclasses")
-	}
-	
-	// MARK: - Glue
-	
-	func cellIdentifier(for indexPath: IndexPath) -> String
-	{
-		switch indexPath.section
-		{
-		case 0:
-			return "mealsCell"
-		case 1:
-			return "waterCell"
-		case 2:
-			return "pomodoroCell"
-		case 3:
-			return "notesCell"
-		default:
-			return "cell"
-		}
-	}
-}
-
-class TabContentDelegate: NSObject, UITableViewDelegate
-{
-	
-}
-
-struct CellClassIdentifier
-{
-	var cellClass: AnyClass?
-	var cellReuseIdentifier: String
-}
-
 class TabContentController: UIViewController
 {
 	// MARK: - Variables
@@ -106,7 +50,8 @@ class TabContentController: UIViewController
 		registerNotifications()
 	}
 	
-	required init?(coder: NSCoder) {
+	required init?(coder: NSCoder)
+	{
 		fatalError("init(coder:) has not been implemented")
 	}
 	
@@ -172,86 +117,10 @@ class TabContentController: UIViewController
 
 // MARK: - Notifications
 
-struct NotifySelector
-{
-	var name: Notification.Name
-	var selector: Selector
-}
-
-struct KeyboardNotification
-{
-	var duration: TimeInterval
-	var animationCurve: UIView.AnimationCurve
-	
-	var frameBegin: CGRect
-	var frameEnd: CGRect
-	
-	var isLocal: Bool
-	
-	init?(notification: Notification)
-	{
-		guard let userInfo = notification.userInfo else { return nil }
-		
-		if let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
-		{
-			self.duration = duration
-		}
-		else
-		{
-			return nil
-		}
-		
-		if let curveRaw = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber)?.intValue, let animationCurve = UIView.AnimationCurve(rawValue: curveRaw)
-		{
-			self.animationCurve = animationCurve
-		}
-		else
-		{
-			return nil
-		}
-		
-		if let frameBegin = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? CGRect
-		{
-			self.frameBegin = frameBegin
-		}
-		else
-		{
-			return nil
-		}
-		
-		if let frameEnd = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-		{
-			self.frameEnd = frameEnd
-		}
-		else
-		{
-			return nil
-		}
-		
-		if let isLocal = userInfo[UIResponder.keyboardIsLocalUserInfoKey] as? Bool
-		{
-			self.isLocal = isLocal
-		}
-		else
-		{
-			return nil
-		}
-	}
-}
-
-extension KeyboardNotification: CustomStringConvertible
-{
-	var description: String
-	{
-		return "Duration: \(duration), Curve: \(animationCurve.rawValue)\n"
-			+ "Begin: \(frameBegin), End: \(frameEnd)"
-			+ "isLocal: \(isLocal)"
-	}
-}
-
 extension TabContentController
 {
-	var notifySelectors: [NotifySelector] {
+	var notifySelectors: [NotifySelector]
+	{
 		return [
 			.init(name: .dayProviderDidUpdateDay, selector: #selector(self.dayProviderDidUpdateDay(_:))),
 			.init(name: UIResponder.keyboardWillShowNotification, selector: #selector(self.keyboardWillShow(_:))),
@@ -260,7 +129,8 @@ extension TabContentController
 		]
 	}
 	
-	func registerNotifications() {
+	func registerNotifications()
+	{
 		notifySelectors.forEach {
 			NotificationCenter.default.addObserver(
 				self,
@@ -282,7 +152,7 @@ extension TabContentController
 			fatalError()
 		}
 		
-		print(keyboard)
+//		print(keyboard)
 		
 //		UIViewPropertyAnimator(
 //			duration: keyboard.duration,
@@ -300,7 +170,7 @@ extension TabContentController
 			fatalError()
 		}
 		
-		print(keyboard)
+//		print(keyboard)
 		
 //		UIViewPropertyAnimator(
 //			duration: keyboard.duration,
@@ -317,7 +187,7 @@ extension TabContentController
 			fatalError()
 		}
 		
-		print(notification)
+//		print(notification)
 		print(keyboard)
 		
 		let frameInView = view.convert(keyboard.frameEnd, from: nil)

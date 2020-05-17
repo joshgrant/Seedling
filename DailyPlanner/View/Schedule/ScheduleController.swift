@@ -8,45 +8,29 @@
 
 import UIKit
 
-class ScheduleController: UIViewController
+class ScheduleController: TabContentController
 {
-	// MARK: - Variables
+	// MARK: - View lifecycle
 	
-	weak var dayProvider: DayProvider?
-	
-    let tableView: UITableView
-
-	// MARK: - Initialization
-	
-	init?(dayProvider: DayProvider)
+	override func viewDidAppear(_ animated: Bool)
 	{
-		self.dayProvider = dayProvider
-		tableView = Self.makeTableView()
-		
-		super.init(coder: Coder())
-		
-		tabBarItem = Self.makeTabBarItem()
-		configureTableView()
-		configureView()
-		
-		handleNotifications()
-	}
-	
-	required init?(coder: NSCoder) { fatalError() }
-	
-	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		tableView.flashScrollIndicators()
 	}
 	
 	// MARK: - Factories
 	
-	static func makeTableView() -> UITableView
+	override class func makeDelegate() -> TabContentDelegate
 	{
-		return UITableView()
+		return ScheduleDelegate()
 	}
 	
-	static func makeTabBarItem() -> UITabBarItem
+	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
+	{
+		return ScheduleDataSource(dayProvider: dayProvider)
+	}
+	
+	override class func makeTabBarItem() -> UITabBarItem
 	{
 		return UITabBarItem(
 			title: "Schedule",
@@ -54,52 +38,15 @@ class ScheduleController: UIViewController
 			selectedImage: .type(.clockSelected))
 	}
 	
-	// MARK: - Configuration
-	
-	func configureTableView()
+	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]
 	{
-		tableView.separatorStyle = .none
-//		tableView.keyboardDismissMode = .onDrag
-//		tableView.insetsContentViewsToSafeArea = true
-//		tableView.automaticallyAdjustsScrollIndicatorInsets = true
-//		tableView.indicator
-		
-		tableView.register(ScheduleCell.self, forCellReuseIdentifier: "scheduleCell")
-		
-		tableView.delegate = self
-		tableView.dataSource = self
+		return [
+			.init(cellClass: ScheduleCell.self, cellReuseIdentifier: "scheduleCell")
+		]
 	}
 	
-	func configureView()
+	override func configureDataSource()
 	{
-		view = tableView
-	}
-}
-
-extension ScheduleController: CellTextViewDelegate {
-	
-	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell) {
-		//
-	}
-
-    func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell) {
-        tableView.performBatchUpdates({
-            UIView.animate(withDuration: 0.0) {
-                cell.contentView.setNeedsLayout()
-                cell.contentView.layoutIfNeeded()
-            }
-        }, completion: nil)
-    }
-	
-	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell) {
-		if let indexPath = tableView.indexPath(for: cell), let schedule = dayProvider?.day.schedulesArray[indexPath.row] {
-			schedule.content = textView.text
-			Database.save()
-		}
-		textView.resignFirstResponder()
-	}
-	
-	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool {
-		return true
+		(dataSource as? ScheduleDataSource)?.cellTextViewDelegate = self
 	}
 }

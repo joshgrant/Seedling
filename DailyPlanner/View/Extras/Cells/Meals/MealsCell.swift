@@ -104,39 +104,3 @@ class MealsCell: UITableViewCell {
         return textView
     }
 }
-
-extension MealsCell: UITextViewDelegate {
-
-	func textViewDidBeginEditing(_ textView: UITextView) {
-		delegate?.textViewDidBeginEditing(textView, in: self)
-	}
-	
-	func textViewDidChange(_ textView: UITextView) {
-		delegate?.textViewDidChange(textView, in: self)
-	}
-	
-	func textViewDidEndEditing(_ textView: UITextView) {
-		delegate?.textViewDidEndEditing(textView, in: self)
-		Database.context.perform {
-			switch textView {
-			case self.breakfastTextView:
-				self.meal?.breakfast = textView.text
-			case self.lunchTextView:
-				self.meal?.lunch = textView.text
-			case self.dinnerTextView:
-				self.meal?.dinner = textView.text
-			default:
-				break
-			}
-			Database.save()
-		}
-	}
-	
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
-			return true
-		} else {
-			return false
-		}
-	}
-}

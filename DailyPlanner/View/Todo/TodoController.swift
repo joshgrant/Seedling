@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoController: UIViewController
+class TodoController: TabContentController
 {
 	// MARK: - Variables
 	
@@ -16,66 +16,43 @@ class TodoController: UIViewController
 		case priorities
 		case todos
 	}
-    
-	weak var dayProvider: DayProvider?
-	
-    let tableView: UITableView
 	
 	var editingSection: Section?
 	
-	// MARK: - Initialization
-    
-    init?(dayProvider: DayProvider)
-	{
-        self.dayProvider = dayProvider
-        
-		tableView = Self.makeTableView()
-		
-        super.init(coder: Coder())
-		
-		tabBarItem = Self.makeTabBarItem()
-		
-		configureTableView()
-		configureView()
-		
-        handleNotifications()
-    }
-    
-    required init?(coder: NSCoder) { fatalError() }
-	
 	// MARK: - Factories
 	
-	private static func makeTableView() -> UITableView
+	override class func makeDelegate() -> TabContentDelegate
 	{
-		return UITableView()
+		return TodoDelegate()
 	}
 	
-	private static func makeTabBarItem() -> UITabBarItem
+	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
 	{
-		//        tabBarItem.landscapeImagePhone = UIImage(named: "todoCompact")
-		// Good for accessibility
-		//        tabBarItem.largeContentSizeImage
+		return TodoDataSource(dayProvider: dayProvider)
+	}
+	
+	override class func makeTabBarItem() -> UITabBarItem
+	{
 		return UITabBarItem(
-			title: "To do",
+			title: "To Do",
 			image: .type(.todo),
 			selectedImage: .type(.todoSelected))
 	}
 	
-	// MARK: - Configuration
-	
-	private func configureView() {
-		view = tableView
+	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]
+	{
+		return [
+			.init(cellClass: TaskCell.self, cellReuseIdentifier: "taskCell")
+		]
 	}
 	
-	private func configureTableView()
+	override func configureDelegate()
 	{
-		tableView.backgroundColor = .white
-		tableView.separatorStyle = .none
-//		tableView.keyboardDismissMode = .interactive
-		
-		tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCell")
-		
-		tableView.dataSource = self
-		tableView.delegate = self
+		(delegate as? TodoDelegate)?.tableView = tableView
+	}
+	
+	override func configureDataSource()
+	{
+		(dataSource as? TodoDataSource)?.cellTextViewDelegate = self
 	}
 }

@@ -12,7 +12,8 @@ class TabContentHeader: UIView
 {
 	// MARK: - Variables
 	
-	var content: String
+	var content: String?
+	var button: UIButton?
 	
 	let label: UILabel
 	let visualEffectView: UIVisualEffectView
@@ -20,9 +21,10 @@ class TabContentHeader: UIView
 	
 	// MARK: - Initialization
 	
-	required init?(content: String)
+	required init?(content: String?, button: UIButton? = nil)
 	{
 		self.content = content
+		self.button = button
 		
 		label = Self.makeLabel()
 		visualEffectView = Self.makeVisualEffectView()
@@ -30,6 +32,8 @@ class TabContentHeader: UIView
 		
 		super.init(coder: Coder())
 		
+		configureLabel()
+		configureButton()
 		configureStackView()
 		configureVisualEffectView()
 		configureView()
@@ -67,9 +71,27 @@ class TabContentHeader: UIView
 	
 	// MARK: - Configuration
 	
-	func configureView()
+	func configureLabel()
 	{
-		embed(view: visualEffectView)
+		label.text = content
+	}
+	
+	func configureButton()
+	{
+		
+	}
+	
+	func configureStackView()
+	{
+		stackView.addArrangedSubview(Spacer(width: 10))
+		stackView.addArrangedSubview(label)
+		
+		if let button = button
+		{
+			stackView.addArrangedSubview(Spacer(width: 10))
+			stackView.addArrangedSubview(button)
+			stackView.addArrangedSubview(Spacer(width: 10))
+		}
 	}
 	
 	func configureVisualEffectView()
@@ -77,9 +99,8 @@ class TabContentHeader: UIView
 		visualEffectView.contentView.embed(view: stackView)
 	}
 	
-	func configureStackView()
+	func configureView()
 	{
-		stackView.addArrangedSubview(Spacer(width: 10))
-		stackView.addArrangedSubview(label)
+		embed(view: visualEffectView)
 	}
 }

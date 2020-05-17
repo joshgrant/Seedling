@@ -57,11 +57,6 @@ class ExtrasController: TabContentController
 	
 	// MARK: - Configuration
 	
-	override func configureDelegate()
-	{
-		(delegate as? ExtrasDelegate)?.view = view
-	}
-	
 	override func configureDataSource()
 	{
 		(dataSource as? ExtrasDataSource)?.cellTextViewDelegate = self

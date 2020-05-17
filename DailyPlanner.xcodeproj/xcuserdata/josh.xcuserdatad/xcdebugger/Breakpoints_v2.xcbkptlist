@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "102B6154-A4DD-4727-B1A7-C6D1DCE76CF9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DailyPlanner/View/Schedule/ScheduleController+DataSource.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "69A68BD5-7BD7-4590-B299-325AE81BF140"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -30,8 +14,8 @@
             filePath = "DailyPlanner/View/Schedule/Cells/ScheduleCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "textViewDidChange(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +30,8 @@
             filePath = "DailyPlanner/View/Schedule/ScheduleController+Notifications.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "keyboardWillHide(_:)"
             landmarkType = "7">
             <Locations>

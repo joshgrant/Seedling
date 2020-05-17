@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ScheduleCell: UITableViewCell {
+class ScheduleCell: UITableViewCell
+{
+	// MARK: - Variables
     
     let meridiemLabel: UILabel
     let hourLabel: UILabel
@@ -30,6 +32,8 @@ class ScheduleCell: UITableViewCell {
         delegate = nil
         schedule = nil
     }
+	
+	// MARK: - Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         
@@ -82,13 +86,30 @@ class ScheduleCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+	
+	// MARK: - Configuration
     
-    func configure(with schedule: Schedule?, delegate: CellTextViewDelegate) {
+    func configure(with schedule: Schedule?) {
         self.schedule = schedule
-        self.delegate = delegate
-		
 		textView.text = schedule?.content
+		hourLabel.text = "\(schedule?.hour ?? 0)"
+		meridiemLabel.text = meridiemText(for: Int(schedule?.hour ?? 0))
     }
+	
+	// MARK: - Utility
+	
+	private func meridiemText(for hour: Int) -> String?
+	{
+		switch hour
+		{
+		case 5:
+			return "AM"
+		case 12:
+			return "PM"
+		default:
+			return nil
+		}
+	}
 }
 
 extension ScheduleCell: UITextViewDelegate {
