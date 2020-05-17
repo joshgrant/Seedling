@@ -11,85 +11,134 @@ import UIKit
 class ScheduleCell: UITableViewCell
 {
 	// MARK: - Variables
+	
+	weak var delegate: CellTextViewDelegate?
+	var schedule: Schedule?
     
     let meridiemLabel: UILabel
     let hourLabel: UILabel
-    let textView: UITextView
-    
-    weak var delegate: CellTextViewDelegate?
-    var schedule: Schedule? // Pass this on custom init?
-    
-    var textViewHeight: NSLayoutConstraint!
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        meridiemLabel.text = nil
-        hourLabel.text = nil
-        textView.text = nil
-        textViewHeight.constant = 44
-        textViewHeight.isActive = false
-        
-        delegate = nil
-        schedule = nil
-    }
+    let textView: TextView
+	
+	let textStack: UIStackView
+	let lineStack: UIStackView
+	let stack: UIStackView
 	
 	// MARK: - Initialization
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        
-        meridiemLabel = UILabel()
-        meridiemLabel.textColor = UIColor(named: "orange")
-        meridiemLabel.font = .monospacedSystemFont(ofSize: 15, weight: .regular)
-        meridiemLabel.widthAnchor.constraint(equalToConstant: 38).isActive = true
-        meridiemLabel.setContentHuggingPriority(.required, for: .horizontal)
-        
-        hourLabel = UILabel()
-        hourLabel.textColor = UIColor(named: "orange")
-        hourLabel.font = .monospacedSystemFont(ofSize: 15, weight: .regular)
-        hourLabel.setContentHuggingPriority(.required, for: .horizontal)
-        
-        textView = UITextView()
-        textView.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
-        textView.textColor = UIColor(named: "text")
-        textView.contentInset = .zero
-        textViewHeight = textView.heightAnchor.constraint(equalToConstant: 44)
-        textViewHeight.isActive = true
-        textViewHeight.priority = .defaultLow
-        textView.isScrollEnabled = false
-        
-        textView.textContainerInset = UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
-        textView.textContainer.lineFragmentPadding = 0
-        
-        let spacer = UIView()
-        spacer.widthAnchor.constraint(equalToConstant: 32).isActive = true
-        
-        let line = UIView()
-        line.backgroundColor = UIColor(named: "separator")
-        line.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        let hStack = UIStackView(arrangedSubviews: [spacer, line])
-        
-        let stackView = UIStackView(arrangedSubviews: [meridiemLabel, hourLabel, textView])
-        
-        let vStack = UIStackView(arrangedSubviews: [stackView, hStack])
-        vStack.axis = .vertical
-        
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        selectionStyle = .none
-        
-        textView.delegate = self
-        contentView.embed(view: vStack)
-//        bottom.priority = .defaultLow
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
+	{
+		meridiemLabel = Self.makeMeridiemLabel()
+		hourLabel = Self.makeHourLabel()
+		textView = Self.makeTextView()
+		textStack = Self.makeTextStack()
+		lineStack = Self.makeLineStack()
+		stack = Self.makeStack()
+		
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+		
+		selectionStyle = .none
+		
+		// Hmm. With constraints, we need to create the parent
+		// views before the children...
+		configureContentView()
+		configureStack()
+		configureTextStack()
+		configureLineStack()
+		
+		configureMeridiemLabel()
+		configureHourLabel()
+		configureTextView()
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+	{
         fatalError("init(coder:) has not been implemented")
     }
 	
+	// MARK: - View lifecycle
+	
+	override func prepareForReuse()
+	{
+		super.prepareForReuse()
+		meridiemLabel.text = nil
+		hourLabel.text = nil
+		textView.text = nil
+		
+		delegate = nil
+		schedule = nil
+	}
+	
+	// MARK: - Factory
+	
+	class func makeMeridiemLabel() -> UILabel { return UILabel() }
+	class func makeHourLabel() -> UILabel { return UILabel() }
+	class func makeTextView() -> TextView { return TextView() }
+	class func makeTextStack() -> UIStackView { return UIStackView() }
+	class func makeLineStack() -> UIStackView { return UIStackView() }
+	class func makeStack() -> UIStackView { return UIStackView() }
+	
 	// MARK: - Configuration
+	
+	func configureMeridiemLabel()
+	{
+		meridiemLabel.configure(with: .meridiem)
+		meridiemLabel.setContentHuggingPriority(.required, for: .horizontal)
+	}
+	
+	func configureHourLabel()
+	{
+		hourLabel.configure(with: .hour)
+		hourLabel.setContentHuggingPriority(.required, for: .horizontal)
+	}
+	
+	func configureTextView()
+	{
+		textView.configure(with: .textView, delegate: self)
+		textView.contentInset = .zero
+		textView.isScrollEnabled = false
+		textView.textContainerInset = UIEdgeInsets(top: 12, left: 10, bottom: 12, right: 10)
+		textView.textContainer.lineFragmentPadding = 0
+	}
+	
+	func configureTextStack()
+	{
+		// TODO: Create a utility function to set the arranged subviews
+		// in an easy way (and absolute)
+		textStack.addArrangedSubview(Spacer(width: 10))
+		textStack.addArrangedSubview(meridiemLabel)
+		textStack.addArrangedSubview(Spacer(width: 20))
+		textStack.addArrangedSubview(hourLabel)
+		textStack.addArrangedSubview(Spacer(width: 20))
+		textStack.addArrangedSubview(textView)
+	}
+	
+	func configureLineStack()
+	{
+		lineStack.addArrangedSubview(Spacer())
+		
+		let line = Spacer(height: 1)
+		lineStack.addArrangedSubview(line) // Lame, but because we need the line and the hour label
+		// to be in the view hierarchy before we create a constraint between them
+		
+		line.backgroundColor = .type(.separator)
+		line.leadingAnchor.constraint(equalTo: hourLabel.leadingAnchor).isActive = true
+	}
+	
+	func configureStack()
+	{
+		stack.addArrangedSubview(textStack)
+		stack.addArrangedSubview(lineStack)
+		
+		stack.axis = .vertical
+	}
+	
+	func configureContentView()
+	{
+		contentView.embed(view: stack)
+	}
     
-    func configure(with schedule: Schedule?) {
+    func configure(with schedule: Schedule?)
+	{
         self.schedule = schedule
 		textView.text = schedule?.content
 		hourLabel.text = "\(schedule?.hour ?? 0)"
@@ -112,16 +161,11 @@ class ScheduleCell: UITableViewCell
 	}
 }
 
-extension ScheduleCell: UITextViewDelegate {
-    
-    // Not called with programmatic changes, just fyi
-    func textViewDidChange(_ textView: UITextView) {
-        let height = textView.text.height(with: .textView, constrainedTo: textView.frame.width)
-        textViewHeight.constant = height
-        
+extension ScheduleCell: UITextViewDelegate
+{    
+    func textViewDidChange(_ textView: UITextView)
+	{
         delegate?.textViewDidChange(textView, in: self)
-		
-		// Doesn't update with autocorrection...
 		self.schedule?.content = textView.text
     }
 }

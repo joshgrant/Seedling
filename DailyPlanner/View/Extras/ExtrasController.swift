@@ -87,9 +87,7 @@ extension ExtrasController: CellTextViewDelegate
 	
 	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
 	{
-		// Perhaps edit the next cell?
-		// And when at dinner, dismiss?
-		
+		textView.resignFirstResponder()
 		return true
 	}
 }

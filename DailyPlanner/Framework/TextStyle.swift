@@ -48,17 +48,14 @@ enum TextStyle {
             return 17
 		case .sectionHeader:
 			return 20
+		case .meridiem, .hour:
+			return 15
         default:
             return 10
         }
     }
     
     var font: UIFont {
-        switch self {
-		case .textView, .sectionHeader:
-            return .monospacedSystemFont(ofSize: fontSize, weight: .regular)
-        default:
-            return .monospacedSystemFont(ofSize: fontSize, weight: .bold)
-        }
+		return .monospacedSystemFont(ofSize: fontSize, weight: .regular)
     }
 }

@@ -42,11 +42,11 @@ extension MealsCell: UITextViewDelegate
 	{
 		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false
 		{
-			return true
+			return false
 		}
 		else
 		{
-			return false
+			return true
 		}
 	}
 }
