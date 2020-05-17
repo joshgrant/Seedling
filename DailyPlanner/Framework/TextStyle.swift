@@ -46,6 +46,8 @@ enum TextStyle {
         switch self {
         case .textView:
             return 17
+		case .sectionHeader:
+			return 20
         default:
             return 10
         }
@@ -53,7 +55,7 @@ enum TextStyle {
     
     var font: UIFont {
         switch self {
-        case .textView:
+		case .textView, .sectionHeader:
             return .monospacedSystemFont(ofSize: fontSize, weight: .regular)
         default:
             return .monospacedSystemFont(ofSize: fontSize, weight: .bold)

@@ -8,12 +8,13 @@
 
 import UIKit
 
-extension UIView {
-    
+extension UIView
+{    
     typealias Constraint = NSLayoutConstraint
     typealias Constraints = (top: Constraint, right: Constraint, bottom: Constraint, left: Constraint)
     
-    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero) -> Constraints {
+    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero) -> Constraints
+	{
         view.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(view)

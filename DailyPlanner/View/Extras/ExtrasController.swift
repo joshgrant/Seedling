@@ -8,194 +8,68 @@
 
 import UIKit
 
-class ExtrasController: UIViewController
+class ExtrasController: TabContentController
 {
-	// MARK: - Variables
-	
-    let tableView: UITableView
-	
-	weak var dayProvider: DayProvider?
-	
 	// MARK: - Initialization
 	
-	init?(dayProvider: DayProvider)
+	override init?(dayProvider: DayProvider)
 	{
-		self.dayProvider = dayProvider
+		super.init(dayProvider: dayProvider)
 		
-		tableView = Self.makeTableView()
-		
-		super.init(coder: Coder())
-
-		tabBarItem = Self.makeTabBarItem()
-		
-		configureTableView()
-		configureView()
-		
-		handleNotifications()
-
-        view = tableView
-    }
+		configureDataSource()
+	}
 	
-	required init?(coder: NSCoder) { fatalError() }
+	required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 	
-	// MARK: - Factories
+	// MARK: - Factory
 	
-	static func makeTableView() -> UITableView
+	override class func makeDelegate() -> TabContentDelegate
+	{
+		return ExtrasDelegate()
+	}
+	
+	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
+	{
+		return ExtrasDataSource(dayProvider: dayProvider)
+	}
+	
+	override class func makeTableView() -> UITableView
 	{
 		return UITableView()
 	}
 	
-	static func makeTabBarItem() -> UITabBarItem {
+	override class func makeTabBarItem() -> UITabBarItem {
 		return UITabBarItem(
 			title: "Extras",
 			image: .type(.extras),
 			selectedImage: .type(.extrasSelected))
 	}
 	
+	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]
+	{
+		return [
+			.init(cellClass: MealsCell.self, cellReuseIdentifier: "mealsCell"),
+			.init(cellClass: WaterCell.self, cellReuseIdentifier: "waterCell"),
+			.init(cellClass: PomodoroCell.self, cellReuseIdentifier: "pomodoroCell"),
+			.init(cellClass: NotesCell.self, cellReuseIdentifier: "notesCell")
+		]
+	}
+	
 	// MARK: - Configuration
 	
-	func configureView()
+	override func configureDelegate()
 	{
-		view = tableView
+		(delegate as? ExtrasDelegate)?.view = view
 	}
 	
-	func configureTableView()
+	override func configureDataSource()
 	{
-		tableView.separatorStyle = .none
-//		tableView.keyboardDismissMode = .
-		
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-		tableView.register(MealsCell.self, forCellReuseIdentifier: "mealsCell")
-		tableView.register(WaterCell.self, forCellReuseIdentifier: "waterCell")
-		tableView.register(PomodoroCell.self, forCellReuseIdentifier: "pomodoroCell")
-		tableView.register(NotesCell.self, forCellReuseIdentifier: "notesCell")
-		
-		tableView.delegate = self
-		tableView.dataSource = self
+		(dataSource as? ExtrasDataSource)?.cellTextViewDelegate = self
 	}
 }
 
-extension ExtrasController: UITableViewDataSource {
-    
-    func cellIdentifier(for indexPath: IndexPath) -> String {
-        switch indexPath.section {
-        case 0:
-            return "mealsCell"
-        case 1:
-            return "waterCell"
-        case 2:
-            return "pomodoroCell"
-        case 3:
-            return "notesCell"
-        default:
-            return "cell"
-        }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        4
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let identifier = cellIdentifier(for: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-        
-        switch indexPath.section {
-        case 0:
-//            (cell as! MealsCell).text
-			if let meal = dayProvider?.day.meal {
-				(cell as? MealsCell)?.configure(with: meal)
-				(cell as? MealsCell)?.delegate = self
-			} // Else create the meal?
-			// TODO: shouldn't creating a new day also create a new meal?
-        case 1:
-			if let water = dayProvider?.day.water {
-				(cell as? WaterCell)?.configure(with: water)
-			}
-        case 2:
-			if let pomodoro = dayProvider?.day.pomodoro {
-				(cell as? PomodoroCell)?.configure(with: pomodoro)
-			}
-        case 3:
-			if let note = dayProvider?.day.note {
-				(cell as? NotesCell)?.configure(with: note)
-				(cell as? NotesCell)?.delegate = self
-			}
-        default:
-            break
-        }
-        
-        return cell
-    }
-    
-}
-
-extension ExtrasController: UITableViewDelegate {
-	
-	func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-		view.endEditing(false)
-	}
-    
-    // TODO: Copied from TodoController
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
-        label.font = UIFont.monospacedSystemFont(ofSize: 20, weight: .regular)
-        label.textColor = UIColor(named: "orange")
-        label.textAlignment = .left
-        
-        switch section {
-        case 0:
-            label.text = "Meals"
-        case 1:
-            label.text = "Water"
-        case 2:
-            label.text = "Pomodoro"
-        case 3:
-            label.text = "Notes"
-        default:
-            break
-        }
-        
-        let leftSpacer = UIView()
-		leftSpacer.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        let bottomSpacer = UIView()
-        
-        let vStack = UIStackView(arrangedSubviews: [
-            leftSpacer,
-            label])
-            //bottomSpacer])
-//        vStack.axis = .vertical
-        
-//        topSpacer.heightAnchor.constraint(equalTo: bottomSpacer.heightAnchor).isActive = true
-        
-        let effect = UIBlurEffect(style: .regular)
-        let visualEffectView = UIVisualEffectView(effect: effect)
-        
-        visualEffectView.contentView.embed(view: vStack)
-        
-        return visualEffectView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 22
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return UIView()
-    }
-}
-
-extension ExtrasController: CellTextViewDelegate {
+extension ExtrasController: CellTextViewDelegate
+{
 	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell)
 	{
 		
@@ -203,12 +77,12 @@ extension ExtrasController: CellTextViewDelegate {
 	
 	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
 	{
-			tableView.performBatchUpdates({
-				UIView.animate(withDuration: 0.0) {
-					cell.contentView.setNeedsLayout()
-					cell.contentView.layoutIfNeeded()
-				}
-			}, completion: nil)
+		tableView.performBatchUpdates({
+			UIView.animate(withDuration: 0.0) {
+				cell.contentView.setNeedsLayout()
+				cell.contentView.layoutIfNeeded()
+			}
+		}, completion: nil)
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell)

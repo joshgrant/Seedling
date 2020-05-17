@@ -72,7 +72,7 @@ extension ScheduleController
 	
 	@objc func keyboardWillHide(_ notification: Notification)
 	{
-		let frameEnd = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+//		let frameEnd = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
 		let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
 		let animationCurve: UIView.AnimationCurve
 		
