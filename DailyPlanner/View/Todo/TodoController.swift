@@ -49,6 +49,7 @@ class TodoController: TabContentController
 	override func configureDelegate()
 	{
 		(delegate as? TodoDelegate)?.tableView = tableView
+		(delegate as? TodoDelegate)?.dayProvider = dayProvider
 	}
 	
 	override func configureDataSource()

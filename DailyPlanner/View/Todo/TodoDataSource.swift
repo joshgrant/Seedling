@@ -27,7 +27,7 @@ class TodoDataSource: TabContentDataSource
 		switch section
 		{
 		case 0:
-			return dayProvider?.day.priorities?.count ?? 0
+			return dayProvider?.day.prioritiesArray.count ?? 0
 		case 1:
 			return dayProvider?.day.todosArray.count ?? 0
 		default:
@@ -52,6 +52,39 @@ class TodoDataSource: TabContentDataSource
 	func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
 	{
 		return true
+	}
+	
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		switch editingStyle {
+		case .delete:
+			switch indexPath.section
+			{
+			case 0:
+				if let task = dayProvider?.day.prioritiesArray[indexPath.row] {
+					tableView.performBatchUpdates({
+						dayProvider?.day.removeFromPriorities(task)
+						Database.context.delete(task)
+						tableView.deleteRows(at: [indexPath], with: .automatic)
+					}, completion: { _ in
+						Database.save()
+					})
+				}
+			case 1:
+				if let task = dayProvider?.day.todosArray[indexPath.row] {
+					tableView.performBatchUpdates({
+						dayProvider?.day.removeFromTodos(task)
+						Database.context.delete(task)
+						tableView.deleteRows(at: [indexPath], with: .automatic)
+					}, completion: { _ in
+						Database.save()
+					})
+				}
+			default:
+				break
+			}
+		default:
+			break
+		}
 	}
 	
 	// MARK: - Utility

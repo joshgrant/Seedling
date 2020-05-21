@@ -83,6 +83,9 @@ class ScheduleCell: UITableViewCell
 	{
 		meridiemLabel.configure(with: .meridiem)
 		meridiemLabel.setContentHuggingPriority(.required, for: .horizontal)
+		
+		// Not ideal for other languages
+		meridiemLabel.widthAnchor.constraint(equalToConstant: 20).isActive = true
 	}
 	
 	func configureHourLabel()
