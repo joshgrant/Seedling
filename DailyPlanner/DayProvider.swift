@@ -82,6 +82,10 @@ class DayProvider {
             return day
         }
     }
+	
+	func resetDay() {
+		_day = nil
+	}
 }
 
 extension NSNotification.Name {

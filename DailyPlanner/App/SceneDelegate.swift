@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        
+
         guard let tabBarController = MainTabBarController(dayProvider: dayProvider) else { return }        
         let navigationController = UINavigationController(rootViewController: tabBarController)
         
@@ -40,6 +40,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+		
+		// See if this makes sense...
+		dayProvider.resetDay()
     }
     
     func sceneWillResignActive(_ scene: UIScene) {

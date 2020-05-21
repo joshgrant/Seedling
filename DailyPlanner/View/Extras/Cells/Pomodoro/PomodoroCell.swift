@@ -49,25 +49,40 @@ class PomodoroCell: UITableViewCell {
 	func makeButton(tag: Int) -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: "clearBubble"), for: .normal)
-        button.addTarget(self, action: #selector(didTouchUpInsideBubble(sender:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTouchUpInsideBubble(_:)), for: .touchUpInside)
 		button.tag = tag
 		
 		button.isEnabled = tag == 1
         return button
     }
-    
-    @objc func didTouchUpInsideBubble(sender: UIButton) {
-        sender.setImage(UIImage(named: "orangeBubble"), for: .normal)
-		
-		pomodoro?.amount = Int32(sender.tag)
-		
-		let tag = sender.tag
-		let next = tag + 1
-		
-		let nextButton = viewWithTag(next) as? UIButton
-		
-		nextButton?.isEnabled = true
-    }
+
+	// TODO: Needs some cleanup. There's probably a better approach
+	@objc func didTouchUpInsideBubble(_ sender: UIButton)
+	{
+		// If we tap on one that's filled, we subtract
+		if Int32(sender.tag) == pomodoro?.amount {
+			pomodoro?.amount -= 1
+			
+			sender.setImage(UIImage.type(.clearBubble), for: .normal)
+			
+			let tag = sender.tag
+			let next = tag + 1
+			let nextButton = viewWithTag(next) as? UIButton
+			
+			nextButton?.isEnabled = false
+		} else if Int32(sender.tag) == (pomodoro?.amount ?? 0) + 1 {
+			sender.setImage(UIImage.type(.orangeBubble), for: .normal)
+			
+			pomodoro?.amount = Int32(sender.tag)
+			
+			let tag = sender.tag
+			let next = tag + 1
+			
+			let nextButton = viewWithTag(next) as? UIButton
+			
+			nextButton?.isEnabled = true
+		}
+	}
     
 	func makeStackView(tag: Int) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
