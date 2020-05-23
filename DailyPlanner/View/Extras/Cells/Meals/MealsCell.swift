@@ -83,7 +83,7 @@ class MealsCell: UITableViewCell
     
     static func makeTextView(placeholder: String) -> TextView
 	{
-        let textView = TextView(defaultHeight: 54)
+        let textView = TextView(minimumHeight: 54)
 		textView.textColor = .type(.emerald)
         textView.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
 		textView.layer.borderColor = UIColor.type(.separator).cgColor

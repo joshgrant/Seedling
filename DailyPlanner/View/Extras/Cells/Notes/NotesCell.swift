@@ -17,7 +17,7 @@ class NotesCell: UITableViewCell {
 	var note: Note?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-		textView = TextView()
+		textView = TextView(minimumHeight: 300)
 		
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 		

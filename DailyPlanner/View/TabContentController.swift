@@ -55,6 +55,13 @@ class TabContentController: UIViewController
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	// MARK: - View lifecycle
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		view.endEditing(false)
+	}
+	
 	// MARK: - Factory
 	
 	class func makeDelegate() -> TabContentDelegate
@@ -116,9 +123,6 @@ class TabContentController: UIViewController
 	
 	func configureNavigationItemTitle()
 	{
-		let formatter = DateFormatter()
-		formatter.dateStyle = .short
-		
 		guard let day = dayProvider?.day else {
 			tabBarController?.navigationItem.title = "None"
 			return
@@ -127,10 +131,17 @@ class TabContentController: UIViewController
 		let todayPredicate = Date().makeDayPredicate()
 		let isToday = todayPredicate.evaluate(with: day)
 		
+		// TODO: The date formatter is not locale-aware
+		// so maybe we should update this format...
+		
 		if isToday  {
-			let title = "Today"
+			let formatter = DateFormatter()
+			formatter.dateFormat = "d MMM"
+			let title = "Today, \(formatter.string(from: day.date ?? Date()))"
 			tabBarController?.navigationItem.title = title
 		} else {
+			let formatter = DateFormatter()
+			formatter.dateFormat = "EEEE, d MMM"
 			let title = formatter.string(from: day.date ?? Date())
 			tabBarController?.navigationItem.title = title
 		}
@@ -162,6 +173,7 @@ extension TabContentController
 	
 	@objc func dayProviderDidUpdateDay(_ notification: Notification)
 	{
+		view.endEditing(false)
 		configureNavigationItemTitle()
 		tableView.reloadData()
 	}

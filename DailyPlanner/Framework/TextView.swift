@@ -11,6 +11,7 @@ import UIKit
 class TextView: UITextView
 {
     var height: NSLayoutConstraint?
+	var minimumHeight: NSLayoutConstraint?
     
     override var text: String!
 	{
@@ -26,7 +27,7 @@ class TextView: UITextView
 		}
 	}
     
-	init(defaultHeight: CGFloat = 44)
+	init(defaultHeight: CGFloat = 44, minimumHeight minimum: CGFloat = 44)
 	{
         super.init(coder: Coder())!
 		
@@ -35,6 +36,10 @@ class TextView: UITextView
 		height = heightAnchor.constraint(equalToConstant: defaultHeight)
 		height?.isActive = true
 		height?.priority = .defaultLow
+		
+		minimumHeight = heightAnchor.constraint(greaterThanOrEqualToConstant: minimum)
+		minimumHeight?.isActive = true
+		minimumHeight?.priority = .defaultHigh
     }
     
     required init?(coder: NSCoder) { fatalError() }

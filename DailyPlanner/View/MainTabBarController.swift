@@ -14,8 +14,6 @@ class MainTabBarController: UITabBarController {
 	
 	unowned var dayProvider: DayProvider
 	
-	//    var date: Date
-	
 	var todo: TodoController
 	var schedule: ScheduleController
 	var extras: ExtrasController
@@ -29,8 +27,6 @@ class MainTabBarController: UITabBarController {
 		schedule = ScheduleController(dayProvider: dayProvider)!
 		extras = ExtrasController(dayProvider: dayProvider)!
 		
-		//        date = Date()
-		
 		super.init(coder: Coder())
 		
 		setViewControllers([todo, schedule, extras], animated: false)
@@ -39,6 +35,7 @@ class MainTabBarController: UITabBarController {
 		tabBar.tintColor = .white
 		tabBar.isTranslucent = true
 		tabBar.unselectedItemTintColor = .white
+		
 		
 		navigationItem.leftBarButtonItem = UIBarButtonItem(
 			image: UIImage(systemName: "arrowtriangle.left.fill"),
@@ -52,8 +49,6 @@ class MainTabBarController: UITabBarController {
 			target: self,
 			action: #selector(didTouchUpInsideRightButton(_:)))
 		navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
-		
-		//        setNavigationTitle()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -64,26 +59,43 @@ class MainTabBarController: UITabBarController {
 		super.viewDidLoad()
 		selectedIndex = 0
 	}
-	//
-	//    private func setNavigationTitle() {
-	//        let formatter = DateFormatter()
-	//        formatter.dateStyle = .short
-	//        if let date = dayProvider.day.date {
-	//            let title = formatter.string(from: date)
-	//            navigationItem.title = title
-	//        } else {
-	//            let title = "Today"
-	//            navigationItem.title = title
-	//        }
-	//    }
-	//
-	    @objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem) {
-	        dayProvider.day = dayProvider.yesterday
-//	        setNavigationTitle()
-	    }
 	
-	    @objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem) {
-	        dayProvider.day = dayProvider.tomorrow
-//	        setNavigationTitle()
-	    }
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		configureNavigationBar()
+	}
+	
+	// MARK: - Configuration
+	
+	func configureNavigationBar()
+	{
+		if let navigationBar = navigationController?.navigationBar {
+			
+			let line = Spacer(height: 1)
+			line.translatesAutoresizingMaskIntoConstraints = false
+			line.backgroundColor = .type(.emerald)
+			
+			//		navigationItem.addSubview(line)
+			navigationBar.addSubview(line)
+			//		self.view.addSubview(line)
+			
+			NSLayoutConstraint.activate([
+				navigationBar.bottomAnchor.constraint(equalTo: line.topAnchor),
+				navigationBar.leadingAnchor.constraint(equalTo: line.leadingAnchor),
+				navigationBar.trailingAnchor.constraint(equalTo: line.trailingAnchor)
+			])
+		}
+	}
+	
+	// MARK: - Actions
+	
+	@objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem)
+	{
+		dayProvider.day = dayProvider.yesterday
+	}
+	
+	@objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem)
+	{
+		dayProvider.day = dayProvider.tomorrow
+	}
 }
