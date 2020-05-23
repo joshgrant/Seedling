@@ -28,6 +28,7 @@
 		0330F9302463413200E07824 /* TodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F92F2463413200E07824 /* TodoController.swift */; };
 		0330F9322463414000E07824 /* ScheduleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9312463414000E07824 /* ScheduleController.swift */; };
 		0330F9342463414A00E07824 /* ExtrasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0330F9332463414A00E07824 /* ExtrasController.swift */; };
+		0333AC462478E502009A85A8 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0333AC452478E502009A85A8 /* Date+Extensions.swift */; };
 		035016372465AF47006726BC /* Day+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016362465AF47006726BC /* Day+Extensions.swift */; };
 		035016392465AFAE006726BC /* Task+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016382465AFAE006726BC /* Task+Extensions.swift */; };
 		0350163D2465B090006726BC /* DayProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0350163C2465B090006726BC /* DayProvider.swift */; };
@@ -105,6 +106,7 @@
 		0330F92F2463413200E07824 /* TodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoController.swift; sourceTree = "<group>"; };
 		0330F9312463414000E07824 /* ScheduleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleController.swift; sourceTree = "<group>"; };
 		0330F9332463414A00E07824 /* ExtrasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasController.swift; sourceTree = "<group>"; };
+		0333AC452478E502009A85A8 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		035016362465AF47006726BC /* Day+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Extensions.swift"; sourceTree = "<group>"; };
 		035016382465AFAE006726BC /* Task+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+Extensions.swift"; sourceTree = "<group>"; };
 		0350163C2465B090006726BC /* DayProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProvider.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				0306CAB92471442500E45DFA /* KeyboardNotification.swift */,
 				0306CABB2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift */,
 				0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */,
+				0333AC452478E502009A85A8 /* Date+Extensions.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				0306CAC22471496A00E45DFA /* CellClassIdentifier.swift in Sources */,
 				03680B962465AE7500904DE1 /* Database.swift in Sources */,
 				0306CAB42471432800E45DFA /* NotesCell+UITextViewDelegate.swift in Sources */,
+				0333AC462478E502009A85A8 /* Date+Extensions.swift in Sources */,
 				035016512465CF60006726BC /* MealsCell.swift in Sources */,
 				0395666B2463315100C0F498 /* DailyPlanner.xcdatamodeld in Sources */,
 				0350164B2465BFD8006726BC /* ScheduleCell.swift in Sources */,

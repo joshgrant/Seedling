@@ -113,6 +113,28 @@ class TabContentController: UIViewController
 	{
 		view = tableView
 	}
+	
+	func configureNavigationItemTitle()
+	{
+		let formatter = DateFormatter()
+		formatter.dateStyle = .short
+		
+		guard let day = dayProvider?.day else {
+			tabBarController?.navigationItem.title = "None"
+			return
+		}
+		
+		let todayPredicate = Date().makeDayPredicate()
+		let isToday = todayPredicate.evaluate(with: day)
+		
+		if isToday  {
+			let title = "Today"
+			tabBarController?.navigationItem.title = title
+		} else {
+			let title = formatter.string(from: day.date ?? Date())
+			tabBarController?.navigationItem.title = title
+		}
+	}
 }
 
 // MARK: - Notifications
@@ -123,8 +145,6 @@ extension TabContentController
 	{
 		return [
 			.init(name: .dayProviderDidUpdateDay, selector: #selector(self.dayProviderDidUpdateDay(_:))),
-			.init(name: UIResponder.keyboardWillShowNotification, selector: #selector(self.keyboardWillShow(_:))),
-			.init(name: UIResponder.keyboardWillHideNotification, selector: #selector(self.keyboardWillHide(_:))),
 			.init(name: UIResponder.keyboardWillChangeFrameNotification, selector: #selector(self.keyboardWillChangeFrame(_:)))
 		]
 	}
@@ -142,42 +162,8 @@ extension TabContentController
 	
 	@objc func dayProviderDidUpdateDay(_ notification: Notification)
 	{
+		configureNavigationItemTitle()
 		tableView.reloadData()
-	}
-	
-	@objc func keyboardWillShow(_ notification: Notification)
-	{
-		guard let keyboard = KeyboardNotification(notification: notification) else
-		{
-			fatalError()
-		}
-		
-//		print(keyboard)
-		
-//		UIViewPropertyAnimator(
-//			duration: keyboard.duration,
-//			curve: keyboard.animationCurve) {
-//				let bottomInset = keyboard.frameEnd.height
-//				self.tableView.contentInset.bottom = bottomInset
-//				self.tableView.verticalScrollIndicatorInsets.bottom = bottomInset
-//		}.startAnimation()
-	}
-	
-	@objc func keyboardWillHide(_ notification: Notification)
-	{
-		guard let keyboard = KeyboardNotification(notification: notification) else
-		{
-			fatalError()
-		}
-		
-//		print(keyboard)
-		
-//		UIViewPropertyAnimator(
-//			duration: keyboard.duration,
-//			curve: keyboard.animationCurve) {
-//				self.tableView.contentInset.bottom = 0
-//				self.tableView.verticalScrollIndicatorInsets.bottom = 0
-//		}.startAnimation()
 	}
 	
 	@objc func keyboardWillChangeFrame(_ notification: Notification)
@@ -187,11 +173,11 @@ extension TabContentController
 			fatalError()
 		}
 		
-//		print(notification)
 		print(keyboard)
 		
+		// 22 is the footer for the bottom section...
 		let frameInView = view.convert(keyboard.frameEnd, from: nil)
-		let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+		let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom - 22)
 		let intersection = safeAreaFrame.intersection(frameInView)
 		
 		UIViewPropertyAnimator(

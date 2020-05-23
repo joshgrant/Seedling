@@ -9,73 +9,81 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    
-    // MARK: - Variables
-    
-    unowned var dayProvider: DayProvider
-    
-//    var date: Date
-    
-    var todo: TodoController
-    var schedule: ScheduleController
-    var extras: ExtrasController
-    
-    // MARK: - Initialization
-    
-    init?(dayProvider: DayProvider) {
-        self.dayProvider = dayProvider
-        
-        todo = TodoController(dayProvider: dayProvider)!
-        schedule = ScheduleController(dayProvider: dayProvider)!
-        extras = ExtrasController(dayProvider: dayProvider)!
-        
-//        date = Date()
-        
-        super.init(coder: Coder())
-        
-        setViewControllers([todo, schedule, extras], animated: false)
-        
-        tabBar.barTintColor = UIColor(named: "emerald")
-        tabBar.tintColor = .white
-        tabBar.isTranslucent = true
-        tabBar.unselectedItemTintColor = .white
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.left.fill"), style: .plain, target: self, action: #selector(didTouchUpInsideLeftButton(_:)))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "emerald")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowtriangle.right.fill"), style: .plain, target: self, action: #selector(didTouchUpInsideRightButton(_:)))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
-        
-        setNavigationTitle()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+	
+	// MARK: - Variables
+	
+	unowned var dayProvider: DayProvider
+	
+	//    var date: Date
+	
+	var todo: TodoController
+	var schedule: ScheduleController
+	var extras: ExtrasController
+	
+	// MARK: - Initialization
+	
+	init?(dayProvider: DayProvider) {
+		self.dayProvider = dayProvider
+		
+		todo = TodoController(dayProvider: dayProvider)!
+		schedule = ScheduleController(dayProvider: dayProvider)!
+		extras = ExtrasController(dayProvider: dayProvider)!
+		
+		//        date = Date()
+		
+		super.init(coder: Coder())
+		
+		setViewControllers([todo, schedule, extras], animated: false)
+		
+		tabBar.barTintColor = UIColor(named: "emerald")
+		tabBar.tintColor = .white
+		tabBar.isTranslucent = true
+		tabBar.unselectedItemTintColor = .white
+		
+		navigationItem.leftBarButtonItem = UIBarButtonItem(
+			image: UIImage(systemName: "arrowtriangle.left.fill"),
+			style: .plain,
+			target: self,
+			action: #selector(didTouchUpInsideLeftButton(_:)))
+		navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "emerald")
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			image: UIImage(systemName: "arrowtriangle.right.fill"),
+			style: .plain,
+			target: self,
+			action: #selector(didTouchUpInsideRightButton(_:)))
+		navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
+		
+		//        setNavigationTitle()
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		selectedIndex = 0
 	}
-    
-    private func setNavigationTitle() {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        if let date = dayProvider.day.date {
-            let title = formatter.string(from: date)
-            navigationItem.title = title
-        } else {
-            let title = "Today"
-            navigationItem.title = title
-        }
-    }
-    
-    @objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem) {
-        dayProvider.day = dayProvider.yesterday
-        setNavigationTitle()
-    }
-    
-    @objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem) {
-        dayProvider.day = dayProvider.tomorrow
-        setNavigationTitle()
-    }
+	//
+	//    private func setNavigationTitle() {
+	//        let formatter = DateFormatter()
+	//        formatter.dateStyle = .short
+	//        if let date = dayProvider.day.date {
+	//            let title = formatter.string(from: date)
+	//            navigationItem.title = title
+	//        } else {
+	//            let title = "Today"
+	//            navigationItem.title = title
+	//        }
+	//    }
+	//
+	    @objc func didTouchUpInsideLeftButton(_ sender: UIBarButtonItem) {
+	        dayProvider.day = dayProvider.yesterday
+//	        setNavigationTitle()
+	    }
+	
+	    @objc func didTouchUpInsideRightButton(_ sender: UIBarButtonItem) {
+	        dayProvider.day = dayProvider.tomorrow
+//	        setNavigationTitle()
+	    }
 }

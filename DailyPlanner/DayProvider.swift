@@ -26,6 +26,9 @@ class DayProvider {
             }
             
             let request: NSFetchRequest<Day> = Day.fetchRequest()
+			request.predicate = Date().makeDayPredicate()
+			request.fetchLimit = 1
+			
             let first = try? Database.context.fetch(request).first
             
             if let first = first {
@@ -33,10 +36,6 @@ class DayProvider {
                 return _day!
             } else {
                 _day = Day.make(date: Date())
-                
-//                _day?.addToTodos(Task.make(content: "Mow the lawn"))
-//                _day?.addToTodos(Task.make(content: "Take out the trash"))
-//                _day?.addToPriorities(Task.make(content: "Be awesome"))
                 
                 Database.save()
                 

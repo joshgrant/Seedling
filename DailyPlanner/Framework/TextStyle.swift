@@ -14,10 +14,11 @@ enum TextStyle {
     case sectionHeader
     case hour
     case meridiem
+	case meals
     
     var textColor: UIColor {
         switch self {
-        case .textView:
+		case .textView, .meals:
 			return .type(.text)
         default:
 			return .type(.orange)
@@ -44,7 +45,7 @@ enum TextStyle {
     
     var fontSize: CGFloat {
         switch self {
-        case .textView:
+		case .textView, .meals:
             return 17
 		case .sectionHeader:
 			return 20

@@ -26,11 +26,13 @@ class TextView: UITextView
 		}
 	}
     
-    init()
+	init(defaultHeight: CGFloat = 44)
 	{
         super.init(coder: Coder())!
 		
-		height = heightAnchor.constraint(equalToConstant: 44)
+		isScrollEnabled = false
+		
+		height = heightAnchor.constraint(equalToConstant: defaultHeight)
 		height?.isActive = true
 		height?.priority = .defaultLow
     }
