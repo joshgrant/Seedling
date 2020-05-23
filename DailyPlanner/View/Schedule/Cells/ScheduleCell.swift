@@ -109,9 +109,9 @@ class ScheduleCell: UITableViewCell
 		// in an easy way (and absolute)
 		textStack.addArrangedSubview(Spacer(width: 10))
 		textStack.addArrangedSubview(meridiemLabel)
-		textStack.addArrangedSubview(Spacer(width: 20))
+		textStack.addArrangedSubview(Spacer(width: 10))
 		textStack.addArrangedSubview(hourLabel)
-		textStack.addArrangedSubview(Spacer(width: 20))
+		textStack.addArrangedSubview(Spacer(width: 7))
 		textStack.addArrangedSubview(textView)
 	}
 	

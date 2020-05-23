@@ -51,8 +51,6 @@ enum TextStyle {
 			return 20
 		case .meridiem, .hour:
 			return 15
-        default:
-            return 10
         }
     }
     

@@ -22,6 +22,8 @@ class TaskCell: UITableViewCell {
         task = nil
         
         textView.text = nil
+		textView.attributedText = nil
+		checkBox.imageView?.image = nil
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -65,14 +67,29 @@ class TaskCell: UITableViewCell {
     
     func configure(with task: Task) {
         self.task = task
+		
+		let content = task.content ?? ""
         
-        textView.text = task.content
+//        textView.text = task.content
+//		textView.attributedText = NSAttributedString(string: task.content, attributes: [.stri])
+		let textStyle = TextStyle.textView
+		let attributedString = NSMutableAttributedString(string: content)
+		
+		let range = NSRange(location: 0, length: attributedString.length)
+		
+		attributedString.addAttribute(.font, value: textStyle.font, range: range)
         
         if task.completed {
 			checkBox.setImage(.type(.orangeBubble), for: .normal)
+			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
+			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
         } else {
 			checkBox.setImage(.type(.clearBubble), for: .normal)
+			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
         }
+		
+		textView.attributedText = attributedString
     }
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
@@ -106,10 +123,6 @@ extension TaskCell: UITextViewDelegate {
     }
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//		print(textView.text)
-//		print(text)
-//		print(textView.text.replacingCharacters(in: Range(range, in: textView.text)!, with: text))
-		
 		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
 			return false
 		} else {

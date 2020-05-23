@@ -48,8 +48,13 @@ class TodoController: TabContentController
 	
 	override func configureDelegate()
 	{
+		// We should use the diffable data source to do this... we can use the NSDiffableDataSourceReference with core data
 		(delegate as? TodoDelegate)?.tableView = tableView
 		(delegate as? TodoDelegate)?.dayProvider = dayProvider
+		
+//		tableView.dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, _) -> UITableViewCell? in
+//
+//		})
 	}
 	
 	override func configureDataSource()

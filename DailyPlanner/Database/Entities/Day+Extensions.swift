@@ -12,7 +12,7 @@ extension Day {
     
     var prioritiesArray: [Task] {
         let set = priorities as? Set<Task>
-        return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
+		return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
     }
     
     var todosArray: [Task] {
