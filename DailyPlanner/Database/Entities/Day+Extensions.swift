@@ -10,15 +10,15 @@ import Foundation
 
 extension Day {
     
-    var prioritiesArray: [Task] {
-        let set = priorities as? Set<Task>
-		return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
-    }
-    
-    var todosArray: [Task] {
-        let set = todos as? Set<Task>
-        return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
-    }
+//    var prioritiesArray: [Task] {
+//        let set = priorities as? Set<Task>
+//		return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
+//    }
+//
+//    var todosArray: [Task] {
+//        let set = todos as? Set<Task>
+//        return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
+//    }
 	
 	var schedulesArray: [Schedule] {
 		let set = schedules as? Set<Schedule>

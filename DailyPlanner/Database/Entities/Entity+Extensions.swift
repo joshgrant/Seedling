@@ -16,11 +16,7 @@ extension Entity
         return createdDate ?? Date()
     }
 	
-	static var all: NSFetchRequest<Entity> {
-		return self.fetchRequest()
-	}
-	
-	static var defaultSortDescriptors: [NSSortDescriptor] {
+    @objc class var defaultSortDescriptors: [NSSortDescriptor] {
 		return [NSSortDescriptor(keyPath: \Entity.createdDate, ascending: true)]
 	}
 }

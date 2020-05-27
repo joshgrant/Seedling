@@ -17,4 +17,8 @@ extension Task
         task.content = content
         return task
     }
+    
+    override class var defaultSortDescriptors: [NSSortDescriptor] {
+        return [NSSortDescriptor(keyPath: \Task.kind, ascending: true)]
+    }
 }

@@ -5,9 +5,8 @@
         <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="day" inverseEntity="Meal"/>
         <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="day" inverseEntity="Note"/>
         <relationship name="pomodoro" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pomodoro" inverseName="day" inverseEntity="Pomodoro"/>
-        <relationship name="priorities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="priorityOfDay" inverseEntity="Task"/>
         <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Schedule" inverseName="day" inverseEntity="Schedule"/>
-        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="todoOfDay" inverseEntity="Task"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="taskOfDay" inverseEntity="Task"/>
         <relationship name="water" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Water" inverseName="day" inverseEntity="Water"/>
     </entity>
     <entity name="Entity" representedClassName="Entity" isAbstract="YES" syncable="YES" codeGenerationType="class">
@@ -37,15 +36,15 @@
     <entity name="Task" representedClassName="Task" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="content" optional="YES" attributeType="String"/>
-        <relationship name="priorityOfDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="priorities" inverseEntity="Day"/>
-        <relationship name="todoOfDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="todos" inverseEntity="Day"/>
+        <attribute name="kind" optional="YES" attributeType="String"/>
+        <relationship name="taskOfDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="tasks" inverseEntity="Day"/>
     </entity>
     <entity name="Water" representedClassName="Water" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="water" inverseEntity="Day"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Day" positionX="-63" positionY="-18" width="128" height="148"/>
         <element name="Entity" positionX="-9" positionY="54" width="128" height="88"/>
         <element name="Meal" positionX="0" positionY="45" width="128" height="103"/>
         <element name="Note" positionX="-9" positionY="36" width="128" height="73"/>

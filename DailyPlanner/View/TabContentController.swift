@@ -22,19 +22,6 @@ class TabContentController: UIViewController
 	
 	let tableView: UITableView
 	
-	var dataSourceReference: UITableViewDiffableDataSourceReference
-	var dataSourceCellProvider: UITableViewDiffableDataSourceReferenceCellProvider
-	
-	lazy var fetchController: NSFetchedResultsController<Entity> = {
-		let fetchRequest = Entity.all
-		fetchRequest.sortDescriptors = Entity.defaultSortDescriptors
-		return NSFetchedResultsController(
-			fetchRequest: fetchRequest,
-			managedObjectContext: Database.context,
-			sectionNameKeyPath: nil,
-			cacheName: nil)
-	}()
-	
 	// MARK: - Initialization
 	
 	init?(dayProvider: DayProvider)
@@ -47,14 +34,7 @@ class TabContentController: UIViewController
 		delegate = Self.makeDelegate()
 		dataSource = Self.makeDataSource(dayProvider: dayProvider)
 		tableView = Self.makeTableView()
-		
-		dataSourceCellProvider = { tableView, indexPath, entity in
-			return UITableViewCell()
-		}
-		
-		dataSourceReference = UITableViewDiffableDataSourceReference(
-			tableView: tableView,
-			cellProvider: dataSourceCellProvider)
+
 		
 		// 3. Super init
 		super.init(coder: Coder())
@@ -117,12 +97,10 @@ class TabContentController: UIViewController
 	
 	func configureDelegate()
 	{
-		
 	}
 	
 	func configureDataSource()
 	{
-		
 	}
 	
 	func configureTableView()
@@ -170,13 +148,13 @@ class TabContentController: UIViewController
 	}
 }
 
-extension TabContentController: NSFetchedResultsControllerDelegate
-{
-	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference)
-	{
-		dataSourceReference.applySnapshot(snapshot, animatingDifferences: true)
-	}
-}
+//extension TabContentController: NSFetchedResultsControllerDelegate
+//{
+//	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference)
+//	{
+//		dataSourceReference.applySnapshot(snapshot, animatingDifferences: true)
+//	}
+//}
 
 // MARK: - Notifications
 
