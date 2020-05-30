@@ -51,6 +51,14 @@ class PomodoroCell: UITableViewCell {
         button.setImage(UIImage(named: "clearBubble"), for: .normal)
         button.addTarget(self, action: #selector(didTouchUpInsideBubble(_:)), for: .touchUpInside)
 		button.tag = tag
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 40),
+            button.heightAnchor.constraint(equalToConstant: 40),
+        ])
 		
 		button.isEnabled = tag == 1
         return button

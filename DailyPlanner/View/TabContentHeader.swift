@@ -53,7 +53,7 @@ class TabContentHeader: UIView
 	
 	private class func makeBlurEffect() -> UIBlurEffect
 	{
-		let style = UIBlurEffect.Style.regular
+        let style = UIBlurEffect.Style.regular
 		return UIBlurEffect(style: style)
 	}
 	
@@ -78,20 +78,29 @@ class TabContentHeader: UIView
 	
 	func configureButton()
 	{
-		
+        button?.widthAnchor.constraint(equalTo: button!.heightAnchor).isActive = true
 	}
 	
 	func configureStackView()
 	{
-		stackView.addArrangedSubview(Spacer(width: 10))
-		stackView.addArrangedSubview(label)
+        // Not ideal to configure multiple nested stack views. Perhaps there is a better way?
+        let horizontalStackView = UIStackView()
+        
+		horizontalStackView.addArrangedSubview(Spacer(width: 10))
+		horizontalStackView.addArrangedSubview(label)
 		
 		if let button = button
 		{
-			stackView.addArrangedSubview(Spacer(width: 10))
-			stackView.addArrangedSubview(button)
-			stackView.addArrangedSubview(Spacer(width: 10))
+			horizontalStackView.addArrangedSubview(Spacer(width: 10))
+			horizontalStackView.addArrangedSubview(button)
+			horizontalStackView.addArrangedSubview(Spacer(width: 10))
 		}
+        
+        stackView.axis = .vertical
+        
+        stackView.addArrangedSubview(Spacer(height: 5))
+        stackView.addArrangedSubview(horizontalStackView)
+        stackView.addArrangedSubview(Spacer(height: 5))
 	}
 	
 	func configureVisualEffectView()
@@ -101,6 +110,8 @@ class TabContentHeader: UIView
 	
 	func configureView()
 	{
-		embed(view: visualEffectView)
+        let verticalStack = UIStackView(arrangedSubviews: [visualEffectView, Spacer(height: 10)])
+        verticalStack.axis = .vertical
+		embed(view: verticalStack)
 	}
 }

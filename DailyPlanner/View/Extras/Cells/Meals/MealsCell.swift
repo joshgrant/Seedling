@@ -76,7 +76,7 @@ class MealsCell: UITableViewCell
     
     static func makeLabel(title: String) -> UILabel
 	{
-		let label = UILabel(style: .meals)
+		let label = UILabel(style: .mealHeader)
 		label.text = title
 		return label
     }
@@ -84,11 +84,6 @@ class MealsCell: UITableViewCell
     static func makeTextView(placeholder: String) -> TextView
 	{
         let textView = TextView(minimumHeight: 54)
-		textView.textColor = .type(.emerald)
-        textView.font = .monospacedSystemFont(ofSize: 17, weight: .regular)
-		textView.layer.borderColor = UIColor.type(.separator).cgColor
-        textView.layer.borderWidth = 1
-        textView.layer.cornerRadius = 4
         return textView
     }
 	
@@ -127,7 +122,11 @@ class MealsCell: UITableViewCell
 	
 	func configureTextView(textView: TextView)
 	{
-		textView.delegate = self
+        textView.configure(with: .mealContent, delegate: self)
+        
+        textView.layer.borderColor = UIColor.type(.separator).cgColor
+        textView.layer.borderWidth = 1
+        textView.layer.cornerRadius = 4
 	}
 	
 	func configureBreakfastStackView()

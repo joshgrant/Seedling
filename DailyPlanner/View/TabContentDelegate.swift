@@ -12,7 +12,7 @@ class TabContentDelegate: NSObject, UITableViewDelegate
 {
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
 	{
-		return 44
+		return 54
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

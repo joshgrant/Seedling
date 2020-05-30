@@ -87,7 +87,7 @@ class TodoDelegate: TabContentDelegate
 		case 0:
 			return "Priorities"
 		case 1:
-			return "Todos"
+			return "To Do"
 		default:
 			return nil
 		}

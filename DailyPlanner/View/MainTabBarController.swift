@@ -30,25 +30,9 @@ class MainTabBarController: UITabBarController {
 		super.init(coder: Coder())
 		
 		setViewControllers([todo, schedule, extras], animated: false)
-		
-		tabBar.barTintColor = UIColor(named: "emerald")
-		tabBar.tintColor = .white
-		tabBar.isTranslucent = true
-		tabBar.unselectedItemTintColor = .white
-		
-		
-		navigationItem.leftBarButtonItem = UIBarButtonItem(
-			image: UIImage(systemName: "arrowtriangle.left.fill"),
-			style: .plain,
-			target: self,
-			action: #selector(didTouchUpInsideLeftButton(_:)))
-		navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "emerald")
-		navigationItem.rightBarButtonItem = UIBarButtonItem(
-			image: UIImage(systemName: "arrowtriangle.right.fill"),
-			style: .plain,
-			target: self,
-			action: #selector(didTouchUpInsideRightButton(_:)))
-		navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
+        
+        configureTabBar()
+        configureNavigationItem()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -66,18 +50,41 @@ class MainTabBarController: UITabBarController {
 	}
 	
 	// MARK: - Configuration
+    
+    func configureTabBar() {
+        tabBar.barTintColor = .type(.emerald)
+        tabBar.tintColor = .systemBackground
+        tabBar.isTranslucent = true
+        tabBar.unselectedItemTintColor = .secondarySystemBackground
+    }
+    
+    func configureNavigationItem() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "arrowtriangle.left.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(didTouchUpInsideLeftButton(_:)))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "emerald")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "arrowtriangle.right.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(didTouchUpInsideRightButton(_:)))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "emerald")
+    }
 	
 	func configureNavigationBar()
 	{
 		if let navigationBar = navigationController?.navigationBar {
+            
+            navigationBar.tintColor = .white
+            navigationBar.barTintColor = .white
 			
 			let line = Spacer(height: 1)
 			line.translatesAutoresizingMaskIntoConstraints = false
 			line.backgroundColor = .type(.emerald)
 			
-			//		navigationItem.addSubview(line)
 			navigationBar.addSubview(line)
-			//		self.view.addSubview(line)
 			
 			NSLayoutConstraint.activate([
 				navigationBar.bottomAnchor.constraint(equalTo: line.topAnchor),

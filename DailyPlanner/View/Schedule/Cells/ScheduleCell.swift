@@ -84,8 +84,8 @@ class ScheduleCell: UITableViewCell
 		meridiemLabel.configure(with: .meridiem)
 		meridiemLabel.setContentHuggingPriority(.required, for: .horizontal)
 		
-		// Not ideal for other languages
-		meridiemLabel.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        let width = widthForMeridiemLabel()
+		meridiemLabel.widthAnchor.constraint(equalToConstant: width).isActive = true
 	}
 	
 	func configureHourLabel()
@@ -149,15 +149,28 @@ class ScheduleCell: UITableViewCell
     }
 	
 	// MARK: - Utility
+    
+    private func widthForMeridiemLabel() -> CGFloat
+    {
+        let text = meridiemText(for: 5) // TODO: Not ideal
+        let font = meridiemLabel.font
+        let testLabel = UILabel()
+        testLabel.font = font
+        testLabel.text = text
+        testLabel.setContentHuggingPriority(.required, for: .horizontal)
+        
+        let size = testLabel.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        return size.width
+    }
 	
 	private func meridiemText(for hour: Int) -> String?
 	{
 		switch hour
 		{
 		case 5:
-			return "AM"
+            return DateFormatter().amSymbol
 		case 12:
-			return "PM"
+            return DateFormatter().pmSymbol
 		default:
 			return nil
 		}

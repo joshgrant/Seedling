@@ -46,6 +46,8 @@ class TextView: UITextView
     
 	func configure(with style: TextStyle, delegate: UITextViewDelegate)
     {
+//        taskCell.textView.adjustsFontForContentSizeCategory = true
+        adjustsFontForContentSizeCategory = true
         font = style.font
         textColor = style.textColor
         contentInset = .zero

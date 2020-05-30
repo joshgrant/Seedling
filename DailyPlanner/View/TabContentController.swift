@@ -47,9 +47,6 @@ class TabContentController: UIViewController
 		configureDataSource()
 		configureTableView()
 		configureView()
-		
-		// 6. Notifications
-		registerNotifications()
 	}
 	
 	required init?(coder: NSCoder)
@@ -58,11 +55,21 @@ class TabContentController: UIViewController
 	}
 	
 	// MARK: - View lifecycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        listenForNotifications(true)
+    }
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		view.endEditing(false)
 	}
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        listenForNotifications(false)
+    }
 	
 	// MARK: - Factory
 	
@@ -105,7 +112,7 @@ class TabContentController: UIViewController
 	
 	func configureTableView()
 	{
-		tableView.backgroundColor = .white
+		tableView.backgroundColor = .systemBackground
 		tableView.separatorStyle = .none
 		
 		cellClassIdentifiers.forEach { identifier in
@@ -145,16 +152,25 @@ class TabContentController: UIViewController
 			let title = formatter.string(from: day.date ?? Date())
 			tabBarController?.navigationItem.title = title
 		}
+        
+        // TODO: Better way to handle appearance?
+        
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.titleTextAttributes = [
+            NSAttributedString.Key.font: TextStyle.navigationBar.font,
+            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
+        ]
+        
+        let compactAppearance = UINavigationBarAppearance()
+        compactAppearance.titleTextAttributes = [
+            NSAttributedString.Key.font: TextStyle.textView.font,
+            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
+        ]
+        
+        tabBarController?.navigationItem.standardAppearance = standardAppearance
+        tabBarController?.navigationItem.compactAppearance = compactAppearance
 	}
 }
-
-//extension TabContentController: NSFetchedResultsControllerDelegate
-//{
-//	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference)
-//	{
-//		dataSourceReference.applySnapshot(snapshot, animatingDifferences: true)
-//	}
-//}
 
 // MARK: - Notifications
 
@@ -168,15 +184,19 @@ extension TabContentController
 		]
 	}
 	
-	func registerNotifications()
+    func listenForNotifications(_ listen: Bool)
 	{
-		notifySelectors.forEach {
-			NotificationCenter.default.addObserver(
-				self,
-				selector: $0.selector,
-				name: $0.name,
-				object: nil)
-		}
+        if listen {
+            notifySelectors.forEach {
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: $0.selector,
+                    name: $0.name,
+                    object: nil)
+            }
+        } else {
+            NotificationCenter.default.removeObserver(self)
+        }
 	}
 	
 	@objc func dayProviderDidUpdateDay(_ notification: Notification)

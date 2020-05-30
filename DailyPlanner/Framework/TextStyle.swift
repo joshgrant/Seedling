@@ -14,12 +14,16 @@ enum TextStyle {
     case sectionHeader
     case hour
     case meridiem
-	case meals
+	case mealHeader
+    case mealContent
+    case navigationBar
     
     var textColor: UIColor {
         switch self {
-		case .textView, .meals:
+        case .textView, .mealHeader, .navigationBar:
 			return .type(.text)
+        case .mealContent:
+            return .type(.emerald)
         default:
 			return .type(.orange)
         }
@@ -27,7 +31,7 @@ enum TextStyle {
     
     var verticalPadding: CGFloat {
         switch self {
-        case .textView:
+        case .textView, .mealContent:
             return 12
         default:
             return 0
@@ -36,7 +40,7 @@ enum TextStyle {
     
     var horizontalPadding: CGFloat {
         switch self {
-        case .textView:
+        case .textView, .mealContent:
             return 10
         default:
             return 0
@@ -45,16 +49,27 @@ enum TextStyle {
     
     var fontSize: CGFloat {
         switch self {
-		case .textView, .meals:
+        case .textView, .mealHeader, .mealContent:
             return 17
 		case .sectionHeader:
 			return 20
+        case .navigationBar:
+            return 22
 		case .meridiem, .hour:
 			return 15
         }
     }
     
     var font: UIFont {
-		return .monospacedSystemFont(ofSize: fontSize, weight: .regular)
+        let font = UIFont.monospacedSystemFont(ofSize: fontSize, weight: .regular)
+        
+        switch fontSize {
+        case ...16:
+            return UIFontMetrics(forTextStyle: .callout).scaledFont(for: font)
+        case 17...:
+            return UIFontMetrics(forTextStyle: .headline).scaledFont(for: font)
+        default:
+            return UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
+        }
     }
 }

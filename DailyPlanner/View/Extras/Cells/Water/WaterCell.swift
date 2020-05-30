@@ -69,6 +69,15 @@ class WaterCell: UITableViewCell
         button.addTarget(self, action: #selector(didTouchUpInsideBubble(_:)), for: .touchUpInside)
         // Why is the selector crossed out?
 		button.tag = tag
+        
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 40),
+            button.heightAnchor.constraint(equalToConstant: 40),
+        ])
 		
 		button.isEnabled = tag == 1
 		
