@@ -57,7 +57,7 @@ class TaskCell: UITableViewCell {
         
         checkBox.addTarget(self, action: #selector(didTouchUpInsideCheckBox(_:)), for: .touchUpInside)
         
-        contentView.embed(view: vStack)
+        contentView.embed(view: vStack, bottomPriority: .defaultHigh)
 		
 		textView.configure(with: .textView, delegate: self)
     }

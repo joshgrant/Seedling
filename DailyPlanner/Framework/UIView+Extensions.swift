@@ -13,7 +13,11 @@ extension UIView
     typealias Constraint = NSLayoutConstraint
     typealias Constraints = (top: Constraint, right: Constraint, bottom: Constraint, left: Constraint)
     
-    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero, bottomPriority: NSLayoutConstraint.Priority = .required) -> Constraints
+    // TODO: This is really 3 methods:
+    // 1. Creating the constraints
+    // 2. Assigning the priority
+    // 3. Activating the constraints and embedding the view
+    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero, bottomPriority: UILayoutPriority = .required) -> Constraints
 	{
         view.translatesAutoresizingMaskIntoConstraints = false
         
