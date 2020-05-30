@@ -21,7 +21,9 @@ class MealsCell: UITableViewCell
 	
 	// MARK: - Variables
 	
+    weak var database: Database?
 	weak var delegate: CellTextViewDelegate?
+    
 	var meal: Meal?
 	
 	var breakfastTextView: TextView

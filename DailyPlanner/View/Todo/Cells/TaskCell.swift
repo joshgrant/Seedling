@@ -13,6 +13,7 @@ class TaskCell: UITableViewCell {
     let checkBox: UIButton
     let textView: TextView
     
+    weak var database: Database?
     weak var delegate: CellTextViewDelegate?
     
     var task: Task?
@@ -93,12 +94,12 @@ class TaskCell: UITableViewCell {
     }
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
-        Database.context.perform {
+        database?.context.perform {
             self.task?.completed.toggle()
             if let task = self.task {
                 self.configure(with: task)
             }
-            Database.save() // Is it possible to create a retain loop here?
+            self.database?.save()
         }
     }
 }
@@ -115,9 +116,9 @@ extension TaskCell: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        Database.context.perform {
+        database?.context.perform {
             self.task?.content = textView.text
-            Database.save()
+            self.database?.save()
         }
 		delegate?.textViewDidEndEditing(textView, in: self)
     }

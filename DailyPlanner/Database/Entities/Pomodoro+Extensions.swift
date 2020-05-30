@@ -10,9 +10,9 @@ import CoreData
 
 extension Pomodoro
 {
-	static func make() -> Pomodoro
+    static func make(in context: Context) -> Pomodoro
 	{
-		let pomodoro = Pomodoro(context: Database.context)
+		let pomodoro = Pomodoro(context: context)
 		pomodoro.createdDate = Date()
 		pomodoro.amount = 0
 		

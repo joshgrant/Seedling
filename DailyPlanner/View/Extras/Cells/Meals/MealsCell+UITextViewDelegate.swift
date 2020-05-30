@@ -22,8 +22,10 @@ extension MealsCell: UITextViewDelegate
 	
 	func textViewDidEndEditing(_ textView: UITextView)
 	{
+        // TODO: Not ideal that we're performing database
+        // operations in the cell... This should be forwarded to the controller..
 		delegate?.textViewDidEndEditing(textView, in: self)
-		Database.context.perform {
+        database?.context.perform {
 			switch textView {
 			case self.breakfastTextView:
 				self.meal?.breakfast = textView.text
@@ -34,7 +36,7 @@ extension MealsCell: UITextViewDelegate
 			default:
 				break
 			}
-			Database.save()
+            self.database?.save()
 		}
 	}
 	

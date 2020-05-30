@@ -10,6 +10,13 @@ import CoreData
 
 class DayProvider {
     
+    weak var database: Database?
+    
+    init(database: Database)
+    {
+        self.database = database
+    }
+    
     private var _day: Day? {
         willSet {
             NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["newDay": newValue as Any])
@@ -29,15 +36,15 @@ class DayProvider {
 			request.predicate = Date().makeDayPredicate()
 			request.fetchLimit = 1
 			
-            let first = try? Database.context.fetch(request).first
+            let first = try? database?.context.fetch(request).first
             
             if let first = first {
                 _day = first
                 return _day!
             } else {
-                _day = Day.make(date: Date())
+                _day = Day.make(date: Date(), in: database!.context)
                 
-                Database.save()
+                database?.save()
                 
                 return _day!
             }
@@ -47,37 +54,37 @@ class DayProvider {
     }
     
     var tomorrow: Day {
-        guard let date = day.date else { return Day.make(date: Date()) }
+        guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
         let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date > %@", date as NSDate)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         fetchRequest.fetchLimit = 1
         
-        let result = try? Database.context.fetch(fetchRequest)
+        let result = try? database?.context.fetch(fetchRequest)
         
         if let tomorrow = result?.first {
             return tomorrow
         } else {
-            let day = Day.make(date: date.addingTimeInterval(60 * 60 * 24))
-            Database.save()
+            let day = Day.make(date: date.addingTimeInterval(60 * 60 * 24), in: database!.context)
+            database?.save()
             return day
         }
     }
     
     var yesterday: Day {
-        guard let date = day.date else { return Day.make(date: Date()) }
+        guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
         let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         fetchRequest.fetchLimit = 1
         
-        let result = try? Database.context.fetch(fetchRequest)
+        let result = try? database?.context.fetch(fetchRequest)
         
         if let yesterday = result?.first {
             return yesterday
         } else {
-            let day = Day.make(date: date.addingTimeInterval(-60 * 60 * 24))
-            Database.save()
+            let day = Day.make(date: date.addingTimeInterval(-60 * 60 * 24), in: database!.context)
+            database?.save()
             return day
         }
     }

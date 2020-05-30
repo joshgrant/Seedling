@@ -20,7 +20,7 @@ extension NotesCell: UITextViewDelegate {
 	
 	func textViewDidEndEditing(_ textView: UITextView) {
 		self.note?.content = textView.text
-		Database.save()
+        database?.save()
 		delegate?.textViewDidEndEditing(textView, in: self)
 	}
 }

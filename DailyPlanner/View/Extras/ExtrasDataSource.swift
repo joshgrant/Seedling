@@ -12,6 +12,7 @@ class ExtrasDataSource: TabContentDataSource
 {
 	// MARK: - Variables
 	
+    weak var database: Database?
 	weak var cellTextViewDelegate: CellTextViewDelegate?
 	
 	// MARK: - Data source
@@ -54,6 +55,7 @@ class ExtrasDataSource: TabContentDataSource
 			{
 				(cell as? NotesCell)?.configure(with: note)
 				(cell as? NotesCell)?.delegate = cellTextViewDelegate
+                (cell as? NotesCell)?.database = database
 			}
 		default:
 			break

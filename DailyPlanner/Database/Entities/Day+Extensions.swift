@@ -25,18 +25,18 @@ extension Day {
 		return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
 	}
     
-    static func make(date: Date) -> Day {
-        let day = Day(context: Database.context)
+    static func make(date: Date, in context: Context) -> Day {
+        let day = Day(context: context)
         day.createdDate = Date()
         day.date = date
 		
-		day.meal = Meal.make()
-		day.water = Water.make()
-		day.pomodoro = Pomodoro.make()
-		day.note = Note.make()
+		day.meal = Meal.make(in: context)
+		day.water = Water.make(in: context)
+        day.pomodoro = Pomodoro.make(in: context)
+		day.note = Note.make(in: context)
 		
 		for i in 5 ..< 23 {
-			day.addToSchedules(Schedule.make(hour: i))
+			day.addToSchedules(Schedule.make(hour: i, in: context))
 		}
 		
         return day

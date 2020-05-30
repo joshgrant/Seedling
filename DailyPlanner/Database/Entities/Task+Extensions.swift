@@ -10,9 +10,9 @@ import Foundation
 
 extension Task
 {
-	static func make(content: String) -> Task
+    static func make(content: String, in context: Context) -> Task
 	{
-        let task = Task(context: Database.context)
+        let task = Task(context: context)
         task.createdDate = Date()
         task.content = content
         return task

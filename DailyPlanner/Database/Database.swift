@@ -7,31 +7,103 @@
 //
 
 import CoreData
+import Basic
+
+typealias Context = NSManagedObjectContext
 
 class Database {
     
-    typealias Context = NSManagedObjectContext
-
-    static var persistentContainer: NSPersistentCloudKitContainer = {
-        let container = NSPersistentCloudKitContainer(name: "DailyPlanner")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+    // MARK: - Variables
+    
+    var containerName: String
+    
+    lazy var container: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: containerName)
+        container.loadPersistentStores { (description, error) in
+            if let error = error {
+                fatalError(error.localizedDescription)
             }
-        })
+        }
         return container
     }()
     
-    static var context: Context { persistentContainer.viewContext }
-
-    static func save () {
-        if context.hasChanges {
-            do {
+    var context: Context { container.viewContext }
+    
+    // MARK: - Initialization
+    
+    init(containerName: String)
+    {
+        self.containerName = containerName
+        
+        Self.testInit()
+    }
+    
+    static func testInit()
+    {
+        print(self)
+    }
+    
+    // MARK: - Database operations
+    
+    func save()
+    {
+        if context.hasChanges
+        {
+            do
+            {
                 try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            catch
+            {
+                fatalError(error.localizedDescription)
             }
         }
+    }
+    
+    func testSave()
+    {
+        
+    }
+    
+    func reset()
+    {
+        // Can we get the entities more easily?
+        let types = [Day.self,
+                     Task.self,
+                     Meal.self,
+                     Note.self,
+                     Pomodoro.self,
+                     Water.self,
+                     Schedule.self]
+        
+        do {
+            for type in types {
+                let request = NSBatchDeleteRequest(fetchRequest: type.fetchRequest())
+                try context.execute(request)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func testReset()
+    {
+        
+    }
+}
+
+extension Database: Testable
+{
+    func prepare() {
+        
+    }
+    
+    func test() {
+        testSave()
+        testReset()
+    }
+    
+    func cleanup() {
+        
     }
 }

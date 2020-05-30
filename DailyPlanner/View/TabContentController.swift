@@ -12,8 +12,9 @@ import CoreData
 class TabContentController: UIViewController
 {
 	// MARK: - Variables
-	
-	weak var dayProvider: DayProvider?
+    
+	unowned var dayProvider: DayProvider
+    unowned var database: Database // Not ideal? Perhaps we could have some "configuration" variable like in SwiftUI
 	
 	let cellClassIdentifiers: [CellClassIdentifier]
 	
@@ -24,10 +25,11 @@ class TabContentController: UIViewController
 	
 	// MARK: - Initialization
 	
-	init?(dayProvider: DayProvider)
+    init?(dayProvider: DayProvider, database: Database)
 	{
 		// 1. self assignments
 		self.dayProvider = dayProvider
+        self.database = database
 		
 		// 2. Factory
 		cellClassIdentifiers = Self.makeCellClassIdentifiers()
@@ -130,10 +132,7 @@ class TabContentController: UIViewController
 	
 	func configureNavigationItemTitle()
 	{
-		guard let day = dayProvider?.day else {
-			tabBarController?.navigationItem.title = "None"
-			return
-		}
+		let day = dayProvider.day
 		
 		let todayPredicate = Date().makeDayPredicate()
 		let isToday = todayPredicate.evaluate(with: day)

@@ -10,9 +10,9 @@ import CoreData
 
 extension Note
 {
-	static func make() -> Note
+    static func make(in context: Context) -> Note
 	{
-		let note = Note(context: Database.context)
+		let note = Note(context: context)
 		note.createdDate = Date()
 		return note
 	}

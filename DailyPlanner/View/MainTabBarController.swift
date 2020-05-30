@@ -13,6 +13,7 @@ class MainTabBarController: UITabBarController {
 	// MARK: - Variables
 	
 	unowned var dayProvider: DayProvider
+    unowned var database: Database
 	
 	var todo: TodoController
 	var schedule: ScheduleController
@@ -20,12 +21,13 @@ class MainTabBarController: UITabBarController {
 	
 	// MARK: - Initialization
 	
-	init?(dayProvider: DayProvider) {
+	init?(dayProvider: DayProvider, database: Database) {
 		self.dayProvider = dayProvider
+        self.database = database
 		
-		todo = TodoController(dayProvider: dayProvider)!
-		schedule = ScheduleController(dayProvider: dayProvider)!
-		extras = ExtrasController(dayProvider: dayProvider)!
+		todo = TodoController(dayProvider: dayProvider, database: database)!
+		schedule = ScheduleController(dayProvider: dayProvider, database: database)!
+		extras = ExtrasController(dayProvider: dayProvider, database: database)!
 		
 		super.init(coder: Coder())
 		

@@ -50,10 +50,12 @@ class TodoController: TabContentController
 	{
 		(delegate as? TodoDelegate)?.tableView = tableView
 		(delegate as? TodoDelegate)?.dayProvider = dayProvider
+        (delegate as? TodoDelegate)?.database = database
 	}
 	
 	override func configureDataSource()
 	{
 		(dataSource as? TodoDataSource)?.cellTextViewDelegate = self
+        (dataSource as? TodoDataSource)?.database = database
 	}
 }

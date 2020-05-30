@@ -14,6 +14,7 @@ class TodoDelegate: TabContentDelegate
 	
 	// TODO: I think we should use a delegate to notify the controller
 	// rather than passing these values
+    weak var database: Database?
 	weak var dayProvider: DayProvider?
 	weak var tableView: UITableView?
 	
@@ -47,20 +48,20 @@ class TodoDelegate: TabContentDelegate
 		case 0:
 			tableView?.performBatchUpdates({
 				let priorityCount = dayProvider?.day.prioritiesArray.count
-				let priority = Task.make(content: "")
+                let priority = Task.make(content: "", in: database!.context)
 				dayProvider?.day.addToPriorities(priority)
 				tableView?.insertRows(at: [IndexPath(item: priorityCount ?? 0, section: 0)], with: .automatic)
 			}, completion: { _ in
-				Database.save()
+                self.database?.save()
 			})
 		case 1:
 			tableView?.performBatchUpdates({
 				let todoCount = dayProvider?.day.todosArray.count // It matters when we create this variable
-				let todo = Task.make(content: "")
+                let todo = Task.make(content: "", in: database!.context)
 				dayProvider?.day.addToTodos(todo)
 				tableView?.insertRows(at: [IndexPath(item: todoCount ?? 0, section: 1)], with: .automatic)
 			}, completion: { _ in
-				Database.save()
+                self.database?.save()
 			})
 		default:
 			break

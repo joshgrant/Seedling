@@ -10,9 +10,9 @@ import Foundation
 
 extension Schedule
 {
-	static func make(hour: Int) -> Schedule
+	static func make(hour: Int, in context: Context) -> Schedule
 	{
-		let schedule = Schedule(context: Database.context)
+		let schedule = Schedule(context: context)
 		schedule.createdDate = Date()
 		schedule.hour = Int32(hour)
 		return schedule

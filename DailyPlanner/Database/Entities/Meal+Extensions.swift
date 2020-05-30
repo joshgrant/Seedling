@@ -10,9 +10,9 @@ import CoreData
 
 extension Meal
 {
-	static func make() -> Meal
+    static func make(in context: Context) -> Meal
 	{
-		let meal = Meal(context: Database.context)
+		let meal = Meal(context: context)
 		meal.createdDate = Date()
 		return meal
 	}

@@ -12,6 +12,7 @@ class TodoDataSource: TabContentDataSource
 {
 	// MARK: - Variables
 	
+    weak var database: Database? // TODO: This needs to be set!
 	weak var cellTextViewDelegate: CellTextViewDelegate?
 	
 	// MARK: - Data source
@@ -44,6 +45,7 @@ class TodoDataSource: TabContentDataSource
 		{
 			taskCell.configure(with: task)
 			taskCell.delegate = cellTextViewDelegate
+            taskCell.database = database
 		}
 		
 		return cell
@@ -63,20 +65,20 @@ class TodoDataSource: TabContentDataSource
 				if let task = dayProvider?.day.prioritiesArray[indexPath.row] {
 					tableView.performBatchUpdates({
 						dayProvider?.day.removeFromPriorities(task)
-						Database.context.delete(task)
+                        database?.context.delete(task)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
 					}, completion: { _ in
-						Database.save()
+                        self.database?.save()
 					})
 				}
 			case 1:
 				if let task = dayProvider?.day.todosArray[indexPath.row] {
 					tableView.performBatchUpdates({
 						dayProvider?.day.removeFromTodos(task)
-						Database.context.delete(task)
+                        database?.context.delete(task)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
 					}, completion: { _ in
-						Database.save()
+                        self.database?.save()
 					})
 				}
 			default:

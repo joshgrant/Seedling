@@ -10,9 +10,9 @@ import CoreData
 
 extension Water
 {
-	static func make() -> Water
+	static func make(in context: Context) -> Water
 	{
-		let water = Water(context: Database.context)
+		let water = Water(context: context)
 		water.createdDate = Date()
 		water.amount = 0
 		return water

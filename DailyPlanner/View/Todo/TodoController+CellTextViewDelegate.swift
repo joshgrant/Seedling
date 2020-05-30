@@ -35,16 +35,17 @@ extension TodoController: CellTextViewDelegate
 		if textView.text.count > 0
 		{
 			tableView.performBatchUpdates({
-				let newTask = Task(context: Database.context)
+                // Any reason we aren't using our own methods?
+                let newTask = Task(context: database.context)
 				
 				switch editingSection {
 				case .priorities:
-					let rowToInsert = dayProvider?.day.prioritiesArray.count ?? 0
-					dayProvider?.day.addToPriorities(newTask)
+					let rowToInsert = dayProvider.day.prioritiesArray.count
+					dayProvider.day.addToPriorities(newTask)
 					tableView.insertRows(at: [IndexPath(row: rowToInsert, section: 0)], with: .automatic)
 				case .todos:
-					let rowToInsert = dayProvider?.day.todosArray.count ?? 0
-					dayProvider?.day.addToTodos(newTask)
+					let rowToInsert = dayProvider.day.todosArray.count
+					dayProvider.day.addToTodos(newTask)
 					tableView.insertRows(at: [IndexPath(row: rowToInsert, section: 1)], with: .automatic)
 				default:
 					break
@@ -56,9 +57,9 @@ extension TodoController: CellTextViewDelegate
 				switch self.editingSection
 				{
 				case .priorities:
-					indexPath = IndexPath(row: (self.dayProvider?.day.prioritiesArray.count ?? 0) - 1, section: 0)
+					indexPath = IndexPath(row: self.dayProvider.day.prioritiesArray.count - 1, section: 0)
 				case .todos:
-					indexPath = IndexPath(row: (self.dayProvider?.day.todosArray.count ?? 0) - 1, section: 1)
+					indexPath = IndexPath(row: self.dayProvider.day.todosArray.count - 1, section: 1)
 				default:
 					break
 				}
@@ -83,19 +84,19 @@ extension TodoController: CellTextViewDelegate
 				switch self.editingSection
 				{
 				case .priorities:
-					if let priority = self.dayProvider?.day.prioritiesArray.last
+					if let priority = self.dayProvider.day.prioritiesArray.last
 					{
-						let indexPath = IndexPath(row: (self.dayProvider?.day.prioritiesArray.count ?? 0) - 1, section: 0)
-						self.dayProvider?.day.removeFromPriorities(priority)
-						Database.context.delete(priority)
+						let indexPath = IndexPath(row: self.dayProvider.day.prioritiesArray.count - 1, section: 0)
+						self.dayProvider.day.removeFromPriorities(priority)
+                        self.database.context.delete(priority)
 						self.tableView.deleteRows(at: [indexPath], with: .automatic)
 					}
 				case .todos:
-					if let todo = self.dayProvider?.day.todosArray.last
+					if let todo = self.dayProvider.day.todosArray.last
 					{
-						let indexPath = IndexPath(row: (self.dayProvider?.day.todosArray.count ?? 0) - 1, section: 1)
-						self.dayProvider?.day.removeFromTodos(todo)
-						Database.context.delete(todo)
+						let indexPath = IndexPath(row: self.dayProvider.day.todosArray.count - 1, section: 1)
+						self.dayProvider.day.removeFromTodos(todo)
+                        self.database.context.delete(todo)
 						self.tableView.deleteRows(at: [indexPath], with: .automatic)
 					}
 				default:
@@ -104,7 +105,7 @@ extension TodoController: CellTextViewDelegate
 			}, completion: { _ in
 				self.editingSection = .none
 				textView.resignFirstResponder()
-				Database.save()
+                self.database.save()
 			})
 		}
 		return true

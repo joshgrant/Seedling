@@ -74,6 +74,7 @@ class TabContentHeader: UIView
 	func configureLabel()
 	{
 		label.text = content
+        label.textAlignment = .center
 	}
 	
 	func configureButton()
@@ -83,18 +84,24 @@ class TabContentHeader: UIView
 	
 	func configureStackView()
 	{
-        // Not ideal to configure multiple nested stack views. Perhaps there is a better way?
         let horizontalStackView = UIStackView()
         
-		horizontalStackView.addArrangedSubview(Spacer(width: 10))
-		horizontalStackView.addArrangedSubview(label)
-		
-		if let button = button
-		{
-			horizontalStackView.addArrangedSubview(Spacer(width: 10))
-			horizontalStackView.addArrangedSubview(button)
-			horizontalStackView.addArrangedSubview(Spacer(width: 10))
-		}
+        let leftSpacer = Spacer()
+        let rightSpacer = Spacer()
+        
+        if let button = button {
+            let buttonStack = UIStackView()
+            buttonStack.addArrangedSubview(Spacer(width: 10))
+            buttonStack.addArrangedSubview(button)
+            buttonStack.addArrangedSubview(Spacer(width: 10))
+            rightSpacer.embed(view: buttonStack)
+        }
+        
+        horizontalStackView.addArrangedSubview(leftSpacer)
+        horizontalStackView.addArrangedSubview(label)
+        horizontalStackView.addArrangedSubview(rightSpacer)
+        
+        leftSpacer.widthAnchor.constraint(equalTo: rightSpacer.widthAnchor).isActive = true
         
         stackView.axis = .vertical
         

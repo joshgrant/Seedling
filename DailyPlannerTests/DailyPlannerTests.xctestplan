@@ -1,0 +1,33 @@
+{
+  "configurations" : [
+    {
+      "id" : "315F4647-F686-41FB-8FDE-1E1A5634C40F",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DailyPlanner.xcodeproj",
+        "identifier" : "039566752463315200C0F498",
+        "name" : "DailyPlannerTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:DailyPlanner.xcodeproj",
+        "identifier" : "039566802463315200C0F498",
+        "name" : "DailyPlannerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

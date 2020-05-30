@@ -10,6 +10,8 @@ import UIKit
 
 class NotesCell: UITableViewCell {
 	
+    weak var database: Database? // TODO: This NEEDS to be set on the cell
+    // but there's not a clear way to enforce this rule...
 	weak var delegate: CellTextViewDelegate?
 	
 	let textView: TextView

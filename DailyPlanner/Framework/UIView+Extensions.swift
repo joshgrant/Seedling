@@ -13,7 +13,7 @@ extension UIView
     typealias Constraint = NSLayoutConstraint
     typealias Constraints = (top: Constraint, right: Constraint, bottom: Constraint, left: Constraint)
     
-    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero) -> Constraints
+    @discardableResult func embed(view: UIView, padding: UIEdgeInsets = .zero, bottomPriority: NSLayoutConstraint.Priority = .required) -> Constraints
 	{
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -23,6 +23,8 @@ extension UIView
         let right = trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding.right)
         let bottom = bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: padding.bottom)
         let leading = view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding.left)
+        
+        bottom.priority = bottomPriority
         
         NSLayoutConstraint.activate([top, right, bottom, leading])
         

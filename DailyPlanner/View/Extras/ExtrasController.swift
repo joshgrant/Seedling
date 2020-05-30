@@ -12,10 +12,9 @@ class ExtrasController: TabContentController
 {
 	// MARK: - Initialization
 	
-	override init?(dayProvider: DayProvider)
+    override init?(dayProvider: DayProvider, database: Database)
 	{
-		super.init(dayProvider: dayProvider)
-		
+        super.init(dayProvider: dayProvider, database: database)
 		configureDataSource()
 	}
 	
@@ -60,6 +59,7 @@ class ExtrasController: TabContentController
 	override func configureDataSource()
 	{
 		(dataSource as? ExtrasDataSource)?.cellTextViewDelegate = self
+        (dataSource as? ExtrasDataSource)?.database = database
 	}
 }
 

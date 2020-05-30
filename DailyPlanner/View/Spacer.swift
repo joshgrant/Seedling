@@ -56,7 +56,7 @@ class Spacer: UIView
 		}
 	}
 	
-	required init?(coder: NSCoder = Coder())
+	required init?(coder: NSCoder)
 	{
 		super.init(coder: coder)
 	}
