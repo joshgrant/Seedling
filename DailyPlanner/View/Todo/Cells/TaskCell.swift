@@ -17,6 +17,7 @@ class TaskCell: UITableViewCell {
     weak var delegate: CellTextViewDelegate?
     
     var task: Task?
+    var section: TodoController.Section?
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -66,8 +67,9 @@ class TaskCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with task: Task) {
+    func configure(with task: Task, section: TodoController.Section) {
         self.task = task
+        self.section = section
 		
 		let content = task.content ?? ""
         
@@ -91,13 +93,49 @@ class TaskCell: UITableViewCell {
         }
 		
 		textView.attributedText = attributedString
+        
+        isAccessibilityElement = true
+        accessibilityLabel = task.content
+        accessibilityTraits = [.adjustable]
+        
+        switch section {
+        case .priorities:
+            accessibilityIdentifier = "priority.cell"
+        case .todos:
+            accessibilityIdentifier = "todo.cell"
+        }
     }
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
         database?.context.perform {
             self.task?.completed.toggle()
-            if let task = self.task {
-                self.configure(with: task)
+            if let task = self.task, let section = self.section {
+                self.configure(with: task, section: section)
+            }
+            self.database?.save()
+        }
+    }
+    
+    override func accessibilityActivate() -> Bool {
+        textView.becomeFirstResponder()
+        return true
+    }
+    
+    override func accessibilityIncrement() {
+        database?.context.perform {
+            self.task?.completed = true
+            if let task = self.task, let section = self.section {
+                self.configure(with: task, section: section)
+            }
+            self.database?.save()
+        }
+    }
+    
+    override func accessibilityDecrement() {
+        database?.context.perform {
+            self.task?.completed = false
+            if let task = self.task, let section = self.section {
+                self.configure(with: task, section: section)
             }
             self.database?.save()
         }

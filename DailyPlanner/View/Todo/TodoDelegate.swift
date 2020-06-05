@@ -75,6 +75,8 @@ class TodoDelegate: TabContentDelegate
 		let content = titleForHeader(in: section)
 		let button = Self.makeButton()
 		button.tag = section + 1
+        button.accessibilityLabel = content
+        button.accessibilityIdentifier = accessibilityIdentifierForAddButton(in: section)
 		configureButton(button: button)
 		
 		let view = TabContentHeader(content: content, button: button)
@@ -93,6 +95,19 @@ class TodoDelegate: TabContentDelegate
 			return nil
 		}
 	}
+    
+    func accessibilityIdentifierForAddButton(in section: Int) -> String?
+    {
+        switch section
+        {
+        case 0:
+            return "add.priority"
+        case 1:
+            return "add.todo"
+        default:
+            return nil
+        }
+    }
 }
 
 // MARK: - Scroll view delegate

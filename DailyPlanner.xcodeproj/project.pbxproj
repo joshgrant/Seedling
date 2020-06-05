@@ -46,7 +46,16 @@
 		03680B962465AE7500904DE1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B952465AE7500904DE1 /* Database.swift */; };
 		039225F62482CD4A00DC2A43 /* Basic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 039225F32482CD4400DC2A43 /* Basic.framework */; };
 		039225F72482CD4A00DC2A43 /* Basic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 039225F32482CD4400DC2A43 /* Basic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0394B796248292FB0014034A /* ToDoTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394B795248292FB0014034A /* ToDoTabUITests.swift */; };
+		039331C4248AC6D100A0C556 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C3248AC6D100A0C556 /* TabBar.swift */; };
+		039331C6248AC6E800A0C556 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C5248AC6E800A0C556 /* TodoView.swift */; };
+		039331C8248ACDE100A0C556 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C7248ACDE000A0C556 /* TaskCell.swift */; };
+		039331D0248AD35100A0C556 /* LaunchArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331CD248AD2A400A0C556 /* LaunchArgument.swift */; };
+		039331D4248AD97200A0C556 /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331D3248AD97200A0C556 /* XCUIApplication+Extensions.swift */; };
+		039331D5248AD97200A0C556 /* XCUIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331D3248AD97200A0C556 /* XCUIApplication+Extensions.swift */; };
+		039331DC248ADB4900A0C556 /* LaunchArgumentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331DB248ADB4900A0C556 /* LaunchArgumentHandler.swift */; };
+		039331DD248ADBAD00A0C556 /* LaunchArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331CD248AD2A400A0C556 /* LaunchArgument.swift */; };
+		039331DE248ADBAD00A0C556 /* LaunchArgument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331CD248AD2A400A0C556 /* LaunchArgument.swift */; };
+		0394B796248292FB0014034A /* TodoTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394B795248292FB0014034A /* TodoTabUITests.swift */; };
 		0394B798248293070014034A /* ScheduleTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394B797248293070014034A /* ScheduleTabUITests.swift */; };
 		0394B79A248293110014034A /* ExtrasTabUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394B799248293110014034A /* ExtrasTabUITests.swift */; };
 		0394B79C248293560014034A /* NavigationBarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0394B79B248293560014034A /* NavigationBarUITests.swift */; };
@@ -157,7 +166,13 @@
 		03680B932465AE1900904DE1 /* Entity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extensions.swift"; sourceTree = "<group>"; };
 		03680B952465AE7500904DE1 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		039225ED2482CD4400DC2A43 /* Basic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Basic.xcodeproj; path = ../../Frameworks/Basic/Basic.xcodeproj; sourceTree = "<group>"; };
-		0394B795248292FB0014034A /* ToDoTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTabUITests.swift; sourceTree = "<group>"; };
+		039331C3248AC6D100A0C556 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		039331C5248AC6E800A0C556 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		039331C7248ACDE000A0C556 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		039331CD248AD2A400A0C556 /* LaunchArgument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArgument.swift; sourceTree = "<group>"; };
+		039331D3248AD97200A0C556 /* XCUIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		039331DB248ADB4900A0C556 /* LaunchArgumentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchArgumentHandler.swift; sourceTree = "<group>"; };
+		0394B795248292FB0014034A /* TodoTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTabUITests.swift; sourceTree = "<group>"; };
 		0394B797248293070014034A /* ScheduleTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTabUITests.swift; sourceTree = "<group>"; };
 		0394B799248293110014034A /* ExtrasTabUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasTabUITests.swift; sourceTree = "<group>"; };
 		0394B79B248293560014034A /* NavigationBarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarUITests.swift; sourceTree = "<group>"; };
@@ -354,6 +369,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		039331C2248AC6BC00A0C556 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				0394B7A22482AB7B0014034A /* BaseElement.swift */,
+				039331C3248AC6D100A0C556 /* TabBar.swift */,
+				039331C5248AC6E800A0C556 /* TodoView.swift */,
+				039331C7248ACDE000A0C556 /* TaskCell.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		039331DA248ADB2F00A0C556 /* Launch Arguments */ = {
+			isa = PBXGroup;
+			children = (
+				039331CD248AD2A400A0C556 /* LaunchArgument.swift */,
+				039331DB248ADB4900A0C556 /* LaunchArgumentHandler.swift */,
+			);
+			path = "Launch Arguments";
+			sourceTree = "<group>";
+		};
 		039566542463315100C0F498 = {
 			isa = PBXGroup;
 			children = (
@@ -401,12 +436,13 @@
 		039566842463315200C0F498 /* DailyPlannerUITests */ = {
 			isa = PBXGroup;
 			children = (
+				039331C2248AC6BC00A0C556 /* Elements */,
 				039566872463315200C0F498 /* Info.plist */,
-				0394B795248292FB0014034A /* ToDoTabUITests.swift */,
+				0394B795248292FB0014034A /* TodoTabUITests.swift */,
 				0394B797248293070014034A /* ScheduleTabUITests.swift */,
 				0394B799248293110014034A /* ExtrasTabUITests.swift */,
 				0394B79B248293560014034A /* NavigationBarUITests.swift */,
-				0394B7A22482AB7B0014034A /* BaseElement.swift */,
+				039331D3248AD97200A0C556 /* XCUIApplication+Extensions.swift */,
 			);
 			path = DailyPlannerUITests;
 			sourceTree = "<group>";
@@ -453,6 +489,7 @@
 		03956699246332D400C0F498 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				039331DA248ADB2F00A0C556 /* Launch Arguments */,
 				039566602463315100C0F498 /* AppDelegate.swift */,
 				039566622463315100C0F498 /* SceneDelegate.swift */,
 				0395666C2463315100C0F498 /* Assets.xcassets */,
@@ -627,6 +664,7 @@
 				0306CAA424712A7900E45DFA /* UILabel+Extensions.swift in Sources */,
 				0306CAC22471496A00E45DFA /* CellClassIdentifier.swift in Sources */,
 				03680B962465AE7500904DE1 /* Database.swift in Sources */,
+				039331D0248AD35100A0C556 /* LaunchArgument.swift in Sources */,
 				0306CAB42471432800E45DFA /* NotesCell+UITextViewDelegate.swift in Sources */,
 				0333AC462478E502009A85A8 /* Date+Extensions.swift in Sources */,
 				035016512465CF60006726BC /* MealsCell.swift in Sources */,
@@ -650,6 +688,7 @@
 				03F3FE7E2466F37B003B420E /* CellTextViewDelegate.swift in Sources */,
 				0307D05824715234009671C8 /* ScheduleDelegate.swift in Sources */,
 				0330F9342463414A00E07824 /* ExtrasController.swift in Sources */,
+				039331DC248ADB4900A0C556 /* LaunchArgumentHandler.swift in Sources */,
 				0330F9322463414000E07824 /* ScheduleController.swift in Sources */,
 				035016452465B5C2006726BC /* TaskCell.swift in Sources */,
 				0307D056247151F4009671C8 /* TodoDelegate.swift in Sources */,
@@ -678,6 +717,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				039331DD248ADBAD00A0C556 /* LaunchArgument.swift in Sources */,
+				039331D4248AD97200A0C556 /* XCUIApplication+Extensions.swift in Sources */,
 				0394B7A12482A7BA0014034A /* DailyPlannerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,8 +730,13 @@
 				0394B7A32482AB7B0014034A /* BaseElement.swift in Sources */,
 				0394B79A248293110014034A /* ExtrasTabUITests.swift in Sources */,
 				0394B79C248293560014034A /* NavigationBarUITests.swift in Sources */,
+				039331C4248AC6D100A0C556 /* TabBar.swift in Sources */,
+				039331C8248ACDE100A0C556 /* TaskCell.swift in Sources */,
+				039331DE248ADBAD00A0C556 /* LaunchArgument.swift in Sources */,
+				039331C6248AC6E800A0C556 /* TodoView.swift in Sources */,
+				039331D5248AD97200A0C556 /* XCUIApplication+Extensions.swift in Sources */,
 				0394B798248293070014034A /* ScheduleTabUITests.swift in Sources */,
-				0394B796248292FB0014034A /* ToDoTabUITests.swift in Sources */,
+				0394B796248292FB0014034A /* TodoTabUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

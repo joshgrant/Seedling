@@ -60,9 +60,9 @@ class Database {
         }
     }
     
-    func testSave()
+    func testSave() -> Bool
     {
-        
+        return false
     }
     
     func reset()
@@ -86,9 +86,9 @@ class Database {
         }
     }
     
-    func testReset()
+    func testReset() -> Bool
     {
-        
+        return false
     }
 }
 
@@ -98,9 +98,9 @@ extension Database: Testable
         
     }
     
-    func test() {
-        testSave()
-        testReset()
+    func test() -> Bool {
+        return testSave()
+            && testReset()
     }
     
     func cleanup() {

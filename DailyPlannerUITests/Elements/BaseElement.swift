@@ -8,21 +8,16 @@
 
 import XCTest
 
-class BaseElement {
+class BaseElement
+{
+    // MARK: - Variables
     
     var view: XCUIElement
+    
+    // MARK: - Initialization
     
     init(in view: XCUIElement)
     {
         self.view = view
-    }
-}
-
-class TabBar: BaseElement {
-    
-    override init(in view: XCUIElement)
-    {
-        // Perhaps just init directly from the app...
-        super.init(in: view)
     }
 }

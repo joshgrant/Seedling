@@ -4,7 +4,7 @@
       "id" : "315F4647-F686-41FB-8FDE-1E1A5634C40F",
       "name" : "Configuration 1",
       "options" : {
-
+        "testExecutionOrdering" : "random"
       }
     }
   ],
@@ -13,6 +13,9 @@
   },
   "testTargets" : [
     {
+      "deviceAppDataReference" : {
+        "resolvedPath" : "..\/..\/DailyPlannerTests\/freshInstall.xcappdata"
+      },
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:DailyPlanner.xcodeproj",
@@ -21,6 +24,9 @@
       }
     },
     {
+      "deviceAppDataReference" : {
+        "resolvedPath" : "..\/..\/DailyPlannerTests\/freshInstall.xcappdata"
+      },
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:DailyPlanner.xcodeproj",

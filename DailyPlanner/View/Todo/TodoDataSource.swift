@@ -43,7 +43,7 @@ class TodoDataSource: TabContentDataSource
 		
 		if let taskCell = cell as? TaskCell, let task = task(for: indexPath)
 		{
-			taskCell.configure(with: task)
+            taskCell.configure(with: task, section: TodoController.Section(rawValue: indexPath.section)!)
 			taskCell.delegate = cellTextViewDelegate
             taskCell.database = database
 		}
