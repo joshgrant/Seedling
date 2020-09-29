@@ -44,8 +44,6 @@
 		035016572465CF75006726BC /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016562465CF75006726BC /* NotesCell.swift */; };
 		03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B932465AE1900904DE1 /* Entity+Extensions.swift */; };
 		03680B962465AE7500904DE1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B952465AE7500904DE1 /* Database.swift */; };
-		039225F62482CD4A00DC2A43 /* Basic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 039225F32482CD4400DC2A43 /* Basic.framework */; };
-		039225F72482CD4A00DC2A43 /* Basic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 039225F32482CD4400DC2A43 /* Basic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		039331C4248AC6D100A0C556 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C3248AC6D100A0C556 /* TabBar.swift */; };
 		039331C6248AC6E800A0C556 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C5248AC6E800A0C556 /* TodoView.swift */; };
 		039331C8248ACDE100A0C556 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C7248ACDE000A0C556 /* TaskCell.swift */; };
@@ -68,6 +66,8 @@
 		039566702463315100C0F498 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0395666E2463315100C0F498 /* LaunchScreen.storyboard */; };
 		039566952463327B00C0F498 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039566942463327B00C0F498 /* MainTabBarController.swift */; };
 		03956697246332BF00C0F498 /* Coder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03956696246332BF00C0F498 /* Coder.swift */; };
+		03DD4D6E252331D800870475 /* Accessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD4D6A252331D800870475 /* Accessible.swift */; };
+		03DD4D6F252331D800870475 /* Testable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD4D6D252331D800870475 /* Testable.swift */; };
 		03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EC4DE124705F14007BB838 /* TabContentController.swift */; };
 		03F3FE6E2466E6A4003B420E /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6D2466E6A4003B420E /* TextView.swift */; };
 		03F3FE702466E753003B420E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE6F2466E753003B420E /* Color.swift */; };
@@ -83,20 +83,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		039225F22482CD4400DC2A43 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 039225ED2482CD4400DC2A43 /* Basic.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0326A14E2482C96900244190;
-			remoteInfo = Basic;
-		};
-		039225F42482CD4400DC2A43 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 039225ED2482CD4400DC2A43 /* Basic.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0326A1572482C96A00244190;
-			remoteInfo = BasicTests;
-		};
 		039566772463315200C0F498 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 039566552463315100C0F498 /* Project object */;
@@ -120,7 +106,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				039225F72482CD4A00DC2A43 /* Basic.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +150,6 @@
 		035016562465CF75006726BC /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		03680B932465AE1900904DE1 /* Entity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extensions.swift"; sourceTree = "<group>"; };
 		03680B952465AE7500904DE1 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		039225ED2482CD4400DC2A43 /* Basic.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Basic.xcodeproj; path = ../../Frameworks/Basic/Basic.xcodeproj; sourceTree = "<group>"; };
 		039331C3248AC6D100A0C556 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		039331C5248AC6E800A0C556 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		039331C7248ACDE000A0C556 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
@@ -192,6 +176,8 @@
 		039566872463315200C0F498 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039566942463327B00C0F498 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		03956696246332BF00C0F498 /* Coder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coder.swift; sourceTree = "<group>"; };
+		03DD4D6A252331D800870475 /* Accessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Accessible.swift; sourceTree = "<group>"; };
+		03DD4D6D252331D800870475 /* Testable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Testable.swift; sourceTree = "<group>"; };
 		03EC4DE124705F14007BB838 /* TabContentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentController.swift; sourceTree = "<group>"; };
 		03F3FE6D2466E6A4003B420E /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		03F3FE6F2466E753003B420E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -211,7 +197,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				039225F62482CD4A00DC2A43 /* Basic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,15 +345,6 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		039225EE2482CD4400DC2A43 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				039225F32482CD4400DC2A43 /* Basic.framework */,
-				039225F52482CD4400DC2A43 /* BasicTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		039331C2248AC6BC00A0C556 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,7 +368,6 @@
 		039566542463315100C0F498 = {
 			isa = PBXGroup;
 			children = (
-				039225ED2482CD4400DC2A43 /* Basic.xcodeproj */,
 				0395665F2463315100C0F498 /* DailyPlanner */,
 				039566792463315200C0F498 /* DailyPlannerTests */,
 				039566842463315200C0F498 /* DailyPlannerUITests */,
@@ -466,6 +441,8 @@
 		03956698246332C400C0F498 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				03DD4D6A252331D800870475 /* Accessible.swift */,
+				03DD4D6D252331D800870475 /* Testable.swift */,
 				03956696246332BF00C0F498 /* Coder.swift */,
 				035016462465B7BC006726BC /* UIView+Extensions.swift */,
 				035016482465B974006726BC /* TextField.swift */,
@@ -591,12 +568,6 @@
 			mainGroup = 039566542463315100C0F498;
 			productRefGroup = 0395665E2463315100C0F498 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 039225EE2482CD4400DC2A43 /* Products */;
-					ProjectRef = 039225ED2482CD4400DC2A43 /* Basic.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				0395665C2463315100C0F498 /* DailyPlanner */,
@@ -605,23 +576,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		039225F32482CD4400DC2A43 /* Basic.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Basic.framework;
-			remoteRef = 039225F22482CD4400DC2A43 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		039225F52482CD4400DC2A43 /* BasicTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BasicTests.xctest;
-			remoteRef = 039225F42482CD4400DC2A43 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0395665B2463315100C0F498 /* Resources */ = {
@@ -656,6 +610,7 @@
 			files = (
 				03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */,
 				0306CABE2471493D00E45DFA /* TabContentDataSource.swift in Sources */,
+				03DD4D6E252331D800870475 /* Accessible.swift in Sources */,
 				0350164F2465C7AE006726BC /* String+Extensions.swift in Sources */,
 				035016552465CF6F006726BC /* PomodoroCell.swift in Sources */,
 				03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */,
@@ -682,6 +637,7 @@
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
 				0306CAA624712F7600E45DFA /* TabContentHeader.swift in Sources */,
 				03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */,
+				03DD4D6F252331D800870475 /* Testable.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,
 				0330F9302463413200E07824 /* TodoController.swift in Sources */,
 				0306CAB82471440A00E45DFA /* NotifySelector.swift in Sources */,
