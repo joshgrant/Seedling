@@ -11,6 +11,8 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static var database = Database(containerName: "Seedling")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -43,12 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func handle(arguments: [String])
     {
         arguments
-            .compactMap { Bundle.main.classNamed($0) as? LaunchArgumentHandler }
+            .compactMap { LaunchArgument(rawValue: $0) }
+            .map { LaunchArgumentMapper.argumentClass(from: $0) }
             .forEach { $0.handle() }
     }
     
     func handle(environment: [String: String])
     {
-        
     }
 }

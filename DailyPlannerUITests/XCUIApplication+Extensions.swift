@@ -16,4 +16,11 @@ extension XCUIApplication
         launchArguments = arguments.map { $0.rawValue }
         launch()
     }
+    
+    func terminateAndActivate(with arguments: [LaunchArgument])
+    {
+        terminate()
+        launchArguments = arguments.map { $0.rawValue }
+        activate()
+    }
 }

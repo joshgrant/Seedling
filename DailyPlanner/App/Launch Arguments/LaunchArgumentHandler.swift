@@ -8,24 +8,26 @@
 
 import UIKit
 
-class LaunchArgumentHandler
+class LaunchArgumentMapper
 {
-    var rawValue: LaunchArgument { .launchArgument }
-    
-    func handle()
+    static func argumentClass(from argument: LaunchArgument) -> LaunchArgumentHandler
     {
-        print("Running Tests")
+        switch argument
+        {
+        case .launchArgument:
+            return LaunchArgumentHandler()
+        case .resetDatabase:
+            return ResetDatabase()
+        }
     }
 }
 
+class LaunchArgumentHandler
+{
+    func handle() { print("Running Tests") }
+}
+
 class ResetDatabase: LaunchArgumentHandler
-{   
-    override func handle()
-    {
-        UIApplication
-            .shared
-            .connectedScenes
-            .compactMap { $0.delegate as? SceneDelegate }
-            .forEach { $0.database.reset() }
-    }
+{
+    override func handle() { AppDelegate.database.reset() }
 }

@@ -134,6 +134,8 @@ class MealsCell: UITableViewCell
 	func configureBreakfastStackView()
 	{
 		let breakfastTitle = "\(Label.breakfast.rawValue):"
+        
+        breakfastTextView.text = meal?.breakfast
 		
 		breakfastStackView.addArrangedSubview(Self.makeLabel(title: breakfastTitle))
 		breakfastStackView.addArrangedSubview(breakfastTextView)
@@ -142,6 +144,8 @@ class MealsCell: UITableViewCell
 	func configureLunchStackView()
 	{
 		let lunchTitle = "\(Label.lunch.rawValue):"
+        
+        lunchTextView.text = meal?.lunch
 		
 		lunchStackView.addArrangedSubview(Self.makeLabel(title: lunchTitle))
 		lunchStackView.addArrangedSubview(lunchTextView)
@@ -150,6 +154,8 @@ class MealsCell: UITableViewCell
 	func configureDinnerStackView()
 	{
 		let dinnerTitle = "\(Label.dinner.rawValue):"
+        
+        dinnerTextView.text = meal?.dinner
 		
 		dinnerStackView.addArrangedSubview(Self.makeLabel(title: dinnerTitle))
 		dinnerStackView.addArrangedSubview(dinnerTextView)

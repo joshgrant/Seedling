@@ -14,6 +14,7 @@ extension TodoController: CellTextViewDelegate
 	{
 		let indexPath = tableView.indexPath(for: cell)
 		editingSection = Section(rawValue: indexPath?.section ?? 0)
+        (delegate as? TodoDelegate)?.editingIndexPath = indexPath
 	}
 	
 	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
@@ -32,11 +33,23 @@ extension TodoController: CellTextViewDelegate
 	
 	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
 	{
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            textView.resignFirstResponder()
+            (delegate as? TodoDelegate)?.shouldStopEditing()
+            return true
+        }
+        
+        if indexPath.row < tableView.numberOfRows(inSection: indexPath.section) - 1 {
+            textView.resignFirstResponder()
+            (delegate as? TodoDelegate)?.shouldStopEditing()
+            return true
+        }
+        
 		if textView.text.count > 0
 		{
 			tableView.performBatchUpdates({
                 // Any reason we aren't using our own methods?
-                let newTask = Task(context: database.context)
+                let newTask = Task.make(in: database.context)
 				
 				switch editingSection {
 				case .priorities:

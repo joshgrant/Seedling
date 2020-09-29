@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TaskCell: UITableViewCell {
-    
+class TaskCell: UITableViewCell
+{
     let checkBox: UIButton
     let textView: TextView
     
@@ -19,17 +19,20 @@ class TaskCell: UITableViewCell {
     var task: Task?
     var section: TodoController.Section?
     
-    override func prepareForReuse() {
+    override func prepareForReuse()
+    {
         super.prepareForReuse()
         task = nil
+        section = nil
         
         textView.text = nil
+        textView.attributedText = nil
 		textView.attributedText = nil
 		checkBox.imageView?.image = nil
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
+    {
         checkBox = UIButton()
         checkBox.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
@@ -104,9 +107,20 @@ class TaskCell: UITableViewCell {
         case .todos:
             accessibilityIdentifier = "todo.cell"
         }
+        
+        textView.accessibilityIdentifier = "todo.textView"
+        checkBox.accessibilityIdentifier = "todo.checkBox"
     }
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
+        
+        // Assign the opposite accessibility value
+        if task?.completed ?? false {
+            sender.accessibilityValue = "Unchecked"
+        } else {
+            sender.accessibilityValue = "Checked"
+        }
+        
         database?.context.perform {
             self.task?.completed.toggle()
             if let task = self.task, let section = self.section {
@@ -122,6 +136,7 @@ class TaskCell: UITableViewCell {
     }
     
     override func accessibilityIncrement() {
+        checkBox.accessibilityValue = "Checked"
         database?.context.perform {
             self.task?.completed = true
             if let task = self.task, let section = self.section {
@@ -132,6 +147,7 @@ class TaskCell: UITableViewCell {
     }
     
     override func accessibilityDecrement() {
+        checkBox.accessibilityValue = "Unchecked"
         database?.context.perform {
             self.task?.completed = false
             if let task = self.task, let section = self.section {

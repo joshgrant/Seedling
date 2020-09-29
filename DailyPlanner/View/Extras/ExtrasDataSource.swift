@@ -39,6 +39,7 @@ class ExtrasDataSource: TabContentDataSource
 			{
 				(cell as? MealsCell)?.configure(with: meal)
 				(cell as? MealsCell)?.delegate = cellTextViewDelegate
+                (cell as? MealsCell)?.database = database
 			}
 		case 1:
 			if let water = dayProvider?.day.water

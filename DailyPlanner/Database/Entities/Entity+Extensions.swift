@@ -16,7 +16,8 @@ extension Entity
         return createdDate ?? Date()
     }
 	
-    @objc class var defaultSortDescriptors: [NSSortDescriptor] {
+    @objc class var defaultSortDescriptors: [NSSortDescriptor]
+    {
 		return [NSSortDescriptor(keyPath: \Entity.createdDate, ascending: true)]
 	}
 }

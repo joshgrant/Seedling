@@ -11,7 +11,7 @@ import UIKit
 class TodoDataSource: TabContentDataSource
 {
 	// MARK: - Variables
-	
+
     weak var database: Database? 
 	weak var cellTextViewDelegate: CellTextViewDelegate?
 	

@@ -59,7 +59,6 @@ class TextView: UITextView
             bottom: style.verticalPadding,
             right: style.horizontalPadding)
         
-        
 		self.delegate = delegate
     }
 }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TodoDismissalDelegate {
+    func shouldStopEditing()
+}
+
 class TodoDelegate: TabContentDelegate
 {
 	// MARK: - Variables
@@ -17,6 +21,8 @@ class TodoDelegate: TabContentDelegate
     weak var database: Database?
 	weak var dayProvider: DayProvider?
 	weak var tableView: UITableView?
+    
+    var editingIndexPath: IndexPath?
 	
 	// MARK: - Factory
 	
@@ -50,7 +56,9 @@ class TodoDelegate: TabContentDelegate
 				let priorityCount = dayProvider?.day.prioritiesArray.count
                 let priority = Task.make(content: "", in: database!.context)
 				dayProvider?.day.addToPriorities(priority)
-				tableView?.insertRows(at: [IndexPath(item: priorityCount ?? 0, section: 0)], with: .automatic)
+                let indexPath = IndexPath(item: priorityCount ?? 0, section: 0)
+				tableView?.insertRows(at: [indexPath], with: .automatic)
+                editingIndexPath = indexPath
 			}, completion: { _ in
                 self.database?.save()
 			})
@@ -59,7 +67,10 @@ class TodoDelegate: TabContentDelegate
 				let todoCount = dayProvider?.day.todosArray.count // It matters when we create this variable
                 let todo = Task.make(content: "", in: database!.context)
 				dayProvider?.day.addToTodos(todo)
-				tableView?.insertRows(at: [IndexPath(item: todoCount ?? 0, section: 1)], with: .automatic)
+                let indexPath = IndexPath(item: todoCount ?? 0, section: 1)
+				tableView?.insertRows(at: [indexPath], with: .automatic)
+                // Start editing the last row...
+                editingIndexPath = indexPath
 			}, completion: { _ in
                 self.database?.save()
 			})
@@ -82,6 +93,15 @@ class TodoDelegate: TabContentDelegate
 		let view = TabContentHeader(content: content, button: button)
 		return view
 	}
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath == editingIndexPath
+        {
+            if let cell = cell as? TaskCell {
+                cell.textView.becomeFirstResponder()
+            }
+        }
+    }
 	
 	override func titleForHeader(in section: Int) -> String?
 	{
@@ -117,5 +137,12 @@ extension TodoDelegate
 	func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
 	{
 		scrollView.endEditing(false)
+        shouldStopEditing()
 	}
+}
+
+extension TodoDelegate: TodoDismissalDelegate {
+    func shouldStopEditing() {
+        editingIndexPath = nil
+    }
 }

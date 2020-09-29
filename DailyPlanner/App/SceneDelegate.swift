@@ -14,11 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     lazy var dayProvider: DayProvider = {
-        return DayProvider(database: database)
-    }()
-    
-    lazy var database: Database = {
-       return Database(containerName: "Seedling")
+        return DayProvider(database: AppDelegate.database)
     }()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -26,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
 
-        guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: database) else { return }        
+        guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
         let navigationController = UINavigationController(rootViewController: tabBarController)
         
         window.rootViewController = navigationController
@@ -65,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        database.save()
+        AppDelegate.database.save()
     }
 }
 

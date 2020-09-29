@@ -10,15 +10,18 @@ import Foundation
 
 extension Task
 {
+    static func make(in context: Context) -> Task
+    {
+        let task = Task(context: context)
+        task.createdDate = Date()
+        return task
+    }
+    
     static func make(content: String, in context: Context) -> Task
 	{
         let task = Task(context: context)
         task.createdDate = Date()
         task.content = content
         return task
-    }
-    
-    override class var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(keyPath: \Task.kind, ascending: true)]
     }
 }

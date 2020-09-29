@@ -29,12 +29,18 @@ class Database {
     
     var context: Context { container.viewContext }
     
+    var entities: [NSEntityDescription]
+    {
+        container
+            .managedObjectModel
+            .entities
+    }
+    
     // MARK: - Initialization
     
     init(containerName: String)
     {
         self.containerName = containerName
-        
         Self.testInit()
     }
     
@@ -67,21 +73,16 @@ class Database {
     
     func reset()
     {
-        // Can we get the entities more easily?
-        let types = [Day.self,
-                     Task.self,
-                     Meal.self,
-                     Note.self,
-                     Pomodoro.self,
-                     Water.self,
-                     Schedule.self]
-        
-        do {
-            for type in types {
-                let request = NSBatchDeleteRequest(fetchRequest: type.fetchRequest())
-                try context.execute(request)
-            }
-        } catch {
+        do
+        {
+            try entities
+                .compactMap { $0.name }
+                .map { NSFetchRequest(entityName: $0) }
+                .map { NSBatchDeleteRequest(fetchRequest: $0) }
+                .forEach { try context.execute($0) }
+        }
+        catch
+        {
             print(error)
         }
     }
@@ -94,16 +95,19 @@ class Database {
 
 extension Database: Testable
 {
-    func prepare() {
+    func prepare()
+    {
         
     }
     
-    func test() -> Bool {
+    func test() -> Bool
+    {
         return testSave()
             && testReset()
     }
     
-    func cleanup() {
+    func cleanup()
+    {
         
     }
 }

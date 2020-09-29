@@ -31,8 +31,7 @@ class ToDoTabUITests: XCTestCase
         // compile...
         
         app = XCUIApplication()
-        
-        app.launch(with: [ResetDatabase()])
+        app.launch(with: [.resetDatabase])
     }
     
     // MARK: - Functions
@@ -49,41 +48,167 @@ class ToDoTabUITests: XCTestCase
         
         XCTAssert(todoView.todoTextViews.count == 1)
         
+        let todo = todoView.todoView(at: 0)
+        todo.setContent(to: "Take out the groceries")
+        todo.setDone(to: true)
         
+        todoView.todoView(at: 1).setContent(to: "")
+        
+        XCTAssert(todo.content == "Take out the groceries")
+        XCTAssert(todo.isDone)
     }
     
     func testDeleteTask()
     {
+        tabBar.select(tab: .toDo)
         
+        XCTAssert(todoView.todoTextViews.count == 0)
+        
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        todoView.addTodo()
+        
+        XCTAssert(todoView.todoTextViews.count == 8)
+        
+        todoView.todoView(at: 3).delete()
+        todoView.todoView(at: 5).delete()
+        
+        XCTAssert(todoView.todoTextViews.count == 6)
+        
+        todoView.addPriority()
+        todoView.addPriority()
+        todoView.addPriority()
+        
+        XCTAssert(todoView.priorityTextViews.count == 3)
+        
+        todoView.priorityView(at: 0).delete()
+        todoView.priorityView(at: 0).delete()
+        todoView.priorityView(at: 0).delete()
+        
+        XCTAssert(todoView.priorityTextViews.count == 0)
     }
     
     func testTaskContentRemainsAfterTabSwitch()
     {
+        createDefaultTasks()
+        verifyDefaultTasks()
         
+        tabBar.select(tab: .schedule)
+        tabBar.select(tab: .extras)
+        tabBar.select(tab: .toDo)
+        
+        verifyDefaultTasks()
     }
     
     func testTaskContentRemainsAfterBackgrounding()
     {
+        createDefaultTasks()
+        verifyDefaultTasks()
         
-    }
-    
-    func testHittingReturnWithContentAddsNewTask()
-    {
+        app.terminateAndActivate(with: [])
         
-    }
-    
-    func testHittingReturnNoContentEndsEditing()
-    {
-        
+        verifyDefaultTasks()
     }
     
     func testCheckingTaskMarksAsComplete()
     {
+        createDefaultTasks()
+        
+        todoView.priorityView(at: 3).setDone(to: true)
+        
+        XCTAssert(todoView.priorityView(at: 3).isDone)
+    }
+    
+    func testAllTaskFunctionality()
+    {
+        XCTAssert(todoView.priorityTextViews.count == 0)
+        XCTAssert(todoView.todoTextViews.count == 0)
+        
+        createDefaultTasks()
+        verifyDefaultTasks()
+        
+        todoView.priorityView(at: 1).setDone(to: true)
+        todoView.priorityView(at: 2).setContent(to: "Testing")
+        
+        todoView.priorityView(at: 2).setContent(to: "")
+        todoView.priorityView(at: 2).setDone(to: true)
+        
+        tabBar.select(tab: .extras)
+        
+        app.terminateAndActivate(with: [])
+        
+        tabBar.select(tab: .toDo)
+        
+        
+        
+        todoView.todoView(at: 2).delete()
+        todoView.todoView(at: 3).delete()
+        
+        
+        
+        todoView.todoView(at: 1).setContent(to: "Trying this out")
+        todoView.todoView(at: 2).setDone(to: true)
+        todoView.todoView(at: 2).setDone(to: false)
+        todoView.todoView(at: 2).setDone(to: true)
+        todoView.todoView(at: 3).setContent(to: "")
+        
         
     }
     
-    func integrityTestForAllTaskFunctionality()
+    // MARK: - Utility
+    
+    private var defaultPriorities: [String]
     {
+        [
+            "Exercise",
+            "Eat healthy food",
+            "Walk the dog",
+            "Earn money"
+        ]
+    }
+    
+    private var defaultTodos: [String]
+    {
+        [
+            "Take out groceries",
+            "Bring home the bacon",
+            "Wash the car",
+            "Open mail",
+            "Sweep the floor",
+            "Wash windows"
+        ]
+    }
+    
+    private func createDefaultTasks()
+    {
+        todoView.addPriority()
+        defaultPriorities
+            .enumerated()
+            .forEach { todoView.priorityView(at: $0.offset).setContent(to: $0.element) }
+        todoView.priorityView(at: defaultPriorities.count).setContent(to: "")
         
+        todoView.addTodo()
+        defaultTodos
+            .enumerated()
+            .forEach { todoView.todoView(at: $0.offset).setContent(to: $0.element) }
+        todoView.todoView(at: defaultTodos.count).setContent(to: "")
+    }
+    
+    private func verifyDefaultTasks()
+    {
+        defaultPriorities
+            .enumerated()
+            .makeIterator()
+            .forEach { XCTAssert(todoView.priorityView(at: $0.offset).content == $0.element) }
+        
+        defaultTodos
+            .enumerated()
+            .makeIterator()
+            .forEach { XCTAssert(todoView.todoView(at: $0.offset).content == $0.element) }
     }
 }

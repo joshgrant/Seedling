@@ -6,24 +6,66 @@
 //  Copyright © 2020 Joshua Grant. All rights reserved.
 //
 
-import Foundation
+import XCTest
 
 class TaskCell: BaseElement
 {
-    func setDone(to isDone: Bool)
+    // MARK: - Variables
+    
+    lazy var textView = view.textViews["todo.textView"]
+    lazy var doneButton = view.buttons["todo.checkBox"]
+    lazy var deleteButton = view.buttons["trailing0"]
+    
+    lazy var selectAllButton = app.menus.menuItems["Select All"]
+    lazy var cutButton = app.menus.menuItems["Cut"]
+    
+    var content: String?
     {
-        if isDone
-        {
-            view.accessibilityIncrement()
-        }
-        else
-        {
-            view.accessibilityDecrement()
+        textView.value as? String
+    }
+    
+    var isDone: Bool
+    {
+        (doneButton.value as? String) == "Checked"
+    }
+    
+    weak var app: XCUIApplication!
+    
+    // MARK: - Initialization
+    
+    init(in view: XCUIElement, app: XCUIApplication) {
+        self.app = app
+        super.init(in: view)
+    }
+    
+    // MARK: - Functions
+    
+    func setDone(to done: Bool)
+    {
+        if isDone != done {
+            doneButton.tap()
         }
     }
     
     func setContent(to content: String)
     {
-        view.typeText("\(content)\n")
+        textView.tap()
+        
+        if let currentText = textView.value as? String, currentText.count > 0
+        {
+            textView.press(forDuration: 1.0)
+            
+            // Needs to happen at the application level
+            selectAllButton.tap()
+            cutButton.tap()
+        }
+        
+        textView.typeText("\(content)\n")
+    }
+    
+    func delete()
+    {
+        view.swipeLeft()
+        deleteButton.tap()
     }
 }

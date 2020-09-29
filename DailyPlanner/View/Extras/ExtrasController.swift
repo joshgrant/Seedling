@@ -87,7 +87,8 @@ extension ExtrasController: CellTextViewDelegate
 	
 	func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
 	{
-		textView.resignFirstResponder()
-		return true
+//		textView.resignFirstResponder()
+//		return true
+        return false // Allow the user to enter new lines
 	}
 }
