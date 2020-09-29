@@ -22,11 +22,7 @@ class TodoDelegate: TabContentDelegate
 	weak var dayProvider: DayProvider?
 	weak var tableView: UITableView?
     
-    var editingIndexPath: IndexPath? {
-        didSet {
-            print("DID SET to: \(editingIndexPath)")
-        }
-    }
+    var editingIndexPath: IndexPath?
 	
 	// MARK: - Factory
 	
