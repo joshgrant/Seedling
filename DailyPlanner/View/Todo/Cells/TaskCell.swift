@@ -19,6 +19,22 @@ class TaskCell: UITableViewCell
     var task: Task?
     var section: TodoController.Section?
     
+    static var normalTypingAttributes: [NSAttributedString.Key: Any] {
+        return [
+            .foregroundColor: TextStyle.textView.textColor,
+            .font: TextStyle.textView.font
+        ]
+    }
+    
+    static var strikeThroughTypingAttributes: [NSAttributedString.Key: Any] {
+        return [
+            .foregroundColor: UIColor.placeholderText,
+            .strikethroughColor: UIColor.placeholderText,
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue,
+            .font: TextStyle.textView.font
+        ]
+    }
+    
     override func prepareForReuse()
     {
         super.prepareForReuse()
@@ -27,7 +43,7 @@ class TaskCell: UITableViewCell
         
         textView.text = nil
         textView.attributedText = nil
-		textView.attributedText = nil
+        textView.typingAttributes = Self.normalTypingAttributes
 		checkBox.imageView?.image = nil
     }
     
@@ -86,11 +102,13 @@ class TaskCell: UITableViewCell
 		attributedString.addAttribute(.font, value: textStyle.font, range: range)
         
         if task.completed {
+            textView.typingAttributes = Self.strikeThroughTypingAttributes
 			checkBox.setImage(.type(.orangeBubble), for: .normal)
 			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
 			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
 			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
         } else {
+            textView.typingAttributes = Self.normalTypingAttributes
 			checkBox.setImage(.type(.clearBubble), for: .normal)
 			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
         }
@@ -121,7 +139,8 @@ class TaskCell: UITableViewCell
             sender.accessibilityValue = "Checked"
         }
         
-        database?.context.perform {
+        database?.context.perform { [unowned self] in
+            self.task?.content = self.textView.text
             self.task?.completed.toggle()
             if let task = self.task, let section = self.section {
                 self.configure(with: task, section: section)
