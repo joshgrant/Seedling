@@ -7,7 +7,6 @@
 //
 
 import CoreData
-import Basic
 
 typealias Context = NSManagedObjectContext
 
@@ -21,7 +20,7 @@ class Database {
         let container = NSPersistentCloudKitContainer(name: containerName)
         container.loadPersistentStores { (description, error) in
             if let error = error {
-                fatalError(error.localizedDescription)
+                assertionFailure(error.localizedDescription)
             }
         }
         return container
@@ -61,7 +60,7 @@ class Database {
             }
             catch
             {
-                fatalError(error.localizedDescription)
+                assertionFailure(error.localizedDescription)
             }
         }
     }

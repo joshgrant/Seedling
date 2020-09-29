@@ -105,7 +105,8 @@ class TodoDataSource: TabContentDataSource
 		case 1:
 			return dayProvider?.day.todosArray[indexPath.row]
 		default:
-			fatalError()
+			assertionFailure("No task")
+            return nil
 		}
 	}
 }

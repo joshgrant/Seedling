@@ -79,7 +79,8 @@ class ExtrasDataSource: TabContentDataSource
 		case 3:
 			return "notesCell"
 		default:
-			fatalError()
+			assertionFailure("No cell identifier")
+            return ""
 		}
 	}
 }

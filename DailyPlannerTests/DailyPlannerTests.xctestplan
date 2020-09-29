@@ -16,7 +16,6 @@
       "deviceAppDataReference" : {
         "resolvedPath" : "..\/..\/DailyPlannerTests\/freshInstall.xcappdata"
       },
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:DailyPlanner.xcodeproj",
         "identifier" : "039566752463315200C0F498",
@@ -27,7 +26,6 @@
       "deviceAppDataReference" : {
         "resolvedPath" : "..\/..\/DailyPlannerTests\/freshInstall.xcappdata"
       },
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:DailyPlanner.xcodeproj",
         "identifier" : "039566802463315200C0F498",

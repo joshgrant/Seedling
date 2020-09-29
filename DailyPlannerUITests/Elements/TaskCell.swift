@@ -14,7 +14,7 @@ class TaskCell: BaseElement
     
     lazy var textView = view.textViews["todo.textView"]
     lazy var doneButton = view.buttons["todo.checkBox"]
-    lazy var deleteButton = view.buttons["trailing0"]
+    lazy var deleteButton = view.buttons["Delete"]
     
     lazy var selectAllButton = app.menus.menuItems["Select All"]
     lazy var cutButton = app.menus.menuItems["Cut"]

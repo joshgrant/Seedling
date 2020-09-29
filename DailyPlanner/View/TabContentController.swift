@@ -209,7 +209,8 @@ extension TabContentController
 	{
 		guard let keyboard = KeyboardNotification(notification: notification) else
 		{
-			fatalError()
+			assertionFailure("Failed to get the keyboard information")
+            return
 		}
 		
 		// 22 is the footer for the bottom section...

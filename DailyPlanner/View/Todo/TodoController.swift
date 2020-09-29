@@ -17,8 +17,6 @@ class TodoController: TabContentController
 		case todos
 	}
 	
-	var editingSection: Section?
-	
 	// MARK: - Factories
 	
 	override class func makeDelegate() -> TabContentDelegate

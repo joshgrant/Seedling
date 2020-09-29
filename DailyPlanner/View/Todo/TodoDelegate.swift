@@ -22,7 +22,11 @@ class TodoDelegate: TabContentDelegate
 	weak var dayProvider: DayProvider?
 	weak var tableView: UITableView?
     
-    var editingIndexPath: IndexPath?
+    var editingIndexPath: IndexPath? {
+        didSet {
+            print("DID SET to: \(editingIndexPath)")
+        }
+    }
 	
 	// MARK: - Factory
 	
@@ -143,6 +147,7 @@ extension TodoDelegate
 
 extension TodoDelegate: TodoDismissalDelegate {
     func shouldStopEditing() {
+        print("Setting to nil")
         editingIndexPath = nil
     }
 }
