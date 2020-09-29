@@ -143,7 +143,6 @@ extension TodoDelegate
 
 extension TodoDelegate: TodoDismissalDelegate {
     func shouldStopEditing() {
-        print("Setting to nil")
         editingIndexPath = nil
     }
 }

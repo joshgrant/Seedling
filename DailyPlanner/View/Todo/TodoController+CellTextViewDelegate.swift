@@ -85,7 +85,6 @@ extension TodoController: CellTextViewDelegate
 				
 				guard let path = indexPath else
 				{
-					print("No index path")
 					return
 				}
 				
