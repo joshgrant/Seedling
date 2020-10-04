@@ -50,7 +50,8 @@ class ExtrasController: TabContentController
 			.init(cellClass: MealsCell.self, cellReuseIdentifier: "mealsCell"),
 			.init(cellClass: WaterCell.self, cellReuseIdentifier: "waterCell"),
 			.init(cellClass: PomodoroCell.self, cellReuseIdentifier: "pomodoroCell"),
-			.init(cellClass: NotesCell.self, cellReuseIdentifier: "notesCell")
+			.init(cellClass: NotesCell.self, cellReuseIdentifier: "notesCell"),
+            .init(cellClass: PrivacyPolicyCell.self, cellReuseIdentifier: "privacyPolicyCell")
 		]
 	}
 	

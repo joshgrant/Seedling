@@ -44,6 +44,7 @@
 		035016572465CF75006726BC /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035016562465CF75006726BC /* NotesCell.swift */; };
 		03680B942465AE1900904DE1 /* Entity+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B932465AE1900904DE1 /* Entity+Extensions.swift */; };
 		03680B962465AE7500904DE1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03680B952465AE7500904DE1 /* Database.swift */; };
+		036854F02529DBA700782265 /* PrivacyPolicyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036854EF2529DBA700782265 /* PrivacyPolicyCell.swift */; };
 		039331C4248AC6D100A0C556 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C3248AC6D100A0C556 /* TabBar.swift */; };
 		039331C6248AC6E800A0C556 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C5248AC6E800A0C556 /* TodoView.swift */; };
 		039331C8248ACDE100A0C556 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039331C7248ACDE000A0C556 /* TaskCell.swift */; };
@@ -150,6 +151,7 @@
 		035016562465CF75006726BC /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		03680B932465AE1900904DE1 /* Entity+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+Extensions.swift"; sourceTree = "<group>"; };
 		03680B952465AE7500904DE1 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		036854EF2529DBA700782265 /* PrivacyPolicyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyCell.swift; sourceTree = "<group>"; };
 		039331C3248AC6D100A0C556 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		039331C5248AC6E800A0C556 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		039331C7248ACDE000A0C556 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
@@ -283,9 +285,10 @@
 			isa = PBXGroup;
 			children = (
 				0306CAB22471431200E45DFA /* Meals */,
-				0306CAB12471430F00E45DFA /* Water */,
-				0306CAB02471430A00E45DFA /* Pomodoro */,
 				0306CAAF2471430000E45DFA /* Notes */,
+				0306CAB02471430A00E45DFA /* Pomodoro */,
+				036854EC2529DB8D00782265 /* Privacy Policy */,
+				0306CAB12471430F00E45DFA /* Water */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -343,6 +346,14 @@
 				03F3FE872466FD32003B420E /* Schedule+Extensions.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		036854EC2529DB8D00782265 /* Privacy Policy */ = {
+			isa = PBXGroup;
+			children = (
+				036854EF2529DBA700782265 /* PrivacyPolicyCell.swift */,
+			);
+			path = "Privacy Policy";
 			sourceTree = "<group>";
 		};
 		039331C2248AC6BC00A0C556 /* Elements */ = {
@@ -636,6 +647,7 @@
 				035016472465B7BC006726BC /* UIView+Extensions.swift in Sources */,
 				03956697246332BF00C0F498 /* Coder.swift in Sources */,
 				0306CAA624712F7600E45DFA /* TabContentHeader.swift in Sources */,
+				036854F02529DBA700782265 /* PrivacyPolicyCell.swift in Sources */,
 				03EC4DE224705F14007BB838 /* TabContentController.swift in Sources */,
 				03DD4D6F252331D800870475 /* Testable.swift in Sources */,
 				039566952463327B00C0F498 /* MainTabBarController.swift in Sources */,

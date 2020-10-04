@@ -19,7 +19,7 @@ class ExtrasDataSource: TabContentDataSource
 	
 	func numberOfSections(in tableView: UITableView) -> Int
 	{
-		return 4
+		return 5
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -78,6 +78,8 @@ class ExtrasDataSource: TabContentDataSource
 			return "pomodoroCell"
 		case 3:
 			return "notesCell"
+        case 4:
+            return "privacyPolicyCell"
 		default:
 			assertionFailure("No cell identifier")
             return ""

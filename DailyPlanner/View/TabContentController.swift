@@ -61,6 +61,7 @@ class TabContentController: UIViewController
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         listenForNotifications(true)
+        tableView.reloadData()
     }
 	
 	override func viewWillDisappear(_ animated: Bool) {

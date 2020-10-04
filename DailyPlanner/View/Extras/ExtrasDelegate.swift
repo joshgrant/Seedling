@@ -26,6 +26,26 @@ class ExtrasDelegate: TabContentDelegate
 			return nil
 		}
 	}
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section
+        {
+        case 4:
+            return nil
+        default:
+            return super.tableView(tableView, viewForHeaderInSection: section)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section
+        {
+        case 4:
+            return 0
+        default:
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
 }
 
 // MARK: - Scroll view delegate
