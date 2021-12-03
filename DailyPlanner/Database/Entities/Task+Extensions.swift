@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension Task
 {
@@ -23,5 +24,13 @@ extension Task
         task.createdDate = Date()
         task.content = content
         return task
+    }
+    
+    static func allUnfinishedHistoricalTasks(in context: Context) -> [Task] {
+        let request: NSFetchRequest<Task> = Task.fetchRequest()
+        request.predicate = NSPredicate(format: "completed ==", false)
+        
+        let result = (try? context.fetch(request)) ?? []
+        return result
     }
 }

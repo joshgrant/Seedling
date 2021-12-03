@@ -54,10 +54,25 @@ class MainTabBarController: UITabBarController {
 	// MARK: - Configuration
     
     func configureTabBar() {
-        tabBar.barTintColor = .type(.emerald)
-        tabBar.tintColor = .systemBackground
-        tabBar.isTranslucent = true
-        tabBar.unselectedItemTintColor = .secondarySystemBackground
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = .type(.emerald)
+            appearance.selectionIndicatorTintColor = .systemBackground
+            
+            appearance.stackedLayoutAppearance.selected.iconColor = .systemBackground
+            appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
+            
+            appearance.stackedLayoutAppearance.normal.iconColor = .secondarySystemBackground
+            appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.secondarySystemBackground]
+            
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        } else {
+            tabBar.barTintColor = .type(.emerald)
+            tabBar.tintColor = .systemBackground
+            tabBar.isTranslucent = true
+            tabBar.unselectedItemTintColor = .secondarySystemBackground
+        }
     }
     
     func configureNavigationItem() {

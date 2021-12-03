@@ -35,7 +35,7 @@ extension Day {
         day.pomodoro = Pomodoro.make(in: context)
 		day.note = Note.make(in: context)
 		
-		for i in 5 ..< 23 {
+        for i in 0 ..< 24 {
 			day.addToSchedules(Schedule.make(hour: i, in: context))
 		}
 		
