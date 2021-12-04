@@ -12,7 +12,7 @@ class TabContentDelegate: NSObject, UITableViewDelegate
 {
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
 	{
-		return 54
+		54
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -23,16 +23,24 @@ class TabContentDelegate: NSObject, UITableViewDelegate
 	
 	func titleForHeader(in section: Int) -> String?
 	{
-		return "Implement"
+		"Implement"
 	}
 	
 	func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
 	{
-		return 22
+        22
 	}
 	
 	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView?
 	{
 		return UIView()
 	}
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+        22
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        54
+    }
 }

@@ -17,7 +17,11 @@ extension Day {
 
     var todosArray: [Task] {
         let set = todos as? Set<Task>
-        return set?.sorted(by: { $0.wrappedCreatedDate < $1.wrappedCreatedDate }) ?? []
+        return set?.sorted(by: {
+            if $0.completed && !$1.completed { return false }
+            if $1.completed && !$0.completed { return true }
+            return $0.wrappedCreatedDate < $1.wrappedCreatedDate
+        }) ?? []
     }
 	
 	var schedulesArray: [Schedule] {

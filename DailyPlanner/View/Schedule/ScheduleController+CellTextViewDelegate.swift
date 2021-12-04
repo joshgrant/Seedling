@@ -24,8 +24,9 @@ extension ScheduleController: CellTextViewDelegate {
 	}
 	
 	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell) {
-		if let indexPath = tableView.indexPath(for: cell) {
-            let schedule = dayProvider.day.schedulesArray[indexPath.row]
+        if let indexPath = tableView.indexPath(for: cell) {
+            let array = dayProvider.day.schedulesArray
+            let schedule = array[indexPath.row]
 			schedule.content = textView.text
             database.save()
 		}

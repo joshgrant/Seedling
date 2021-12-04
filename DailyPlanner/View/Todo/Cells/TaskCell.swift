@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CheckBoxDelegate: AnyObject {
+    func checkBoxWillTouchUpInside(_ sender: TaskCell)
+    func checkBoxDidTouchUpInside(_ sender: TaskCell)
+}
+
 class TaskCell: UITableViewCell
 {
     let checkBox: UIButton
@@ -15,6 +20,7 @@ class TaskCell: UITableViewCell
     
     weak var database: Database?
     weak var delegate: CellTextViewDelegate?
+    weak var checkBoxDelegate: CheckBoxDelegate?
     
     var task: Task?
     var section: TodoController.Section?
@@ -92,8 +98,6 @@ class TaskCell: UITableViewCell
 		
 		let content = task.content ?? ""
         
-//        textView.text = task.content
-//		textView.attributedText = NSAttributedString(string: task.content, attributes: [.stri])
 		let textStyle = TextStyle.textView
 		let attributedString = NSMutableAttributedString(string: content)
 		
@@ -132,6 +136,8 @@ class TaskCell: UITableViewCell
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
         
+        checkBoxDelegate?.checkBoxWillTouchUpInside(self)
+        
         // Assign the opposite accessibility value
         if task?.completed ?? false {
             sender.accessibilityValue = "Unchecked"
@@ -140,12 +146,13 @@ class TaskCell: UITableViewCell
         }
         
         database?.context.perform { [unowned self] in
-            self.task?.content = self.textView.text
-            self.task?.completed.toggle()
-            if let task = self.task, let section = self.section {
-                self.configure(with: task, section: section)
+            task?.content = textView.text
+            task?.completed.toggle()
+            if let task = task, let section = section {
+                configure(with: task, section: section)
             }
-            self.database?.save()
+            database?.save()
+            checkBoxDelegate?.checkBoxDidTouchUpInside(self)
         }
     }
     

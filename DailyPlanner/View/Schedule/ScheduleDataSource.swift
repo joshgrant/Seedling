@@ -30,7 +30,8 @@ class ScheduleDataSource: TabContentDataSource
 	{
 		let identifier = cellIdentifier(for: indexPath)
 		let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
-		
+        
+        // This is crashing, but maybe that's better than not crashing?
 		if let scheduleCell = cell as? ScheduleCell, let schedule = dayProvider?.day.schedulesArray[indexPath.row]
 		{
 			scheduleCell.configure(with: schedule)

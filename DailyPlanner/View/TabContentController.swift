@@ -114,7 +114,7 @@ class TabContentController: UIViewController
 	}
 	
 	func configureTableView()
-	{
+	{        
 		tableView.backgroundColor = .systemBackground
 		tableView.separatorStyle = .none
 		
@@ -124,6 +124,11 @@ class TabContentController: UIViewController
 		
 		tableView.dataSource = dataSource
 		tableView.delegate = delegate
+//        tableView.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: 0, height: .leastNormalMagnitude))
+        
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = .leastNormalMagnitude
+        }
 	}
 	
 	func configureView()
@@ -143,12 +148,12 @@ class TabContentController: UIViewController
 		
 		if isToday  {
 			let formatter = DateFormatter()
-			formatter.dateFormat = "d MMM"
+            formatter.setLocalizedDateFormatFromTemplate("d MMM")
 			let title = "Today, \(formatter.string(from: day.date ?? Date()))"
 			tabBarController?.navigationItem.title = title
 		} else {
 			let formatter = DateFormatter()
-			formatter.dateFormat = "EEEE, d MMM"
+            formatter.setLocalizedDateFormatFromTemplate("EEEE, d MMM")
 			let title = formatter.string(from: day.date ?? Date())
 			tabBarController?.navigationItem.title = title
 		}

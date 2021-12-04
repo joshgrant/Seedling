@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoDataSource: TabContentDataSource
 {
@@ -14,6 +15,7 @@ class TodoDataSource: TabContentDataSource
 
     weak var database: Database? 
 	weak var cellTextViewDelegate: CellTextViewDelegate?
+    weak var checkBoxDelegate: CheckBoxDelegate?
 	
 	// MARK: - Data source
 	
@@ -46,6 +48,7 @@ class TodoDataSource: TabContentDataSource
             taskCell.configure(with: task, section: TodoController.Section(rawValue: indexPath.section)!)
 			taskCell.delegate = cellTextViewDelegate
             taskCell.database = database
+            taskCell.checkBoxDelegate = checkBoxDelegate
 		}
 		
 		return cell
