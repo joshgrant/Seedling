@@ -17,7 +17,8 @@ class DayProvider {
         self.database = database
     }
     
-    private var _day: Day? {
+    private var _day: Day?
+    {
         willSet {
             NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["newDay": newValue as Any])
         }
@@ -26,7 +27,8 @@ class DayProvider {
         }
     }
     
-    var day: Day {
+    var day: Day
+    {
         get {
             if let day = _day {
                 return day
@@ -53,7 +55,8 @@ class DayProvider {
         }
     }
     
-    var tomorrow: Day {
+    var tomorrow: Day
+    {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
         let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date > %@", date as NSDate)
@@ -71,7 +74,8 @@ class DayProvider {
         }
     }
     
-    var yesterday: Day {
+    var yesterday: Day
+    {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
         let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
@@ -88,8 +92,15 @@ class DayProvider {
             return day
         }
     }
+    
+    var today: Day
+    {
+        resetDay()
+        return day
+    }
 	
-	func resetDay() {
+	func resetDay()
+    {
 		_day = nil
 	}
 }

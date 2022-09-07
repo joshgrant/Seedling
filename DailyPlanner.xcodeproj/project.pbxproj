@@ -81,6 +81,8 @@
 		03F3FE842466FC55003B420E /* Pomodoro+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */; };
 		03F3FE862466FCCA003B420E /* Water+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE852466FCCA003B420E /* Water+Extensions.swift */; };
 		03F3FE882466FD32003B420E /* Schedule+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F3FE872466FD32003B420E /* Schedule+Extensions.swift */; };
+		03FF92DC28C81E8000FC1956 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FF92DB28C81E8000FC1956 /* Int+Extensions.swift */; };
+		03FF92DE28C8206300FC1956 /* Int+Extensions+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FF92DD28C8206300FC1956 /* Int+Extensions+Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +194,8 @@
 		03F3FE832466FC55003B420E /* Pomodoro+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pomodoro+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE852466FCCA003B420E /* Water+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Water+Extensions.swift"; sourceTree = "<group>"; };
 		03F3FE872466FD32003B420E /* Schedule+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Schedule+Extensions.swift"; sourceTree = "<group>"; };
+		03FF92DB28C81E8000FC1956 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		03FF92DD28C8206300FC1956 /* Int+Extensions+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions+Tests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +419,7 @@
 				0395667C2463315200C0F498 /* Info.plist */,
 				0394B79F2482A7120014034A /* DailyPlannerTests.xctestplan */,
 				0394B7A02482A7BA0014034A /* DailyPlannerTests.swift */,
+				03FF92DD28C8206300FC1956 /* Int+Extensions+Tests.swift */,
 			);
 			path = DailyPlannerTests;
 			sourceTree = "<group>";
@@ -453,23 +458,24 @@
 			isa = PBXGroup;
 			children = (
 				03DD4D6A252331D800870475 /* Accessible.swift */,
-				03DD4D6D252331D800870475 /* Testable.swift */,
-				03956696246332BF00C0F498 /* Coder.swift */,
-				035016462465B7BC006726BC /* UIView+Extensions.swift */,
-				035016482465B974006726BC /* TextField.swift */,
-				0350164C2465C2CB006726BC /* TableView.swift */,
-				0350164E2465C7AE006726BC /* String+Extensions.swift */,
-				03F3FE6D2466E6A4003B420E /* TextView.swift */,
-				03F3FE6F2466E753003B420E /* Color.swift */,
-				03F3FE712466E922003B420E /* TextStyle.swift */,
-				03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */,
+				0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */,
 				03F3FE7D2466F37B003B420E /* CellTextViewDelegate.swift */,
-				0306CAA324712A7900E45DFA /* UILabel+Extensions.swift */,
-				0306CAB72471440A00E45DFA /* NotifySelector.swift */,
+				03956696246332BF00C0F498 /* Coder.swift */,
+				03F3FE6F2466E753003B420E /* Color.swift */,
+				0333AC452478E502009A85A8 /* Date+Extensions.swift */,
+				03FF92DB28C81E8000FC1956 /* Int+Extensions.swift */,
 				0306CAB92471442500E45DFA /* KeyboardNotification.swift */,
 				0306CABB2471459A00E45DFA /* KeyboardNotification+CustomStringConvertible.swift */,
-				0306CAC12471496A00E45DFA /* CellClassIdentifier.swift */,
-				0333AC452478E502009A85A8 /* Date+Extensions.swift */,
+				0306CAB72471440A00E45DFA /* NotifySelector.swift */,
+				0350164E2465C7AE006726BC /* String+Extensions.swift */,
+				0350164C2465C2CB006726BC /* TableView.swift */,
+				03DD4D6D252331D800870475 /* Testable.swift */,
+				035016482465B974006726BC /* TextField.swift */,
+				03F3FE712466E922003B420E /* TextStyle.swift */,
+				03F3FE6D2466E6A4003B420E /* TextView.swift */,
+				03F3FE7B2466EF12003B420E /* UIImage+Extensions.swift */,
+				0306CAA324712A7900E45DFA /* UILabel+Extensions.swift */,
+				035016462465B7BC006726BC /* UIView+Extensions.swift */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 				0306CAA82471306000E45DFA /* Spacer.swift in Sources */,
 				035016572465CF75006726BC /* NotesCell.swift in Sources */,
 				0306CAA424712A7900E45DFA /* UILabel+Extensions.swift in Sources */,
+				03FF92DC28C81E8000FC1956 /* Int+Extensions.swift in Sources */,
 				0306CAC22471496A00E45DFA /* CellClassIdentifier.swift in Sources */,
 				03680B962465AE7500904DE1 /* Database.swift in Sources */,
 				039331D0248AD35100A0C556 /* LaunchArgument.swift in Sources */,
@@ -686,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				039331DD248ADBAD00A0C556 /* LaunchArgument.swift in Sources */,
+				03FF92DE28C8206300FC1956 /* Int+Extensions+Tests.swift in Sources */,
 				039331D4248AD97200A0C556 /* XCUIApplication+Extensions.swift in Sources */,
 				0394B7A12482A7BA0014034A /* DailyPlannerTests.swift in Sources */,
 			);

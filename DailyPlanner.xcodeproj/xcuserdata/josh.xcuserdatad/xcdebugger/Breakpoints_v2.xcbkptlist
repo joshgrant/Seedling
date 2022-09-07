@@ -121,6 +121,38 @@
             endingLineNumber = "78"
             landmarkName = "tableView(_:commit:forRowAt:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2348DE12-5F75-4A06-AAC4-8660CF851EB4 - 3033c89cd641235c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Seedling.TodoDataSource.tableView(_: __C.UITableView, commit: __C.UITableViewCellEditingStyle, forRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Seedling"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josh/Documents/Xcode/Apps/Seedling/DailyPlanner/View/Todo/TodoDataSource.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "1692">
+               </Location>
+               <Location
+                  uuid = "2348DE12-5F75-4A06-AAC4-8660CF851EB4 - 3033c89cd641235c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Seedling.TodoDataSource.tableView(_: __C.UITableView, commit: __C.UITableViewCellEditingStyle, forRowAt: Foundation.IndexPath) -&gt; ()"
+                  moduleName = "Seedling"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josh/Documents/Xcode/Apps/Seedling/DailyPlanner/View/Todo/TodoDataSource.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "78"
+                  endingLineNumber = "78"
+                  offsetFromSymbolStart = "1804">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

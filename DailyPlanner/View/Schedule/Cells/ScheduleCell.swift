@@ -151,7 +151,8 @@ class ScheduleCell: UITableViewCell
         // The schedule hour comes in as a 24-hour time. We just need to
         // format it to see if we use AM/PM
         if Date.uses12HourTime {
-            hourLabel.text = "\(schedule?.twelveHour ?? 0)"
+            let twelveHour = schedule?.hour.convert24HourTimeToTwelveHourTime() ?? 0
+            hourLabel.text = "\(twelveHour)"
             let text = meridiemText(for: Int(schedule?.hour ?? 0))
             meridiemLabel.text = text
         } else {
@@ -180,7 +181,7 @@ class ScheduleCell: UITableViewCell
         {
         case 0:
             return DateFormatter().amSymbol
-        case 11:
+        case 12:
             return DateFormatter().pmSymbol
         default:
             return nil

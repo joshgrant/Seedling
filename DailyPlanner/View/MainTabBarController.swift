@@ -102,6 +102,9 @@ class MainTabBarController: UITabBarController {
 			line.backgroundColor = .type(.emerald)
 			
 			navigationBar.addSubview(line)
+            
+            let tapGesture = createNavigationBarGestureRecognizer()
+            navigationBar.addGestureRecognizer(tapGesture)
 			
 			NSLayoutConstraint.activate([
 				navigationBar.bottomAnchor.constraint(equalTo: line.topAnchor),
@@ -110,6 +113,13 @@ class MainTabBarController: UITabBarController {
 			])
 		}
 	}
+    
+    func createNavigationBarGestureRecognizer() -> UITapGestureRecognizer
+    {
+        let gestureRecognizer = UITapGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(didTouchUpInsideNavigationBar))
+        return gestureRecognizer
+    }
 	
 	// MARK: - Actions
 	
@@ -122,4 +132,9 @@ class MainTabBarController: UITabBarController {
 	{
 		dayProvider.day = dayProvider.tomorrow
 	}
+    
+    @objc func didTouchUpInsideNavigationBar(_ sender: UITapGestureRecognizer)
+    {
+        dayProvider.day = dayProvider.today
+    }
 }

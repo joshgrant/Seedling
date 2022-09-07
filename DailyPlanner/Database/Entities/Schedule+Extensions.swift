@@ -17,12 +17,4 @@ extension Schedule
 		schedule.hour = Int32(hour)
 		return schedule
 	}
-    
-    var twelveHour: Int {
-        if hour < 12 {
-            return Int(hour + 1)
-        } else {
-            return Int(hour - 11)
-        }
-    }
 }
