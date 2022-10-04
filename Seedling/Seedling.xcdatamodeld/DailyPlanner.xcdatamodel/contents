@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName="Day" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="day" inverseEntity="Meal"/>
@@ -27,6 +27,7 @@
     </entity>
     <entity name="Pomodoro" representedClassName="Pomodoro" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="breakAmount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="pomodoro" inverseEntity="Day"/>
     </entity>
     <entity name="Schedule" representedClassName="Schedule" parentEntity="Entity" syncable="YES" codeGenerationType="class">
@@ -45,14 +46,4 @@
         <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="water" inverseEntity="Day"/>
     </entity>
-    <elements>
-        <element name="Day" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="Entity" positionX="-9" positionY="54" width="128" height="88"/>
-        <element name="Meal" positionX="0" positionY="45" width="128" height="103"/>
-        <element name="Note" positionX="-9" positionY="36" width="128" height="73"/>
-        <element name="Pomodoro" positionX="36" positionY="81" width="128" height="73"/>
-        <element name="Schedule" positionX="-18" positionY="27" width="128" height="88"/>
-        <element name="Task" positionX="-9" positionY="54" width="128" height="118"/>
-        <element name="Water" positionX="18" positionY="63" width="128" height="73"/>
-    </elements>
 </model>
