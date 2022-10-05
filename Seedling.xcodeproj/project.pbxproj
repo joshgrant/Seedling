@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0334551B28ECF28C00F203CE /* Seedling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0334551928ECF28C00F203CE /* Seedling.xcdatamodeld */; };
+		0334552328ED01D700F203CE /* SeedlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334552228ED01D700F203CE /* SeedlingTests.swift */; };
+		0334553028ED01DF00F203CE /* SeedlingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334552F28ED01DF00F203CE /* SeedlingUITests.swift */; };
+		0334553228ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */; };
 		034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4828D17EA100D25D17 /* SeedlingApp.swift */; };
 		034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4A28D17EA100D25D17 /* Persistence.swift */; };
 		034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4F28D17EA100D25D17 /* ContentView.swift */; };
@@ -15,8 +18,30 @@
 		034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0334552428ED01D700F203CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 034FEE3D28D17EA100D25D17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 034FEE4428D17EA100D25D17;
+			remoteInfo = Seedling;
+		};
+		0334553328ED01DF00F203CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 034FEE3D28D17EA100D25D17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 034FEE4428D17EA100D25D17;
+			remoteInfo = Seedling;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0334551A28ECF28C00F203CE /* DailyPlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailyPlanner.xcdatamodel; sourceTree = "<group>"; };
+		0334552028ED01D700F203CE /* SeedlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeedlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0334552228ED01D700F203CE /* SeedlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingTests.swift; sourceTree = "<group>"; };
+		0334552D28ED01DF00F203CE /* SeedlingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeedlingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0334552F28ED01DF00F203CE /* SeedlingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingUITests.swift; sourceTree = "<group>"; };
+		0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		034FEE4528D17EA100D25D17 /* Seedling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seedling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034FEE4828D17EA100D25D17 /* SeedlingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingApp.swift; sourceTree = "<group>"; };
 		034FEE4A28D17EA100D25D17 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -27,6 +52,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0334551D28ED01D700F203CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0334552A28ED01DF00F203CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		034FEE4228D17EA100D25D17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +76,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0334552128ED01D700F203CE /* SeedlingTests */ = {
+			isa = PBXGroup;
+			children = (
+				0334552228ED01D700F203CE /* SeedlingTests.swift */,
+			);
+			path = SeedlingTests;
+			sourceTree = "<group>";
+		};
+		0334552E28ED01DF00F203CE /* SeedlingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0334552F28ED01DF00F203CE /* SeedlingUITests.swift */,
+				0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */,
+			);
+			path = SeedlingUITests;
+			sourceTree = "<group>";
+		};
 		034FEE3C28D17EA100D25D17 = {
 			isa = PBXGroup;
 			children = (
 				034FEE4728D17EA100D25D17 /* Seedling */,
+				0334552128ED01D700F203CE /* SeedlingTests */,
+				0334552E28ED01DF00F203CE /* SeedlingUITests */,
 				034FEE4628D17EA100D25D17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				034FEE4528D17EA100D25D17 /* Seedling.app */,
+				0334552028ED01D700F203CE /* SeedlingTests.xctest */,
+				0334552D28ED01DF00F203CE /* SeedlingUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +138,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0334551F28ED01D700F203CE /* SeedlingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0334552628ED01D700F203CE /* Build configuration list for PBXNativeTarget "SeedlingTests" */;
+			buildPhases = (
+				0334551C28ED01D700F203CE /* Sources */,
+				0334551D28ED01D700F203CE /* Frameworks */,
+				0334551E28ED01D700F203CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0334552528ED01D700F203CE /* PBXTargetDependency */,
+			);
+			name = SeedlingTests;
+			productName = SeedlingTests;
+			productReference = 0334552028ED01D700F203CE /* SeedlingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		0334552C28ED01DF00F203CE /* SeedlingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0334553528ED01DF00F203CE /* Build configuration list for PBXNativeTarget "SeedlingUITests" */;
+			buildPhases = (
+				0334552928ED01DF00F203CE /* Sources */,
+				0334552A28ED01DF00F203CE /* Frameworks */,
+				0334552B28ED01DF00F203CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0334553428ED01DF00F203CE /* PBXTargetDependency */,
+			);
+			name = SeedlingUITests;
+			productName = SeedlingUITests;
+			productReference = 0334552D28ED01DF00F203CE /* SeedlingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		034FEE4428D17EA100D25D17 /* Seedling */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 034FEE6F28D17EA200D25D17 /* Build configuration list for PBXNativeTarget "Seedling" */;
@@ -105,6 +201,14 @@
 				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					0334551F28ED01D700F203CE = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 034FEE4428D17EA100D25D17;
+					};
+					0334552C28ED01DF00F203CE = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = 034FEE4428D17EA100D25D17;
+					};
 					034FEE4428D17EA100D25D17 = {
 						CreatedOnToolsVersion = 14.0;
 					};
@@ -124,11 +228,27 @@
 			projectRoot = "";
 			targets = (
 				034FEE4428D17EA100D25D17 /* Seedling */,
+				0334551F28ED01D700F203CE /* SeedlingTests */,
+				0334552C28ED01DF00F203CE /* SeedlingUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0334551E28ED01D700F203CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0334552B28ED01DF00F203CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		034FEE4328D17EA100D25D17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +261,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0334551C28ED01D700F203CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0334552328ED01D700F203CE /* SeedlingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0334552928ED01DF00F203CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0334553228ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift in Sources */,
+				0334553028ED01DF00F203CE /* SeedlingUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		034FEE4128D17EA100D25D17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,7 +291,94 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0334552528ED01D700F203CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 034FEE4428D17EA100D25D17 /* Seedling */;
+			targetProxy = 0334552428ED01D700F203CE /* PBXContainerItemProxy */;
+		};
+		0334553428ED01DF00F203CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 034FEE4428D17EA100D25D17 /* Seedling */;
+			targetProxy = 0334553328ED01DF00F203CE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0334552728ED01D700F203CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685257RUQP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seedling.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seedling";
+			};
+			name = Debug;
+		};
+		0334552828ED01D700F203CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685257RUQP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seedling.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seedling";
+			};
+			name = Release;
+		};
+		0334553628ED01DF00F203CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685257RUQP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Seedling;
+			};
+			name = Debug;
+		};
+		0334553728ED01DF00F203CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 685257RUQP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Seedling;
+			};
+			name = Release;
+		};
 		034FEE6D28D17EA200D25D17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -347,6 +571,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0334552628ED01D700F203CE /* Build configuration list for PBXNativeTarget "SeedlingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0334552728ED01D700F203CE /* Debug */,
+				0334552828ED01D700F203CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0334553528ED01DF00F203CE /* Build configuration list for PBXNativeTarget "SeedlingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0334553628ED01DF00F203CE /* Debug */,
+				0334553728ED01DF00F203CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		034FEE4028D17EA100D25D17 /* Build configuration list for PBXProject "Seedling" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
