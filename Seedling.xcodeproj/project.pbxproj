@@ -16,6 +16,9 @@
 		034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4F28D17EA100D25D17 /* ContentView.swift */; };
 		034FEE5228D17EA200D25D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5128D17EA200D25D17 /* Assets.xcassets */; };
 		034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */; };
+		D3666F5428F4D646002C98BB /* TaskCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5328F4D646002C98BB /* TaskCellTests.swift */; };
+		D3666F5628F4DABA002C98BB /* CheckboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5528F4DABA002C98BB /* CheckboxTests.swift */; };
+		D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5728F4DB21002C98BB /* Checkbox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		034FEE5128D17EA200D25D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		034FEE5328D17EA200D25D17 /* Seedling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Seedling.entitlements; sourceTree = "<group>"; };
 		034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3666F5328F4D646002C98BB /* TaskCellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TaskCellTests.swift; path = SeedlingTests/TaskCellTests.swift; sourceTree = SOURCE_ROOT; };
+		D3666F5528F4DABA002C98BB /* CheckboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxTests.swift; sourceTree = "<group>"; };
+		D3666F5728F4DB21002C98BB /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +85,9 @@
 		0334552128ED01D700F203CE /* SeedlingTests */ = {
 			isa = PBXGroup;
 			children = (
+				D3666F5328F4D646002C98BB /* TaskCellTests.swift */,
 				0334552228ED01D700F203CE /* SeedlingTests.swift */,
+				D3666F5528F4DABA002C98BB /* CheckboxTests.swift */,
 			);
 			path = SeedlingTests;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 				034FEE5328D17EA200D25D17 /* Seedling.entitlements */,
 				0334551928ECF28C00F203CE /* Seedling.xcdatamodeld */,
 				034FEE5428D17EA200D25D17 /* Preview Content */,
+				D3666F5728F4DB21002C98BB /* Checkbox.swift */,
 			);
 			path = Seedling;
 			sourceTree = "<group>";
@@ -265,7 +274,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3666F5428F4D646002C98BB /* TaskCellTests.swift in Sources */,
 				0334552328ED01D700F203CE /* SeedlingTests.swift in Sources */,
+				D3666F5628F4DABA002C98BB /* CheckboxTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +297,7 @@
 				034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */,
 				034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */,
 				034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */,
+				D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
