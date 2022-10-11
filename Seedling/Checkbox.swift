@@ -9,31 +9,42 @@ import SwiftUI
 
 struct Checkbox: View
 {
-    @State var checked: Bool
+    @Binding var checked: Bool
     
     var body: some View
+    {
+        Button(
+            action: toggleChecked,
+            label: renderButton)
+    }
+    
+    func toggleChecked()
+    {
+        checked.toggle()
+    }
+    
+    func renderButton() -> some View
     {
         ZStack
         {
             Ellipse()
                 .stroke(style: StrokeStyle(lineWidth: 1))
-                .foregroundColor(Color("CheckboxBorder"))
+                .foregroundColor(Color.darkGrey)
                 .frame(width: 18, height: 18)
             Ellipse()
-                .foregroundColor(Color("Clementine"))
+                .foregroundColor(Color.clementine)
                 .opacity(checked ? 1 : 0)
                 .frame(width: 14, height: 14)
-            Button(action: {
-                checked.toggle()
-            }, label: {})
         }
     }
 }
 
 struct Checkbox_Previews: PreviewProvider
 {
+    @State static var checked: Bool = true
+    
     static var previews: some View
     {
-        Checkbox(checked: false)
+        Checkbox(checked: $checked)
     }
 }

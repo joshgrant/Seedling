@@ -8,15 +8,18 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    
-    var body: some View {
-        Checkbox(checked: false)
+struct ContentView: View
+{
+    var body: some View
+    {
+        TaskCell(checked: false)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+struct ContentView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         ContentView()
     }
 }
