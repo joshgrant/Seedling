@@ -12,7 +12,7 @@ struct ContentView: View
 {
     var body: some View
     {
-        TaskCell(checked: false)
+        TaskCell(checked: false, text: "Lol :)")
     }
 }
 

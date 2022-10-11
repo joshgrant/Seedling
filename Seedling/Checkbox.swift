@@ -16,6 +16,7 @@ struct Checkbox: View
         Button(
             action: toggleChecked,
             label: renderButton)
+        .frame(width: 44, height: 44)
     }
     
     func toggleChecked()

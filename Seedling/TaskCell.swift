@@ -10,13 +10,25 @@ import SwiftUI
 struct TaskCell: View
 {
     @State var checked: Bool
+    @State var text: String
+    
+    var textColor: Color
+    {
+        checked ? .dust : .darkGrey
+    }
     
     var body: some View
     {
         HStack
         {
             Checkbox(checked: $checked)
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/).strikethrough(checked).foregroundColor(checked ? .dust : .darkGrey) 
+            VStack
+            {
+                TextField("Enter task", text: $text)
+                    .strikethrough(checked, color: textColor)
+                    .foregroundColor(checked ? .dust : .darkGrey)
+                Rectangle().frame(height: 1).foregroundColor(.clementine)
+            }
         }
     }
 }
@@ -25,6 +37,6 @@ struct TaskCell_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        TaskCell(checked: false)
+        TaskCell(checked: false, text: "Lol")
     }
 }
