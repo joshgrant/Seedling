@@ -21,6 +21,7 @@
 		D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5728F4DB21002C98BB /* Checkbox.swift */; };
 		D3666F5A28F62904002C98BB /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5928F62904002C98BB /* TaskCell.swift */; };
 		D3666F5C28F62CE2002C98BB /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */; };
+		D3666F5E28F8D4A2002C98BB /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5D28F8D4A2002C98BB /* TaskSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D3666F5728F4DB21002C98BB /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		D3666F5928F62904002C98BB /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		D3666F5D28F8D4A2002C98BB /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				D3666F5728F4DB21002C98BB /* Checkbox.swift */,
 				D3666F5928F62904002C98BB /* TaskCell.swift */,
 				D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */,
+				D3666F5D28F8D4A2002C98BB /* TaskSection.swift */,
 			);
 			path = Seedling;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */,
 				034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */,
 				034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */,
+				D3666F5E28F8D4A2002C98BB /* TaskSection.swift in Sources */,
 				D3666F5C28F62CE2002C98BB /* Color+Extensions.swift in Sources */,
 				D3666F5A28F62904002C98BB /* TaskCell.swift in Sources */,
 				D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */,
