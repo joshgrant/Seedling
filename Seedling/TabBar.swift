@@ -9,49 +9,83 @@ import SwiftUI
 
 struct TabBar: View {
     
-    private enum Tab: Hashable {
+    // TODO: Why doesn't this work with @State to update the DOM?
+    private enum Tab: Int, Hashable {
         case tasks
         case schedule
         case extras
         case settings
+        
+        func image(selectedTab: Tab) -> String {
+            switch self {
+            case .tasks:
+                return selectedTab == self ? "tasks_selected" : "tasks_unselected"
+            case .schedule:
+                return selectedTab == self ? "schedule_selected" : "schedule_unselected"
+            case .extras:
+                return selectedTab == self ? "extras_selected" : "extras_unselected"
+            case .settings:
+                return selectedTab == self ? "settings_selected" : "settings_unselected"
+            }
+        }
     }
     
-    @State private var selectedTab: Tab = .tasks
+    @State private var selectedTab: Int = Tab.tasks.rawValue
+    
+    init() {
+//        let appearance = UITabBarAppearance()
+//        appearance.backgroundColor = .systemGreen
+//        appearance.shadowColor = .systemGreen
+//        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().backgroundColor = .systemGreen
+        UITabBar.appearance().backgroundImage = UIImage()
+        UITabBar.appearance().unselectedItemTintColor = .white
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
             TestView()
-                .tag(0)
+                .tag(Tab.tasks.rawValue)
                 .tabItem {
-                    Text("Tasks")
-                    Image("tasks")
+                    Label("Tasks", image: selectedTab == Tab.tasks.rawValue
+                        ? "tasks_selected"
+                        : "tasks_unselected")
                 }
+                .accentColor(.green)
             TestView()
-                .tag(1)
+                .tag(Tab.schedule.rawValue)
                 .tabItem {
-                    Text("Schedule")
-                    Image("schedule")
+                    Label("Schedule", image: selectedTab == Tab.schedule.rawValue
+                        ? "schedule_selected"
+                        : "schedule_unselected")
                 }
+                .accentColor(.green)
             TestView()
-                .tag(2)
+                .tag(Tab.extras.rawValue)
                 .tabItem {
-                    Text("Extras")
-                    Image("extras")
+                    Label("Extras", image: selectedTab == Tab.extras.rawValue
+                        ? "extras_selected"
+                      : "extras_unselected")
                 }
+                .accentColor(.green)
             TestView()
-                .tag(3)
+                .tag(Tab.settings.rawValue)
                 .tabItem {
-                    Text("Settings")
-                    Image("settings")
+                    Label("Settings", image: selectedTab == Tab.settings.rawValue
+                        ? "settings_selected"
+                        : "settings_unselected")
                 }
-        }
+                .accentColor(.green)
+        }.accentColor(.white)
     }
 }
 
 struct TestView: View
 {
     var body: some View {
-        Button("Hello", action: { })
+        List(0..<18) { row in
+            Button("\(row)", action: {})
+        }
     }
 }
 
