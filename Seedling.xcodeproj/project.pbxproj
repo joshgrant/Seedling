@@ -16,6 +16,7 @@
 		034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4F28D17EA100D25D17 /* ContentView.swift */; };
 		034FEE5228D17EA200D25D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5128D17EA200D25D17 /* Assets.xcassets */; };
 		034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */; };
+		03EFAB7628F8DA9E00855DA4 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03EFAB7528F8DA9E00855DA4 /* TabBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		034FEE5128D17EA200D25D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		034FEE5328D17EA200D25D17 /* Seedling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Seedling.entitlements; sourceTree = "<group>"; };
 		034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		03EFAB7528F8DA9E00855DA4 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				034FEE4828D17EA100D25D17 /* SeedlingApp.swift */,
+				03EFAB7528F8DA9E00855DA4 /* TabBar.swift */,
 				034FEE4A28D17EA100D25D17 /* Persistence.swift */,
 				034FEE4F28D17EA100D25D17 /* ContentView.swift */,
 				034FEE5128D17EA200D25D17 /* Assets.xcassets */,
@@ -286,6 +289,7 @@
 				034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */,
 				034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */,
 				034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */,
+				03EFAB7628F8DA9E00855DA4 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
