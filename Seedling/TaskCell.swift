@@ -27,14 +27,14 @@ struct TaskCell: View
                 buttonSize: $taskCellDefaultHeight)
             VStack(spacing: 0)
             {
-                TextField("Enter task", text: $text, axis: .vertical)
+                TextField(Localizable.taskPlaceholder, text: $text, axis: .vertical)
                     .strikethrough(checked, color: textColor)
                     .foregroundColor(checked ? .dust : .darkGrey)
                     .padding(EdgeInsets(
                         top: 10,
                         leading: 0,
                         bottom: 10,
-                        trailing: 0))
+                        trailing: 10))
                     .font(.body.monospaced())
                 Rectangle()
                     .frame(height: 1)
@@ -48,7 +48,6 @@ struct TaskCell_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        TaskCell(checked: false, text: "Hi")
-//        TaskCell(checked: false, text: "Hi my name is jesse and i am a really cool person i think blah blah blah labag")
+        TaskCell(checked: false, text: "go to my sisters wedding and give her her present")
     }
 }
