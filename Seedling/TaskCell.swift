@@ -40,7 +40,7 @@ struct TaskCell: View
                     .frame(height: 1)
                     .foregroundColor(.clementine)
             }
-        }
+        }.accessibilityLabel("\(text): checked: \(checked.description)")
     }
 }
 
