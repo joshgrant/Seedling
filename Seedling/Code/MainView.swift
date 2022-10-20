@@ -27,7 +27,7 @@ struct MainView: View
                     TaskSection(tasks: [.init(checked: true, content: "2")])
                     TaskSection(tasks: [.init(checked: true, content: "3")])
                     TaskSection(tasks: [.init(checked: true, content: "4")])
-                }.frame(width: 1900)
+                }.frame(width: 1800) // TODO: Maybe make this dynamic (like each section has a minimum width and the HStack has a maximum width)
             }
         }
     }
