@@ -32,19 +32,16 @@ struct TabBar: View {
     
     @State private var selectedTab: Int = Tab.tasks.rawValue
     
-    init() {
-//        let appearance = UITabBarAppearance()
-//        appearance.backgroundColor = .systemGreen
-//        appearance.shadowColor = .systemGreen
-//        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().backgroundColor = .systemGreen
+    init()
+    {
+        UITabBar.appearance().backgroundColor = .emerald
         UITabBar.appearance().backgroundImage = UIImage()
         UITabBar.appearance().unselectedItemTintColor = .white
     }
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            TestView()
+            TaskSection(tasks: [.init(checked: true, content: "hi")])
                 .tag(Tab.tasks.rawValue)
                 .tabItem {
                     Label("Tasks", image: selectedTab == Tab.tasks.rawValue
