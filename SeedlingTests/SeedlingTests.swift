@@ -2,7 +2,7 @@
 //  SeedlingTests.swift
 //  SeedlingTests
 //
-//  Created by Joshua Grant on 10/4/22.
+//  Created by Jesse Vernon on 10/20/22.
 //
 
 import XCTest
@@ -27,7 +27,7 @@ final class SeedlingTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        measure {
+        self.measure {
             // Put the code you want to measure the time of here.
         }
     }

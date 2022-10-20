@@ -8,15 +8,18 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
-    
-    var body: some View {
-        return Button("Hello", action: {})
+struct ContentView: View
+{
+    var body: some View
+    {
+        TaskCell(checked: false, text: "Lol :)")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+struct ContentView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         ContentView()
     }
 }
