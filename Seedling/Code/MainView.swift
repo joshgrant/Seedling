@@ -7,21 +7,36 @@
 
 import SwiftUI
 
-struct MainView: View {
-    
+struct MainView: View
+{
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
-    var body: some View {
-        if horizontalSizeClass == .compact {
+    var body: some View
+    {
+        if horizontalSizeClass == .compact
+        {
             TabBar()
-        } else {
-            TaskSection(tasks: [.init(checked: true, content: "Sup")])
+        }
+        else
+        {
+            ScrollView(.horizontal)
+            {
+                HStack
+                {
+                    TaskSection(tasks: [.init(checked: true, content: "1")])
+                    TaskSection(tasks: [.init(checked: true, content: "2")])
+                    TaskSection(tasks: [.init(checked: true, content: "3")])
+                    TaskSection(tasks: [.init(checked: true, content: "4")])
+                }.frame(width: 1900)
+            }
         }
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
+struct MainView_Previews: PreviewProvider
+{
+    static var previews: some View
+    {
         MainView()
     }
 }
