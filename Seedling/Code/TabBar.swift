@@ -39,6 +39,7 @@ struct TabBar: View {
         UITabBar.appearance().unselectedItemTintColor = .white
     }
     
+    // TODO: clean tbis up 
     var body: some View {
         TabView(selection: $selectedTab) {
             TaskSection(tasks: [.init(checked: true, content: "hi")])
