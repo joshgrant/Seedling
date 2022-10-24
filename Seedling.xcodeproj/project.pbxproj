@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0334551B28ECF28C00F203CE /* Seedling.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0334551928ECF28C00F203CE /* Seedling.xcdatamodeld */; };
-		0334552328ED01D700F203CE /* SeedlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334552228ED01D700F203CE /* SeedlingTests.swift */; };
 		0334553028ED01DF00F203CE /* SeedlingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334552F28ED01DF00F203CE /* SeedlingUITests.swift */; };
 		0334553228ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */; };
 		034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4828D17EA100D25D17 /* SeedlingApp.swift */; };
@@ -16,6 +15,13 @@
 		034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4F28D17EA100D25D17 /* ContentView.swift */; };
 		034FEE5228D17EA200D25D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5128D17EA200D25D17 /* Assets.xcassets */; };
 		034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */; };
+		D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5728F4DB21002C98BB /* Checkbox.swift */; };
+		D3666F5A28F62904002C98BB /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5928F62904002C98BB /* TaskCell.swift */; };
+		D3666F5C28F62CE2002C98BB /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */; };
+		D3666F5E28F8D4A2002C98BB /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F5D28F8D4A2002C98BB /* TaskSection.swift */; };
+		D3666F6128FE11A0002C98BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D3666F6328FE11A0002C98BB /* Localizable.strings */; };
+		D3666F6528FE1240002C98BB /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F6428FE1240002C98BB /* Localizable.swift */; };
+		D3666F6729020461002C98BB /* SeedlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3666F6629020461002C98BB /* SeedlingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +44,6 @@
 /* Begin PBXFileReference section */
 		0334551A28ECF28C00F203CE /* DailyPlanner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DailyPlanner.xcdatamodel; sourceTree = "<group>"; };
 		0334552028ED01D700F203CE /* SeedlingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeedlingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0334552228ED01D700F203CE /* SeedlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingTests.swift; sourceTree = "<group>"; };
 		0334552D28ED01DF00F203CE /* SeedlingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeedlingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0334552F28ED01DF00F203CE /* SeedlingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingUITests.swift; sourceTree = "<group>"; };
 		0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -49,6 +54,13 @@
 		034FEE5128D17EA200D25D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		034FEE5328D17EA200D25D17 /* Seedling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Seedling.entitlements; sourceTree = "<group>"; };
 		034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3666F5728F4DB21002C98BB /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		D3666F5928F62904002C98BB /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		D3666F5D28F8D4A2002C98BB /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
+		D3666F6228FE11A0002C98BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D3666F6428FE1240002C98BB /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		D3666F6629020461002C98BB /* SeedlingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +91,7 @@
 		0334552128ED01D700F203CE /* SeedlingTests */ = {
 			isa = PBXGroup;
 			children = (
-				0334552228ED01D700F203CE /* SeedlingTests.swift */,
+				D3666F6629020461002C98BB /* SeedlingTests.swift */,
 			);
 			path = SeedlingTests;
 			sourceTree = "<group>";
@@ -123,6 +135,12 @@
 				034FEE5328D17EA200D25D17 /* Seedling.entitlements */,
 				0334551928ECF28C00F203CE /* Seedling.xcdatamodeld */,
 				034FEE5428D17EA200D25D17 /* Preview Content */,
+				D3666F5728F4DB21002C98BB /* Checkbox.swift */,
+				D3666F5928F62904002C98BB /* TaskCell.swift */,
+				D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */,
+				D3666F5D28F8D4A2002C98BB /* TaskSection.swift */,
+				D3666F6328FE11A0002C98BB /* Localizable.strings */,
+				D3666F6428FE1240002C98BB /* Localizable.swift */,
 			);
 			path = Seedling;
 			sourceTree = "<group>";
@@ -203,6 +221,7 @@
 				TargetAttributes = {
 					0334551F28ED01D700F203CE = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
 						TestTargetID = 034FEE4428D17EA100D25D17;
 					};
 					0334552C28ED01DF00F203CE = {
@@ -254,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */,
+				D3666F6128FE11A0002C98BB /* Localizable.strings in Resources */,
 				034FEE5228D17EA200D25D17 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0334552328ED01D700F203CE /* SeedlingTests.swift in Sources */,
+				D3666F6729020461002C98BB /* SeedlingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +306,11 @@
 				034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */,
 				034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */,
 				034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */,
+				D3666F5E28F8D4A2002C98BB /* TaskSection.swift in Sources */,
+				D3666F5C28F62CE2002C98BB /* Color+Extensions.swift in Sources */,
+				D3666F5A28F62904002C98BB /* TaskCell.swift in Sources */,
+				D3666F6528FE1240002C98BB /* Localizable.swift in Sources */,
+				D3666F5828F4DB21002C98BB /* Checkbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,16 +329,33 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		D3666F6328FE11A0002C98BB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3666F6228FE11A0002C98BB /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		0334552728ED01D700F203CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 685257RUQP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingTests;
@@ -323,6 +365,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Seedling.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Seedling";
@@ -333,11 +376,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 685257RUQP;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.joshgrant.SeedlingTests;
@@ -447,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -502,7 +551,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -537,7 +586,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
@@ -579,7 +628,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
