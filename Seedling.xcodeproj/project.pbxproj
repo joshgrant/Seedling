@@ -12,7 +12,6 @@
 		0334553228ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0334553128ED01DF00F203CE /* SeedlingUITestsLaunchTests.swift */; };
 		034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4828D17EA100D25D17 /* SeedlingApp.swift */; };
 		034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4A28D17EA100D25D17 /* Persistence.swift */; };
-		034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034FEE4F28D17EA100D25D17 /* ContentView.swift */; };
 		034FEE5228D17EA200D25D17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5128D17EA200D25D17 /* Assets.xcassets */; };
 		034FEE5628D17EA200D25D17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */; };
 		D31AD21E29020AD5009EC073 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31AD21D29020AD5009EC073 /* TabBar.swift */; };
@@ -52,7 +51,6 @@
 		034FEE4528D17EA100D25D17 /* Seedling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Seedling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034FEE4828D17EA100D25D17 /* SeedlingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedlingApp.swift; sourceTree = "<group>"; };
 		034FEE4A28D17EA100D25D17 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		034FEE4F28D17EA100D25D17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		034FEE5128D17EA200D25D17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		034FEE5328D17EA200D25D17 /* Seedling.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Seedling.entitlements; sourceTree = "<group>"; };
 		034FEE5528D17EA200D25D17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 			children = (
 				034FEE5328D17EA200D25D17 /* Seedling.entitlements */,
 				034FEE5128D17EA200D25D17 /* Assets.xcassets */,
-				D3666F6328FE11A0002C98BB /* Localizable.strings */,
 				0334551928ECF28C00F203CE /* Seedling.xcdatamodeld */,
 			);
 			path = App;
@@ -167,16 +164,10 @@
 		D31AD22229020EFA009EC073 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				D3666F5728F4DB21002C98BB /* Checkbox.swift */,
-				D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */,
-				034FEE4F28D17EA100D25D17 /* ContentView.swift */,
-				D3666F6428FE1240002C98BB /* Localizable.swift */,
 				D31AD21F29020ED3009EC073 /* MainView.swift */,
 				034FEE4A28D17EA100D25D17 /* Persistence.swift */,
 				034FEE4828D17EA100D25D17 /* SeedlingApp.swift */,
 				D31AD21D29020AD5009EC073 /* TabBar.swift */,
-				D3666F5928F62904002C98BB /* TaskCell.swift */,
-				D3666F5D28F8D4A2002C98BB /* TaskSection.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -332,7 +323,6 @@
 			files = (
 				0334551B28ECF28C00F203CE /* Seedling.xcdatamodeld in Sources */,
 				034FEE4928D17EA100D25D17 /* SeedlingApp.swift in Sources */,
-				034FEE5028D17EA100D25D17 /* ContentView.swift in Sources */,
 				034FEE4B28D17EA100D25D17 /* Persistence.swift in Sources */,
 				D3666F5E28F8D4A2002C98BB /* TaskSection.swift in Sources */,
 				D3666F5C28F62CE2002C98BB /* Color+Extensions.swift in Sources */,

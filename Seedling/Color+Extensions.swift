@@ -16,3 +16,13 @@ extension Color
     static let emerald = Color("Emerald")
     static let lightGrey = Color("Light Grey")
 }
+
+extension UIColor
+{
+    static let clementine = UIColor(named: "Clementine")
+    static let darkEmerald = UIColor(named: "Dark Emerald")
+    static let darkGrey = UIColor(named: "Dark Grey")
+    static let dust = UIColor(named: "Dust")
+    static let emerald = UIColor(named: "Emerald")
+    static let lightGrey = UIColor(named: "Light Grey")
+}
