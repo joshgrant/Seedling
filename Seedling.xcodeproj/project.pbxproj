@@ -135,6 +135,12 @@
 				D31AD22129020EF2009EC073 /* App */,
 				D31AD22229020EFA009EC073 /* Code */,
 				034FEE5428D17EA200D25D17 /* Preview Content */,
+				D3666F5728F4DB21002C98BB /* Checkbox.swift */,
+				D3666F5928F62904002C98BB /* TaskCell.swift */,
+				D3666F5B28F62CE2002C98BB /* Color+Extensions.swift */,
+				D3666F5D28F8D4A2002C98BB /* TaskSection.swift */,
+				D3666F6328FE11A0002C98BB /* Localizable.strings */,
+				D3666F6428FE1240002C98BB /* Localizable.swift */,
 			);
 			path = Seedling;
 			sourceTree = "<group>";
