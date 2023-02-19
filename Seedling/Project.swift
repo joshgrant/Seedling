@@ -1,5 +1,19 @@
 import ProjectDescription
 
+let sceneManifest: [String: InfoPlist.Value] = [
+    "UIApplicationSceneManifest": .dictionary([
+        "UIApplicationSupportsMultipleScenes": .boolean(false),
+        "UISceneConfigurations": .dictionary([
+            "UIWindowSceneSessionRoleApplication": .array([
+                .dictionary([
+                    "UISceneConfigurationName": "Scene",
+                    "UISceneDelegateClassName": "$(PRODUCT_MODULE_NAME).SceneDelegate"
+                ])
+            ])
+        ])
+    ])
+]
+
 let project = Project(
     name: "Seedling",
     organizationName: "Team Seedling",
@@ -9,7 +23,7 @@ let project = Project(
               product: .app,
               bundleId: "joshgrant.me.seedling",
               deploymentTarget: .iOS(targetVersion: "14.0", devices: [.ipad, .iphone]),
-              infoPlist: .default,
+              infoPlist: .extendingDefault(with: sceneManifest),
               sources: ["Sources/**"],
               resources: ["Resources/**"],
               coreDataModels: [.init(.relativeToCurrentFile("Sources/Database/Seedling.xcdatamodeld"))]),

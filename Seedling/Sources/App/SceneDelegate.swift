@@ -17,7 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return DayProvider(database: AppDelegate.database)
     }()
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions)
+    {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
@@ -31,31 +35,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
-    }
+    func sceneDidDisconnect(_ scene: UIScene) {}
     
-    func sceneDidBecomeActive(_ scene: UIScene) {
+    func sceneDidBecomeActive(_ scene: UIScene)
+    {
 		dayProvider.resetDay()
         movePreviousTasksToTodayIfNeeded(day: dayProvider.day)
     }
     
-    func sceneWillResignActive(_ scene: UIScene) {
+    func sceneWillResignActive(_ scene: UIScene)
+    {
 		window?.endEditing(false)
     }
     
-    func sceneWillEnterForeground(_ scene: UIScene) {
+    func sceneWillEnterForeground(_ scene: UIScene)
+    {
     }
     
-    func sceneDidEnterBackground(_ scene: UIScene) {
+    func sceneDidEnterBackground(_ scene: UIScene)
+    {
         AppDelegate.database.save()
     }
     
     // MARK: - Utility
     
-    func movePreviousTasksToTodayIfNeeded(day: Day) {
+    func movePreviousTasksToTodayIfNeeded(day: Day)
+    {
         let allUnfinishedTasks = Task.allUnfinishedHistoricalTasks(in: AppDelegate.database.context)
         
-        for task in allUnfinishedTasks {
+        for task in allUnfinishedTasks
+        {
             task.todoOfDay = day
         }
         

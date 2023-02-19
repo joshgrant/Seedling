@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
-	
+class MainTabBarController: UITabBarController
+{
 	// MARK: - Variables
 	
 	unowned var dayProvider: DayProvider
@@ -21,7 +21,8 @@ class MainTabBarController: UITabBarController {
 	
 	// MARK: - Initialization
 	
-	init?(dayProvider: DayProvider, database: Database) {
+	init?(dayProvider: DayProvider, database: Database)
+    {
 		self.dayProvider = dayProvider
         self.database = database
 		
@@ -37,24 +38,29 @@ class MainTabBarController: UITabBarController {
         configureNavigationItem()
 	}
 	
-	required init?(coder: NSCoder) {
+	required init?(coder: NSCoder)
+    {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func viewDidLoad() {
+	override func viewDidLoad()
+    {
 		super.viewDidLoad()
 		selectedIndex = 0
 	}
 	
-	override func viewWillAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool)
+    {
 		super.viewWillAppear(animated)
 		configureNavigationBar()
 	}
 	
 	// MARK: - Configuration
     
-    func configureTabBar() {
-        if #available(iOS 15.0, *) {
+    func configureTabBar()
+    {
+        if #available(iOS 15.0, *)
+        {
             let appearance = UITabBarAppearance()
             appearance.backgroundColor = .type(.emerald)
             appearance.selectionIndicatorTintColor = .systemBackground
@@ -67,7 +73,9 @@ class MainTabBarController: UITabBarController {
             
             tabBar.standardAppearance = appearance
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-        } else {
+        }
+        else
+        {
             tabBar.barTintColor = .type(.emerald)
             tabBar.tintColor = .systemBackground
             tabBar.isTranslucent = true
@@ -75,7 +83,8 @@ class MainTabBarController: UITabBarController {
         }
     }
     
-    func configureNavigationItem() {
+    func configureNavigationItem()
+    {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "arrowtriangle.left.fill"),
             style: .plain,
@@ -92,8 +101,8 @@ class MainTabBarController: UITabBarController {
 	
 	func configureNavigationBar()
 	{
-		if let navigationBar = navigationController?.navigationBar {
-            
+		if let navigationBar = navigationController?.navigationBar
+        {
             navigationBar.tintColor = .white
             navigationBar.barTintColor = .white
 			
