@@ -1,6 +1,7 @@
 import ProjectDescription
 
-let sceneManifest: [String: InfoPlist.Value] = [
+let infoPlistExtension: [String: InfoPlist.Value] = [
+    "UILaunchStoryboardName": "LaunchScreen.storyboard",
     "UIApplicationSceneManifest": .dictionary([
         "UIApplicationSupportsMultipleScenes": .boolean(false),
         "UISceneConfigurations": .dictionary([
@@ -23,7 +24,7 @@ let project = Project(
               product: .app,
               bundleId: "joshgrant.me.seedling",
               deploymentTarget: .iOS(targetVersion: "14.0", devices: [.ipad, .iphone]),
-              infoPlist: .extendingDefault(with: sceneManifest),
+              infoPlist: .extendingDefault(with: infoPlistExtension),
               sources: ["Sources/**"],
               resources: ["Resources/**"],
               coreDataModels: [.init(.relativeToCurrentFile("Sources/Database/Seedling.xcdatamodeld"))]),
