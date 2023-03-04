@@ -29,10 +29,10 @@ public enum SeedlingAsset {
   public static let text = SeedlingColors(name: "text")
   public static let clock = SeedlingImages(name: "clock")
   public static let clockSelected = SeedlingImages(name: "clockSelected")
-  public static let extras = SeedlingImages(name: "extras")
-  public static let extrasSelected = SeedlingImages(name: "extrasSelected")
   public static let todo = SeedlingImages(name: "todo")
   public static let todoSelected = SeedlingImages(name: "todoSelected")
+  public static let extras = SeedlingImages(name: "extras")
+  public static let extrasSelected = SeedlingImages(name: "extrasSelected")
   public static let bar = SeedlingImages(name: "bar")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
