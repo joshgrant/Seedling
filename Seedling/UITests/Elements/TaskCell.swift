@@ -49,18 +49,7 @@ class TaskCell: BaseElement
     
     func setContent(to content: String)
     {
-        textView.tap()
-        
-        if let currentText = textView.value as? String, currentText.count > 0
-        {
-            textView.press(forDuration: 1.0)
-            
-            // Needs to happen at the application level
-            selectAllButton.tap()
-            cutButton.tap()
-        }
-        
-        textView.typeText("\(content)\n")
+        textView.clearAndTypeText("\(content)\n")
     }
     
     func delete()
