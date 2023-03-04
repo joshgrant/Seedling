@@ -65,7 +65,7 @@ class WaterCell: UITableViewCell
 	func makeButton(tag: Int) -> UIButton
 	{
         let button = UIButton()
-		button.setImage(UIImage.type(.clearBubble), for: .normal)
+        button.setImage(SeedlingAsset.clearBubble.image, for: .normal)
         button.addTarget(self, action: #selector(didTouchUpInsideBubble(_:)), for: .touchUpInside)
         // Why is the selector crossed out?
 		button.tag = tag
@@ -94,7 +94,7 @@ class WaterCell: UITableViewCell
 		if Int32(sender.tag) == water?.amount {
 			water?.amount -= 1
 			
-			sender.setImage(UIImage.type(.clearBubble), for: .normal)
+            sender.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			
 			let tag = sender.tag
 			let next = tag + 1
@@ -102,7 +102,7 @@ class WaterCell: UITableViewCell
 			
 			nextButton?.isEnabled = false
 		} else if Int32(sender.tag) == (water?.amount ?? 0) + 1 {
-			sender.setImage(UIImage.type(.blueBubble), for: .normal)
+            sender.setImage(SeedlingAsset.blueBubble.image, for: .normal)
 			
 			water?.amount = Int32(sender.tag)
 			
@@ -126,14 +126,14 @@ class WaterCell: UITableViewCell
 		for i in 1 ..< numberOfWater {
 			let button = viewWithTag(i) as? UIButton
 			if i < amount {
-				button?.setImage(UIImage.type(.blueBubble), for: .normal)
+                button?.setImage(SeedlingAsset.blueBubble.image, for: .normal)
 				button?.isEnabled = true
 			} else if i == amount {
 				button?.isEnabled = true
-				button?.setImage(.type(.clearBubble), for: .normal)
+                button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			} else {
 				button?.isEnabled = false
-				button?.setImage(.type(.clearBubble), for: .normal)
+				button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			}
 		}
 	}

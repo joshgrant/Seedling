@@ -35,8 +35,8 @@ class TodoController: TabContentController
 	{
 		return UITabBarItem(
             title: SeedlingStrings.toDo.localizedCapitalized,
-			image: .type(.todo),
-			selectedImage: .type(.todoSelected))
+            image: SeedlingAsset.toDoUnselected.image,
+            selectedImage: SeedlingAsset.toDoSelected.image)
 	}
 	
 	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]

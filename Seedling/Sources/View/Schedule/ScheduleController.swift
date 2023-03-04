@@ -34,8 +34,8 @@ class ScheduleController: TabContentController
 	{
 		return UITabBarItem(
             title: SeedlingStrings.schedule.localizedCapitalized,
-			image: .type(.clock),
-			selectedImage: .type(.clockSelected))
+            image: SeedlingAsset.scheduleUnselected.image,
+            selectedImage: SeedlingAsset.scheduleSelected.image)
 	}
 	
 	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]

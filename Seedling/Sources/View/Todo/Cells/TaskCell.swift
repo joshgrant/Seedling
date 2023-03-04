@@ -107,13 +107,13 @@ class TaskCell: UITableViewCell
         
         if task.completed {
             textView.typingAttributes = Self.strikeThroughTypingAttributes
-			checkBox.setImage(.type(.orangeBubble), for: .normal)
+            checkBox.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
 			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
 			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
         } else {
             textView.typingAttributes = Self.normalTypingAttributes
-			checkBox.setImage(.type(.clearBubble), for: .normal)
+            checkBox.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
         }
 		
