@@ -12,11 +12,24 @@ class MealsCell: UITableViewCell
 {
 	// MARK: - Defined types
 	
-	enum Label: String
+	enum Label
 	{
-		case breakfast = "Breakfast"
-		case lunch = "Lunch"
-		case dinner = "Dinner"
+		case breakfast
+		case lunch
+		case dinner
+        
+        var rawValue: String
+        {
+            switch self
+            {
+            case .breakfast:
+                return SeedlingStrings.breakfast.localizedCapitalized
+            case .lunch:
+                return SeedlingStrings.lunch.localizedCapitalized
+            case .dinner:
+                return SeedlingStrings.dinner.localizedCapitalized
+            }
+        }
 	}
 	
 	// MARK: - Variables
@@ -41,9 +54,9 @@ class MealsCell: UITableViewCell
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
 	{
-		breakfastTextView = Self.makeTextView(placeholder: "Breakfast")
-		lunchTextView = Self.makeTextView(placeholder: "Lunch")
-		dinnerTextView = Self.makeTextView(placeholder: "Dinner")
+        breakfastTextView = Self.makeTextView(placeholder: SeedlingStrings.breakfast.localizedCapitalized)
+        lunchTextView = Self.makeTextView(placeholder: SeedlingStrings.lunch.localizedCapitalized)
+        dinnerTextView = Self.makeTextView(placeholder: SeedlingStrings.dinner.localizedCapitalized)
 		
 		breakfastStackView = Self.makeMealStackView()
 		lunchStackView = Self.makeMealStackView()
