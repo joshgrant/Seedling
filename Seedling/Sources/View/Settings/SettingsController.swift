@@ -17,7 +17,7 @@ class SettingsController: UIViewController
         super.init(nibName: nil, bundle: nil)
         
         components = [
-            TabComponent(tab: .toDo, controller: self)
+            TabComponent(tab: .settings, controller: self)
         ]
     }
     

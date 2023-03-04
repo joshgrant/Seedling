@@ -40,6 +40,8 @@ public enum SeedlingStrings {
   public static let privacyPolicyUrl = SeedlingStrings.tr("Localizable", "privacy_policy_url")
   /// schedule
   public static let schedule = SeedlingStrings.tr("Localizable", "schedule")
+  /// settings
+  public static let settings = SeedlingStrings.tr("Localizable", "settings")
   /// to do
   public static let toDo = SeedlingStrings.tr("Localizable", "to do")
   /// today, %@

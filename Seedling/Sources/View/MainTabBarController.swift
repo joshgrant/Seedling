@@ -18,6 +18,7 @@ class MainTabBarController: UITabBarController
 	var todo: TodoController
 	var schedule: ScheduleController
 	var extras: ExtrasController
+    var settings: SettingsController
 	
 	// MARK: - Initialization
 	
@@ -29,10 +30,11 @@ class MainTabBarController: UITabBarController
 		todo = TodoController(dayProvider: dayProvider, database: database)!
 		schedule = ScheduleController(dayProvider: dayProvider, database: database)!
 		extras = ExtrasController(dayProvider: dayProvider, database: database)!
+        settings = SettingsController()
 		
 		super.init(coder: Coder())
 		
-		setViewControllers([todo, schedule, extras], animated: false)
+		setViewControllers([todo, schedule, extras, settings], animated: false)
         
         configureTabBar()
         configureNavigationItem()

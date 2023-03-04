@@ -35,9 +35,9 @@ extension TabComponent
         var image: UIImage?
         var selectedImage: UIImage?
         
-        static let toDo = Tab(title: SeedlingStrings.toDo, image: SeedlingAsset.toDoUnselected.image, selectedImage: SeedlingAsset.toDoSelected.image)
-        static let schedule = Tab(title: SeedlingStrings.toDo, image: SeedlingAsset.scheduleUnselected.image, selectedImage: SeedlingAsset.scheduleSelected.image)
-        static let extras = Tab(title: SeedlingStrings.toDo, image: SeedlingAsset.extrasUnselected.image, selectedImage: SeedlingAsset.extrasSelected.image)
-        static let settings = Tab(title: SeedlingStrings.toDo, image: SeedlingAsset.settingsUnselected.image, selectedImage: SeedlingAsset.settingsSelected.image)
+        static let toDo = Tab(title: SeedlingStrings.toDo.localizedCapitalized, image: SeedlingAsset.toDoUnselected.image, selectedImage: SeedlingAsset.toDoSelected.image)
+        static let schedule = Tab(title: SeedlingStrings.schedule.localizedCapitalized, image: SeedlingAsset.scheduleUnselected.image, selectedImage: SeedlingAsset.scheduleSelected.image)
+        static let extras = Tab(title: SeedlingStrings.extras.localizedCapitalized, image: SeedlingAsset.extrasUnselected.image, selectedImage: SeedlingAsset.extrasSelected.image)
+        static let settings = Tab(title: SeedlingStrings.settings.localizedCapitalized, image: SeedlingAsset.settingsUnselected.image, selectedImage: SeedlingAsset.settingsSelected.image)
     }
 }
