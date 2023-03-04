@@ -149,7 +149,7 @@ class TabContentController: UIViewController
 		if isToday  {
 			let formatter = DateFormatter()
             formatter.setLocalizedDateFormatFromTemplate(SeedlingStrings.formatDayMonth)
-            let title = SeedlingStrings.today(formatter.string(from: day.date ?? .now)).localizedCapitalized
+            let title = SeedlingStrings.today(formatter.string(from: day.date ?? Date())).localizedCapitalized
 			tabBarController?.navigationItem.title = title
 		} else {
 			let formatter = DateFormatter()
