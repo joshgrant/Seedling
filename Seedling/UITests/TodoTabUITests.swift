@@ -44,11 +44,11 @@ class ToDoTabUITests: XCTestCase
         
         tabBar.select(tab: .toDo)
         
-        XCTAssert(todoView.todoTextViews.count == 0)
+        XCTAssert(todoView.todoTextViews.count == 0, "The number of text views is: \(todoView.todoTextViews.count). It should be 0")
         
         todoView.addTodo()
         
-        XCTAssert(todoView.todoTextViews.count == 1)
+        XCTAssert(todoView.todoTextViews.count == 1, "The number of text views is: \(todoView.todoTextViews.count). It should be 1.")
         
         var todo = todoView.todoView(at: 0)
         todo.setContent(to: "Take out the groceries")
@@ -59,8 +59,8 @@ class ToDoTabUITests: XCTestCase
         // Marking the todo as "Done" moves it to the bottom
         todo = todoView.todoView(at: 1)
         
-        XCTAssert(todo.content == "Take out the groceries")
-        XCTAssert(todo.isDone)
+        XCTAssert(todo.content == "Take out the groceries", "The content is \(todo.content ?? "nil"). It should be `Take out the groceries`.")
+        XCTAssert(todo.isDone, "The status is \(todo.isDone). It should be true.")
     }
     
     func testDeleteTask()
