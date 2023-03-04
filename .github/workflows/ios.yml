@@ -15,10 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        uses: tuist/tuist-action@0.13.0
-        with:
-          command: 'build'
-          arguments: ''
+        run: |
+          curl -Ls https://install.tuist.io | bash;
+          tuist build
       - name: Test
         env:
           scheme: ${{ 'default' }}
