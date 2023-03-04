@@ -7,7 +7,7 @@
 //
 
 import XCTest
-
+@testable import Seedling
 
 extension XCUIApplication
 {
