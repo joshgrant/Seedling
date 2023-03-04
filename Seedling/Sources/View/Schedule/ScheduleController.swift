@@ -33,7 +33,7 @@ class ScheduleController: TabContentController
 	override class func makeTabBarItem() -> UITabBarItem
 	{
 		return UITabBarItem(
-			title: "Schedule",
+            title: SeedlingStrings.schedule.localizedCapitalized,
 			image: .type(.clock),
 			selectedImage: .type(.clockSelected))
 	}

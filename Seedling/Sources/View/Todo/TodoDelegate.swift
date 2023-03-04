@@ -108,9 +108,9 @@ class TodoDelegate: TabContentDelegate
 		switch section
 		{
 		case 0:
-			return "Priorities"
+            return SeedlingStrings.priorities.localizedCapitalized
 		case 1:
-			return "To Do"
+            return SeedlingStrings.toDo.localizedCapitalized
 		default:
 			return nil
 		}

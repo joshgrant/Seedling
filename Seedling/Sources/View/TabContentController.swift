@@ -148,13 +148,13 @@ class TabContentController: UIViewController
 		
 		if isToday  {
 			let formatter = DateFormatter()
-            formatter.setLocalizedDateFormatFromTemplate("d MMM")
-			let title = "Today, \(formatter.string(from: day.date ?? Date()))"
+            formatter.setLocalizedDateFormatFromTemplate(SeedlingStrings.formatDayMonth)
+            let title = SeedlingStrings.today(formatter.string(from: day.date ?? .now)).localizedCapitalized
 			tabBarController?.navigationItem.title = title
 		} else {
 			let formatter = DateFormatter()
-            formatter.setLocalizedDateFormatFromTemplate("EEEE, d MMM")
-			let title = formatter.string(from: day.date ?? Date())
+            formatter.setLocalizedDateFormatFromTemplate(SeedlingStrings.formatWeekdayDayMonth)
+            let title = formatter.string(from: day.date ?? Date())
 			tabBarController?.navigationItem.title = title
 		}
         

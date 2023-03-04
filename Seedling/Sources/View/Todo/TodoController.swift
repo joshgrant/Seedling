@@ -34,7 +34,7 @@ class TodoController: TabContentController
 	override class func makeTabBarItem() -> UITabBarItem
 	{
 		return UITabBarItem(
-			title: "To Do",
+            title: SeedlingStrings.toDo.localizedCapitalized,
 			image: .type(.todo),
 			selectedImage: .type(.todoSelected))
 	}

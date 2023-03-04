@@ -17,7 +17,7 @@ class PrivacyPolicyCell: UITableViewCell
         selectionStyle = .none
         
         let button = UIButton()
-        button.setTitle("Privacy Policy", for: .normal)
+        button.setTitle(SeedlingStrings.privacyPolicy.localizedCapitalized, for: .normal)
         button.addTarget(self, action: #selector(privacyPolicyButtonDidTouchUpInside(_:)), for: .touchUpInside)
         button.setTitleColor(.type(.emerald), for: .normal)
         
@@ -33,7 +33,7 @@ class PrivacyPolicyCell: UITableViewCell
     
     @objc func privacyPolicyButtonDidTouchUpInside(_ sender: UIButton)
     {
-        guard let url = URL(string: "https://bloomingthyme.com/?page_id=168") else {
+        guard let url = URL(string: SeedlingStrings.privacyPolicyUrl) else {
             print("URL invalid")
             return
         }

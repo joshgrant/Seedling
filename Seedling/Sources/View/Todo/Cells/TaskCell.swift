@@ -140,9 +140,9 @@ class TaskCell: UITableViewCell
         
         // Assign the opposite accessibility value
         if task?.completed ?? false {
-            sender.accessibilityValue = "Unchecked"
+            sender.accessibilityValue = SeedlingStrings.unchecked
         } else {
-            sender.accessibilityValue = "Checked"
+            sender.accessibilityValue = SeedlingStrings.checked
         }
         
         database?.context.perform { [unowned self] in
@@ -162,7 +162,7 @@ class TaskCell: UITableViewCell
     }
     
     override func accessibilityIncrement() {
-        checkBox.accessibilityValue = "Checked"
+        checkBox.accessibilityValue = SeedlingStrings.checked
         database?.context.perform {
             self.task?.completed = true
             if let task = self.task, let section = self.section {
@@ -173,7 +173,7 @@ class TaskCell: UITableViewCell
     }
     
     override func accessibilityDecrement() {
-        checkBox.accessibilityValue = "Unchecked"
+        checkBox.accessibilityValue = SeedlingStrings.unchecked
         database?.context.perform {
             self.task?.completed = false
             if let task = self.task, let section = self.section {
