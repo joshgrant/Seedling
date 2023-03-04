@@ -40,7 +40,9 @@ class ToDoTabUITests: XCTestCase
     {
         tabBar.select(tab: .toDo)
         
-        // TODO: Need to reset the database
+        app.terminateAndActivate(with: [.resetDatabase])
+        
+        tabBar.select(tab: .toDo)
         
         XCTAssert(todoView.todoTextViews.count == 0)
         
