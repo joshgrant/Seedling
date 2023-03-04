@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum LaunchArgument: String
+public enum LaunchArgument: String
 {
     case launchArgument
     case resetDatabase

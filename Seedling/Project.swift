@@ -42,6 +42,6 @@ let project = Project(
               bundleId: "joshgrant.me.seedlingUITests",
               deploymentTarget: .iOS(targetVersion: "15.0", devices: [.ipad, .iphone]),
               infoPlist: .default,
-              sources: ["UITests/**"],
+              sources: ["UITests/**", "Sources/App/Launch Arguments/LaunchArgument.swift"],
               dependencies: [.target(name: "Seedling")])
     ])
