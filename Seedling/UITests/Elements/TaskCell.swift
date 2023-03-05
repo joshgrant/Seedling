@@ -26,7 +26,7 @@ class TaskCell: BaseElement
     
     var isDone: Bool
     {
-        (doneButton.value as? String) == "Checked"
+        (doneButton.value as? String) == "checked"
     }
     
     weak var app: XCUIApplication!

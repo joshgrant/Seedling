@@ -107,13 +107,13 @@ class TaskCell: UITableViewCell
         
         if task.completed {
             textView.typingAttributes = Self.strikeThroughTypingAttributes
-			checkBox.setImage(.type(.orangeBubble), for: .normal)
+            checkBox.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
 			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
 			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
         } else {
             textView.typingAttributes = Self.normalTypingAttributes
-			checkBox.setImage(.type(.clearBubble), for: .normal)
+            checkBox.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
         }
 		
@@ -140,9 +140,9 @@ class TaskCell: UITableViewCell
         
         // Assign the opposite accessibility value
         if task?.completed ?? false {
-            sender.accessibilityValue = "Unchecked"
+            sender.accessibilityValue = SeedlingStrings.unchecked
         } else {
-            sender.accessibilityValue = "Checked"
+            sender.accessibilityValue = SeedlingStrings.checked
         }
         
         database?.context.perform { [unowned self] in
@@ -162,7 +162,7 @@ class TaskCell: UITableViewCell
     }
     
     override func accessibilityIncrement() {
-        checkBox.accessibilityValue = "Checked"
+        checkBox.accessibilityValue = SeedlingStrings.checked
         database?.context.perform {
             self.task?.completed = true
             if let task = self.task, let section = self.section {
@@ -173,7 +173,7 @@ class TaskCell: UITableViewCell
     }
     
     override func accessibilityDecrement() {
-        checkBox.accessibilityValue = "Unchecked"
+        checkBox.accessibilityValue = SeedlingStrings.unchecked
         database?.context.perform {
             self.task?.completed = false
             if let task = self.task, let section = self.section {

@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Seedling
+
+  Created by Me on 3/4/23.
+  Copyright © 2023 Team Seedling. All rights reserved.
+*/
+
+"format_day_month" = "d MMM";
+"format_weekday_day_month" = "EEEE, d MMM";
+
+"today" = "today, %@";
+
+"priorities" = "priorities";
+"to do" = "to do";
+
+"checked" = "checked";
+"unchecked" = "unchecked";
+
+"schedule" = "schedule";
+
+"extras" = "extras";
+
+"breakfast" = "breakfast";
+"lunch" = "lunch";
+"dinner" = "dinner";
+
+"meals" = "meals";
+"water" = "water";
+"pomodoro" = "pomodoro";
+"notes" = "notes";
+
+"privacy_policy" = "privacy policy";
+"privacy_policy_url" = "https://bloomingthyme.com/?page_id=168";

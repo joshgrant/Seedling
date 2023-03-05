@@ -71,7 +71,7 @@ class PomodoroCell: UITableViewCell {
 		if Int32(sender.tag) == pomodoro?.amount {
 			pomodoro?.amount -= 1
 			
-			sender.setImage(UIImage.type(.clearBubble), for: .normal)
+            sender.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			
 			let tag = sender.tag
 			let next = tag + 1
@@ -79,7 +79,7 @@ class PomodoroCell: UITableViewCell {
 			
 			nextButton?.isEnabled = false
 		} else if Int32(sender.tag) == (pomodoro?.amount ?? 0) + 1 {
-			sender.setImage(UIImage.type(.orangeBubble), for: .normal)
+            sender.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 			
 			pomodoro?.amount = Int32(sender.tag)
 			
@@ -114,14 +114,14 @@ class PomodoroCell: UITableViewCell {
 		for i in 1 ..< numberOfPomodoro {
 			let button = viewWithTag(i) as? UIButton
 			if i < amount {
-				button?.setImage(UIImage.type(.orangeBubble), for: .normal)
+                button?.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 				button?.isEnabled = true
 			} else if i == amount {
 				button?.isEnabled = true
-				button?.setImage(.type(.clearBubble), for: .normal)
+                button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			} else {
 				button?.isEnabled = false
-				button?.setImage(.type(.clearBubble), for: .normal)
+                button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			}
 		}
 	}
