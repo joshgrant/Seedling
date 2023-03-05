@@ -2,7 +2,7 @@
 
 import UIKit
 
-class TabComponent: Component
+class TabModule
 {
     // MARK: - Variables
     
@@ -27,7 +27,7 @@ class TabComponent: Component
     }
 }
 
-extension TabComponent
+extension TabModule
 {
     struct Tab
     {
