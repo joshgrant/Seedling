@@ -1,38 +1,99 @@
 // Copyright Team Seedling ©
 
-import UIKit
+import SwiftUI
 
-protocol SettingsCell: UITableViewCell
+struct SettingsCell<Content>: View where Content: View
 {
-    associatedtype Item: SettingsItem
+    // MARK: - Variables
     
-    static func make(
-        tableView: UITableView,
-        indexPath: IndexPath,
-        item: Item)
-    -> UITableViewCell
+    @ScaledMetric(relativeTo: .body) var titleSize: CGFloat = 19
+    @ScaledMetric(relativeTo: .body) var subtitleSize: CGFloat = 16
+    @ScaledMetric(relativeTo: .body) var titleSpacing: CGFloat = 4
     
-    func configure(with item: Item)
+    var title: String
+    var subtitle: String?
+    
+    var label: Content
+    
+    // MARK: - Initialization
+    
+    init(
+        title: String,
+        subtitle: String? = nil,
+        @ViewBuilder label: () -> Content)
+    {
+        self.title = title
+        self.subtitle = subtitle
+        self.label = label()
+    }
+    
+    var body: some View
+    {
+        VStack(alignment: .leading, spacing: titleSpacing)
+        {
+            HStack(spacing: 0)
+            {
+                Text(title)
+                    .font(.system(size: titleSize).monospaced())
+                    .fontWeight(.medium)
+                SwiftUI.Spacer()
+                label
+            }
+            
+            if let subtitle = subtitle
+            {
+                Text(subtitle)
+                    .font(.system(size: subtitleSize).monospaced())
+                    .fontWeight(.light)
+            }
+        }
+        .padding([.leading, .trailing], 20)
+    }
 }
 
-extension SettingsCell
+struct SettingsCell_Previews: PreviewProvider
 {
-    static func make(
-        tableView: UITableView,
-        indexPath: IndexPath,
-        item: Item)
-    -> UITableViewCell
+    struct CheckboxPreviewView: View
     {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: type(of: item).reuseIdentifier,
-            for: indexPath)
+        @State var isOn: Bool = false
         
-        guard let cell = cell as? Self else
+        var body: some View
         {
-            return cell
+            SettingsCell(
+                title: "Hide settings",
+                subtitle: "To access settings, swipe right on the extras page",
+                label: {
+                    Toggle("", isOn: $isOn)
+                        .toggleStyle(.circleCheck)
+                })
         }
+    }
+    
+    struct PickerPreviewView: View
+    {
+        @State var selection: Int = 0
         
-        cell.configure(with: item)
-        return cell
+        var body: some View
+        {
+            SettingsCell(title: "Section duration") {
+                Picker("", selection: $selection)
+                {
+                    Text("15m").tag(0)
+                    Text("30m").tag(1)
+                    Text("1hr").tag(2)
+                }
+                .frame(width: 150)
+                .pickerStyle(.segmented)
+            }
+        }
+    }
+    
+    static var previews: some View
+    {
+        VStack
+        {
+            CheckboxPreviewView()
+            PickerPreviewView()
+        }
     }
 }
