@@ -39,9 +39,9 @@ class ExtrasController: TabContentController
 	
 	override class func makeTabBarItem() -> UITabBarItem {
 		return UITabBarItem(
-			title: "Extras",
-			image: .type(.extras),
-			selectedImage: .type(.extrasSelected))
+            title: SeedlingStrings.extras.localizedCapitalized,
+            image: SeedlingAsset.extrasUnselected.image,
+            selectedImage: SeedlingAsset.extrasSelected.image)
 	}
 	
 	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]

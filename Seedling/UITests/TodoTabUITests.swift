@@ -40,22 +40,27 @@ class ToDoTabUITests: XCTestCase
     {
         tabBar.select(tab: .toDo)
         
-        // TODO: Need to reset the database
+        app.terminateAndActivate(with: [.resetDatabase])
         
-        XCTAssert(todoView.todoTextViews.count == 0)
+        tabBar.select(tab: .toDo)
+        
+        XCTAssert(todoView.todoTextViews.count == 0, "The number of text views is: \(todoView.todoTextViews.count). It should be 0")
         
         todoView.addTodo()
         
-        XCTAssert(todoView.todoTextViews.count == 1)
+        XCTAssert(todoView.todoTextViews.count == 1, "The number of text views is: \(todoView.todoTextViews.count). It should be 1.")
         
-        let todo = todoView.todoView(at: 0)
+        var todo = todoView.todoView(at: 0)
         todo.setContent(to: "Take out the groceries")
         todo.setDone(to: true)
         
-        todoView.todoView(at: 1).setContent(to: "")
+        todoView.todoView(at: 0).setContent(to: "")
         
-        XCTAssert(todo.content == "Take out the groceries")
-        XCTAssert(todo.isDone)
+        // Marking the todo as "Done" moves it to the bottom
+        todo = todoView.todoView(at: 1)
+        
+        XCTAssert(todo.content == "Take out the groceries", "The content is \(todo.content ?? "nil"). It should be `Take out the groceries`.")
+        XCTAssert(todo.isDone, "The status is \(todo.isDone). It should be true.")
     }
     
     func testDeleteTask()
@@ -85,6 +90,8 @@ class ToDoTabUITests: XCTestCase
         todoView.addPriority()
         
         XCTAssert(todoView.priorityTextViews.count == 3)
+        
+        todoView.view.swipeDown()
         
         todoView.priorityView(at: 0).delete()
         todoView.priorityView(at: 0).delete()
@@ -133,9 +140,13 @@ class ToDoTabUITests: XCTestCase
         verifyDefaultTasks()
         
         todoView.priorityView(at: 1).setDone(to: true)
+        
         todoView.priorityView(at: 2).setContent(to: "Testing")
+        XCTAssertEqual(todoView.priorityView(at: 2).content, "Testing")
         
         todoView.priorityView(at: 2).setContent(to: "")
+        XCTAssertEqual(todoView.priorityView(at: 2).content, "")
+        
         todoView.priorityView(at: 2).setDone(to: true)
         
         tabBar.select(tab: .extras)
