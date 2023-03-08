@@ -24,6 +24,9 @@ class SettingsController: UIHostingController<SettingsView>
 
 struct SettingsView: View
 {
+    @ScaledMetric(relativeTo: .body) var iconHeight: CGFloat = 20
+    @ScaledMetric(relativeTo: .body) var chevronHeight: CGFloat = 15
+    
     var body: some View
     {
         ScrollView
@@ -62,7 +65,7 @@ struct SettingsView: View
                 label: Image(systemName: "chevron.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 15),
+                    .frame(height: chevronHeight),
                 action: {
                     print("Edit custom sections")
                 })
@@ -98,7 +101,7 @@ struct SettingsView: View
                 label: Image(systemName: "rectangle.portrait.and.arrow.forward")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 20),
+                    .frame(height: iconHeight),
                 action: {
                     print("Privacy policy")
                 })
@@ -109,10 +112,15 @@ struct SettingsView: View
                 label: Image(systemName: "arrow.down.doc")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(height: 20),
+                    .frame(height: iconHeight),
                 action: {
                     print("Data export")
                 })
+            
+            CenterButtonCell(
+                title: "Like the app?",
+                image: Image(systemName: "dollarsign.circle.fill"),
+                action: {})
         }
     }
 }

@@ -4,6 +4,9 @@ import SwiftUI
 
 struct MenuCellView<Option: PickerOption> : View
 {
+    @ScaledMetric(relativeTo: .body) var fontSize: CGFloat = 20
+    @ScaledMetric(relativeTo: .body) var width: CGFloat = 100
+    
     @State var selection: Int = 0
     
     var title: String
@@ -34,9 +37,9 @@ struct MenuCellView<Option: PickerOption> : View
         Text(options[selection].title)
             .padding(3)
             .font(.system(
-                size: 20,
+                size: fontSize,
                 weight: .medium).monospaced())
-            .frame(width: 100)
+            .frame(width: width)
             .background(Material.bar)
             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
             .tint(.primary)
