@@ -37,7 +37,12 @@ struct SettingsCell<Content>: View where Content: View
                     .font(.system(size: titleSize).monospaced())
                     .fontWeight(.medium)
                 SwiftUI.Spacer()
-                label
+                
+                VStack(alignment: .leading)
+                {
+                    label
+                }
+                .frame(minWidth: 28)
             }
             
             if let subtitle = subtitle
@@ -48,6 +53,8 @@ struct SettingsCell<Content>: View where Content: View
             }
         }
         .padding([.leading, .trailing], 20)
+        .padding([.top, .bottom], 8)
+        .frame(minHeight: 44)
     }
 }
 

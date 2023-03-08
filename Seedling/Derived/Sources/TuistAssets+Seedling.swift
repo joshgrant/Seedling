@@ -23,6 +23,8 @@ public enum SeedlingAsset {
   public static let blueBubble = SeedlingImages(name: "blueBubble")
   public static let clearBubble = SeedlingImages(name: "clearBubble")
   public static let orangeBubble = SeedlingImages(name: "orangeBubble")
+  public static let background = SeedlingColors(name: "background")
+  public static let darkText = SeedlingColors(name: "dark_text")
   public static let emerald = SeedlingColors(name: "emerald")
   public static let orange = SeedlingColors(name: "orange")
   public static let sectionHeaderBackground = SeedlingColors(name: "section_header_background")

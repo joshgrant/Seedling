@@ -28,24 +28,21 @@ struct SettingsView: View
     {
         ScrollView
         {
-            VStack
+            LazyVStack(spacing: 0, pinnedViews: .sectionHeaders)
             {
                 generalSection
                 tasksSection
                 scheduleSection
-                SectionHeader(title: "Extras")
-                CheckboxCellView(isOn: false, title: "Pomodoro notifications")
-                CheckboxCellView(isOn: false, title: "Show total water")
-                SectionHeader(title: "Info")
+                extrasSection
+                infoSection
             }
         }
     }
     
     var generalSection: some View
     {
-        VStack
+        Section(header: SectionHeader(title: "General"))
         {
-            SectionHeader(title: "General")
             CheckboxCellView(isOn: false, title: "Hide settings", subtitle: "To access settings, swipe right on the extras page")
             CheckboxCellView(isOn: false, title: "Monospaced font")
             CheckboxCellView(isOn: false, title: "Lowercase text")
@@ -56,19 +53,117 @@ struct SettingsView: View
     
     var tasksSection: some View
     {
-        VStack
+        Section(header: SectionHeader(title: "Tasks"))
         {
-            SectionHeader(title: "Tasks")
             CheckboxCellView(isOn: true, title: "Automatically transfer uncompleted tasks to today")
+
+            TappableCellView(
+                title: "Edit custom sections",
+                label: Image(systemName: "chevron.right")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 15),
+                action: {
+                    print("Edit custom sections")
+                })
         }
     }
     
     var scheduleSection: some View
     {
-        VStack
+        Section(header: SectionHeader(title: "Schedule"))
         {
-            SectionHeader(title: "Schedule")
-            PickerCellView()
+            SegmentedCellView(title: "Section duration", options: SectionDuration.allCases)
+        }
+    }
+    
+    var extrasSection: some View
+    {
+        Section(header: SectionHeader(title: "Extras"))
+        {
+            CheckboxCellView(isOn: false, title: "Pomodoro notifications")
+            CheckboxCellView(isOn: false, title: "Show total water")
+            MenuCellView(
+                title: "Water amount",
+                options: WaterAmountOption.allCases)
+        }
+    }
+    
+    var infoSection: some View
+    {
+        Section(header: SectionHeader(title: "Info"))
+        {
+            TappableCellView(
+                title: "Privacy policy",
+                label: Image(systemName: "rectangle.portrait.and.arrow.forward")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 20),
+                action: {
+                    print("Privacy policy")
+                })
+            
+            // TODO: Make these labels @ViewBuilders
+            TappableCellView(
+                title: "Data export",
+                label: Image(systemName: "arrow.down.doc")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 20),
+                action: {
+                    print("Data export")
+                })
+        }
+    }
+}
+
+extension SettingsView
+{
+    // MARK: - Types
+    
+    enum SectionDuration: Int, CaseIterable, PickerOption
+    {
+        case minutes15
+        case minutes30
+        case hour1
+        
+        var id: Int { rawValue }
+        
+        var title: String
+        {
+            switch self
+            {
+            case .minutes15: return "15m"
+            case .minutes30: return "30m"
+            case .hour1: return "1hr"
+            }
+        }
+    }
+    
+    enum WaterAmountOption: Int, CaseIterable, PickerOption
+    {
+        case ouncesTwo
+        case ouncesFour
+        case ouncesSix
+        case ouncesEight
+        case ouncesTwelve
+        case ouncesTwentyFour
+        case ouncesThirtyTwo
+        
+        var id: Int { rawValue }
+        
+        var title: String
+        {
+            switch self
+            {
+            case .ouncesTwo: return "2oz"
+            case .ouncesFour: return "4oz"
+            case .ouncesSix: return "6oz"
+            case .ouncesEight: return "8oz"
+            case .ouncesTwelve: return "12oz"
+            case .ouncesTwentyFour: return "24oz"
+            case .ouncesThirtyTwo: return "32oz"
+            }
         }
     }
 }
