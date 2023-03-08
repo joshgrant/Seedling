@@ -41,24 +41,24 @@ struct SettingsView: View
     
     var generalSection: some View
     {
-        Section(header: SectionHeader(title: "General"))
+        Section(header: SectionHeader(title: SeedlingStrings.general))
         {
-            CheckboxCellView(isOn: false, title: "Hide settings", subtitle: "To access settings, swipe right on the extras page")
-            CheckboxCellView(isOn: false, title: "Monospaced font")
-            CheckboxCellView(isOn: false, title: "Lowercase text")
-            CheckboxCellView(isOn: false, title: "Format notes with Markdown")
-            CheckboxCellView(isOn: false, title: "Haptic feedback")
+            CheckboxCellView(isOn: false, title: SeedlingStrings.hideSettings, subtitle: SeedlingStrings.toAccessSettings)
+            CheckboxCellView(isOn: false, title: SeedlingStrings.monospacedFont)
+            CheckboxCellView(isOn: false, title: SeedlingStrings.lowercaseText)
+            CheckboxCellView(isOn: false, title: SeedlingStrings.formatMarkdown)
+            CheckboxCellView(isOn: false, title: SeedlingStrings.hapticFeedback)
         }
     }
     
     var tasksSection: some View
     {
-        Section(header: SectionHeader(title: "Tasks"))
+        Section(header: SectionHeader(title: SeedlingStrings.tasks))
         {
-            CheckboxCellView(isOn: true, title: "Automatically transfer uncompleted tasks to today")
+            CheckboxCellView(isOn: true, title: SeedlingStrings.automaticallyTransfer)
 
             TappableCellView(
-                title: "Edit custom sections",
+                title: SeedlingStrings.editCustomSections,
                 label: Image(systemName: "chevron.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -71,30 +71,30 @@ struct SettingsView: View
     
     var scheduleSection: some View
     {
-        Section(header: SectionHeader(title: "Schedule"))
+        Section(header: SectionHeader(title: SeedlingStrings.schedule))
         {
-            SegmentedCellView(title: "Section duration", options: SectionDuration.allCases)
+            SegmentedCellView(title: SeedlingStrings.sectionDuration, options: SectionDuration.allCases)
         }
     }
     
     var extrasSection: some View
     {
-        Section(header: SectionHeader(title: "Extras"))
+        Section(header: SectionHeader(title: SeedlingStrings.extras))
         {
-            CheckboxCellView(isOn: false, title: "Pomodoro notifications")
-            CheckboxCellView(isOn: false, title: "Show total water")
+            CheckboxCellView(isOn: false, title: SeedlingStrings.pomodoroNotifications)
+            CheckboxCellView(isOn: false, title: SeedlingStrings.showTotalWater)
             MenuCellView(
-                title: "Water amount",
+                title: SeedlingStrings.waterAmount,
                 options: WaterAmountOption.allCases)
         }
     }
     
     var infoSection: some View
     {
-        Section(header: SectionHeader(title: "Info"))
+        Section(header: SectionHeader(title: SeedlingStrings.info))
         {
             TappableCellView(
-                title: "Privacy policy",
+                title: SeedlingStrings.privacyPolicy,
                 label: Image(systemName: "rectangle.portrait.and.arrow.forward")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -105,7 +105,7 @@ struct SettingsView: View
             
             // TODO: Make these labels @ViewBuilders
             TappableCellView(
-                title: "Data export",
+                title: SeedlingStrings.dataExport,
                 label: Image(systemName: "arrow.down.doc")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -133,9 +133,9 @@ extension SettingsView
         {
             switch self
             {
-            case .minutes15: return "15m"
-            case .minutes30: return "30m"
-            case .hour1: return "1hr"
+            case .minutes15: return SeedlingStrings.m15
+            case .minutes30: return SeedlingStrings.m30
+            case .hour1: return SeedlingStrings.hr1
             }
         }
     }
@@ -156,13 +156,13 @@ extension SettingsView
         {
             switch self
             {
-            case .ouncesTwo: return "2oz"
-            case .ouncesFour: return "4oz"
-            case .ouncesSix: return "6oz"
-            case .ouncesEight: return "8oz"
-            case .ouncesTwelve: return "12oz"
-            case .ouncesTwentyFour: return "24oz"
-            case .ouncesThirtyTwo: return "32oz"
+            case .ouncesTwo: return SeedlingStrings.ouncesAmount(2)
+            case .ouncesFour: return SeedlingStrings.ouncesAmount(4)
+            case .ouncesSix: return SeedlingStrings.ouncesAmount(6)
+            case .ouncesEight: return SeedlingStrings.ouncesAmount(8)
+            case .ouncesTwelve: return SeedlingStrings.ouncesAmount(12)
+            case .ouncesTwentyFour: return SeedlingStrings.ouncesAmount(24)
+            case .ouncesThirtyTwo: return SeedlingStrings.ouncesAmount(32)
             }
         }
     }
