@@ -28,6 +28,10 @@ public enum SeedlingStrings {
   public static let lunch = SeedlingStrings.tr("Localizable", "lunch")
   /// meals
   public static let meals = SeedlingStrings.tr("Localizable", "meals")
+  /// Move %@ uncompleted tasks to today
+  public static func moveUncompleted(_ p1: Any) -> String {
+    return SeedlingStrings.tr("Localizable", "move_uncompleted", String(describing: p1))
+  }
   /// notes
   public static let notes = SeedlingStrings.tr("Localizable", "notes")
   /// pomodoro

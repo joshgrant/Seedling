@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class TodoController: TabContentController
 {
@@ -18,7 +19,20 @@ class TodoController: TabContentController
 	}
     
     var previousRows: [Task: Int] = [:]
-	
+    
+    var progressIndicator: UIHostingController<CircularProgressIndicator>
+    
+    override init?(dayProvider: DayProvider, database: Database) {
+        let rootView = CircularProgressIndicator(endAngle: 0, uncompletedCount: 1)
+        progressIndicator = .init(rootView: rootView)
+        super.init(dayProvider: dayProvider, database: database)
+        view.addSubview(progressIndicator.view)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 	// MARK: - Factories
 	
 	override class func makeDelegate() -> TabContentDelegate
