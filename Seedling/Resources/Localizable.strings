@@ -9,26 +9,50 @@
 "format_day_month" = "d MMM";
 "format_weekday_day_month" = "EEEE, d MMM";
 
-"today" = "today, %@";
+"today" = "Today, %@";
 
-"priorities" = "priorities";
-"to do" = "to do";
+"priorities" = "Priorities";
+"to do" = "To do";
 
-"checked" = "checked";
-"unchecked" = "unchecked";
+"checked" = "Checked";
+"unchecked" = "Unchecked";
 
-"schedule" = "schedule";
+"schedule" = "Schedule";
 
-"extras" = "extras";
+"extras" = "Extras";
 
-"breakfast" = "breakfast";
-"lunch" = "lunch";
-"dinner" = "dinner";
+"breakfast" = "Breakfast";
+"lunch" = "Lunch";
+"dinner" = "Dinner";
 
-"meals" = "meals";
-"water" = "water";
-"pomodoro" = "pomodoro";
-"notes" = "notes";
+"meals" = "Meals";
+"water" = "Water";
+"pomodoro" = "Pomodoro";
+"notes" = "Notes";
 
-"privacy_policy" = "privacy policy";
+"settings" = "Settings";
+"general" = "General";
+"hide_settings" = "Hide settings";
+"to_access_settings" = "To access settings, swipe right on the extras page";
+"monospaced_font" = "Monospaced font";
+"lowercase_text" = "Lowercase text";
+"format_markdown" = "Format notes with Markdown";
+"haptic_feedback" = "Haptic feedback";
+"tasks" = "Tasks";
+"automatically_transfer" = "Automatically transfer uncompleted tasks to today";
+"edit_custom_sections" = "Edit custom sections";
+"section_duration" = "Section duration";
+"pomodoro_notifications" = "Pomodoro notifications";
+"show_total_water" = "Show total water";
+"water_amount" = "Water amount";
+"info" = "Info";
+"data_export" = "Data export";
+
+"m15" = "15m";
+"m30" = "30m";
+"hr1" = "1hr";
+
+"ounces_amount" = "%@oz";
+
+"privacy_policy" = "Privacy policy";
 "privacy_policy_url" = "https://bloomingthyme.com/?page_id=168";
