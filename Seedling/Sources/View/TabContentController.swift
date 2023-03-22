@@ -157,23 +157,6 @@ class TabContentController: UIViewController
             let title = formatter.string(from: day.date ?? Date())
 			tabBarController?.navigationItem.title = title
 		}
-        
-        // TODO: Better way to handle appearance?
-        
-        let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.titleTextAttributes = [
-            NSAttributedString.Key.font: TextStyle.navigationBar.font,
-            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
-        ]
-        
-        let compactAppearance = UINavigationBarAppearance()
-        compactAppearance.titleTextAttributes = [
-            NSAttributedString.Key.font: TextStyle.textView.font,
-            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
-        ]
-        
-        tabBarController?.navigationItem.standardAppearance = standardAppearance
-        tabBarController?.navigationItem.compactAppearance = compactAppearance
 	}
 }
 
