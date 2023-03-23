@@ -54,13 +54,17 @@ public enum SeedlingStrings {
   public static let meals = SeedlingStrings.tr("Localizable", "meals")
   /// Monospaced font
   public static let monospacedFont = SeedlingStrings.tr("Localizable", "monospaced_font")
-  /// Notes
+  /// Move %@ uncompleted tasks to today
+  public static func moveUncompleted(_ p1: Any) -> String {
+    return SeedlingStrings.tr("Localizable", "move_uncompleted", String(describing: p1))
+  }
+  /// notes
   public static let notes = SeedlingStrings.tr("Localizable", "notes")
   /// %@oz
   public static func ouncesAmount(_ p1: Any) -> String {
     return SeedlingStrings.tr("Localizable", "ounces_amount", String(describing: p1))
   }
-  /// Pomodoro
+  /// pomodoro
   public static let pomodoro = SeedlingStrings.tr("Localizable", "pomodoro")
   /// Pomodoro notifications
   public static let pomodoroNotifications = SeedlingStrings.tr("Localizable", "pomodoro_notifications")
@@ -80,7 +84,7 @@ public enum SeedlingStrings {
   public static let showTotalWater = SeedlingStrings.tr("Localizable", "show_total_water")
   /// Tasks
   public static let tasks = SeedlingStrings.tr("Localizable", "tasks")
-  /// To do
+  /// to do
   public static let toDo = SeedlingStrings.tr("Localizable", "to do")
   /// To access settings, swipe right on the extras page
   public static let toAccessSettings = SeedlingStrings.tr("Localizable", "to_access_settings")
@@ -90,7 +94,7 @@ public enum SeedlingStrings {
   }
   /// Unchecked
   public static let unchecked = SeedlingStrings.tr("Localizable", "unchecked")
-  /// Water
+  /// water
   public static let water = SeedlingStrings.tr("Localizable", "water")
   /// Water amount
   public static let waterAmount = SeedlingStrings.tr("Localizable", "water_amount")

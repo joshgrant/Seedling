@@ -23,7 +23,13 @@ class TodoDelegate: TabContentDelegate
 	weak var tableView: UITableView?
     
     var editingIndexPath: IndexPath?
-	
+    var scrollViewDidScroll: (CGFloat) -> Void
+    
+    init(scrollViewDidScroll: @escaping (CGFloat) -> Void)
+    {
+        self.scrollViewDidScroll = scrollViewDidScroll
+    }
+    
 	// MARK: - Factory
 	
 	class func makeButton() -> UIButton
@@ -139,10 +145,17 @@ extension TodoDelegate
 		scrollView.endEditing(false)
         shouldStopEditing()
 	}
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        scrollViewDidScroll(scrollView.contentOffset.y)
+    }
 }
 
-extension TodoDelegate: TodoDismissalDelegate {
-    func shouldStopEditing() {
+extension TodoDelegate: TodoDismissalDelegate
+{
+    func shouldStopEditing()
+    {
         editingIndexPath = nil
     }
 }

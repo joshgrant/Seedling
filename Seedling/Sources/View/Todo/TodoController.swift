@@ -13,31 +13,65 @@ class TodoController: TabContentController
 {
 	// MARK: - Variables
 	
-	enum Section: Int {
+	enum Section: Int
+    {
 		case priorities
 		case todos
 	}
     
-    var previousRows: [Task: Int] = [:]
+    enum Constants
+    {
+        static let updateTasksScrollMultiplier: CGFloat = 1.8
+    }
     
+    var previousRows: [Task: Int] = [:]
+    var model: CircularProgressIndicatorModel
     var progressIndicator: UIHostingController<CircularProgressIndicator>
     
     override init?(dayProvider: DayProvider, database: Database) {
-        let rootView = CircularProgressIndicator(endAngle: 0, uncompletedCount: 1)
-        progressIndicator = .init(rootView: rootView)
+        self.model = Self.makeModel()
+        self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
+        
         super.init(dayProvider: dayProvider, database: database)
-        view.addSubview(progressIndicator.view)
+        
+        // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
+        delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
+        tableView.delegate = delegate
+        
+        progressIndicator.view.frame.size.height = 100
+        tableView.contentInset = UIEdgeInsets(top: -100, left: 0, bottom: 0, right: 0)
+        tableView.tableHeaderView = progressIndicator.view
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Functions
+    
+    func updateProgressIndicatorEndAngle(offset: CGFloat)
+    {
+        model.endAngle = -(offset * Constants.updateTasksScrollMultiplier)
+    }
+    
 	// MARK: - Factories
+    
+    static func makeModel() -> CircularProgressIndicatorModel
+    {
+        CircularProgressIndicatorModel { state in
+            switch state {
+            case .complete:
+                print("Time to fetch!")
+            default:
+                break
+            }
+        }
+    }
 	
 	override class func makeDelegate() -> TabContentDelegate
 	{
-		return TodoDelegate()
+        // TODO: Fix this because we'll rewrite the TabContentController
+        return ExtrasDelegate()
 	}
 	
 	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
@@ -65,6 +99,8 @@ class TodoController: TabContentController
 		(delegate as? TodoDelegate)?.tableView = tableView
 		(delegate as? TodoDelegate)?.dayProvider = dayProvider
         (delegate as? TodoDelegate)?.database = database
+        
+        tableView.delegate = (delegate as? TodoDelegate)
 	}
 	
 	override func configureDataSource()

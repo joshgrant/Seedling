@@ -4,18 +4,19 @@ import SwiftUI
 
 struct CircularProgressIndicator: View
 {
+    @ObservedObject var model: CircularProgressIndicatorModel
+    
     @ScaledMetric(relativeTo: .body) var textSize: CGFloat = 18
     @ScaledMetric(relativeTo: .body) var radiusSize: CGFloat = 12.5
     @ScaledMetric(relativeTo: .body) var frameSize: CGFloat = 31
     @ScaledMetric(relativeTo: .body) var lineWidth: CGFloat = 1
-    @State var endAngle: Double = -90.0
+    
     @State var uncompletedCount: Int
     
     var body: some View
     {
         VStack
         {
-            Slider(value: $endAngle, in: -90...270)
             Text(SeedlingStrings.moveUncompleted(uncompletedCount))
                 .font(.system(size: textSize).monospaced())
                 .multilineTextAlignment(.center)
@@ -31,7 +32,7 @@ struct CircularProgressIndicator: View
                             center: center,
                             radius: radiusSize,
                             startAngle: .degrees(-90.0),
-                            endAngle: .degrees(endAngle),
+                            endAngle: .degrees(model.endAngle),
                             clockwise: false,
                             transform: .identity)
                     }.fill(SeedlingAsset.orange.swiftUIColor)
@@ -41,8 +42,12 @@ struct CircularProgressIndicator: View
     }
 }
 
-struct CircularProgressIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        CircularProgressIndicator( uncompletedCount: 6)
+struct CircularProgressIndicator_Previews: PreviewProvider
+{
+    @State static var endAngle: Double = -90
+    
+    static var previews: some View
+    {
+        CircularProgressIndicator(model: .init(), uncompletedCount: 6)
     }
 }
