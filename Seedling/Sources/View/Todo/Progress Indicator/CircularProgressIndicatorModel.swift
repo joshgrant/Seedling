@@ -38,8 +38,10 @@ class CircularProgressIndicatorModel: ObservableObject
     {
         switch (currentState, angle)
         {
-        case (.inactive, _):
+        case (.inactive, let x) where x > Constants.resetAngle:
             transition(to: .pulling)
+        case (.pulling, let x) where x < Constants.resetAngle:
+            transition(to: .inactive)
         case (.pulling, let x) where x >= Constants.maxAngle:
             transition(to: .animatingCheckmark)
             transition(to: .complete)
@@ -71,7 +73,7 @@ extension CircularProgressIndicatorModel: StateMachine
             return true
         case (.animatingCheckmark, .complete):
             return true
-        case (.complete, .inactive):
+        case (.complete, .inactive), (.pulling, .inactive):
             return true
         default:
             return false
