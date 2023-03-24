@@ -20,6 +20,7 @@
 "schedule" = "Schedule";
 
 "extras" = "Extras";
+"to do" = "to do";
 
 "breakfast" = "Breakfast";
 "lunch" = "Lunch";
@@ -53,6 +54,11 @@
 "hr1" = "1hr";
 
 "ounces_amount" = "%@oz";
+"water" = "water";
+"pomodoro" = "pomodoro";
+"notes" = "notes";
 
 "privacy_policy" = "Privacy policy";
 "privacy_policy_url" = "https://bloomingthyme.com/?page_id=168";
+
+"move_uncompleted" = "Move %@ uncompleted tasks to today";

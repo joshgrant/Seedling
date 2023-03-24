@@ -18,7 +18,7 @@ class TabContentController: UIViewController
 	
 	let cellClassIdentifiers: [CellClassIdentifier]
 	
-	let delegate: TabContentDelegate
+	var delegate: TabContentDelegate
 	let dataSource: TabContentDataSource
 	
 	let tableView: UITableView
