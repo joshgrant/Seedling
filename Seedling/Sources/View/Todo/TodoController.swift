@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-class TodoController: TabContentController
+class TodoController: UIViewController
 {
 	// MARK: - Variables
 	
@@ -24,15 +24,22 @@ class TodoController: TabContentController
         static let updateTasksScrollMultiplier: CGFloat = 1.8
     }
     
+    unowned var dayProvider: DayProvider
+    unowned var database: Database
     var previousRows: [Task: Int] = [:]
     var model: CircularProgressIndicatorModel
     var progressIndicator: UIHostingController<CircularProgressIndicator>
     
-    override init?(dayProvider: DayProvider, database: Database) {
+    // MARK: - Initialization
+    
+    init(dayProvider: DayProvider, database: Database)
+    {
+        self.dayProvider = dayProvider
+        self.database = database
         self.model = Self.makeModel()
         self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
         
-        super.init(dayProvider: dayProvider, database: database)
+        super.init(nibName: nil, bundle: nil)
         
         // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
         delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
