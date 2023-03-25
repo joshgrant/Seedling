@@ -7,6 +7,12 @@ class MenuCellModel<Option: PickerOption>: SettingsCellModel, ObservableObject
     // MARK: - Variables
     
     @Published var selection: Int
+    {
+        didSet
+        {
+            selectionDidChange(options[selection])
+        }
+    }
     
     var id = UUID()
     var title: String

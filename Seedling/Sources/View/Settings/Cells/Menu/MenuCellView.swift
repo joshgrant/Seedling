@@ -22,16 +22,13 @@ struct MenuCellView<Option: PickerOption>: View
                     label: EmptyView(), // May be an issue in Mac
                     content: {
                         ForEach(model.options, id: \.id) { option in
-                            Text(option.title).tag(option.id)
+                            Text(option.title).tag(option.sortIndex)
                         }
                     })
                 .pickerStyle(.automatic)
             } label: {
                 pickerLabel
             }
-        }
-        .onChange(of: model.selection) { newValue in
-            model.selectionDidChange(model.options[newValue])
         }
     }
     

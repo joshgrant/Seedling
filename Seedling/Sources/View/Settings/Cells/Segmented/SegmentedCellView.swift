@@ -15,14 +15,11 @@ struct SegmentedCellView<Option: PickerOption>: View
                 label: EmptyView(), // May be an issue in Mac
                 content: {
                     ForEach(model.options, id: \.id) { option in
-                        Text(option.title).tag(option.id)
+                        Text(option.title).tag(option.sortIndex)
                     }
                 })
             .frame(width: 150)
             .pickerStyle(.segmented)
-        }
-        .onChange(of: model.selection) { index in
-            model.selectionDidChange(model.options[index])
         }
     }
 }

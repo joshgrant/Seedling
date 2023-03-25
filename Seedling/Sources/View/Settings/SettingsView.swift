@@ -34,10 +34,10 @@ struct SettingsView: View
                                         .aspectRatio(contentMode: .fit)
                                         .frame(height: chevronHeight)
                                 }
-                            case let model as SegmentedCellModel:
-                                SegmentedCellView(model: model)
-                            case let model as MenuCellModel:
-                                MenuCellView(model: model)
+                            case let model as SegmentedCellModel<DurationPickerOption>:
+                                SegmentedCellView<DurationPickerOption>(model: model)
+                            case let model as MenuCellModel<WaterPickerOption>:
+                                MenuCellView<WaterPickerOption>(model: model)
                             case let model as CenterButtonCellModel:
                                 CenterButtonCellView(model: model)
                             default:

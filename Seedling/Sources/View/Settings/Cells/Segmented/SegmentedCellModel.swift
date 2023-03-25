@@ -7,6 +7,12 @@ class SegmentedCellModel<Option: PickerOption>: SettingsCellModel, ObservableObj
     // MARK: - Variables
     
     @Published var selection: Int
+    {
+        didSet
+        {
+            selectionDidChange(options[selection])
+        }
+    }
     
     var id = UUID()
     var title: String
