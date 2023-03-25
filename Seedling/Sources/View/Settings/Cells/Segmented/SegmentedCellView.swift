@@ -2,17 +2,16 @@
 
 import SwiftUI
 
-struct SegmentedCellView: View
+struct SegmentedCellView<Option: PickerOption>: View
 {
-    @State var selection: Int = 0
-    @ObservedObject var model: SegmentedCellModel
+    @ObservedObject var model: SegmentedCellModel<Option>
     
     var body: some View
     {
         SettingsCell(title: model.title)
         {
             Picker(
-                selection: $selection,
+                selection: $model.selection,
                 label: EmptyView(), // May be an issue in Mac
                 content: {
                     ForEach(model.options, id: \.id) { option in
@@ -22,7 +21,7 @@ struct SegmentedCellView: View
             .frame(width: 150)
             .pickerStyle(.segmented)
         }
-        .onChange(of: selection) { index in
+        .onChange(of: model.selection) { index in
             model.selectionDidChange(model.options[index])
         }
     }
@@ -32,11 +31,10 @@ struct SegmentedCellView_Previews: PreviewProvider
 {
     struct SegmentedCellView_Shim: View
     {
-        var model: SegmentedCellModel
+        var model: SegmentedCellModel<DurationPickerOption>
         
         var body: some View
         {
-            
             SegmentedCellView(model: model)
         }
     }
@@ -51,7 +49,8 @@ struct SegmentedCellView_Previews: PreviewProvider
             
             SegmentedCellView_Shim(model: .init(
                 title: Strings.sectionDuration,
-                options: PickerOption.durations,
+                options: DurationPickerOption.allCases,
+                selection: 0,
                 selectionDidChange: { selectedOption = $0.title }))
         }
     }

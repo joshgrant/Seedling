@@ -2,51 +2,89 @@
 
 import Foundation
 
-@propertyWrapper struct Ubiquitous<Value>
+@propertyWrapper struct UbiquitousBool
 {
     let key: String
+    let defaultValue: Bool
     var store: NSUbiquitousKeyValueStore = .default
     
-    var wrappedValue: Value? {
-        get { store.value(forKey: key) as? Value }
-        set { store.setValue(newValue, forKey: key) }
+    var wrappedValue: Bool {
+        get
+        {
+            if let number = store.object(forKey: key) as? NSNumber
+            {
+                return number.boolValue
+            }
+            else
+            {
+                return defaultValue
+            }
+        }
+        set
+        {
+            let newNumber = NSNumber(booleanLiteral: newValue)
+            store.set(newNumber, forKey: key)
+            
+        }
+    }
+}
+
+@propertyWrapper struct UbiquitousInt
+{
+    let key: String
+    let defaultValue: Int
+    var store: NSUbiquitousKeyValueStore = .default
+    
+    var wrappedValue: Int {
+        get {
+            if let number = store.object(forKey: key) as? NSNumber
+            {
+                return number.intValue
+            }
+            else
+            {
+                return defaultValue
+            }
+        }
+        set
+        {
+            let newNumber = NSNumber(integerLiteral: newValue)
+            store.set(newNumber, forKey: key)
+        }
     }
 }
 
 class Settings
 {
-    @Ubiquitous<Bool>(key: "hide-settings")
+    @UbiquitousBool(key: "hide-settings", defaultValue: false)
     static var hideSettings
     
-    @Ubiquitous<Bool>(key: "monospaced-font")
+    @UbiquitousBool(key: "monospaced-font", defaultValue: true)
     static var monospacedFont
     
-    @Ubiquitous<Bool>(key: "lowercase-text")
+    @UbiquitousBool(key: "lowercase-text", defaultValue: false)
     static var lowercaseText
     
-    @Ubiquitous<Bool>(key: "format-notes-with-markdown")
+    @UbiquitousBool(key: "format-notes-with-markdown", defaultValue: true)
     static var formatNotesWithMarkdown
     
-    @Ubiquitous<Bool>(key: "haptic-feedback")
+    @UbiquitousBool(key: "haptic-feedback", defaultValue: true)
     static var hapticFeedback
     
-    @Ubiquitous<Bool>(key: "automatically-transfer-tasks")
+    @UbiquitousBool(key: "automatically-transfer-tasks", defaultValue: false)
     static var automaticallyTransferTasks
-
-    @Ubiquitous<[String]>(key: "custom-sections")
-    static var customSections
     
     /// Either 15, 30, or 60 with the option to expand in the future if necessary
-    @Ubiquitous<[Int]>(key: "section-duration-minutes")
+    @UbiquitousInt(key: "section-duration-minutes", defaultValue: 60)
     static var sectionDurationMinutes
     
-    @Ubiquitous<Bool>(key: "pomodoro-notifications")
+    @UbiquitousBool(key: "pomodoro-notifications", defaultValue: false)
     static var pomodoroNotifications
     
-    @Ubiquitous<Bool>(key: "show-total-water")
+    @UbiquitousBool(key: "show-total-water", defaultValue: false)
     static var showTotalWater
     
     /// Either 1, 2, 4, or 8 with the option to expand
-    @Ubiquitous<[Int]>(key: "water-amount-ounces")
+    @UbiquitousInt(key: "water-amount-ounces", defaultValue: 8)
     static var waterAmountOunces
 }

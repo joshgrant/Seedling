@@ -35,34 +35,39 @@ class SettingsSection: Identifiable
         title: Strings.general,
         items: [
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.hideSettings,
                 title: Strings.hideSettings,
                 subtitle: Strings.toAccessSettings,
                 action: { isOn in
+                    Settings.hideSettings = isOn
                     print("Should toggle 'Hide settings'")
                 }),
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.monospacedFont,
                 title: Strings.monospacedFont,
                 action: { isOn in
+                    Settings.monospacedFont = isOn
                     print("Should toggle 'Monospaced font'")
                 }),
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.lowercaseText,
                 title: Strings.lowercaseText,
                 action: { isOn in
+                    Settings.lowercaseText = isOn
                     print("Should toggle 'Lowercase text'")
                 }),
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.formatNotesWithMarkdown,
                 title: Strings.formatMarkdown,
                 action: { isOn in
+                    Settings.formatNotesWithMarkdown = isOn
                     print("Should toggle 'Format Markdown'")
                 }),
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.hapticFeedback,
                 title: Strings.hapticFeedback,
                 action: { isOn in
+                    Settings.hapticFeedback = isOn
                     print("Should toggle 'Haptic feedback'")
                 })
         ])
@@ -71,9 +76,10 @@ class SettingsSection: Identifiable
         title: Strings.tasks,
         items: [
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.automaticallyTransferTasks,
                 title: Strings.automaticallyTransfer,
                 action: { isOn in
+                    Settings.automaticallyTransferTasks = isOn
                     print("Should toggle 'Automatically transfer'")
                 }),
             TappableCellModel(
@@ -86,10 +92,12 @@ class SettingsSection: Identifiable
     static let schedule = SettingsSection(
         title: Strings.schedule,
         items: [
-            SegmentedCellModel(
+            SegmentedCellModel<DurationPickerOption>(
                 title: Strings.sectionDuration,
-                options: PickerOption.durations,
+                options: DurationPickerOption.allCases,
+                selection: DurationPickerOption.index(from: Settings.sectionDurationMinutes),
                 selectionDidChange: { selection in
+                    Settings.sectionDurationMinutes = selection.duration
                     print("Updated duration selection: \(selection.title)")
                 })
         ])
@@ -98,21 +106,25 @@ class SettingsSection: Identifiable
         title: Strings.extras,
         items: [
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.pomodoroNotifications,
                 title: Strings.pomodoroNotifications,
                 action: { isOn in
+                    Settings.pomodoroNotifications = isOn
                     print("Should toggle 'Pomodoro notifications'")
                 }),
             CheckboxCellModel(
-                isOn: false,
+                isOn: Settings.showTotalWater,
                 title: Strings.showTotalWater,
                 action: { isOn in
+                    Settings.showTotalWater = isOn
                     print("Should toggle 'Show total water'")
                 }),
-            MenuCellModel(
+            MenuCellModel<WaterPickerOption>(
                 title: Strings.waterAmount,
-                options: PickerOption.waterAmounts,
+                options: WaterPickerOption.allCases,
+                selection: WaterPickerOption.index(from: Settings.waterAmountOunces),
                 selectionDidChange: { option in
+                    Settings.waterAmountOunces = option.ouncesOfWater
                     print("Updated water amount selection: \(option.title)")
                 })
         ])

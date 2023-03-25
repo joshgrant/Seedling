@@ -2,24 +2,28 @@
 
 import Foundation
 
-class MenuCellModel: SettingsCellModel, ObservableObject
+class MenuCellModel<Option: PickerOption>: SettingsCellModel, ObservableObject
 {
     // MARK: - Variables
     
+    @Published var selection: Int
+    
     var id = UUID()
     var title: String
-    var options: [PickerOption]
-    var selectionDidChange: (PickerOption) -> Void
+    var options: [Option]
+    var selectionDidChange: (Option) -> Void
     
     // MARK: - Initialization
     
     init(
         title: String,
-        options: [PickerOption],
-        selectionDidChange: @escaping (PickerOption) -> Void)
+        options: [Option],
+        selection: Int,
+        selectionDidChange: @escaping (Option) -> Void)
     {
         self.title = title
         self.options = options
+        self.selection = selection
         self.selectionDidChange = selectionDidChange
     }
 }

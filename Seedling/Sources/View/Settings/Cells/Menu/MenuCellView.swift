@@ -2,14 +2,13 @@
 
 import SwiftUI
 
-struct MenuCellView: View
+struct MenuCellView<Option: PickerOption>: View
 {
     // MARK: - Variables
     
     @ScaledMetric(relativeTo: .body) var fontSize: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var width: CGFloat = 100
-    @ObservedObject var model: MenuCellModel
-    @State var selection: Int = 0
+    @ObservedObject var model: MenuCellModel<Option>
     
     // MARK: - View
     
@@ -19,7 +18,7 @@ struct MenuCellView: View
         {
             Menu {
                 Picker(
-                    selection: $selection,
+                    selection: $model.selection,
                     label: EmptyView(), // May be an issue in Mac
                     content: {
                         ForEach(model.options, id: \.id) { option in
@@ -31,14 +30,14 @@ struct MenuCellView: View
                 pickerLabel
             }
         }
-        .onChange(of: selection) { newValue in
+        .onChange(of: model.selection) { newValue in
             model.selectionDidChange(model.options[newValue])
         }
     }
     
     var pickerLabel: some View
     {
-        Text(model.options[selection].title)
+        Text(model.options[model.selection].title)
             .padding(3)
             .font(.system(
                 size: fontSize,
@@ -54,7 +53,7 @@ struct MenuCellView_Previews: PreviewProvider
 {
     struct MenuCellView_Shim: View
     {
-        var model: MenuCellModel
+        var model: MenuCellModel<WaterPickerOption>
         
         var body: some View
         {
@@ -70,8 +69,9 @@ struct MenuCellView_Previews: PreviewProvider
         {
             if let selection = selection { Text(selection) }
             MenuCellView_Shim(model: .init(
-                title: "Water amount",
-                options: PickerOption.waterAmounts,
+                title: Strings.waterAmount,
+                options: WaterPickerOption.allCases,
+                selection: 0,
                 selectionDidChange: { selection = $0.title }))
         }
     }
