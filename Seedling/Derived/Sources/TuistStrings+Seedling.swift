@@ -42,6 +42,8 @@ public enum SeedlingStrings {
   public static let hr1 = SeedlingStrings.tr("Localizable", "hr1")
   /// Info
   public static let info = SeedlingStrings.tr("Localizable", "info")
+  /// Like the app?
+  public static let likeTheApp = SeedlingStrings.tr("Localizable", "like_the_app")
   /// Lowercase text
   public static let lowercaseText = SeedlingStrings.tr("Localizable", "lowercase_text")
   /// Lunch

@@ -2,26 +2,27 @@
 
 import SwiftUI
 
-struct MenuCellView<Option: PickerOption> : View
+struct MenuCellView: View
 {
+    // MARK: - Variables
+    
     @ScaledMetric(relativeTo: .body) var fontSize: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var width: CGFloat = 100
-    
+    @ObservedObject var model: MenuCellModel
     @State var selection: Int = 0
     
-    var title: String
-    var options: [Option]
+    // MARK: - View
     
     var body: some View
     {
-        SettingsCell(title: title)
+        SettingsCell(title: model.title)
         {
             Menu {
                 Picker(
                     selection: $selection,
                     label: EmptyView(), // May be an issue in Mac
                     content: {
-                        ForEach(options, id: \.id) { option in
+                        ForEach(model.options, id: \.id) { option in
                             Text(option.title).tag(option.id)
                         }
                     })
@@ -30,11 +31,14 @@ struct MenuCellView<Option: PickerOption> : View
                 pickerLabel
             }
         }
+        .onChange(of: selection) { newValue in
+            model.selectionDidChange(model.options[newValue])
+        }
     }
     
     var pickerLabel: some View
     {
-        Text(options[selection].title)
+        Text(model.options[selection].title)
             .padding(3)
             .font(.system(
                 size: fontSize,
@@ -48,28 +52,27 @@ struct MenuCellView<Option: PickerOption> : View
 
 struct MenuCellView_Previews: PreviewProvider
 {
-    enum TestOption: Int, PickerOption, CaseIterable
+    struct MenuCellView_Shim: View
     {
-        case solid
-        case liquid
-        case gas
+        var model: MenuCellModel
         
-        var id: Int { rawValue }
-        var title: String
+        var body: some View
         {
-            switch self
-            {
-            case .solid: return "solid"
-            case .liquid: return "liquid"
-            case .gas: return "gas"
-            }
+            MenuCellView(model: model)
         }
     }
     
+    @State static var selection: String? = nil
+    
     static var previews: some View
     {
-        MenuCellView(
-            title: "Phase of matter",
-            options: TestOption.allCases)
+        VStack
+        {
+            if let selection = selection { Text(selection) }
+            MenuCellView_Shim(model: .init(
+                title: "Water amount",
+                options: PickerOption.waterAmounts,
+                selectionDidChange: { selection = $0.title }))
+        }
     }
 }

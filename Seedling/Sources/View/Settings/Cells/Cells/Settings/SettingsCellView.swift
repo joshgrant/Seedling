@@ -13,7 +13,7 @@ struct SettingsCell<Content>: View where Content: View
     var title: String
     var subtitle: String?
     
-    var label: Content
+    @ViewBuilder var label: Content
     
     // MARK: - Initialization
     
