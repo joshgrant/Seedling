@@ -40,7 +40,9 @@ class SettingsSection: Identifiable
                 subtitle: Strings.toAccessSettings,
                 action: { isOn in
                     Settings.hideSettings = isOn
-                    print("Should toggle 'Hide settings'")
+                    NotificationCenter.default.post(
+                        name: .hideSettingsDidToggle,
+                        object: nil)
                 }),
             CheckboxCellModel(
                 isOn: Settings.monospacedFont,

@@ -2,6 +2,10 @@
 
 import SwiftUI
 
+// TODO: INVESTIGATE:
+// https://www.hackingwithswift.com/forums/swiftui/a-guide-to-delaying-gestures-in-scrollview/6005
+// For delaying content touches on the view
+
 struct TappableCellView<Content>: View where Content: View
 {
     // MARK: - Variables

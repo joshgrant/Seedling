@@ -38,6 +38,8 @@ class MainTabBarController: UITabBarController
         setViewControllers([todo, schedule, extras, settings], animated: false)
         
         configureTabBar()
+        
+        registerForNotifications()
     }
     
     required init?(coder: NSCoder)
@@ -155,6 +157,26 @@ class MainTabBarController: UITabBarController
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(didTouchUpInsideNavigationBar))
         return gestureRecognizer
+    }
+    
+    // MARK: - Notifications
+    
+    public func registerForNotifications()
+    {
+        NotificationCenter.default.addObserver(
+            forName: .hideSettingsDidToggle,
+            object: nil,
+            queue: .main) { [unowned self] notification in
+                // TODO: This should be handled in the model, not in the view
+                if Settings.hideSettings
+                {
+                    setViewControllers([todo, schedule, extras], animated: true)
+                }
+                else
+                {
+                    setViewControllers([todo, schedule, extras, settings], animated: true)
+                }
+            }
     }
     
     // MARK: - Actions
