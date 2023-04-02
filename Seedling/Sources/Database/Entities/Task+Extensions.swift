@@ -11,6 +11,11 @@ import CoreData
 
 extension Task
 {
+    var identifier: String
+    {
+        "taskCellIdentifier"
+    }
+    
     static func make(in context: Context) -> Task
     {
         let task = Task(context: context)

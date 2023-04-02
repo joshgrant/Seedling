@@ -23,7 +23,6 @@ class TaskCell: UITableViewCell
     weak var checkBoxDelegate: CheckBoxDelegate?
     
     var task: Task?
-    var section: TodoController.Section?
     
     static var normalTypingAttributes: [NSAttributedString.Key: Any] {
         return [
@@ -45,7 +44,6 @@ class TaskCell: UITableViewCell
     {
         super.prepareForReuse()
         task = nil
-        section = nil
         
         textView.text = nil
         textView.attributedText = nil
@@ -92,9 +90,8 @@ class TaskCell: UITableViewCell
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with task: Task, section: TodoController.Section) {
+    func configure(with task: Task) {
         self.task = task
-        self.section = section
 		
 		let content = task.content ?? ""
         
@@ -123,12 +120,7 @@ class TaskCell: UITableViewCell
         accessibilityLabel = task.content
         accessibilityTraits = [.adjustable]
         
-        switch section {
-        case .priorities:
-            accessibilityIdentifier = "priority.cell"
-        case .todos:
-            accessibilityIdentifier = "todo.cell"
-        }
+        accessibilityIdentifier = "task.cell"
         
         textView.accessibilityIdentifier = "todo.textView"
         checkBox.accessibilityIdentifier = "todo.checkBox"
@@ -148,8 +140,9 @@ class TaskCell: UITableViewCell
         database?.context.perform { [unowned self] in
             task?.content = textView.text
             task?.completed.toggle()
-            if let task = task, let section = section {
-                configure(with: task, section: section)
+            if let task = task
+            {
+                configure(with: task)
             }
             database?.save()
             checkBoxDelegate?.checkBoxDidTouchUpInside(self)
@@ -165,8 +158,9 @@ class TaskCell: UITableViewCell
         checkBox.accessibilityValue = SeedlingStrings.checked
         database?.context.perform {
             self.task?.completed = true
-            if let task = self.task, let section = self.section {
-                self.configure(with: task, section: section)
+            if let task = self.task
+            {
+                self.configure(with: task)
             }
             self.database?.save()
         }
@@ -176,8 +170,9 @@ class TaskCell: UITableViewCell
         checkBox.accessibilityValue = SeedlingStrings.unchecked
         database?.context.perform {
             self.task?.completed = false
-            if let task = self.task, let section = self.section {
-                self.configure(with: task, section: section)
+            if let task = self.task
+            {
+                self.configure(with: task)
             }
             self.database?.save()
         }

@@ -28,7 +28,7 @@ class MainTabBarController: UITabBarController
         self.dayProvider = dayProvider
         self.database = database
         
-        todo = TodoController(dayProvider: dayProvider, database: database)!
+        todo = TodoController(dayProvider: dayProvider, database: database)
         schedule = ScheduleController(dayProvider: dayProvider, database: database)!
         extras = ExtrasController(dayProvider: dayProvider, database: database)!
         settings = SettingsController()
