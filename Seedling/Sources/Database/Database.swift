@@ -127,7 +127,9 @@ extension Database
         if Defaults.hasPopulatedDefaultData { return }
         
         let priority = TaskSection(context: context)
+        priority.title = SeedlingStrings.priorities
         let tasks = TaskSection(context: context)
+        priority.title = SeedlingStrings.tasks
         
         save()
         
