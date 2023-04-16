@@ -83,7 +83,8 @@ class MealsCell: UITableViewCell
 		configureTextView(textView: dinnerTextView)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
 	

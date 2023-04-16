@@ -42,7 +42,8 @@ class WaterCell: UITableViewCell
         contentView.embed(view: hStack)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
 	
@@ -91,7 +92,8 @@ class WaterCell: UITableViewCell
     @objc func didTouchUpInsideBubble(_ sender: UIButton)
 	{
 		// If we tap on one that's filled, we subtract
-		if Int32(sender.tag) == water?.amount {
+		if Int32(sender.tag) == water?.amount
+        {
 			water?.amount -= 1
 			
             sender.setImage(SeedlingAsset.clearBubble.image, for: .normal)
@@ -101,7 +103,9 @@ class WaterCell: UITableViewCell
 			let nextButton = viewWithTag(next) as? UIButton
 			
 			nextButton?.isEnabled = false
-		} else if Int32(sender.tag) == (water?.amount ?? 0) + 1 {
+		}
+        else if Int32(sender.tag) == (water?.amount ?? 0) + 1
+        {
             sender.setImage(SeedlingAsset.blueBubble.image, for: .normal)
 			
 			water?.amount = Int32(sender.tag)
@@ -123,15 +127,21 @@ class WaterCell: UITableViewCell
 		
 		let amount = Int(water.amount) + 1
 		let numberOfWater = 12 + 1
-		for i in 1 ..< numberOfWater {
+		for i in 1 ..< numberOfWater
+        {
 			let button = viewWithTag(i) as? UIButton
-			if i < amount {
+			if i < amount
+            {
                 button?.setImage(SeedlingAsset.blueBubble.image, for: .normal)
 				button?.isEnabled = true
-			} else if i == amount {
+			}
+            else if i == amount
+            {
 				button?.isEnabled = true
                 button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
-			} else {
+			}
+            else
+            {
 				button?.isEnabled = false
 				button?.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			}

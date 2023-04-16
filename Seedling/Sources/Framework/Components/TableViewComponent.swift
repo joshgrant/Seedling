@@ -7,7 +7,7 @@ protocol TableViewComponent
 {
     associatedtype Section: Hashable
     associatedtype Item: Hashable
-    typealias DataSource = UITableViewDiffableDataSource<Section, Item>
+    typealias DataSource = UITableViewDiffableDataSourceReference
     
     // MARK: - Variables
     
@@ -45,14 +45,29 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     {
         self.context = context
         let tableView = UITableView()
-        self.dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: item.identifier, for: indexPath)
-            if let taskCell = cell as? TaskCell
+        
+        self.dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, item in
+            switch item
             {
-                taskCell.configure(with: item)
+            case let task as Task:
+                let cell = tableView.dequeueReusableCell(withIdentifier: task.identifier, for: indexPath)
+                if let taskCell = cell as? TaskCell
+                {
+                    taskCell.configure(with: task)
+                }
+                return cell
+            case let taskSection as TaskSection:
+                let cell = tableView.dequeueReusableCell(withIdentifier: taskSection.identifier, for: indexPath)
+                if let taskSectionCell = cell as? TaskSectionCell
+                {
+                    taskSectionCell.configure(with: taskSection)
+                }
+                return cell
+            default:
+                fatalError()
             }
-            return cell
         })
+        
         self.tableView = tableView
         super.init()
         fetchController.delegate = self
@@ -65,10 +80,10 @@ class TodoTableViewComponent: NSObject, TableViewComponent
 
 extension TodoTableViewComponent: NSFetchedResultsControllerDelegate
 {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference)
+    func controller(
+        _ controller: NSFetchedResultsController<NSFetchRequestResult>,
+        didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference)
     {
-        dataSource.apply(<#T##snapshot: NSDiffableDataSourceSnapshot<Section, Item>##NSDiffableDataSourceSnapshot<Section, Item>#>, animatingDifferences: true) {
-            print("Finished applying the snapshot!")
-        }
+        dataSource.applySnapshot(snapshot, animatingDifferences: true)
     }
 }

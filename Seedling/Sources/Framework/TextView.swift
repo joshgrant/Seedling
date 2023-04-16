@@ -19,9 +19,12 @@ class TextView: UITextView
 		{
 			let textHeight = text.height(with: .textView, constrainedTo: frame.width)
 			// Unexpectedly found nil when switching tabs
-			if let height = height {
+			if let height = height
+            {
 				height.constant = textHeight
-			} else {
+			}
+            else
+            {
 				print("NO HEIGHT")
 			}
 		}

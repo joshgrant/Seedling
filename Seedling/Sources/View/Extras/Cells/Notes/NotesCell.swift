@@ -8,8 +8,8 @@
 
 import UIKit
 
-class NotesCell: UITableViewCell {
-	
+class NotesCell: UITableViewCell
+{
     weak var database: Database? // TODO: This NEEDS to be set on the cell
     // but there's not a clear way to enforce this rule...
 	weak var delegate: CellTextViewDelegate?
@@ -18,7 +18,8 @@ class NotesCell: UITableViewCell {
 	
 	var note: Note?
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
+    {
 		textView = TextView(minimumHeight: 300)
 		
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,11 +48,13 @@ class NotesCell: UITableViewCell {
         contentView.embed(view: hStack)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
-	func configure(with note: Note) {
+	func configure(with note: Note)
+    {
 		self.note = note
 		self.textView.text = note.content
 	}

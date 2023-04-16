@@ -10,12 +10,16 @@ import Foundation
 
 public extension SignedInteger
 {
-    func convert24HourTimeToTwelveHourTime() -> Self {
+    func convert24HourTimeToTwelveHourTime() -> Self
+    {
         let convertedValue = self % 12
         
-        if convertedValue == 0 {
+        if convertedValue == 0
+        {
             return 12
-        } else {
+        }
+        else
+        {
             return convertedValue
         }
     }

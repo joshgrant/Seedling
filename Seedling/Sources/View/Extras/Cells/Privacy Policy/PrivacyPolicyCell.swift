@@ -25,7 +25,8 @@ class PrivacyPolicyCell: UITableViewCell
         contentView.embed(view: stackView)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -33,7 +34,8 @@ class PrivacyPolicyCell: UITableViewCell
     
     @objc func privacyPolicyButtonDidTouchUpInside(_ sender: UIButton)
     {
-        guard let url = URL(string: SeedlingStrings.privacyPolicyUrl) else {
+        guard let url = URL(string: SeedlingStrings.privacyPolicyUrl) else
+        {
             print("URL invalid")
             return
         }

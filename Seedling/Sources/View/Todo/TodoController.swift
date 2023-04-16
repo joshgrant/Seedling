@@ -11,17 +11,23 @@ import SwiftUI
 
 class TodoController: UIViewController
 {
-	// MARK: - Variables
+    // MARK: - Types
+    
     enum Constants
     {
         static let updateTasksScrollMultiplier: CGFloat = 1.8
     }
+    
+    // MARK: - Variables
     
     unowned var dayProvider: DayProvider
     unowned var database: Database
     var previousRows: [Task: Int] = [:]
     var model: CircularProgressIndicatorModel
     var progressIndicator: UIHostingController<CircularProgressIndicator>
+    
+    var tableViewComponent: TodoTableViewComponent?
+    var tabComponent: TabComponent?
     
     // MARK: - Initialization
     
@@ -31,8 +37,12 @@ class TodoController: UIViewController
         self.database = database
         self.model = Self.makeModel()
         self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
+        self.tableViewComponent = .init(context: database.context)
         
         super.init(nibName: nil, bundle: nil)
+        
+        tableViewComponent = .init(context: database.context)
+        tabComponent = .init(tab: .toDo, controller: self)
         
         // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
 //        delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
@@ -43,8 +53,16 @@ class TodoController: UIViewController
 //        tableView.tableHeaderView = progressIndicator.view
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View lifecycle
+    
+    override func loadView()
+    {
+        self.view = tableViewComponent?.tableView
     }
     
     // MARK: - Functions

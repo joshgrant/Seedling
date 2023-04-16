@@ -10,7 +10,8 @@ struct TappableCellView<Content>: View where Content: View
     var label: Content
     var action: () -> Void
     
-    var body: some View {
+    var body: some View
+    {
         let tap = DragGesture(minimumDistance: 0)
             .updating($isTouchingDown, body: { _, isTouchingDown, _ in
                 isTouchingDown = true

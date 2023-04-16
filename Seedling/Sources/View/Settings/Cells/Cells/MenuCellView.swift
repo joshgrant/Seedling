@@ -16,7 +16,8 @@ struct MenuCellView<Option: PickerOption> : View
     {
         SettingsCell(title: title)
         {
-            Menu {
+            Menu
+            {
                 Picker(
                     selection: $selection,
                     label: EmptyView(), // May be an issue in Mac

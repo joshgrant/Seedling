@@ -8,8 +8,8 @@
 
 import UIKit
 
-enum TextStyle {
-    
+enum TextStyle
+{
     case textView
     case sectionHeader
     case hour
@@ -18,8 +18,10 @@ enum TextStyle {
     case mealContent
     case navigationBar
     
-    var textColor: UIColor {
-        switch self {
+    var textColor: UIColor
+    {
+        switch self
+        {
         case .textView, .mealHeader, .navigationBar:
 			return .type(.text)
         case .mealContent:
@@ -29,8 +31,10 @@ enum TextStyle {
         }
     }
     
-    var verticalPadding: CGFloat {
-        switch self {
+    var verticalPadding: CGFloat
+    {
+        switch self
+        {
         case .textView, .mealContent:
             return 12
         default:
@@ -38,8 +42,10 @@ enum TextStyle {
         }
     }
     
-    var horizontalPadding: CGFloat {
-        switch self {
+    var horizontalPadding: CGFloat
+    {
+        switch self
+        {
         case .textView, .mealContent:
             return 10
         default:
@@ -47,8 +53,10 @@ enum TextStyle {
         }
     }
     
-    var fontSize: CGFloat {
-        switch self {
+    var fontSize: CGFloat
+    {
+        switch self
+        {
         case .textView, .mealHeader, .mealContent:
             return 17
 		case .sectionHeader:
@@ -60,10 +68,12 @@ enum TextStyle {
         }
     }
     
-    var font: UIFont {
+    var font: UIFont
+    {
         let font = UIFont.monospacedSystemFont(ofSize: fontSize, weight: .regular)
         
-        switch fontSize {
+        switch fontSize
+        {
         case ...16:
             return UIFontMetrics(forTextStyle: .callout).scaledFont(for: font)
         case 17...:

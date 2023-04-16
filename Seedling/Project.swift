@@ -27,6 +27,7 @@ let project = Project(
               infoPlist: .extendingDefault(with: infoPlistExtension),
               sources: ["Sources/**"],
               resources: ["Resources/**"],
+              entitlements: "Seedling.entitlements",
               coreDataModels: [.init(.relativeToCurrentFile("Sources/Database/Seedling.xcdatamodeld"))]),
         .init(name: "SeedlingTests",
               platform: .iOS,

@@ -108,7 +108,8 @@ class ScheduleCell: UITableViewCell
         // TODO: Create a utility function to set the arranged subviews
         // in an easy way (and absolute)
         
-        if Date.uses12HourTime {
+        if Date.uses12HourTime
+        {
             textStack.addArrangedSubview(Spacer(width: 10))
             textStack.addArrangedSubview(meridiemLabel)
         }
@@ -150,12 +151,15 @@ class ScheduleCell: UITableViewCell
         
         // The schedule hour comes in as a 24-hour time. We just need to
         // format it to see if we use AM/PM
-        if Date.uses12HourTime {
+        if Date.uses12HourTime
+        {
             let twelveHour = schedule?.hour.convert24HourTimeToTwelveHourTime() ?? 0
             hourLabel.text = "\(twelveHour)"
             let text = meridiemText(for: Int(schedule?.hour ?? 0))
             meridiemLabel.text = text
-        } else {
+        }
+        else
+        {
             hourLabel.text = "\(schedule?.hour ?? 0)"
         }
     }

@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol CheckBoxDelegate: AnyObject {
+protocol CheckBoxDelegate: AnyObject
+{
     func checkBoxWillTouchUpInside(_ sender: TaskCell)
     func checkBoxDidTouchUpInside(_ sender: TaskCell)
 }
@@ -24,14 +25,16 @@ class TaskCell: UITableViewCell
     
     var task: Task?
     
-    static var normalTypingAttributes: [NSAttributedString.Key: Any] {
+    static var normalTypingAttributes: [NSAttributedString.Key: Any]
+    {
         return [
             .foregroundColor: TextStyle.textView.textColor,
             .font: TextStyle.textView.font
         ]
     }
     
-    static var strikeThroughTypingAttributes: [NSAttributedString.Key: Any] {
+    static var strikeThroughTypingAttributes: [NSAttributedString.Key: Any]
+    {
         return [
             .foregroundColor: UIColor.placeholderText,
             .strikethroughColor: UIColor.placeholderText,
@@ -86,11 +89,13 @@ class TaskCell: UITableViewCell
 		textView.configure(with: .textView, delegate: self)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with task: Task) {
+    func configure(with task: Task)
+    {
         self.task = task
 		
 		let content = task.content ?? ""
@@ -102,13 +107,16 @@ class TaskCell: UITableViewCell
 		
 		attributedString.addAttribute(.font, value: textStyle.font, range: range)
         
-        if task.completed {
+        if task.completed
+        {
             textView.typingAttributes = Self.strikeThroughTypingAttributes
             checkBox.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
 			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
 			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
-        } else {
+        }
+        else
+        {
             textView.typingAttributes = Self.normalTypingAttributes
             checkBox.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
@@ -126,14 +134,17 @@ class TaskCell: UITableViewCell
         checkBox.accessibilityIdentifier = "todo.checkBox"
     }
     
-    @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
-        
+    @objc func didTouchUpInsideCheckBox(_ sender: UIButton)
+    {
         checkBoxDelegate?.checkBoxWillTouchUpInside(self)
         
         // Assign the opposite accessibility value
-        if task?.completed ?? false {
+        if task?.completed ?? false
+        {
             sender.accessibilityValue = SeedlingStrings.unchecked
-        } else {
+        }
+        else
+        {
             sender.accessibilityValue = SeedlingStrings.checked
         }
         
@@ -149,14 +160,17 @@ class TaskCell: UITableViewCell
         }
     }
     
-    override func accessibilityActivate() -> Bool {
+    override func accessibilityActivate() -> Bool
+    {
         textView.becomeFirstResponder()
         return true
     }
     
-    override func accessibilityIncrement() {
+    override func accessibilityIncrement()
+    {
         checkBox.accessibilityValue = SeedlingStrings.checked
-        database?.context.perform {
+        database?.context.perform
+        {
             self.task?.completed = true
             if let task = self.task
             {
@@ -166,9 +180,11 @@ class TaskCell: UITableViewCell
         }
     }
     
-    override func accessibilityDecrement() {
+    override func accessibilityDecrement()
+    {
         checkBox.accessibilityValue = SeedlingStrings.unchecked
-        database?.context.perform {
+        database?.context.perform
+        {
             self.task?.completed = false
             if let task = self.task
             {
@@ -179,29 +195,37 @@ class TaskCell: UITableViewCell
     }
 }
 
-extension TaskCell: UITextViewDelegate {
-	
-	func textViewDidBeginEditing(_ textView: UITextView) {
+extension TaskCell: UITextViewDelegate
+{
+	func textViewDidBeginEditing(_ textView: UITextView)
+    {
 		delegate?.textViewDidBeginEditing(textView, in: self)
 	}
     
     // Not called with programmatic changes, just fyi
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView)
+    {
         delegate?.textViewDidChange(textView, in: self)
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        database?.context.perform {
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        database?.context.perform
+        {
             self.task?.content = textView.text
             self.database?.save()
         }
 		delegate?.textViewDidEndEditing(textView, in: self)
     }
 	
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false
+        {
 			return false
-		} else {
+		}
+        else
+        {
 			return true
 		}
 	}

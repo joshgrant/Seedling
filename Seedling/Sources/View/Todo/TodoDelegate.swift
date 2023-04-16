@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol TodoDismissalDelegate {
+protocol TodoDismissalDelegate
+{
     func shouldStopEditing()
 }
 
@@ -100,10 +101,12 @@ class TodoDelegate: TabContentDelegate
 		return view
 	}
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
         if indexPath == editingIndexPath
         {
-            if let cell = cell as? TaskCell {
+            if let cell = cell as? TaskCell
+            {
                 cell.textView.becomeFirstResponder()
             }
         }

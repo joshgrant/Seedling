@@ -15,7 +15,8 @@ class ScheduleDelegate: TabContentDelegate
 		scrollView.endEditing(false)
 	}
 	
-	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
 		return 0
 	}
 	

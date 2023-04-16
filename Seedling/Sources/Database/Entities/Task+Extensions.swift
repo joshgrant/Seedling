@@ -31,7 +31,8 @@ extension Task
         return task
     }
     
-    static func allUnfinishedHistoricalTasks(in context: Context) -> [Task] {
+    static func allUnfinishedHistoricalTasks(in context: Context) -> [Task]
+    {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
         request.predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
         

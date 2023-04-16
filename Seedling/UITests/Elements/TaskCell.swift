@@ -33,7 +33,8 @@ class TaskCell: BaseElement
     
     // MARK: - Initialization
     
-    init(in view: XCUIElement, app: XCUIApplication) {
+    init(in view: XCUIElement, app: XCUIApplication)
+    {
         self.app = app
         super.init(in: view)
     }
@@ -42,7 +43,8 @@ class TaskCell: BaseElement
     
     func setDone(to done: Bool)
     {
-        if isDone != done {
+        if isDone != done
+        {
             doneButton.tap()
         }
     }

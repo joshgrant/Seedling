@@ -27,7 +27,8 @@ class ExtrasDelegate: TabContentDelegate
 		}
 	}
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         switch section
         {
         case 4:
@@ -37,7 +38,8 @@ class ExtrasDelegate: TabContentDelegate
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
         switch section
         {
         case 4:

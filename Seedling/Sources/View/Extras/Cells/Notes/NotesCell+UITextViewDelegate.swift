@@ -8,17 +8,20 @@
 
 import UIKit
 
-extension NotesCell: UITextViewDelegate {
-	
-	func textViewDidBeginEditing(_ textView: UITextView) {
+extension NotesCell: UITextViewDelegate
+{
+	func textViewDidBeginEditing(_ textView: UITextView)
+    {
 		delegate?.textViewDidBeginEditing(textView, in: self)
 	}
 	
-	func textViewDidChange(_ textView: UITextView) {
+	func textViewDidChange(_ textView: UITextView)
+    {
 		delegate?.textViewDidChange(textView, in: self)
 	}
 	
-	func textViewDidEndEditing(_ textView: UITextView) {
+	func textViewDidEndEditing(_ textView: UITextView)
+    {
 		self.note?.content = textView.text
         database?.save()
 		delegate?.textViewDidEndEditing(textView, in: self)

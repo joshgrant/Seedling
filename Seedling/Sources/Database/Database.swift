@@ -10,8 +10,8 @@ import CoreData
 
 typealias Context = NSManagedObjectContext
 
-class Database {
-    
+class Database
+{
     // MARK: - Variables
     
     var containerName: String
@@ -19,7 +19,8 @@ class Database {
     lazy var container: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: containerName)
         container.loadPersistentStores { (description, error) in
-            if let error = error {
+            if let error = error
+            {
                 assertionFailure(error.localizedDescription)
             }
         }
@@ -41,15 +42,19 @@ class Database {
     {
         self.containerName = containerName
         Self.testInit()
+        populateWithDefaultData()
     }
     
     static func testInit()
     {
         print(self)
     }
+}
+
+// MARK: - Database operations
     
-    // MARK: - Database operations
-    
+extension Database
+{
     func save()
     {
         if context.hasChanges
@@ -92,6 +97,8 @@ class Database {
     }
 }
 
+// MARK: - Testable
+
 extension Database: Testable
 {
     func prepare()
@@ -108,5 +115,22 @@ extension Database: Testable
     func cleanup()
     {
         
+    }
+}
+
+// MARK: - Data population
+
+extension Database
+{
+    func populateWithDefaultData()
+    {
+        if Defaults.hasPopulatedDefaultData { return }
+        
+        let priority = TaskSection(context: context)
+        let tasks = TaskSection(context: context)
+        
+        save()
+        
+        Defaults.hasPopulatedDefaultData = true
     }
 }

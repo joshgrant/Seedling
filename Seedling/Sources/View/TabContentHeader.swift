@@ -89,7 +89,8 @@ class TabContentHeader: UIView
         let leftSpacer = Spacer()
         let rightSpacer = Spacer()
         
-        if let button = button {
+        if let button = button
+        {
             let buttonStack = UIStackView()
             buttonStack.addArrangedSubview(Spacer(width: 10))
             buttonStack.addArrangedSubview(button)

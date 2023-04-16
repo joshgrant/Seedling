@@ -29,7 +29,8 @@ extension Date
 		return NSPredicate(format: "date >= %@ AND date =< %@", argumentArray: [startDate!, endDate!])
 	}
     
-    static var uses12HourTime: Bool {
+    static var uses12HourTime: Bool
+    {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .medium
