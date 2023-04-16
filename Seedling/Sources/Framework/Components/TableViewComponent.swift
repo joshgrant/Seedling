@@ -45,9 +45,17 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     {
         self.context = context
         let tableView = UITableView()
+        tableView.separatorStyle = .none
+        // TODO: Not great...
+        tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCellIdentifier")
+        tableView.register(TaskSectionCell.self, forCellReuseIdentifier: "taskSectionCellIdentifier")
         
-        self.dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, item in
-            switch item
+        self.dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, id in
+            
+            guard let id = id as? NSManagedObjectID else { fatalError() }
+            let object = context.object(with: id)
+            
+            switch object
             {
             case let task as Task:
                 let cell = tableView.dequeueReusableCell(withIdentifier: task.identifier, for: indexPath)
