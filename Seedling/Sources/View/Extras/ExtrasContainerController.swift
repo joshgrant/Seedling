@@ -84,10 +84,11 @@ class ExtrasContainerController: UIViewController
         var transform = CATransform3DIdentity
         transform.m34 = -1 / 2000
         
-        let maxDelta: CGFloat = view.window?.screen.bounds.width ?? 0
-        let percent = delta / maxDelta
-        let interpolatedValue = (maxDelta - delta) * percent
-        return CATransform3DTranslate(transform, 0, 0, interpolatedValue * -10)
+        let offset = (view.bounds.width - abs(delta)) / view.bounds.width
+        let zTranslate = -100 * offset
+        let xTranslate = 100 * offset
+        
+        return CATransform3DTranslate(transform, xTranslate, 0, zTranslate)
     }
     
     // MARK: - Factory
@@ -109,7 +110,11 @@ class ExtrasContainerController: UIViewController
     @objc func handleScreenEdgeSwipe(_ gesture: UIScreenEdgePanGestureRecognizer)
     {
         let x: CGFloat = gesture.location(in: view).x
-        let delta = previousX - x
+        let velocity = gesture.velocity(in: view)
+        
+        // TODO: Use the velocity
+        
+        let delta = x - previousX
         
         switch gesture.state
         {
@@ -117,21 +122,14 @@ class ExtrasContainerController: UIViewController
             previousX = x
         case .changed:
             settingsController.view.transform3D = transform(with: delta)
-            extrasController.view.transform = .init(translationX: -delta, y: 0)
+            extrasController.view.transform = .init(translationX: delta, y: 0)
         case .recognized:
-            // TODO: Switch tabs after the animation completes
-            // and reset the alpha to 1
-            UIView.animate(withDuration: 3.0) {
-                self.extrasController.view.alpha = 0
-            }
-            
-            NotificationCenter.default.post(name: .requestShowSettings, object: nil)
+            NotificationCenter.default.post(name: .requestShowSettings, object: ["switch_to_settings": true])
             
             UIView.animate(withDuration: 0.5) {
                 self.extrasController.view.alpha = 0
                 self.settingsController.view.transform3D = CATransform3DIdentity
             } completion: { success in
-                self.tabBarController?.selectedIndex = 3
                 self.extrasController.view.alpha = 1
                 self.extrasController.view.transform = .identity
             }
@@ -147,6 +145,12 @@ class ExtrasContainerController: UIViewController
 
 extension ExtrasContainerController: UIGestureRecognizerDelegate
 {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool
+    {
+//        if Settings.hideSettings { return false }
+        return true
+    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool
     {
         true

@@ -35,7 +35,14 @@ class MainTabBarController: UITabBarController
         
         super.init(coder: Coder())
         
-        setViewControllers([todo, schedule, extras, settings], animated: false)
+        if Settings.hideSettings
+        {
+            setViewControllers([todo, schedule, extras], animated: false)
+        }
+        else
+        {
+            setViewControllers([todo, schedule, extras, settings], animated: false)
+        }
         
         configureTabBar()
         
@@ -164,19 +171,22 @@ class MainTabBarController: UITabBarController
     public func registerForNotifications()
     {
         NotificationCenter.default.addObserver(
-            forName: .requestHideSettings,
-            object: nil,
-            queue: .main) { [unowned self] notification in
-                // TODO: This should be handled in the model, not in the view
-                setViewControllers([todo, schedule, extras], animated: true)
-            }
-        
-        NotificationCenter.default.addObserver(
             forName: .requestShowSettings,
             object: nil,
             queue: .main) { [unowned self] notification in
                 // TODO: This should be handled in the model, not in the view
-                setViewControllers([todo, schedule, extras, settings], animated: true)
+                setViewControllers([todo, schedule, extras, settings], animated: false)
+                
+                if let object = notification.object as? [String: Any]
+                {
+                    if let shouldSwitch = object["switch_to_settings"] as? Bool
+                    {
+                        if shouldSwitch
+                        {
+                            self.selectedIndex = 3
+                        }
+                    }
+                }
             }
     }
     
@@ -195,5 +205,16 @@ class MainTabBarController: UITabBarController
     @objc func didTouchUpInsideNavigationBar(_ sender: UITapGestureRecognizer)
     {
         dayProvider.day = dayProvider.today
+    }
+}
+
+extension MainTabBarController
+{
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem)
+    {
+        if Settings.hideSettings && item.tag != 3
+        {
+            setViewControllers([todo, schedule, extras], animated: true)
+        }
     }
 }

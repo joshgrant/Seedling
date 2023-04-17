@@ -40,18 +40,6 @@ class SettingsSection: Identifiable
                 subtitle: Strings.toAccessSettings,
                 action: { isOn in
                     Settings.hideSettings = isOn
-                    if isOn
-                    {
-                        NotificationCenter.default.post(
-                            name: .requestHideSettings,
-                            object: nil)
-                    }
-                    else
-                    {
-                        NotificationCenter.default.post(
-                            name: .requestShowSettings,
-                            object: nil)
-                    }
                 }),
             CheckboxCellModel(
                 isOn: Settings.monospacedFont,
