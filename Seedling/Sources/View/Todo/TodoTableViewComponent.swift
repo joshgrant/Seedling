@@ -37,6 +37,7 @@ class TodoTableViewComponent: NSObject, TableViewComponent
         tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCellIdentifier")
         tableView.register(TaskSectionCell.self, forCellReuseIdentifier: "taskSectionCellIdentifier")
         
+        // TODO: With no cells in a section, the section itself is hidden
         self.dataSource = .init(tableView: tableView, cellProvider: { tableView, indexPath, id in
         print(id)
            fatalError("")
