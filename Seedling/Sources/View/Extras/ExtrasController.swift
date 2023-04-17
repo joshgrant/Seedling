@@ -7,18 +7,10 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ExtrasController: TabContentController
 {
-    // MARK: - Variables
-    
-    lazy var screenEdgeSwipeGesture: UIScreenEdgePanGestureRecognizer = {
-        let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleScreenEdgeSwipe))
-        gesture.edges = .right
-        gesture.delegate = self
-        return gesture
-    }()
-    
     // MARK: - Initialization
     
     override init?(dayProvider: DayProvider, database: Database)
@@ -28,16 +20,6 @@ class ExtrasController: TabContentController
     }
     
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.addGestureRecognizer(screenEdgeSwipeGesture)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        view.removeGestureRecognizer(screenEdgeSwipeGesture)
-    }
     
     // MARK: - Factory
     
@@ -110,28 +92,5 @@ extension ExtrasController: CellTextViewDelegate
         //		textView.resignFirstResponder()
         //		return true
         return false // Allow the user to enter new lines
-    }
-    
-    // MARK: - Actions
-    
-    @objc func handleScreenEdgeSwipe(_ sender: UIScreenEdgePanGestureRecognizer)
-    {
-        // TODO: Slide the view over and reveal the settings screen behind it...
-        // Once they let go, switch over to the settings screen...
-        switch sender.state
-        {
-        case .recognized:
-            print("SCREEN EDGE SWIPE!!!")
-        default:
-            print("NON")
-        }
-    }
-}
-
-extension ExtrasController: UIGestureRecognizerDelegate
-{
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool
-    {
-        return true
     }
 }

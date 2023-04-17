@@ -18,7 +18,7 @@ class MainTabBarController: UITabBarController
     
     var todo: TodoController
     var schedule: ScheduleController
-    var extras: ExtrasController
+    var extras: ExtrasContainerController
     var settings: SettingsController
     
     // MARK: - Initialization
@@ -30,7 +30,7 @@ class MainTabBarController: UITabBarController
         
         todo = TodoController(dayProvider: dayProvider, database: database)!
         schedule = ScheduleController(dayProvider: dayProvider, database: database)!
-        extras = ExtrasController(dayProvider: dayProvider, database: database)!
+        extras = ExtrasContainerController(dayProvider: dayProvider, database: database)
         settings = SettingsController(model: .init())
         
         super.init(coder: Coder())
@@ -164,18 +164,19 @@ class MainTabBarController: UITabBarController
     public func registerForNotifications()
     {
         NotificationCenter.default.addObserver(
-            forName: .hideSettingsDidToggle,
+            forName: .requestHideSettings,
             object: nil,
             queue: .main) { [unowned self] notification in
                 // TODO: This should be handled in the model, not in the view
-                if Settings.hideSettings
-                {
-                    setViewControllers([todo, schedule, extras], animated: true)
-                }
-                else
-                {
-                    setViewControllers([todo, schedule, extras, settings], animated: true)
-                }
+                setViewControllers([todo, schedule, extras], animated: true)
+            }
+        
+        NotificationCenter.default.addObserver(
+            forName: .requestShowSettings,
+            object: nil,
+            queue: .main) { [unowned self] notification in
+                // TODO: This should be handled in the model, not in the view
+                setViewControllers([todo, schedule, extras, settings], animated: true)
             }
     }
     

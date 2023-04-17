@@ -6,7 +6,8 @@ extension Notification.Name
 {
     // MARK: - Settings notifications
     
-    static let hideSettingsDidToggle = Notification.Name("hideSettingsDidToggle")
+    static let requestShowSettings = Notification.Name("requestShowSettings")
+    static let requestHideSettings = Notification.Name("requestHideSettings")
     static let monospacedFontDidToggle = Notification.Name("monospacedFontDidToggle")
     static let lowercaseTextDidToggle = Notification.Name("lowercaseTextDidToggle")
     static let formatNotesWithMarkdownDidToggle = Notification.Name("formatNotesWithMarkdownDidToggle")

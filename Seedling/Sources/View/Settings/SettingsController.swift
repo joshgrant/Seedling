@@ -7,14 +7,12 @@ class SettingsController: UIHostingController<SettingsView>
 {
     // MARK: - Initialization
     
+    var tabComponent: TabModule?
+    
     init(model: SettingsViewModel)
     {
         super.init(rootView: SettingsView(model: model))
-        
-        tabBarItem = UITabBarItem(
-            title: SeedlingStrings.settings,
-            image: SeedlingAsset.settingsUnselected.image,
-            selectedImage: SeedlingAsset.settingsSelected.image)
+        tabComponent = .init(tab: .settings, controller: self)
     }
     
     @MainActor required dynamic init?(coder aDecoder: NSCoder)
