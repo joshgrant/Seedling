@@ -3,18 +3,44 @@
 import UIKit
 import SwiftUI
 
+// 1. When the view loads, take snapshots of the primary and secondary controllers
+// 2. When the gesture begins, make the snapshots visible and interactible
+// 3. When the gesture ends, animate the snapshots to their final place and then swap out the screens
+
+/// This is stored as a property on the view that needs to have the screen edge swipe (the extras controller)
+class ScreenEdgeTabSwitchComponent
+{
+    // MARK: - Variables
+    
+    private weak var viewController: UIViewController?
+    private weak var secondaryController: UIViewController?
+    
+    // MARK: - Initialization
+    
+    init(viewController: UIViewController, secondaryController: UIViewController)
+    {
+        self.viewController = viewController
+        self.secondaryController = secondaryController
+    }
+    
+    private func makeSnapshot(with controller: UIViewController) -> UIImage
+    {
+        let frame = controller.view.bounds
+        let renderer = UIGraphicsImageRenderer(bounds: frame)
+        return renderer.image { context in
+            controller.view.draw(frame)
+        }
+    }
+}
+
 class ScreenEdgeContainerController: UIViewController
 {
-    // MARK: - Types
-    
-    typealias ControllerClosure = () -> UIViewController
-    
     // MARK: - Variables
     
     private var initialX: CGFloat = 0
     
-    private var makePrimaryController: ControllerClosure
-    private var makeSecondaryController: ControllerClosure
+    private var primaryController: UIViewController
+    private var secondaryController: UIViewController
     
     private lazy var screenEdgeSwipeGesture: UIScreenEdgePanGestureRecognizer = {
         let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleScreenEdgeSwipe))
@@ -25,7 +51,7 @@ class ScreenEdgeContainerController: UIViewController
     
     // MARK: - Initialization
     
-    init(makePrimaryController: @escaping ControllerClosure, makeSecondaryController: @escaping ControllerClosure)
+    init(makePrimaryController: UIViewController, makeSecondaryController: UIViewController)
     {
         self.makePrimaryController = makePrimaryController
         self.makeSecondaryController = makeSecondaryController
