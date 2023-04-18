@@ -88,7 +88,7 @@ class ExtrasContainerController: UIViewController
         let zTranslate = -100 * offset
         let xTranslate = 100 * offset
         
-        return CATransform3DTranslate(transform, xTranslate, 0, zTranslate)
+        return CATransform3DTranslate(transform, xTranslate, 0, 0)
     }
     
     // MARK: - Factory
@@ -116,6 +116,8 @@ class ExtrasContainerController: UIViewController
         
         let delta = x - previousX
         
+        print(x + velocity.x)
+        
         switch gesture.state
         {
         case .began:
@@ -123,21 +125,45 @@ class ExtrasContainerController: UIViewController
         case .changed:
             settingsController.view.transform3D = transform(with: delta)
             extrasController.view.transform = .init(translationX: delta, y: 0)
-        case .recognized:
-            NotificationCenter.default.post(name: .requestShowSettings, object: ["switch_to_settings": true])
-            
-            UIView.animate(withDuration: 0.5) {
-                self.extrasController.view.alpha = 0
-                self.settingsController.view.transform3D = CATransform3DIdentity
-            } completion: { success in
-                self.extrasController.view.alpha = 1
-                self.extrasController.view.transform = .identity
-            }
-
         case .cancelled:
             // Animate this
             extrasController.view.transform = .identity
-        default:
+        case .ended:
+            
+            // Animate to the settings page
+            if (x + velocity.x) < 0
+            {
+                
+                let velocity = abs(velocity.x / view.bounds.width)
+                let extrasTransform = CGAffineTransform(translationX: -view.bounds.width, y: 0)
+                
+                UIView.animate(
+                    withDuration: 0.5,
+                    delay: 0,
+                    usingSpringWithDamping: 1,
+                    initialSpringVelocity: velocity,
+                    options: [.beginFromCurrentState, .curveEaseInOut],
+                    animations: {
+//                        self.extrasController.view.alpha = 0
+                        self.extrasController.view.transform = extrasTransform
+                        self.settingsController.view.transform3D = CATransform3DIdentity
+                    },
+                    completion: { _ in
+                        self.extrasController.view.alpha = 1
+                        self.extrasController.view.transform = .identity
+                        NotificationCenter.default.post(name: .requestShowSettings, object: ["switch_to_settings": true])
+                    })
+            }
+            else
+            {
+                UIView.animate(withDuration: 0.2) {
+                    self.extrasController.view.alpha = 1
+                    self.extrasController.view.transform = .identity
+                } completion: { success in
+                }
+            }
+
+        @unknown default:
             break
         }
     }
