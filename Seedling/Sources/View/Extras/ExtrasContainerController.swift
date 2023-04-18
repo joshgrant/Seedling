@@ -54,14 +54,26 @@ class ExtrasContainerController: UIViewController
         // TODO: Reduce this duplication
         
         addChild(settingsController)
-        settingsController.view.frame = view.frame
         view.addSubview(settingsController.view)
+        settingsController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            settingsController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            settingsController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            settingsController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            settingsController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
         settingsController.didMove(toParent: self)
         settingsController.view.transform3D = self.transform(with: 0)
         
         addChild(extrasController)
-        extrasController.view.frame = view.frame
         view.addSubview(extrasController.view)
+        extrasController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            extrasController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            extrasController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            extrasController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            extrasController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
         extrasController.didMove(toParent: self)
     }
     
