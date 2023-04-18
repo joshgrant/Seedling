@@ -2,6 +2,8 @@
 
 import UIKit
 
+protocol 
+
 class TabModule
 {
     // MARK: - Variables

@@ -3,25 +3,38 @@
 import UIKit
 import SwiftUI
 
-/// Contains the Extras controller so we can do screen-edge swiping on in
-class ExtrasContainerController: UIViewController
+class ScreenEdgeContainerController: UIViewController
 {
+    // MARK: - Types
+    
+    typealias ControllerClosure = () -> UIViewController
+    
     // MARK: - Variables
     
-    var dayProvider: DayProvider
-    var database: Database
+    private var initialX: CGFloat = 0
     
-    private var extrasController: ExtrasController
-    private var settingsController: UIHostingController<SettingsView>
+    private var makePrimaryController: ControllerClosure
+    private var makeSecondaryController: ControllerClosure
     
-    private var previousX: CGFloat = 0
-    
-    lazy var screenEdgeSwipeGesture: UIScreenEdgePanGestureRecognizer = {
+    private lazy var screenEdgeSwipeGesture: UIScreenEdgePanGestureRecognizer = {
         let gesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleScreenEdgeSwipe))
         gesture.edges = .right
         gesture.delegate = self
         return gesture
     }()
+    
+    // MARK: - Initialization
+    
+    init(makePrimaryController: @escaping ControllerClosure, makeSecondaryController: @escaping ControllerClosure)
+    {
+        self.makePrimaryController = makePrimaryController
+        self.makeSecondaryController = makeSecondaryController
+    }
+}
+
+class ExtrasContainerController: UIViewController
+{
+    // MARK: - Variables
     
     var tabComponent: TabModule?
     
