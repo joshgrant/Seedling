@@ -50,6 +50,8 @@ struct SettingsView: View
                 }
             }
             .onDisappear {
+                // We scroll to the top on disappear because we want to reset the settings view
+                // state the next time we tap on the tab
                 proxy.scrollTo(model.sections[0].id)
             }
         }
