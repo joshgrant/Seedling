@@ -68,6 +68,12 @@ class ExtrasContainerController: UIViewController
         addChild(extrasController)
         view.addSubview(extrasController.view)
         extrasController.view.translatesAutoresizingMaskIntoConstraints = false
+        extrasController.view.layer.shadowRadius = 30
+        extrasController.view.layer.shadowOffset = .init(width: 10, height: 0)
+        extrasController.view.layer.shadowOpacity = 1
+        extrasController.view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+        extrasController.view.layer.masksToBounds = false
+        extrasController.view.clipsToBounds = false
         NSLayoutConstraint.activate([
             extrasController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             extrasController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -97,7 +103,6 @@ class ExtrasContainerController: UIViewController
         transform.m34 = -1 / 2000
         
         let offset = (view.bounds.width - abs(delta)) / view.bounds.width
-        let zTranslate = -100 * offset
         let xTranslate = 100 * offset
         
         return CATransform3DTranslate(transform, xTranslate, 0, 0)
@@ -126,9 +131,7 @@ class ExtrasContainerController: UIViewController
         
         // TODO: Use the velocity
         
-        let delta = x - previousX
-        
-        print(x + velocity.x)
+        let delta = min(0, x - previousX)
         
         switch gesture.state
         {
@@ -145,7 +148,6 @@ class ExtrasContainerController: UIViewController
             // Animate to the settings page
             if (x + velocity.x) < 0
             {
-                
                 let velocity = abs(velocity.x / view.bounds.width)
                 let extrasTransform = CGAffineTransform(translationX: -view.bounds.width, y: 0)
                 
@@ -156,12 +158,13 @@ class ExtrasContainerController: UIViewController
                     initialSpringVelocity: velocity,
                     options: [.beginFromCurrentState, .curveEaseInOut],
                     animations: {
-//                        self.extrasController.view.alpha = 0
+                        self.extrasController.view.layer.shadowOpacity = 0
                         self.extrasController.view.transform = extrasTransform
                         self.settingsController.view.transform3D = CATransform3DIdentity
                     },
                     completion: { _ in
                         self.extrasController.view.alpha = 1
+                        self.extrasController.view.layer.shadowOpacity = 1
                         self.extrasController.view.transform = .identity
                         NotificationCenter.default.post(name: .requestShowSettings, object: ["switch_to_settings": true])
                     })
@@ -174,8 +177,7 @@ class ExtrasContainerController: UIViewController
                 } completion: { success in
                 }
             }
-
-        @unknown default:
+        default:
             break
         }
     }

@@ -16,36 +16,41 @@ struct SettingsView: View
     
     var body: some View
     {
-        ScrollView
-        {
-            LazyVStack(spacing: 0, pinnedViews: .sectionHeaders)
+        ScrollViewReader { proxy in
+            ScrollView
             {
-                ForEach(model.sections, id: \.id) { section in
-                    Section(header: SectionHeader(title: section.title)) {
-                        ForEach(section.items, id: \.id) { item in
-                            switch item
-                            {
-                            case let model as CheckboxCellModel:
-                                CheckboxCellView(model: model)
-                            case let model as TappableCellModel:
-                                TappableCellView(model: model) {
-                                    Image(systemName: "chevron.right")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(height: chevronHeight)
+                LazyVStack(spacing: 0, pinnedViews: .sectionHeaders)
+                {
+                    ForEach(model.sections, id: \.id) { section in
+                        Section(header: SectionHeader(title: section.title)) {
+                            ForEach(section.items, id: \.id) { item in
+                                switch item
+                                {
+                                case let model as CheckboxCellModel:
+                                    CheckboxCellView(model: model)
+                                case let model as TappableCellModel:
+                                    TappableCellView(model: model) {
+                                        Image(systemName: "chevron.right")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(height: chevronHeight)
+                                    }
+                                case let model as SegmentedCellModel<DurationPickerOption>:
+                                    SegmentedCellView<DurationPickerOption>(model: model)
+                                case let model as MenuCellModel<WaterPickerOption>:
+                                    MenuCellView<WaterPickerOption>(model: model)
+                                case let model as CenterButtonCellModel:
+                                    CenterButtonCellView(model: model)
+                                default:
+                                    EmptyView()
                                 }
-                            case let model as SegmentedCellModel<DurationPickerOption>:
-                                SegmentedCellView<DurationPickerOption>(model: model)
-                            case let model as MenuCellModel<WaterPickerOption>:
-                                MenuCellView<WaterPickerOption>(model: model)
-                            case let model as CenterButtonCellModel:
-                                CenterButtonCellView(model: model)
-                            default:
-                                EmptyView()
                             }
                         }
                     }
                 }
+            }
+            .onDisappear {
+                proxy.scrollTo(model.sections[0].id)
             }
         }
     }
