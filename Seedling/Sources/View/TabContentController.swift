@@ -133,7 +133,8 @@ class TabContentController: UIViewController
 	
 	func configureView()
 	{
-		view = tableView
+		view = UIView()
+        view.embed(view: tableView)
 	}
 	
 	func configureNavigationItemTitle()

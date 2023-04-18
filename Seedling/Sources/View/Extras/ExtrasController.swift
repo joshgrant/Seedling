@@ -13,9 +13,14 @@ class ExtrasController: TabContentController
 {
     // MARK: - Initialization
     
-    override init?(dayProvider: DayProvider, database: Database)
+    private var screenEdgeTabSwitchComponent: ScreenEdgeTabSwitchComponent?
+    
+    // MARK: - Initialization
+    
+    init?(settingsController: UIViewController, dayProvider: DayProvider, database: Database)
     {
         super.init(dayProvider: dayProvider, database: database)
+        self.screenEdgeTabSwitchComponent = .init(viewController: self, secondaryController: settingsController)
         configureDataSource()
     }
     

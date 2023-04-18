@@ -34,4 +34,14 @@ extension UIView
         
         return (top, right, bottom, leading)
     }
+    
+    func snapshot(afterScreenUpdates: Bool = true) -> UIImage
+    {
+        // TODO: This isn't rendering UI visual effects views because it's the window that hosts the effects views,
+        // which means we need to take a snapshot of the entire window...
+        UIGraphicsImageRenderer(bounds: bounds).image { context in
+            layer.render(in: context.cgContext)
+            drawHierarchy(in: bounds, afterScreenUpdates: afterScreenUpdates)
+        }
+    }
 }

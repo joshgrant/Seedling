@@ -18,7 +18,7 @@ class MainTabBarController: UITabBarController
     
     var todo: TodoController
     var schedule: ScheduleController
-    var extras: ExtrasContainerController
+    var extras: ExtrasController
     var settings: SettingsController
     
     // MARK: - Initialization
@@ -28,10 +28,11 @@ class MainTabBarController: UITabBarController
         self.dayProvider = dayProvider
         self.database = database
         
+        settings = SettingsController(model: .init())
+        
         todo = TodoController(dayProvider: dayProvider, database: database)!
         schedule = ScheduleController(dayProvider: dayProvider, database: database)!
-        extras = ExtrasContainerController(dayProvider: dayProvider, database: database)
-        settings = SettingsController(model: .init())
+        extras = ExtrasController(settingsController: settings, dayProvider: dayProvider, database: database)!
         
         super.init(coder: Coder())
         
