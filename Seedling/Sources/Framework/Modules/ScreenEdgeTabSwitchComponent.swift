@@ -94,12 +94,12 @@ class ScreenEdgeTabSwitchComponent: NSObject
         case .began:
             initialAnimationData = animationData
             
-            let secondarySnapshot = Self.makeSnapshotImageView(with: secondaryController)
+            let secondarySnapshot = Self.makeSnapshotView(with: secondaryController)
             secondarySnapshot.transform = secondaryUpdateTransform(delta: initialAnimationData, view: view)
             view.embed(view: secondarySnapshot)
             self.secondarySnapshot = secondarySnapshot
             
-            let primarySnapshot = Self.makeSnapshotImageView(with: viewController, shadow: true)
+            let primarySnapshot = Self.makeSnapshotView(with: viewController, shadow: true)
             view.embed(view: primarySnapshot)
             self.primarySnapshot = primarySnapshot
         case .changed:
@@ -191,22 +191,21 @@ extension ScreenEdgeTabSwitchComponent
 
 extension ScreenEdgeTabSwitchComponent
 {
-    private static func makeSnapshotImageView(with controller: UIViewController, shadow: Bool = false) -> UIImageView
+    private static func makeSnapshotView(with controller: UIViewController, shadow: Bool = false) -> UIView
     {
-        let image = controller.view.snapshot(afterScreenUpdates: false)
-        let imageView = UIImageView(image: image)
-
+        guard let view = controller.view.snapshotView(afterScreenUpdates: false) else { return UIView() }
+        
         if shadow
         {
-            imageView.layer.shadowRadius = 30
-            imageView.layer.shadowOffset = .init(width: 10, height: 0)
-            imageView.layer.shadowOpacity = 1
-            imageView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
-            imageView.layer.masksToBounds = false
-            imageView.clipsToBounds = false
+            view.layer.shadowRadius = 30
+            view.layer.shadowOffset = .init(width: 10, height: 0)
+            view.layer.shadowOpacity = 1
+            view.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
+            view.layer.masksToBounds = false
+            view.clipsToBounds = false
         }
-
-        return imageView
+        
+        return view
     }
     
     private func relativeVelocity(gestureVelocityX: CGFloat, view: UIView) -> CGFloat

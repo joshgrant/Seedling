@@ -9,6 +9,8 @@
 import UIKit
 import SwiftUI
 
+// TODO: This tab bar controller needs a view model
+
 class MainTabBarController: UITabBarController
 {
     // MARK: - Variables
@@ -35,19 +37,6 @@ class MainTabBarController: UITabBarController
         extras = ExtrasController(settingsController: settings, dayProvider: dayProvider, database: database)!
         
         super.init(coder: Coder())
-        
-        if Settings.hideSettings
-        {
-            setViewControllers([todo, schedule, extras], animated: false)
-        }
-        else
-        {
-            setViewControllers([todo, schedule, extras, settings], animated: false)
-        }
-        
-        configureTabBar()
-        
-        registerForNotifications()
     }
     
     required init?(coder: NSCoder)
@@ -59,13 +48,20 @@ class MainTabBarController: UITabBarController
     {
         super.viewDidLoad()
         selectedIndex = 0
-    }
-    
-    override func viewWillAppear(_ animated: Bool)
-    {
-        super.viewWillAppear(animated)
+        
+        if Settings.hideSettings
+        {
+            configureTabBarWithSwipableSettingsTab(animated: false)
+        }
+        else
+        {
+            configureTabBarWithVisibleSettingsTab(animated: false)
+        }
+        
+        configureTabBar()
         configureNavigationBar()
         configureNavigationItem()
+        registerForNotifications()
     }
     
     // MARK: - Configuration
@@ -167,6 +163,36 @@ class MainTabBarController: UITabBarController
         return gestureRecognizer
     }
     
+    func configureTabBarWithSwipableSettingsTab(animated: Bool)
+    {
+        // Make sure settings is in the view hierarchy so we can render it
+        addChild(settings)
+        view.insertSubview(settings.view, at: 0)
+        settings.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            settings.view.topAnchor.constraint(equalTo: view.topAnchor),
+            settings.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            settings.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            settings.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        settings.didMove(toParent: self)
+        
+        setViewControllers([todo, schedule, extras], animated: animated)
+    }
+    
+    func configureTabBarWithVisibleSettingsTab(animated: Bool)
+    {
+        // Remove settings from the view hierarchy because it'll be a tab
+        settings.willMove(toParent: nil)
+        settings.view.removeFromSuperview()
+        settings.removeFromParent()
+        settings.view.translatesAutoresizingMaskIntoConstraints = true
+        settings.view.removeConstraints(settings.view.constraints)
+        
+        setViewControllers([todo, schedule, extras, settings], animated: animated)
+    }
+    
     // MARK: - Notifications
     
     public func registerForNotifications()
@@ -175,8 +201,7 @@ class MainTabBarController: UITabBarController
             forName: .requestShowSettings,
             object: nil,
             queue: .main) { [unowned self] notification in
-                // TODO: This should be handled in the model, not in the view
-                setViewControllers([todo, schedule, extras, settings], animated: false)
+                configureTabBarWithVisibleSettingsTab(animated: false)
                 
                 if let object = notification.object as? [String: Any]
                 {
@@ -215,7 +240,7 @@ extension MainTabBarController
     {
         if Settings.hideSettings && item.tag != 3
         {
-            setViewControllers([todo, schedule, extras], animated: true)
+            configureTabBarWithSwipableSettingsTab(animated: true)
         }
     }
 }
