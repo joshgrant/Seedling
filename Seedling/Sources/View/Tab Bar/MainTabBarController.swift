@@ -71,19 +71,24 @@ class MainTabBarController: UITabBarController
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = SeedlingAsset.emerald.color
         
+        let titleTextAttributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.systemBackground,
+            .paragraphStyle: NSParagraphStyle.default
+        ]
+        
         // When the icon is stacked above the image
-        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
-        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = titleTextAttributes
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = titleTextAttributes
         appearance.stackedLayoutAppearance.normal.iconColor = .systemBackground
         appearance.stackedLayoutAppearance.selected.iconColor = .systemBackground
         
-        appearance.inlineLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
-        appearance.inlineLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
+        appearance.inlineLayoutAppearance.selected.titleTextAttributes = titleTextAttributes
+        appearance.inlineLayoutAppearance.normal.titleTextAttributes = titleTextAttributes
         appearance.inlineLayoutAppearance.normal.iconColor = .systemBackground
         appearance.inlineLayoutAppearance.selected.iconColor = .systemBackground
         
-        appearance.compactInlineLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
-        appearance.compactInlineLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.systemBackground]
+        appearance.compactInlineLayoutAppearance.selected.titleTextAttributes = titleTextAttributes
+        appearance.compactInlineLayoutAppearance.normal.titleTextAttributes = titleTextAttributes
         appearance.compactInlineLayoutAppearance.normal.iconColor = .systemBackground
         appearance.compactInlineLayoutAppearance.selected.iconColor = .systemBackground
         
@@ -165,31 +170,11 @@ class MainTabBarController: UITabBarController
     
     func configureTabBarWithSwipableSettingsTab(animated: Bool)
     {
-        // Make sure settings is in the view hierarchy so we can render it
-        addChild(settings)
-        view.insertSubview(settings.view, at: 0)
-        settings.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            settings.view.topAnchor.constraint(equalTo: view.topAnchor),
-            settings.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            settings.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            settings.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        
-        settings.didMove(toParent: self)
-        
         setViewControllers([todo, schedule, extras], animated: animated)
     }
     
     func configureTabBarWithVisibleSettingsTab(animated: Bool)
     {
-        // Remove settings from the view hierarchy because it'll be a tab
-        settings.willMove(toParent: nil)
-        settings.view.removeFromSuperview()
-        settings.removeFromParent()
-        settings.view.translatesAutoresizingMaskIntoConstraints = true
-        settings.view.removeConstraints(settings.view.constraints)
-        
         setViewControllers([todo, schedule, extras, settings], animated: animated)
     }
     

@@ -94,12 +94,12 @@ class ScreenEdgeTabSwitchComponent: NSObject
         case .began:
             initialAnimationData = animationData
             
-            let secondarySnapshot = Self.makeSnapshotView(with: secondaryController)
-            secondarySnapshot.transform = secondaryUpdateTransform(delta: initialAnimationData, view: view)
+            let secondarySnapshot = Self.makeSnapshotView(with: secondaryController, frame: viewController.view.frame)
             view.embed(view: secondarySnapshot)
+            secondarySnapshot.transform = secondaryUpdateTransform(delta: initialAnimationData, view: view)
             self.secondarySnapshot = secondarySnapshot
             
-            let primarySnapshot = Self.makeSnapshotView(with: viewController, shadow: true)
+            let primarySnapshot = Self.makeSnapshotView(with: viewController, frame: viewController.view.frame, shadow: true)
             view.embed(view: primarySnapshot)
             self.primarySnapshot = primarySnapshot
         case .changed:
@@ -191,9 +191,25 @@ extension ScreenEdgeTabSwitchComponent
 
 extension ScreenEdgeTabSwitchComponent
 {
-    private static func makeSnapshotView(with controller: UIViewController, shadow: Bool = false) -> UIView
+    private static func makeSnapshotView(
+        with controller: UIViewController,
+        frame: CGRect,
+        shadow: Bool = false) -> UIView
     {
-        guard let view = controller.view.snapshotView(afterScreenUpdates: false) else { return UIView() }
+        if !controller.isViewLoaded
+        {
+            let hostingView = UIView()
+            hostingView.addSubview(controller.view)
+            controller.view.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                controller.view.widthAnchor.constraint(equalToConstant: frame.width),
+                controller.view.heightAnchor.constraint(equalToConstant: frame.height),
+            ])
+            controller.view.setNeedsLayout()
+            controller.view.layoutIfNeeded()
+        }
+        
+        guard let view = controller.view.snapshotView(afterScreenUpdates: true) else { return UIView() }
         
         if shadow
         {

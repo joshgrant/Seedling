@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -26,10 +27,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
 
-        guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
-        let navigationController = UINavigationController(rootViewController: tabBarController)        
+//        guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
+//        let navigationController = UINavigationController(rootViewController: tabBarController)
         
-        window.rootViewController = navigationController
+        let rootView = TabBar(model: .default) {
+            Text("Hi")
+        }
+        let testTabBarController = UIHostingController(rootView: rootView)
+        
+        window.rootViewController = testTabBarController
         
         self.window = window
         window.makeKeyAndVisible()
