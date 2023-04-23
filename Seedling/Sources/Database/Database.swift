@@ -42,7 +42,7 @@ class Database
     {
         self.containerName = containerName
         Self.testInit()
-        populateWithDefaultData()
+        populateWithDefaultData(shouldReset: true)
     }
     
     static func testInit()
@@ -122,17 +122,27 @@ extension Database: Testable
 
 extension Database
 {
-    func populateWithDefaultData()
+    func populateWithDefaultData(shouldReset: Bool = false)
     {
+        if shouldReset
+        {
+            reset()
+            Defaults.hasPopulatedDefaultData = false
+        }
+        
         if Defaults.hasPopulatedDefaultData { return }
         
         let priority = TaskSection(context: context)
         priority.title = SeedlingStrings.priorities
         let tasks = TaskSection(context: context)
-        priority.title = SeedlingStrings.tasks
+        tasks.title = SeedlingStrings.tasks
+        let task = Task(context: context)
+        tasks.addToTasks(task)
+        
         
         save()
         
         Defaults.hasPopulatedDefaultData = true
     }
+    
 }

@@ -3,7 +3,7 @@
 import UIKit
 import CoreData
 
-protocol TableViewComponent
+protocol TableViewComponent: UITableViewDelegate
 {
     associatedtype Section: Hashable
     associatedtype Item: Hashable
@@ -13,4 +13,6 @@ protocol TableViewComponent
     
     var tableView: UITableView { get set }
     var dataSource: DataSource { get set }
+    
+    
 }

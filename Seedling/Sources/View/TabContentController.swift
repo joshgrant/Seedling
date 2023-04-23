@@ -129,10 +129,7 @@ class TabContentController: UIViewController
         tableView.delegate = delegate
         //        tableView.tableHeaderView = UIView(frame: .init(x: 0, y: 0, width: 0, height: .leastNormalMagnitude))
         
-        if #available(iOS 15.0, *)
-        {
-            tableView.sectionHeaderTopPadding = .leastNormalMagnitude
-        }
+        tableView.sectionHeaderTopPadding = .leastNormalMagnitude
     }
     
     func configureView()
