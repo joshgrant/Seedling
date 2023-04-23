@@ -30,9 +30,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
 //        let navigationController = UINavigationController(rootViewController: tabBarController)
         
-        let rootView = TabBar(model: .default) {
-            Text("Hi")
-        }
+        let model = TabBarModel(tabs: [
+//            .init(item: .toDo, content: {
+//                Text("1")
+//            }),
+//            .init(item: .schedule, content: {
+//                Text("2")
+//            }),
+//            .init(item: .extras, content: {
+//                Text("3")
+//            }),
+//            .init(item: .settings, content: {
+//                Text("4")
+//            })
+        ])
+        
+        let rootView = TabBar(model: model)
+        
         let testTabBarController = UIHostingController(rootView: rootView)
         
         window.rootViewController = testTabBarController
