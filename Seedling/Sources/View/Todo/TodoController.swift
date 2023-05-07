@@ -28,6 +28,8 @@ class TodoController: UIViewController
     
     var tableViewComponent: TodoTableViewComponent?
     var tabComponent: TabComponent?
+    var dayNavigationTitleComponent: DayNavigationTitleComponent?
+    var updateDayComponent: UpdateDayComponent?
     
     // MARK: - Initialization
     
@@ -43,6 +45,7 @@ class TodoController: UIViewController
         
         tableViewComponent = .init(context: database.context)
         tabComponent = .init(tab: .toDo, controller: self)
+        
         
         // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
 //        delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
@@ -63,6 +66,13 @@ class TodoController: UIViewController
     override func loadView()
     {
         self.view = tableViewComponent?.tableView
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        dayNavigationTitleComponent = .init(day: dayProvider.day, navigationItem: tabBarController?.navigationItem)
+        updateDayComponent = .init(willUpdate: { _ in }, didUpdate: dayNavigationTitleComponent?.update ?? { _ in })
     }
     
     // MARK: - Functions

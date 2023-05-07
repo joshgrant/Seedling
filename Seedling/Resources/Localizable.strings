@@ -62,3 +62,5 @@
 "privacy_policy_url" = "https://bloomingthyme.com/?page_id=168";
 
 "move_uncompleted" = "Move %@ uncompleted tasks to today";
+
+"delete" = "delete";

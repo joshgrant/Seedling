@@ -20,6 +20,8 @@ public enum SeedlingStrings {
   public static let checked = SeedlingStrings.tr("Localizable", "checked")
   /// Data export
   public static let dataExport = SeedlingStrings.tr("Localizable", "data_export")
+  /// delete
+  public static let delete = SeedlingStrings.tr("Localizable", "delete")
   /// Dinner
   public static let dinner = SeedlingStrings.tr("Localizable", "dinner")
   /// Edit custom sections

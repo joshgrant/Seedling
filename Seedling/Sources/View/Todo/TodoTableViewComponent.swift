@@ -115,17 +115,23 @@ extension TodoTableViewComponent
     @objc func didTouchUpInsideButton(_ sender: SectionHeaderButton)
     {
         guard taskToEdit == nil else { return }
-        let count = sender.section.tasks?.count ?? 0
+        makeTask(section: sender.section)
+    }
+    
+    func makeTask(section: TaskSection)
+    {
+        let count = section.tasks?.count ?? 0
         let task = Task(context: context)
         task.sortIndex = Int32(count)
-        sender.section.addToTasks(task)
+        section.addToTasks(task)
         taskToEdit = task
     }
 }
 
 extension TodoTableViewComponent
 {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    {
         let task = dataSource.itemIdentifier(for: indexPath)
         if task == taskToEdit
         {
@@ -159,6 +165,16 @@ extension TodoTableViewComponent
     {
         54
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        guard let task = dataSource.itemIdentifier(for: indexPath), task != taskToEdit else { return .none }
+        
+        return UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: SeedlingStrings.delete.localizedCapitalized, handler: { [weak self] action, view, result in
+            self?.context.delete(task)
+            result(true)
+        })])
+    }
 }
 
 extension TodoTableViewComponent: CellTextViewDelegate
@@ -175,8 +191,12 @@ extension TodoTableViewComponent: CellTextViewDelegate
         if task.content == nil || task.content == ""
         {
             context.delete(task)
+            taskToEdit = nil
         }
-        taskToEdit = nil
+        else if let section = task.taskSection
+        {
+            makeTask(section: section)
+        }
     }
     
     func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
