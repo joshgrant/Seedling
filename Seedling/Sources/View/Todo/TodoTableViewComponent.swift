@@ -5,7 +5,7 @@ import CoreData
 
 class TodoTableViewComponent: NSObject, TableViewComponent
 {
-    typealias Section = TaskSection
+    typealias Section = DailyTaskSection
     typealias Item = Task
     
     // MARK: - Variables
@@ -25,21 +25,12 @@ class TodoTableViewComponent: NSObject, TableViewComponent
         return cell
     })
     
-    lazy var fetchRequest: NSFetchRequest<Section> = {
-        let fetchRequest: NSFetchRequest<Section> = Section.fetchRequest()
-        fetchRequest.sortDescriptors = [
-            .init(keyPath: \TaskSection.sortIndex, ascending: true)
-        ]
-        return fetchRequest
-    }()
-    
-    lazy var fetchController: NSFetchedResultsController<Section> = {
-        .init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-    }()
+    var fetchRequest: NSFetchRequest<Section>
+    var fetchController: NSFetchedResultsController<Section>
     
     // MARK: - Initialization
     
-    init(context: NSManagedObjectContext)
+    init(context: NSManagedObjectContext, day: Day)
     {
         self.context = context
         let tableView = UITableView()
@@ -50,10 +41,39 @@ class TodoTableViewComponent: NSObject, TableViewComponent
         tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCellIdentifier")
         tableView.register(TaskSectionCell.self, forCellReuseIdentifier: "taskSectionCellIdentifier")
         self.tableView = tableView
+        let fetchRequest = Self.makeDayFetchRequest(day: day)
+        fetchController = Self.makeFetchController(with: fetchRequest, context: context)
+        self.fetchRequest = fetchRequest
         super.init()
         tableView.delegate = self
+        // TODO: Duplication
         fetchController.delegate = self
         try! fetchController.performFetch() // TODO: Don't force
+    }
+    
+    // MARK: - Functions
+    
+    func updateDay(day: Day)
+    {
+        fetchRequest = Self.makeDayFetchRequest(day: day)
+        fetchController = Self.makeFetchController(with: fetchRequest, context: context)
+        fetchController.delegate = self
+        try! fetchController.performFetch() // TODO: Don't force
+    }
+    
+    static func makeDayFetchRequest(day: Day) -> NSFetchRequest<Section>
+    {
+        let fetchRequest: NSFetchRequest<Section> = Section.fetchRequest()
+        let (startDate, endDate) = day.date!.dateRange
+        fetchRequest.predicate = NSPredicate(format: "day.date >= %@ AND day.date <= %@", argumentArray: [startDate, endDate])
+        fetchRequest.sortDescriptors = [
+            .init(keyPath: \DailyTaskSection.sortIndex, ascending: true)
+        ]
+        return fetchRequest
+    }
+    
+    static func makeFetchController<T: NSFetchRequestResult>(with fetchRequest: NSFetchRequest<T>, context: NSManagedObjectContext) -> NSFetchedResultsController<T> {
+        .init(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     }
 }
 
@@ -95,7 +115,7 @@ extension TodoTableViewComponent
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         guard let section = dataSource.sectionIdentifier(for: section) else { return nil }
-        let content = section.title
+        let content = section.taskSection!.title
         let button = SectionHeaderButton(section: section)
         configureButton(button: button)
         let view = TabContentHeader(content: content, button: button)
@@ -118,7 +138,7 @@ extension TodoTableViewComponent
         makeTask(section: sender.section)
     }
     
-    func makeTask(section: TaskSection)
+    func makeTask(section: DailyTaskSection)
     {
         let count = section.tasks?.count ?? 0
         let task = Task(context: context)
@@ -193,7 +213,7 @@ extension TodoTableViewComponent: CellTextViewDelegate
             context.delete(task)
             taskToEdit = nil
         }
-        else if let section = task.taskSection
+        else if let section = task.dailyTaskSection
         {
             makeTask(section: section)
         }

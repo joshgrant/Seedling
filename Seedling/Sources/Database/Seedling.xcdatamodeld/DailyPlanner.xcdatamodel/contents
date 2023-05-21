@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="DailyTaskSection" representedClassName="DailyTaskSection" parentEntity="Entity" syncable="YES" codeGenerationType="class">
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyTaskSections" inverseEntity="Day"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="dailyTaskSection" inverseEntity="Task"/>
+        <relationship name="taskSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskSection" inverseName="dailyTaskSections" inverseEntity="TaskSection"/>
+    </entity>
     <entity name="Day" representedClassName="Day" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="dailyTaskSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyTaskSection" inverseName="day" inverseEntity="DailyTaskSection"/>
         <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="day" inverseEntity="Meal"/>
         <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="day" inverseEntity="Note"/>
         <relationship name="pomodoro" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pomodoro" inverseName="day" inverseEntity="Pomodoro"/>
@@ -38,13 +44,13 @@
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="kind" optional="YES" attributeType="String"/>
+        <relationship name="dailyTaskSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyTaskSection" inverseName="tasks" inverseEntity="DailyTaskSection"/>
         <relationship name="priorityOfDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="priorities" inverseEntity="Day"/>
-        <relationship name="taskSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskSection" inverseName="tasks" inverseEntity="TaskSection"/>
         <relationship name="todoOfDay" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="todos" inverseEntity="Day"/>
     </entity>
     <entity name="TaskSection" representedClassName="TaskSection" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="taskSection" inverseEntity="Task"/>
+        <relationship name="dailyTaskSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyTaskSection" inverseName="taskSection" inverseEntity="DailyTaskSection"/>
     </entity>
     <entity name="Water" representedClassName="Water" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

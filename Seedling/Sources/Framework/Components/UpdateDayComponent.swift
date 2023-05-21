@@ -41,5 +41,4 @@ class UpdateDayComponent
         guard let day = notification.userInfo?["day"] as? Day else { return }
         didUpdate(day)
     }
-    
 }

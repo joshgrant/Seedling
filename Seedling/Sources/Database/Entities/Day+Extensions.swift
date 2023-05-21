@@ -47,7 +47,14 @@ extension Day
         {
 			day.addToSchedules(Schedule.make(hour: i, in: context))
 		}
-		
+    
+        for section in TaskSection.allSections(in: context)
+        {
+            let dailyTaskSection = DailyTaskSection(context: context)
+            dailyTaskSection.taskSection = section
+            day.addToDailyTaskSections(dailyTaskSection)
+        }
+        
         return day
     }
 }

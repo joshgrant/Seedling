@@ -39,11 +39,9 @@ class TodoController: UIViewController
         self.database = database
         self.model = Self.makeModel()
         self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
-        self.tableViewComponent = .init(context: database.context)
+        self.tableViewComponent = .init(context: database.context, day: dayProvider.day)
         
         super.init(nibName: nil, bundle: nil)
-        
-        tableViewComponent = .init(context: database.context)
         tabComponent = .init(tab: .toDo, controller: self)
         
         
@@ -72,10 +70,16 @@ class TodoController: UIViewController
     {
         super.viewDidLoad()
         dayNavigationTitleComponent = .init(day: dayProvider.day, navigationItem: tabBarController?.navigationItem)
-        updateDayComponent = .init(willUpdate: { _ in }, didUpdate: dayNavigationTitleComponent?.update ?? { _ in })
+        updateDayComponent = .init(willUpdate: { _ in }, didUpdate: dayProviderDidUpdate)
     }
     
     // MARK: - Functions
+    
+    func dayProviderDidUpdate(_ day: Day)
+    {
+        dayNavigationTitleComponent?.update(day: day)
+        tableViewComponent?.updateDay(day: day)
+    }
     
     func updateProgressIndicatorEndAngle(offset: CGFloat)
     {
