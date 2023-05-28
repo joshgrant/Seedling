@@ -11,22 +11,36 @@ import SwiftUI
 
 class TodoController: UIViewController
 {
-    // MARK: - Types
-    
-    enum Constants
-    {
-        static let updateTasksScrollMultiplier: CGFloat = 1.8
-    }
-    
     // MARK: - Variables
     
     unowned var dayProvider: DayProvider
     unowned var database: Database
-    var previousRows: [Task: Int] = [:]
-    var model: CircularProgressIndicatorModel
-    var progressIndicator: UIHostingController<CircularProgressIndicator>
+    var previousRows: [Seedling.Task: Int] = [:]
+    var tasks: [Seedling.Task]?
     
-    var tableViewComponent: TodoTableViewComponent?
+    lazy var model = CircularProgressIndicatorModel { [self] model, state in
+        switch state {
+        case .pulling:
+            tasks = Seedling.Task.allUnfinishedTasks(in: database.context, before: dayProvider.day.date!)
+            model.uncompletedCount = tasks!.count
+        case .complete:
+            let section = DailyTaskSection.findOrMakePreviousTaskSection(day: dayProvider.day, context: database.context)
+            for t in tasks ?? [] {
+                t.todoOfDay = nil
+                t.priorityOfDay = nil
+                t.dailyTaskSection = nil
+                section.addToTasks(t)
+            }
+        case .inactive:
+            tasks = nil
+        default:
+            break
+        }
+    }
+    lazy var progressIndicator = UIHostingController(rootView: CircularProgressIndicator(model: model))
+    lazy var tableViewComponent = TodoTableViewComponent(context: database.context, day: dayProvider.day, scrollViewDidScroll: { y in
+        self.model.endAngle = -(y * Constants.updateTasksScrollMultiplier)
+    })
     var tabComponent: TabComponent?
     var dayNavigationTitleComponent: DayNavigationTitleComponent?
     var updateDayComponent: UpdateDayComponent?
@@ -37,21 +51,13 @@ class TodoController: UIViewController
     {
         self.dayProvider = dayProvider
         self.database = database
-        self.model = Self.makeModel()
-        self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
-        self.tableViewComponent = .init(context: database.context, day: dayProvider.day)
         
         super.init(nibName: nil, bundle: nil)
         tabComponent = .init(tab: .toDo, controller: self)
         
-        
-        // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
-//        delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
-//        tableView.delegate = delegate
-//
-//        progressIndicator.view.frame.size.height = 100
-//        tableView.contentInset = UIEdgeInsets(top: -100, left: 0, bottom: 0, right: 0)
-//        tableView.tableHeaderView = progressIndicator.view
+        progressIndicator.view.frame.size.height = Constants.progressIndicatorHeight
+        tableViewComponent.tableView.contentInset = UIEdgeInsets(top: -Constants.progressIndicatorHeight, left: 0, bottom: 0, right: 0)
+        tableViewComponent.tableView.tableHeaderView = progressIndicator.view
     }
     
     required init?(coder: NSCoder)
@@ -63,7 +69,7 @@ class TodoController: UIViewController
     
     override func loadView()
     {
-        self.view = tableViewComponent?.tableView
+        self.view = tableViewComponent.tableView
     }
     
     override func viewDidLoad()
@@ -78,28 +84,18 @@ class TodoController: UIViewController
     func dayProviderDidUpdate(_ day: Day)
     {
         dayNavigationTitleComponent?.update(day: day)
-        tableViewComponent?.updateDay(day: day)
+        tableViewComponent.updateDay(day: day)
     }
-    
-    func updateProgressIndicatorEndAngle(offset: CGFloat)
+}
+
+extension TodoController
+{
+    private enum Constants
     {
-        model.endAngle = -(offset * Constants.updateTasksScrollMultiplier)
+        static let progressIndicatorHeight: CGFloat = 100
+        static let updateTasksScrollMultiplier: CGFloat = 1.8
     }
-    
-	// MARK: - Factories
-    
-    static func makeModel() -> CircularProgressIndicatorModel
-    {
-        CircularProgressIndicatorModel { state in
-            switch state {
-            case .complete:
-                print("Time to fetch!")
-            default:
-                break
-            }
-        }
-    }
-	
+}
 //	override class func makeDelegate() -> TabContentDelegate
 //	{
 //        // TODO: Fix this because we'll rewrite the TabContentController
@@ -141,7 +137,6 @@ class TodoController: UIViewController
 //        (dataSource as? TodoDataSource)?.database = database
 //        (dataSource as? TodoDataSource)?.checkBoxDelegate = self
 //	}
-}
 
 //extension TodoController: CheckBoxDelegate {
 //    

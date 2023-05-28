@@ -12,7 +12,8 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     
     var context: NSManagedObjectContext
     var tableView: UITableView
-   
+    var scrollViewDidScroll: (_ y: CGFloat) -> Void
+    
     private var taskToEdit: Task?
     
     lazy var dataSource = DataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, id in
@@ -30,9 +31,10 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     
     // MARK: - Initialization
     
-    init(context: NSManagedObjectContext, day: Day)
+    init(context: NSManagedObjectContext, day: Day, scrollViewDidScroll: @escaping (CGFloat) -> Void)
     {
         self.context = context
+        self.scrollViewDidScroll = scrollViewDidScroll
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.sectionHeaderTopPadding = .leastNormalMagnitude
@@ -115,7 +117,7 @@ extension TodoTableViewComponent
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
     {
         guard let section = dataSource.sectionIdentifier(for: section) else { return nil }
-        let content = section.taskSection!.title
+        let content = section.title
         let button = SectionHeaderButton(section: section)
         configureButton(button: button)
         let view = TabContentHeader(content: content, button: button)
@@ -141,7 +143,7 @@ extension TodoTableViewComponent
     func makeTask(section: DailyTaskSection)
     {
         let count = section.tasks?.count ?? 0
-        let task = Task(context: context)
+        let task = Task.make(in: context)
         task.sortIndex = Int32(count)
         section.addToTasks(task)
         taskToEdit = task
@@ -223,5 +225,19 @@ extension TodoTableViewComponent: CellTextViewDelegate
     {
         textView.resignFirstResponder()
         return true
+    }
+}
+
+extension TodoTableViewComponent: UIScrollViewDelegate
+{
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
+    {
+        scrollView.endEditing(false)
+        taskToEdit = nil
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        scrollViewDidScroll(scrollView.contentOffset.y)
     }
 }

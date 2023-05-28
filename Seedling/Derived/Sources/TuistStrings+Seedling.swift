@@ -70,6 +70,8 @@ public enum SeedlingStrings {
   public static let pomodoro = SeedlingStrings.tr("Localizable", "pomodoro")
   /// Pomodoro notifications
   public static let pomodoroNotifications = SeedlingStrings.tr("Localizable", "pomodoro_notifications")
+  /// Previous Tasks
+  public static let previousTasks = SeedlingStrings.tr("Localizable", "previous_tasks")
   /// Priorities
   public static let priorities = SeedlingStrings.tr("Localizable", "priorities")
   /// Privacy policy

@@ -13,8 +13,8 @@ class SectionHeaderButton: UIButton
         super.init(frame: .zero)
         setImage(.init(systemName: "plus.circle"), for: .normal)
         tintColor = .type(.orange)
-        accessibilityLabel = section.taskSection!.title
-        accessibilityIdentifier = "add.\(section.taskSection!.title ?? "")"
+        accessibilityLabel = section.title
+        accessibilityIdentifier = "add.\(section.title ?? "")"
     }
     
     required init?(coder: NSCoder) {

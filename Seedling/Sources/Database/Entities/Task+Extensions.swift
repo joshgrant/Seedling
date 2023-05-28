@@ -16,25 +16,19 @@ extension Task
         "taskCellIdentifier"
     }
     
-    static func make(in context: Context) -> Task
-    {
-        let task = Task(context: context)
-        task.createdDate = Date()
-        return task
-    }
-    
-    static func make(content: String, in context: Context) -> Task
+    static func make(content: String? = nil, in context: Context) -> Task
 	{
         let task = Task(context: context)
         task.createdDate = Date()
+        task.completed = false
         task.content = content
         return task
     }
     
-    static func allUnfinishedHistoricalTasks(in context: Context) -> [Task]
+    static func allUnfinishedTasks(in context: Context, before date: Date) -> [Task]
     {
         let request: NSFetchRequest<Task> = Task.fetchRequest()
-        request.predicate = NSPredicate(format: "completed == %@", NSNumber(value: false))
+        request.predicate = NSPredicate(format: "completed == %@ AND dailyTaskSection.day.date < %@", NSNumber(value: false), date as NSDate)
         
         let result = (try? context.fetch(request)) ?? []
         return result

@@ -11,13 +11,11 @@ struct CircularProgressIndicator: View
     @ScaledMetric(relativeTo: .body) var frameSize: CGFloat = 31
     @ScaledMetric(relativeTo: .body) var lineWidth: CGFloat = 1
     
-    @State var uncompletedCount: Int
-    
     var body: some View
     {
         VStack
         {
-            Text(SeedlingStrings.moveUncompleted(uncompletedCount))
+            Text(SeedlingStrings.moveUncompleted(model.uncompletedCount))
                 .font(.system(size: textSize).monospaced())
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 40)
@@ -48,6 +46,6 @@ struct CircularProgressIndicator_Previews: PreviewProvider
     
     static var previews: some View
     {
-        CircularProgressIndicator(model: .init(), uncompletedCount: 6)
+        CircularProgressIndicator(model: .init())
     }
 }

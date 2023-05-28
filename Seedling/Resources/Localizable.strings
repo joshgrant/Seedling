@@ -64,3 +64,5 @@
 "move_uncompleted" = "Move %@ uncompleted tasks to today";
 
 "delete" = "delete";
+
+"previous_tasks" = "Previous Tasks";
