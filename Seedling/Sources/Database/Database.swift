@@ -134,6 +134,11 @@ extension Database
         
         let todoSection = TaskSection(context: context)
         todoSection.title = SeedlingStrings.toDo.localizedCapitalized
+        todoSection.sortIndex = 1
+        
+        let prioritySection = TaskSection(context: context)
+        prioritySection.title = SeedlingStrings.priorities.localizedCapitalized
+        prioritySection.sortIndex = 2
         
         save()
         

@@ -101,7 +101,7 @@ extension TodoTableViewComponent: NSFetchedResultsControllerDelegate
             
             newSnapshot.appendItems(tasks, toSection: section)
         }
-        dataSource.apply(newSnapshot)
+        dataSource.apply(newSnapshot, animatingDifferences: false)
     }
     
     func mapSectionIdToSection(sectionId: Any) -> Section?
