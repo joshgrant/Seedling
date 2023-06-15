@@ -140,6 +140,22 @@ extension Database
         prioritySection.title = SeedlingStrings.priorities.localizedCapitalized
         prioritySection.sortIndex = 2
         
+        let breakfast = MealType(context: context)
+        breakfast.title = SeedlingStrings.breakfast
+        breakfast.sortIndex = 1
+        
+        let lunch = MealType(context: context)
+        lunch.title = SeedlingStrings.lunch
+        lunch.sortIndex = 2
+        
+        let dinner = MealType(context: context)
+        dinner.title = SeedlingStrings.dinner
+        dinner.sortIndex = 3
+        
+        let snack = MealType(context: context)
+        snack.title = SeedlingStrings.snack
+        snack.sortIndex = 4
+        
         save()
         
         Defaults.hasPopulatedDefaultData = true

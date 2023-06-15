@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="DailyMeal" representedClassName="DailyMeal" parentEntity="Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyMeal" inverseEntity="Day"/>
+        <relationship name="mealType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealType" inverseName="dailyMeal" inverseEntity="MealType"/>
+    </entity>
     <entity name="DailyTaskSection" representedClassName="DailyTaskSection" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="previousTaskSection" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -9,6 +15,7 @@
     </entity>
     <entity name="Day" representedClassName="Day" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="dailyMeal" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyMeal" inverseName="day" inverseEntity="DailyMeal"/>
         <relationship name="dailyTaskSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyTaskSection" inverseName="day" inverseEntity="DailyTaskSection"/>
         <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="day" inverseEntity="Meal"/>
         <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="day" inverseEntity="Note"/>
@@ -28,6 +35,10 @@
         <attribute name="dinner" optional="YES" attributeType="String"/>
         <attribute name="lunch" optional="YES" attributeType="String"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="meal" inverseEntity="Day"/>
+    </entity>
+    <entity name="MealType" representedClassName="MealType" parentEntity="Entity" syncable="YES" codeGenerationType="class">
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="dailyMeal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyMeal" inverseName="mealType" inverseEntity="DailyMeal"/>
     </entity>
     <entity name="Note" representedClassName="Note" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>

@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController
         todo = TodoController(dayProvider: dayProvider, database: database)
         schedule = ScheduleController(dayProvider: dayProvider, database: database)!
         extras = ExtrasController(dayProvider: dayProvider, database: database)!
-        settings = SettingsController()
+        settings = SettingsController(context: database.context)
         
         super.init(coder: Coder())
         

@@ -6,9 +6,11 @@ class SettingsController: UIHostingController<SettingsView>
 {
     // MARK: - Initialization
     
-    init()
+    init(context: Context)
     {
-        super.init(rootView: SettingsView())
+        // TODO: Context for some reason is failing here
+        ///Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '+entityForName: nil is not a legal NSPersistentStoreCoordinator for searching for entity name 'MealType''
+        super.init(rootView: SettingsView(context: context))
         
         tabBarItem = UITabBarItem(
             title: SeedlingStrings.settings,
@@ -27,6 +29,8 @@ struct SettingsView: View
     @ScaledMetric(relativeTo: .body) var iconHeight: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var chevronHeight: CGFloat = 15
     
+    @Environment(\.managedObjectContext) var context
+    
     var body: some View
     {
         ScrollView
@@ -40,6 +44,7 @@ struct SettingsView: View
                 infoSection
             }
         }
+        .environment(\.managedObjectContext, context)
     }
     
     var generalSection: some View
@@ -59,15 +64,15 @@ struct SettingsView: View
         Section(header: SectionHeader(title: SeedlingStrings.tasks))
         {
             CheckboxCellView(isOn: true, title: SeedlingStrings.automaticallyTransfer)
-
+            
             TappableCellView(
                 title: SeedlingStrings.editCustomSections,
                 label: Image(systemName: "chevron.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
-                action: {
-                    print("Edit custom sections")
+                destination: {
+                    SectionEditView()
                 })
         }
     }
@@ -84,8 +89,19 @@ struct SettingsView: View
     {
         Section(header: SectionHeader(title: SeedlingStrings.extras))
         {
+            TappableCellView(
+                title: SeedlingStrings.editCustomMealTypes,
+                label: Image(systemName: "chevron.right")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: chevronHeight),
+                destination: {
+                    MealTypeListView()
+                })
+            
             CheckboxCellView(isOn: false, title: SeedlingStrings.pomodoroNotifications)
             CheckboxCellView(isOn: false, title: SeedlingStrings.showTotalWater)
+            
             MenuCellView(
                 title: SeedlingStrings.waterAmount,
                 options: WaterAmountOption.allCases)
@@ -102,8 +118,8 @@ struct SettingsView: View
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: iconHeight),
-                action: {
-                    print("Privacy policy")
+                destination: {
+                    SettingsCell(title: "Privacy Policy", label: { Text("This should be the privacy policy view") })
                 })
             
             // TODO: Make these labels @ViewBuilders
@@ -113,8 +129,8 @@ struct SettingsView: View
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: iconHeight),
-                action: {
-                    print("Data export")
+                destination: {
+                    SettingsCell(title: "Data Export", label: { Text("This should be the data export view") })
                 })
             
             CenterButtonCell(
@@ -178,8 +194,13 @@ extension SettingsView
 
 struct SettingsView_Previews: PreviewProvider
 {
+    static let database = Database(containerName: "Seedling")
+    
     static var previews: some View
     {
-        SettingsView()
+        NavigationStack {
+            SettingsView(context: database.context)
+        }
+        .tint(SeedlingAsset.orange.swiftUIColor)
     }
 }

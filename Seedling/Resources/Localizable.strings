@@ -25,6 +25,7 @@
 "breakfast" = "Breakfast";
 "lunch" = "Lunch";
 "dinner" = "Dinner";
+"snack" = "Snack";
 
 "meals" = "Meals";
 "water" = "Water";
@@ -42,12 +43,14 @@
 "tasks" = "Tasks";
 "automatically_transfer" = "Automatically transfer uncompleted tasks to today";
 "edit_custom_sections" = "Edit custom sections";
+"edit_custom_meal_types" = "Edit custom meal types";
 "section_duration" = "Section duration";
 "pomodoro_notifications" = "Pomodoro notifications";
 "show_total_water" = "Show total water";
 "water_amount" = "Water amount";
 "info" = "Info";
 "data_export" = "Data export";
+"meal_types" = "Meal Types";
 
 "m15" = "15m";
 "m30" = "30m";
@@ -64,5 +67,6 @@
 "move_uncompleted" = "Move %@ uncompleted tasks to today";
 
 "delete" = "delete";
+"add" = "add";
 
 "previous_tasks" = "Previous Tasks";
