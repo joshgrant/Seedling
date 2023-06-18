@@ -2,15 +2,19 @@
 
 import SwiftUI
 
-class SettingsController: UIHostingController<SettingsView>
+class SettingsController: UIHostingController<AnyView>
 {
     // MARK: - Initialization
     
     init(context: Context)
     {
+        let rootView = SettingsView()
+            .environment(\.managedObjectContext, context)
+        
         // TODO: Context for some reason is failing here
         ///Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '+entityForName: nil is not a legal NSPersistentStoreCoordinator for searching for entity name 'MealType''
-        super.init(rootView: SettingsView(context: context))
+        let anyView = AnyView(rootView)
+        super.init(rootView: anyView)
         
         tabBarItem = UITabBarItem(
             title: SeedlingStrings.settings,
@@ -63,8 +67,6 @@ struct SettingsView: View
     {
         Section(header: SectionHeader(title: SeedlingStrings.tasks))
         {
-            CheckboxCellView(isOn: true, title: SeedlingStrings.automaticallyTransfer)
-            
             TappableCellView(
                 title: SeedlingStrings.editCustomSections,
                 label: Image(systemName: "chevron.right")
@@ -72,8 +74,16 @@ struct SettingsView: View
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
                 destination: {
-                    SectionEditView()
+                    EntityListEditView<TaskSection>(title: SeedlingStrings.editCustomSections) { context in
+                        let numberOfSections = TaskSection.allSections(in: context).count
+                        let newTaskSection = TaskSection(context: context)
+                        newTaskSection.sortIndex = Int32(numberOfSections + 1)
+                        try! context.save()
+                    }
+                    .environment(\.managedObjectContext, context)
                 })
+            
+            CheckboxCellView(isOn: true, title: SeedlingStrings.automaticallyTransfer)
         }
     }
     
@@ -96,7 +106,13 @@ struct SettingsView: View
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
                 destination: {
-                    MealTypeListView()
+                    EntityListEditView<MealType>(title: SeedlingStrings.editCustomMealTypes) { context in
+                        let numberOfMeals = try! MealType.totalCount(in: context)
+                        let newMeal = MealType(context: context)
+                        newMeal.sortIndex = Int32(numberOfMeals + 1)
+                        try! context.save()
+                    }
+                    .environment(\.managedObjectContext, context)
                 })
             
             CheckboxCellView(isOn: false, title: SeedlingStrings.pomodoroNotifications)
@@ -199,7 +215,8 @@ struct SettingsView_Previews: PreviewProvider
     static var previews: some View
     {
         NavigationStack {
-            SettingsView(context: database.context)
+            SettingsView()
+                .environment(\.managedObjectContext, database.context)
         }
         .tint(SeedlingAsset.orange.swiftUIColor)
     }

@@ -12,11 +12,12 @@ struct TappableCellView<Content, Destination>: View where Content: View, Destina
     {
         NavigationLink {
             destination()
+                .tint(SeedlingAsset.emerald.swiftUIColor)
         } label: {
             SettingsCell(title: title, label: {
                 label
             })
-            .tint(.primary)
+            .tint(SeedlingAsset.emerald.swiftUIColor)
         }
     }
 }
@@ -36,5 +37,6 @@ struct TappableCellView_Previews: PreviewProvider
                     })
             }
         }
+        .tint(SeedlingAsset.emerald.swiftUIColor)
     }
 }

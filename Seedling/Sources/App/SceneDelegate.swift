@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate
         let window = UIWindow(windowScene: scene)
 
         guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
-        let navigationController = UINavigationController(rootViewController: tabBarController)        
+        let navigationController = UINavigationController(rootViewController: tabBarController)
+        navigationController.navigationBar.tintColor = SeedlingAsset.emerald.color
         
         window.rootViewController = navigationController
         

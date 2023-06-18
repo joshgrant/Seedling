@@ -15,3 +15,8 @@ extension TaskSection
         return (try? context.fetch(fetchRequest())) ?? []
     }
 }
+
+extension TaskSection: ListEditable
+{
+    
+}

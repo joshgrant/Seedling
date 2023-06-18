@@ -10,3 +10,8 @@ extension MealType
         return try context.fetch(request).count
     }
 }
+
+extension MealType: ListEditable
+{
+    
+}

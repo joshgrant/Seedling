@@ -134,27 +134,27 @@ extension Database
         
         let todoSection = TaskSection(context: context)
         todoSection.title = SeedlingStrings.toDo.localizedCapitalized
-        todoSection.sortIndex = 1
+        todoSection.sortIndex = 0
         
         let prioritySection = TaskSection(context: context)
         prioritySection.title = SeedlingStrings.priorities.localizedCapitalized
-        prioritySection.sortIndex = 2
+        prioritySection.sortIndex = 1
         
         let breakfast = MealType(context: context)
         breakfast.title = SeedlingStrings.breakfast
-        breakfast.sortIndex = 1
+        breakfast.sortIndex = 0
         
         let lunch = MealType(context: context)
         lunch.title = SeedlingStrings.lunch
-        lunch.sortIndex = 2
+        lunch.sortIndex = 1
         
         let dinner = MealType(context: context)
         dinner.title = SeedlingStrings.dinner
-        dinner.sortIndex = 3
+        dinner.sortIndex = 2
         
         let snack = MealType(context: context)
         snack.title = SeedlingStrings.snack
-        snack.sortIndex = 4
+        snack.sortIndex = 3
         
         save()
         
