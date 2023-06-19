@@ -33,7 +33,7 @@ class ScheduleController: TabContentController
 	override class func makeTabBarItem() -> UITabBarItem
 	{
 		return UITabBarItem(
-            title: SeedlingStrings.schedule.localizedCapitalized,
+            title: Strings.schedule.localizedCapitalized,
             image: SeedlingAsset.scheduleUnselected.image,
             selectedImage: SeedlingAsset.scheduleSelected.image)
 	}

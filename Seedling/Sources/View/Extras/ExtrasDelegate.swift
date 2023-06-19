@@ -15,13 +15,13 @@ class ExtrasDelegate: TabContentDelegate
 		switch section
 		{
 		case 0:
-            return SeedlingStrings.meals.localizedCapitalized
+            return Strings.meals.localizedCapitalized
 		case 1:
-            return SeedlingStrings.water.localizedCapitalized
+            return Strings.water.localizedCapitalized
 		case 2:
-            return SeedlingStrings.pomodoro.localizedCapitalized
+            return Strings.pomodoro.localizedCapitalized
 		case 3:
-            return SeedlingStrings.notes.localizedCapitalized
+            return Strings.notes.localizedCapitalized
 		default:
 			return nil
 		}

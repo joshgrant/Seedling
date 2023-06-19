@@ -1,6 +1,7 @@
 // Copyright Team Seedling ©
 
 import SwiftUI
+import CoreData
 
 protocol ListEditable: Entity
 {
@@ -9,14 +10,30 @@ protocol ListEditable: Entity
 
 struct EntityListEditView<E: ListEditable>: View
 {
+    struct Configuration
+    {
+        var title: String
+        var deleteTitle: String
+        var deleteMessage: String
+        static var taskSection: Configuration {
+            .init(title: Strings.editSections, deleteTitle: Strings.deleteSection, deleteMessage: Strings.deleteSectionMessage)
+        }
+        static var mealType: Configuration {
+            .init(title: Strings.editMealTypes, deleteTitle: Strings.deleteMealType, deleteMessage: Strings.deleteMealTypeMessage)
+        }
+    }
     
     @ScaledMetric(relativeTo: .body) var textSize: CGFloat = 22
     @Environment(\.managedObjectContext) var context
     @FetchRequest(sortDescriptors: [SortDescriptor(\.sortIndex, order: SortOrder.forward)])
     private var entities: FetchedResults<E>
-    var title: String
-    var addEntity: (Context) -> Void
-    
+    @FocusState var focus: NSManagedObjectID?
+    @State var focusEntity: NSManagedObject?
+    @State var deleteAlert: Bool = false
+    @State var swipeEntity: NSManagedObject?
+    var configuration: Configuration
+    var addEntity: (Context) -> NSManagedObject
+
     var body: some View
     {
         List(entities, id: \.objectID) { entity in
@@ -26,7 +43,11 @@ struct EntityListEditView<E: ListEditable>: View
                 }, set: { newText in
                     entity.title = newText
                 }))
+                .focused($focus, equals: entity.objectID)
                 .font(.system(size: textSize, weight: .medium).monospaced())
+                .onSubmit {
+                    dismissKeyboard()
+                }
                 Rectangle()
                     .fill(SeedlingAsset.orange.swiftUIColor)
                     .frame(height: 1)
@@ -34,28 +55,55 @@ struct EntityListEditView<E: ListEditable>: View
             .listRowSeparator(.hidden)
             .listRowInsets(.init(top: 0, leading: 20, bottom: -7, trailing: 0))
             .swipeActions {
-                Button(role: .destructive) {
-                    context.delete(entity)
-                    // TODO: Add a confirmation alert
+                Button() {
+                    deleteAlert = true
+                    swipeEntity = entity
                 } label: {
-                    Label(SeedlingStrings.delete.localizedCapitalized, systemImage: "trash")
+                    Label(Strings.delete.localizedCapitalized, systemImage: "trash")
                 }
+                .tint(.red)
             }
+            .confirmationDialog(configuration.deleteTitle, isPresented: $deleteAlert, actions: {
+                Button(configuration.deleteTitle, role: .destructive) {
+                    if let swipeEntity = swipeEntity {
+                            context.delete(swipeEntity)
+                            focus = nil
+                            focusEntity = nil
+                            self.swipeEntity = nil
+                    }
+                }
+            } , message: {
+                Text(configuration.deleteMessage)
+            })
+        }
+        
+        .onTapGesture {
+            dismissKeyboard()
         }
         .listStyle(.plain)
-        .navigationTitle(title)
+        .navigationTitle(configuration.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    addEntity(context)
+                    let entity = addEntity(context)
+                    focus = entity.objectID
+                    focusEntity = entity
                 } label: {
-                    Label(SeedlingStrings.add, systemImage: "plus.circle")
+                    Label(Strings.add, systemImage: "plus.circle")
                 }
                 
             }
         }
         .scrollDismissesKeyboard(.interactively)
+    }
+    
+    private func dismissKeyboard() {
+        if let focusEntity = focusEntity as? ListEditable, focusEntity.title == nil || focusEntity.title?.isEmpty ?? false {
+            context.delete(focusEntity)
+        }
+        focus = nil
+        focusEntity = nil
     }
 }
 
@@ -66,10 +114,11 @@ struct EntityListEditView_Previews: PreviewProvider
     static var previews: some View
     {
         NavigationStack {
-            EntityListEditView<TaskSection>(title: "Task Section", addEntity: { context in
+            EntityListEditView<TaskSection>(configuration: .taskSection, addEntity: { context in
                 let taskSection = TaskSection(context: context)
                 let numTaskSections = TaskSection.allSections(in: context).count
                 taskSection.sortIndex = Int32(numTaskSections)
+                return taskSection
             })
             .environment(\.managedObjectContext, database.context)
         }

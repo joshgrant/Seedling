@@ -53,7 +53,18 @@ extension Day
             let dailyTaskSection = DailyTaskSection(context: context)
             dailyTaskSection.taskSection = section
             dailyTaskSection.title = section.title
+            dailyTaskSection.sortIndex = section.sortIndex
             day.addToDailyTaskSections(dailyTaskSection)
+        }
+        
+        // TODO: Daily task sections that are created aren't added to today or any other created days
+        // TODO: Same with delete
+        
+        let todayAndFuture = Day.fetchRequest()
+        // TODO: Set the predicate
+        let result = context.fetch(todayAndFuture)
+        for day in result {
+            // TODO: Add / remode the task sections we did in settings
         }
         
         return day

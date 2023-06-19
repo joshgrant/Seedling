@@ -42,8 +42,12 @@
 "haptic_feedback" = "Haptic feedback";
 "tasks" = "Tasks";
 "automatically_transfer" = "Automatically transfer uncompleted tasks to today";
-"edit_custom_sections" = "Edit custom sections";
-"edit_custom_meal_types" = "Edit custom meal types";
+"edit_sections" = "Edit sections";
+"delete_section" = "Delete Section";
+"delete_section_message" = "You'll lose all tasks that are associated with this section.";
+"edit_meal_types" = "Edit meal types";
+"delete_meal_type" = "Delete Meal Type";
+"delete_meal_type_message" = "You'll lose all meals that are associated with this meal type.";
 "section_duration" = "Section duration";
 "pomodoro_notifications" = "Pomodoro notifications";
 "show_total_water" = "Show total water";

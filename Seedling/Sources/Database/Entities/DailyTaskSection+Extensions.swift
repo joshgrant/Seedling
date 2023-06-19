@@ -17,7 +17,7 @@ extension DailyTaskSection
             let section = DailyTaskSection(context: context)
             section.previousTaskSection = true
             section.day = day
-            section.title = SeedlingStrings.previousTasks
+            section.title = Strings.previousTasks
             return section
         }
     }

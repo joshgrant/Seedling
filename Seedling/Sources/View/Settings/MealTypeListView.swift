@@ -33,19 +33,19 @@ struct MealTypeListView: View {
                     context.delete(type)
                     // TODO: Add a confirmation alert
                 } label: {
-                    Label(SeedlingStrings.delete.localizedCapitalized, systemImage: "trash")
+                    Label(Strings.delete.localizedCapitalized, systemImage: "trash")
                 }
             }
         }
         .listStyle(.plain)
-        .navigationTitle(SeedlingStrings.mealTypes)
+        .navigationTitle(Strings.mealTypes)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     addNewMealType()
                 } label: {
-                    Label(SeedlingStrings.add, systemImage: "plus.circle")
+                    Label(Strings.add, systemImage: "plus.circle")
                 }
                 
             }

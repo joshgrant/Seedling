@@ -15,7 +15,7 @@ struct CircularProgressIndicator: View
     {
         VStack
         {
-            Text(SeedlingStrings.moveUncompleted(model.uncompletedCount))
+            Text(Strings.moveUncompleted(model.uncompletedCount))
                 .font(.system(size: textSize).monospaced())
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 40)

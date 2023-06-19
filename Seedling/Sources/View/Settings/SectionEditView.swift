@@ -27,7 +27,7 @@ struct SectionEditView: View {
                     context.delete(section)
                     // TODO: Add a confirmation alert
                 } label: {
-                    Label(SeedlingStrings.delete.localizedCapitalized, systemImage: "trash")
+                    Label(Strings.delete.localizedCapitalized, systemImage: "trash")
                 }
             }
         }

@@ -40,7 +40,7 @@ class ExtrasController: TabContentController
 	override class func makeTabBarItem() -> UITabBarItem
     {
 		return UITabBarItem(
-            title: SeedlingStrings.extras.localizedCapitalized,
+            title: Strings.extras.localizedCapitalized,
             image: SeedlingAsset.extrasUnselected.image,
             selectedImage: SeedlingAsset.extrasSelected.image)
 	}

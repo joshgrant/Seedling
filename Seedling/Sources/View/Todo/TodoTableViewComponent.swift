@@ -192,7 +192,7 @@ extension TodoTableViewComponent
     {
         guard let task = dataSource.itemIdentifier(for: indexPath), task != taskToEdit else { return .none }
         
-        return UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: SeedlingStrings.delete.localizedCapitalized, handler: { [weak self] action, view, result in
+        return UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: Strings.delete.localizedCapitalized, handler: { [weak self] action, view, result in
             self?.context.delete(task)
             result(true)
         })])

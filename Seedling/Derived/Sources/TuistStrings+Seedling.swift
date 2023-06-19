@@ -24,12 +24,20 @@ public enum SeedlingStrings {
   public static let dataExport = SeedlingStrings.tr("Localizable", "data_export")
   /// delete
   public static let delete = SeedlingStrings.tr("Localizable", "delete")
+  /// Delete Meal Type
+  public static let deleteMealType = SeedlingStrings.tr("Localizable", "delete_meal_type")
+  /// You'll lose all meals that are associated with this meal type.
+  public static let deleteMealTypeMessage = SeedlingStrings.tr("Localizable", "delete_meal_type_message")
+  /// Delete Section
+  public static let deleteSection = SeedlingStrings.tr("Localizable", "delete_section")
+  /// You'll lose all tasks that are associated with this section.
+  public static let deleteSectionMessage = SeedlingStrings.tr("Localizable", "delete_section_message")
   /// Dinner
   public static let dinner = SeedlingStrings.tr("Localizable", "dinner")
-  /// Edit custom meal types
-  public static let editCustomMealTypes = SeedlingStrings.tr("Localizable", "edit_custom_meal_types")
-  /// Edit custom sections
-  public static let editCustomSections = SeedlingStrings.tr("Localizable", "edit_custom_sections")
+  /// Edit meal types
+  public static let editMealTypes = SeedlingStrings.tr("Localizable", "edit_meal_types")
+  /// Edit sections
+  public static let editSections = SeedlingStrings.tr("Localizable", "edit_sections")
   /// Extras
   public static let extras = SeedlingStrings.tr("Localizable", "extras")
   /// d MMM

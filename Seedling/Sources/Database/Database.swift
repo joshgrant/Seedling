@@ -133,27 +133,27 @@ extension Database
         if Defaults.hasPopulatedDefaultData { return }
         
         let todoSection = TaskSection(context: context)
-        todoSection.title = SeedlingStrings.toDo.localizedCapitalized
+        todoSection.title = Strings.toDo.localizedCapitalized
         todoSection.sortIndex = 0
         
         let prioritySection = TaskSection(context: context)
-        prioritySection.title = SeedlingStrings.priorities.localizedCapitalized
+        prioritySection.title = Strings.priorities.localizedCapitalized
         prioritySection.sortIndex = 1
         
         let breakfast = MealType(context: context)
-        breakfast.title = SeedlingStrings.breakfast
+        breakfast.title = Strings.breakfast
         breakfast.sortIndex = 0
         
         let lunch = MealType(context: context)
-        lunch.title = SeedlingStrings.lunch
+        lunch.title = Strings.lunch
         lunch.sortIndex = 1
         
         let dinner = MealType(context: context)
-        dinner.title = SeedlingStrings.dinner
+        dinner.title = Strings.dinner
         dinner.sortIndex = 2
         
         let snack = MealType(context: context)
-        snack.title = SeedlingStrings.snack
+        snack.title = Strings.snack
         snack.sortIndex = 3
         
         save()

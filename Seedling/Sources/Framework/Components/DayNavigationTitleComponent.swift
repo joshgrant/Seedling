@@ -22,12 +22,12 @@ class DayNavigationTitleComponent
         
         if isToday
         {
-            formatter.setLocalizedDateFormatFromTemplate(SeedlingStrings.formatDayMonth)
-            title = SeedlingStrings.today(formatter.string(from: day.date ?? Date())).localizedCapitalized
+            formatter.setLocalizedDateFormatFromTemplate(Strings.formatDayMonth)
+            title = Strings.today(formatter.string(from: day.date ?? Date())).localizedCapitalized
         }
         else
         {
-            formatter.setLocalizedDateFormatFromTemplate(SeedlingStrings.formatWeekdayDayMonth)
+            formatter.setLocalizedDateFormatFromTemplate(Strings.formatWeekdayDayMonth)
             title = formatter.string(from: day.date ?? Date())
         }
         

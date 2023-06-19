@@ -110,7 +110,7 @@ extension TodoController
 //	override class func makeTabBarItem() -> UITabBarItem
 //	{
 //		return UITabBarItem(
-//            title: SeedlingStrings.toDo.localizedCapitalized,
+//            title: Strings.toDo.localizedCapitalized,
 //            image: SeedlingAsset.toDoUnselected.image,
 //            selectedImage: SeedlingAsset.toDoSelected.image)
 //	}
