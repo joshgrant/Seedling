@@ -57,16 +57,7 @@ extension Day
             dailyTaskSection.sortIndex = section.sortIndex
             day.addToDailyTaskSections(dailyTaskSection)
         }
-        
-        // TODO: Daily task sections that are created aren't added to today or any other created days
-        // TODO: Same with delete
-//        let todayAndFuture = Day.fetchRequest()
-        // TODO: Set the predicate
-//        let result = context.fetch(todayAndFuture)
-//        for day in result {
-//            // TODO: Add / remode the task sections we did in settings
-//        }
-//
+
         return day
     }
     
@@ -79,8 +70,16 @@ extension Day
     static func todayAndFutureDays(context: Context) -> [Day]
     {
         let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
-        // TODO: Should be searching from the beginning minute of the day
-        fetchRequest.predicate = NSPredicate(format: "date >= %@", NSDate())
+        let date = Date().startOfDay
+        fetchRequest.predicate = NSPredicate(format: "date >= %@", date as NSDate)
+        return (try? context.fetch(fetchRequest)) ?? []
+    }
+    
+    static func pastDays(context: Context) -> [Day]
+    {
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        let date = Date().startOfDay
+        fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
         return (try? context.fetch(fetchRequest)) ?? []
     }
 }

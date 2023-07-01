@@ -74,13 +74,31 @@ struct SettingsView: View
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
                 destination: {
-                    EntityListEditView<TaskSection>(configuration: .taskSection) { context in
-                        let numberOfSections = TaskSection.allSections(in: context).count
-                        let newTaskSection = TaskSection(context: context)
-                        newTaskSection.sortIndex = Int32(numberOfSections + 1)
-                        try! context.save()
-                        return newTaskSection
-                    }
+                    EntityListEditView<TaskSection>(
+                        configuration: .taskSection,
+                        addEntity: { context in
+                            let numberOfSections = TaskSection.allSections(in: context).count
+                            let newTaskSection = TaskSection(context: context)
+                            newTaskSection.sortIndex = Int32(numberOfSections + 1)
+                            try! context.save()
+                            return newTaskSection
+                        },
+                        deleteEntity: { context, entity in
+                            guard let entity = entity as? TaskSection else
+                            {
+                                assertionFailure("Expected a TaskSection")
+                                return
+                            }
+                            entity.delete(from: context)
+                        },
+                        onDismiss: { context, entity in
+                            guard let entity = entity as? TaskSection else
+                            {
+                                assertionFailure("Expected a TaskSection")
+                                return
+                            }
+                            entity.propagate(to: context)
+                        })
                     .environment(\.managedObjectContext, context)
                 })
             
@@ -107,13 +125,18 @@ struct SettingsView: View
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
                 destination: {
-                    EntityListEditView<MealType>(configuration: .mealType) { context in
-                        let numberOfMeals = try! MealType.totalCount(in: context)
-                        let newMeal = MealType(context: context)
-                        newMeal.sortIndex = Int32(numberOfMeals + 1)
-                        try! context.save()
-                        return newMeal
-                    }
+                    EntityListEditView<MealType>(
+                        configuration: .mealType,
+                        addEntity: { context in
+                            let numberOfMeals = try! MealType.totalCount(in: context)
+                            let newMeal = MealType(context: context)
+                            newMeal.sortIndex = Int32(numberOfMeals + 1)
+                            try! context.save()
+                            return newMeal
+                        },
+                        deleteEntity: { context, entity in
+                            context.delete(entity)
+                        })
                     .environment(\.managedObjectContext, context)
                 })
             

@@ -17,7 +17,29 @@ extension TaskSection
     
     func propagate(to context: Context)
     {
-            // TODO: do this
+        let days = Day.todayAndFutureDays(context: context)
+        for day in days
+        {
+            let dailyTaskSection = DailyTaskSection(context: context)
+            dailyTaskSection.taskSection = self
+            dailyTaskSection.title = self.title
+            dailyTaskSection.sortIndex = self.sortIndex
+            day.addToDailyTaskSections(dailyTaskSection)
+        }
+        try? context.save()
+    }
+    
+    func delete(from context: NSManagedObjectContext)
+    {
+        let fetchRequest: NSFetchRequest<DailyTaskSection> = DailyTaskSection.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "day.date >= %@ && taskSection == %@", Date().startOfDay as NSDate, self)
+        let results = (try? context.fetch(fetchRequest)) ?? []
+        for r in results
+        {
+            context.delete(r)
+        }
+        context.delete(self)
+        try? context.save()
     }
 }
 

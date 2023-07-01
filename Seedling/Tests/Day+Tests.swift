@@ -5,11 +5,6 @@ import XCTest
 
 final class Day_Tests: XCTestCase
 {
-
-    // TODO: Test adding dailyTaskSection doesn't add to previous days
-    // TODO: adding dailyTaskSection adds to today and all future days
-    // TODO: removing a dailyTaskSection only removes it for any created future days
-    
     var database: Database!
     
     
@@ -33,10 +28,38 @@ final class Day_Tests: XCTestCase
     {
         populateTestDatabaseDaysInRange(database, range: .today)
         populateTestDatabaseDaysInRange(database, range: .future)
-        let dailyTaskSection = DailyTaskSection(context: database.context)
-        // TODO: Finish up here!
-        let days = Day.allDays(context: database.context)
-        for day in days
+        let taskSection = TaskSection(context: database.context)
+        taskSection.title = "New Section"
+        taskSection.propagate(to: database.context)
+        let allDays = Day.allDays(context: database.context)
+        for day in allDays
+        {
+            XCTAssertEqual(day.dailyTaskSections?.count, 1)
+            XCTAssertEqual((day.dailyTaskSections?.anyObject() as! DailyTaskSection).title, "New Section")
+        }
+    }
+    
+    func test_removingDailyTaskSectionRemovesForFutureDays()
+    {
+        let taskSection = TaskSection(context: database.context)
+        taskSection.title = "New Section"
+        populateTestDatabaseDaysInRange(database, range: .past)
+        populateTestDatabaseDaysInRange(database, range: .today)
+        populateTestDatabaseDaysInRange(database, range: .future)
+        let allDays = Day.allDays(context: database.context)
+        for day in allDays
+        {
+            XCTAssertEqual(day.dailyTaskSections?.count, 1)
+        }
+        
+        taskSection.delete(from: database.context)
+        let todayAndFutureDays = Day.todayAndFutureDays(context: database.context)
+        for day in todayAndFutureDays
+        {
+            XCTAssertEqual(day.dailyTaskSections?.count, 0)
+        }
+        let pastDays = Day.pastDays(context: database.context)
+        for day in pastDays
         {
             XCTAssertEqual(day.dailyTaskSections?.count, 1)
         }
@@ -75,8 +98,8 @@ extension Day_Tests
     {
         for i in range.range
         {
-            let day = Day(context: database.context)
-            day.date = Date(timeIntervalSinceNow: TimeInterval(i * 360 * 24))
+            let date = Date(timeIntervalSinceNow: TimeInterval(i * 360 * 24))
+            let day = Day.make(date: date, in: database.context)
         }
     }
     

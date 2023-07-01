@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="DailyMeal" representedClassName="DailyMeal" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -10,7 +10,7 @@
         <attribute name="previousTaskSection" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyTaskSections" inverseEntity="Day"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="dailyTaskSection" inverseEntity="Task"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="dailyTaskSection" inverseEntity="Task"/>
         <relationship name="taskSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskSection" inverseName="dailyTaskSections" inverseEntity="TaskSection"/>
     </entity>
     <entity name="Day" representedClassName="Day" parentEntity="Entity" syncable="YES" codeGenerationType="class">

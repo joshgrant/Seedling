@@ -33,6 +33,8 @@ struct EntityListEditView<E: ListEditable>: View
     @State var swipeEntity: NSManagedObject?
     var configuration: Configuration
     var addEntity: (Context) -> NSManagedObject
+    var deleteEntity: (Context, NSManagedObject) -> Void
+    var onDismiss: ((Context, NSManagedObject) -> Void)? = nil
 
     var body: some View
     {
@@ -66,10 +68,10 @@ struct EntityListEditView<E: ListEditable>: View
             .confirmationDialog(configuration.deleteTitle, isPresented: $deleteAlert, actions: {
                 Button(configuration.deleteTitle, role: .destructive) {
                     if let swipeEntity = swipeEntity {
-                            context.delete(swipeEntity)
-                            focus = nil
-                            focusEntity = nil
-                            self.swipeEntity = nil
+                        deleteEntity(context, swipeEntity)
+                        focus = nil
+                        focusEntity = nil
+                        self.swipeEntity = nil
                     }
                 }
             } , message: {
@@ -98,9 +100,18 @@ struct EntityListEditView<E: ListEditable>: View
         .scrollDismissesKeyboard(.interactively)
     }
     
-    private func dismissKeyboard() {
-        if let focusEntity = focusEntity as? ListEditable, focusEntity.title == nil || focusEntity.title?.isEmpty ?? false {
-            context.delete(focusEntity)
+    private func dismissKeyboard()
+    {
+        if let focusEntity = focusEntity as? ListEditable
+        {
+            if focusEntity.title == nil || focusEntity.title?.isEmpty ?? false
+            {
+                deleteEntity(context, focusEntity)
+            }
+            else
+            {
+                onDismiss?(context, focusEntity)
+            }
         }
         focus = nil
         focusEntity = nil
@@ -119,6 +130,8 @@ struct EntityListEditView_Previews: PreviewProvider
                 let numTaskSections = TaskSection.allSections(in: context).count
                 taskSection.sortIndex = Int32(numTaskSections)
                 return taskSection
+            }, deleteEntity: { context, entity in
+                context.delete(entity)
             })
             .environment(\.managedObjectContext, database.context)
         }
