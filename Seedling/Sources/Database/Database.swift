@@ -41,13 +41,7 @@ class Database
     init(containerName: String)
     {
         self.containerName = containerName
-        Self.testInit()
         populateWithDefaultData(shouldReset: true)
-    }
-    
-    static func testInit()
-    {
-        print(self)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension Day
 {
@@ -59,14 +60,27 @@ extension Day
         
         // TODO: Daily task sections that are created aren't added to today or any other created days
         // TODO: Same with delete
-        
-        let todayAndFuture = Day.fetchRequest()
+//        let todayAndFuture = Day.fetchRequest()
         // TODO: Set the predicate
-        let result = context.fetch(todayAndFuture)
-        for day in result {
-            // TODO: Add / remode the task sections we did in settings
-        }
-        
+//        let result = context.fetch(todayAndFuture)
+//        for day in result {
+//            // TODO: Add / remode the task sections we did in settings
+//        }
+//
         return day
+    }
+    
+    static func allDays(context: Context) -> [Day]
+    {
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        return (try? context.fetch(fetchRequest)) ?? []
+    }
+    
+    static func todayAndFutureDays(context: Context) -> [Day]
+    {
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        // TODO: Should be searching from the beginning minute of the day
+        fetchRequest.predicate = NSPredicate(format: "date >= %@", NSDate())
+        return (try? context.fetch(fetchRequest)) ?? []
     }
 }

@@ -14,9 +14,15 @@ extension TaskSection
     {
         return (try? context.fetch(fetchRequest())) ?? []
     }
+    
+    func propagate(to context: Context)
+    {
+            // TODO: do this
+    }
 }
 
 extension TaskSection: ListEditable
 {
     
 }
+
