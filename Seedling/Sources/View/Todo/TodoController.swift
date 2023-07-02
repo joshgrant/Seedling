@@ -79,6 +79,12 @@ class TodoController: UIViewController
         updateDayComponent = .init(willUpdate: { _ in }, didUpdate: dayProviderDidUpdate)
     }
     
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableViewComponent.tableView.reloadData()
+    }
+    
     // MARK: - Functions
     
     func dayProviderDidUpdate(_ day: Day)

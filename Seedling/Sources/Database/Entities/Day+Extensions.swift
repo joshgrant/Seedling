@@ -53,7 +53,6 @@ extension Day
         {
             let dailyTaskSection = DailyTaskSection(context: context)
             dailyTaskSection.taskSection = section
-            dailyTaskSection.title = section.title
             dailyTaskSection.sortIndex = section.sortIndex
             day.addToDailyTaskSections(dailyTaskSection)
         }

@@ -8,10 +8,15 @@
     </entity>
     <entity name="DailyTaskSection" representedClassName="DailyTaskSection" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="previousTaskSection" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="dailyTaskSections" inverseEntity="Day"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Task" inverseName="dailyTaskSection" inverseEntity="Task"/>
         <relationship name="taskSection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaskSection" inverseName="dailyTaskSections" inverseEntity="TaskSection"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="taskSection"/>
+                <constraint value="day"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Day" representedClassName="Day" parentEntity="Entity" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

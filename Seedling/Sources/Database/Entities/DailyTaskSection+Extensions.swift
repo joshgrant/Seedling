@@ -4,6 +4,11 @@ import CoreData
 
 extension DailyTaskSection
 {
+    var title: String?
+    {
+        return previousTaskSection ? Strings.previousTasks : taskSection?.title
+    }
+    
     static func findOrMakePreviousTaskSection(day: Day, context: Context) -> DailyTaskSection
     {
         let fetchRequest: NSFetchRequest<DailyTaskSection> = DailyTaskSection.fetchRequest()
@@ -17,7 +22,6 @@ extension DailyTaskSection
             let section = DailyTaskSection(context: context)
             section.previousTaskSection = true
             section.day = day
-            section.title = Strings.previousTasks
             return section
         }
     }

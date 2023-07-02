@@ -22,7 +22,6 @@ extension TaskSection
         {
             let dailyTaskSection = DailyTaskSection(context: context)
             dailyTaskSection.taskSection = self
-            dailyTaskSection.title = self.title
             dailyTaskSection.sortIndex = self.sortIndex
             day.addToDailyTaskSections(dailyTaskSection)
         }
