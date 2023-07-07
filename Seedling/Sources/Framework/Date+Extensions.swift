@@ -55,4 +55,26 @@ extension Date
         
         return string.contains(am) || string.contains(pm)
     }
+    
+    var tomorrow: Date
+    {
+        let calendar = Calendar.autoupdatingCurrent
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        components.day = components.day! + 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 1
+        return calendar.date(from: components)!
+    }
+    
+    var yesterday: Date
+    {
+        let calendar = Calendar.autoupdatingCurrent
+        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
+        components.day = components.day! - 1
+        components.hour = 0
+        components.minute = 0
+        components.second = 1
+        return calendar.date(from: components)!
+    }
 }

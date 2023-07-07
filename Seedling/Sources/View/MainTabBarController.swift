@@ -135,7 +135,6 @@ class MainTabBarController: UITabBarController
     func createNavigationBarLongPressGestureRecognizer() -> UILongPressGestureRecognizer
     {
         let gestureRecognizer = UILongPressGestureRecognizer()
-        gestureRecognizer.state
         gestureRecognizer.addTarget(self, action: #selector(didLongPressInsideNavigationBar))
         return gestureRecognizer
     }
@@ -162,8 +161,7 @@ class MainTabBarController: UITabBarController
         switch sender.state
         {
         case .began:
-            let rootView = DayPickerComponent()
-            let viewController = DayPickerController(rootView: rootView)
+            let viewController = DayPickerController(context: database.context, dayProvider: dayProvider)
             present(viewController, animated: true, completion: nil)
         default: break
         }
