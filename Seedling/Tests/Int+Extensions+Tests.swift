@@ -8,8 +8,8 @@
 
 import XCTest
 
-final class Int_Extensions_Tests: XCTestCase {
-    
+final class Int_Extensions_Tests: XCTestCase
+{
     func test_convert24HourTimeToTwelveHourTime_midnight()
     {
         let value = 0

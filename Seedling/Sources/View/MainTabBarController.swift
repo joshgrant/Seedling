@@ -28,10 +28,10 @@ class MainTabBarController: UITabBarController
         self.dayProvider = dayProvider
         self.database = database
         
-        todo = TodoController(dayProvider: dayProvider, database: database)!
+        todo = TodoController(dayProvider: dayProvider, database: database)
         schedule = ScheduleController(dayProvider: dayProvider, database: database)!
         extras = ExtrasController(dayProvider: dayProvider, database: database)!
-        settings = SettingsController()
+        settings = SettingsController(context: database.context)
         
         super.init(coder: Coder())
         
@@ -105,8 +105,6 @@ class MainTabBarController: UITabBarController
     {
         if let navigationBar = navigationController?.navigationBar
         {
-            configureNavigationBarAppearance(navigationBar)
-            
             let line = Spacer(height: 1)
             line.translatesAutoresizingMaskIntoConstraints = false
             line.backgroundColor = .type(.emerald)
@@ -122,32 +120,6 @@ class MainTabBarController: UITabBarController
                 navigationBar.trailingAnchor.constraint(equalTo: line.trailingAnchor)
             ])
         }
-    }
-    
-    private func configureNavigationBarAppearance(_ navigationBar: UINavigationBar)
-    {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = UIColor.clear
-        appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
-        appearance.titleTextAttributes = [
-            NSAttributedString.Key.font: TextStyle.navigationBar.font,
-            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
-        ]
-        
-        let compactAppearance = UINavigationBarAppearance()
-        compactAppearance.configureWithTransparentBackground()
-        compactAppearance.backgroundColor = UIColor.clear
-        compactAppearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
-        compactAppearance.titleTextAttributes = [
-            NSAttributedString.Key.font: TextStyle.textView.font,
-            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
-        ]
-        
-        navigationBar.compactAppearance = compactAppearance
-        navigationBar.compactScrollEdgeAppearance = compactAppearance
-        navigationBar.standardAppearance = appearance
-        navigationBar.scrollEdgeAppearance = appearance
     }
     
     func createNavigationBarGestureRecognizer() -> UITapGestureRecognizer

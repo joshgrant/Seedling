@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Coder: NSCoder {
-    
+class Coder: NSCoder
+{
     override var allowsKeyedCoding: Bool { true }
     
     override func containsValue(forKey key: String) -> Bool { false }

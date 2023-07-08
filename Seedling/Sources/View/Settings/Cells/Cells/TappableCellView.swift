@@ -2,48 +2,41 @@
 
 import SwiftUI
 
-struct TappableCellView<Content>: View where Content: View
+struct TappableCellView<Content, Destination>: View where Content: View, Destination: View
 {
-    @GestureState private var isTouchingDown = false
-    
     var title: String
     var label: Content
-    var action: () -> Void
+    @ViewBuilder var destination: () -> Destination
     
-    var body: some View {
-        let tap = DragGesture(minimumDistance: 0)
-            .updating($isTouchingDown, body: { _, isTouchingDown, _ in
-                isTouchingDown = true
+    var body: some View
+    {
+        NavigationLink {
+            destination()
+                .tint(SeedlingAsset.emerald.swiftUIColor)
+        } label: {
+            SettingsCell(title: title, label: {
+                label
             })
-        
-        SettingsCell(title: title, label: {
-            label
-        })
-        .background(isTouchingDown ? Color(white: 0.95) : SeedlingAsset.background.swiftUIColor)
-        .onTapGesture(perform: action)
-        .simultaneousGesture(tap)
+            .tint(SeedlingAsset.emerald.swiftUIColor)
+        }
     }
 }
 
 struct TappableCellView_Previews: PreviewProvider
 {
-    @State static var buttonPress: Bool = false
-    
     static var previews: some View
     {
-        VStack
-        {
-            if buttonPress
+        NavigationStack {
+            VStack
             {
-                Text("Button was pressed!")
+                TappableCellView(
+                    title: "Hello",
+                    label: Image(systemName: "paperplane"),
+                    destination: {
+                        Text("Hi!")
+                    })
             }
-            
-            TappableCellView(
-                title: "Hello",
-                label: Image(systemName: "paperplane"),
-                action: {
-                     buttonPress = true
-            })
         }
+        .tint(SeedlingAsset.emerald.swiftUIColor)
     }
 }

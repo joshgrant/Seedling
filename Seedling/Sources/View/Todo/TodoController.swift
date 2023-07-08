@@ -9,130 +9,163 @@
 import UIKit
 import SwiftUI
 
-class TodoController: TabContentController
+class TodoController: UIViewController
 {
-	// MARK: - Variables
-	
-	enum Section: Int
-    {
-		case priorities
-		case todos
-	}
+    // MARK: - Variables
     
-    enum Constants
+    unowned var dayProvider: DayProvider
+    unowned var database: Database
+    var previousRows: [Seedling.Task: Int] = [:]
+    var tasks: [Seedling.Task]?
+    
+    lazy var model = CircularProgressIndicatorModel { [self] model, state in
+        switch state {
+        case .pulling:
+            tasks = Seedling.Task.allUnfinishedTasks(in: database.context, before: dayProvider.day.date!)
+            model.uncompletedCount = tasks!.count
+        case .complete:
+            let section = DailyTaskSection.findOrMakePreviousTaskSection(day: dayProvider.day, context: database.context)
+            for t in tasks ?? [] {
+                t.todoOfDay = nil
+                t.priorityOfDay = nil
+                t.dailyTaskSection = nil
+                section.addToTasks(t)
+            }
+        case .inactive:
+            tasks = nil
+        default:
+            break
+        }
+    }
+    lazy var progressIndicator = UIHostingController(rootView: CircularProgressIndicator(model: model))
+    lazy var tableViewComponent = TodoTableViewComponent(context: database.context, day: dayProvider.day, scrollViewDidScroll: { y in
+        self.model.endAngle = -(y * Constants.updateTasksScrollMultiplier)
+    })
+    var tabComponent: TabComponent?
+    var dayNavigationTitleComponent: DayNavigationTitleComponent?
+    var updateDayComponent: UpdateDayComponent?
+    
+    // MARK: - Initialization
+    
+    init(dayProvider: DayProvider, database: Database)
     {
-        static let updateTasksScrollMultiplier: CGFloat = 1.8
+        self.dayProvider = dayProvider
+        self.database = database
+        
+        super.init(nibName: nil, bundle: nil)
+        tabComponent = .init(tab: .toDo, controller: self)
+        
+        progressIndicator.view.frame.size.height = Constants.progressIndicatorHeight
+        tableViewComponent.tableView.contentInset = UIEdgeInsets(top: -Constants.progressIndicatorHeight, left: 0, bottom: 0, right: 0)
+        tableViewComponent.tableView.tableHeaderView = progressIndicator.view
     }
     
-    var previousRows: [Task: Int] = [:]
-    var model: CircularProgressIndicatorModel
-    var progressIndicator: UIHostingController<CircularProgressIndicator>
-    
-    override init?(dayProvider: DayProvider, database: Database) {
-        self.model = Self.makeModel()
-        self.progressIndicator = .init(rootView: CircularProgressIndicator(model: self.model, uncompletedCount: 2))
-        
-        super.init(dayProvider: dayProvider, database: database)
-        
-        // TODO: Not great the way we're overriding the delegate. Will update when we refactor the TabContentController
-        delegate = TodoDelegate(scrollViewDidScroll: updateProgressIndicatorEndAngle)
-        tableView.delegate = delegate
-        
-        progressIndicator.view.frame.size.height = 100
-        tableView.contentInset = UIEdgeInsets(top: -100, left: 0, bottom: 0, right: 0)
-        tableView.tableHeaderView = progressIndicator.view
-    }
-    
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View lifecycle
+    
+    override func loadView()
+    {
+        self.view = tableViewComponent.tableView
+    }
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        dayNavigationTitleComponent = .init(day: dayProvider.day, navigationItem: tabBarController?.navigationItem)
+        updateDayComponent = .init(willUpdate: { _ in }, didUpdate: dayProviderDidUpdate)
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        tableViewComponent.tableView.reloadData()
     }
     
     // MARK: - Functions
     
-    func updateProgressIndicatorEndAngle(offset: CGFloat)
+    func dayProviderDidUpdate(_ day: Day)
     {
-        model.endAngle = -(offset * Constants.updateTasksScrollMultiplier)
+        dayNavigationTitleComponent?.update(day: day)
+        tableViewComponent.updateDay(day: day)
     }
-    
-	// MARK: - Factories
-    
-    static func makeModel() -> CircularProgressIndicatorModel
-    {
-        CircularProgressIndicatorModel { state in
-            switch state {
-            case .complete:
-                print("Time to fetch!")
-            default:
-                break
-            }
-        }
-    }
-	
-	override class func makeDelegate() -> TabContentDelegate
-	{
-        // TODO: Fix this because we'll rewrite the TabContentController
-        return ExtrasDelegate()
-	}
-	
-	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
-	{
-		return TodoDataSource(dayProvider: dayProvider)
-	}
-	
-	override class func makeTabBarItem() -> UITabBarItem
-	{
-		return UITabBarItem(
-            title: SeedlingStrings.toDo.localizedCapitalized,
-            image: SeedlingAsset.toDoUnselected.image,
-            selectedImage: SeedlingAsset.toDoSelected.image)
-	}
-	
-	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]
-	{
-		return [
-			.init(cellClass: TaskCell.self, cellReuseIdentifier: "taskCell")
-		]
-	}
-	
-	override func configureDelegate()
-	{
-		(delegate as? TodoDelegate)?.tableView = tableView
-		(delegate as? TodoDelegate)?.dayProvider = dayProvider
-        (delegate as? TodoDelegate)?.database = database
-        
-        tableView.delegate = (delegate as? TodoDelegate)
-	}
-	
-	override func configureDataSource()
-	{
-		(dataSource as? TodoDataSource)?.cellTextViewDelegate = self
-        (dataSource as? TodoDataSource)?.database = database
-        (dataSource as? TodoDataSource)?.checkBoxDelegate = self
-	}
 }
 
-extension TodoController: CheckBoxDelegate {
-    
-    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
-        
-        // What about the priority array?
-        
-        guard let task = sender.task else { return }
-        guard let row = dayProvider.day.todosArray.firstIndex(of: task) else { return }
-        previousRows[task] = row
-    }
-    
-    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
-        
-        guard let task = sender.task,
-              let previousRow = previousRows[task],
-              let currentRow = dayProvider.day.todosArray.firstIndex(of: task) else {
-            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-            return
-        }
-        
-        tableView.beginUpdates()
-        tableView.moveRow(at: IndexPath(row: previousRow, section: 1), to: IndexPath(row: currentRow, section: 1))
-        tableView.endUpdates()
+extension TodoController
+{
+    private enum Constants
+    {
+        static let progressIndicatorHeight: CGFloat = 100
+        static let updateTasksScrollMultiplier: CGFloat = 1.8
     }
 }
+//	override class func makeDelegate() -> TabContentDelegate
+//	{
+//        // TODO: Fix this because we'll rewrite the TabContentController
+//        return ExtrasDelegate()
+//	}
+//
+//	override class func makeDataSource(dayProvider: DayProvider) -> TabContentDataSource
+//	{
+//		return TodoDataSource(dayProvider: dayProvider)
+//	}
+//
+//	override class func makeTabBarItem() -> UITabBarItem
+//	{
+//		return UITabBarItem(
+//            title: Strings.toDo.localizedCapitalized,
+//            image: SeedlingAsset.toDoUnselected.image,
+//            selectedImage: SeedlingAsset.toDoSelected.image)
+//	}
+//
+//	override class func makeCellClassIdentifiers() -> [CellClassIdentifier]
+//	{
+//		return [
+//			.init(cellClass: TaskCell.self, cellReuseIdentifier: "taskCell")
+//		]
+//	}
+//
+//	override func configureDelegate()
+//	{
+//		(delegate as? TodoDelegate)?.tableView = tableView
+//		(delegate as? TodoDelegate)?.dayProvider = dayProvider
+//        (delegate as? TodoDelegate)?.database = database
+//
+//        tableView.delegate = (delegate as? TodoDelegate)
+//	}
+//
+//	override func configureDataSource()
+//	{
+//		(dataSource as? TodoDataSource)?.cellTextViewDelegate = self
+//        (dataSource as? TodoDataSource)?.database = database
+//        (dataSource as? TodoDataSource)?.checkBoxDelegate = self
+//	}
+
+//extension TodoController: CheckBoxDelegate {
+//    
+//    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
+//        
+//        // What about the priority array?
+//        
+//        guard let task = sender.task else { return }
+//        guard let row = dayProvider.day.todosArray.firstIndex(of: task) else { return }
+//        previousRows[task] = row
+//    }
+//    
+//    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
+//        
+//        guard let task = sender.task,
+//              let previousRow = previousRows[task],
+//              let currentRow = dayProvider.day.todosArray.firstIndex(of: task) else {
+//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+//            return
+//        }
+//        
+//        tableView.beginUpdates()
+//        tableView.moveRow(at: IndexPath(row: previousRow, section: 1), to: IndexPath(row: currentRow, section: 1))
+//        tableView.endUpdates()
+//    }
+//}

@@ -45,7 +45,7 @@ class TodoDataSource: TabContentDataSource
 		
 		if let taskCell = cell as? TaskCell, let task = task(for: indexPath)
 		{
-            taskCell.configure(with: task, section: TodoController.Section(rawValue: indexPath.section)!)
+            taskCell.configure(with: task)
 			taskCell.delegate = cellTextViewDelegate
             taskCell.database = database
             taskCell.checkBoxDelegate = checkBoxDelegate
@@ -59,13 +59,16 @@ class TodoDataSource: TabContentDataSource
 		return true
 	}
 	
-	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-		switch editingStyle {
+	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+		switch editingStyle
+        {
 		case .delete:
 			switch indexPath.section
 			{
 			case 0:
-				if let task = task(for: indexPath) {
+				if let task = task(for: indexPath)
+                {
 					tableView.performBatchUpdates({
 						dayProvider?.day.removeFromPriorities(task)
                         database?.context.delete(task)
@@ -75,7 +78,8 @@ class TodoDataSource: TabContentDataSource
 					})
 				}
 			case 1:
-				if let task = task(for: indexPath) {
+				if let task = task(for: indexPath)
+                {
 					tableView.performBatchUpdates({
 						dayProvider?.day.removeFromTodos(task)
                         database?.context.delete(task)

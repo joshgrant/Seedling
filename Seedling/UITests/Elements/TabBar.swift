@@ -10,13 +10,15 @@ import Foundation
 
 class TabBar: BaseElement
 {
-    enum Tab: String {
+    enum Tab: String
+    {
         case toDo = "To Do"
         case schedule = "Schedule"
         case extras = "Extras"
     }
     
-    func select(tab: Tab) {
+    func select(tab: Tab)
+    {
         view.tabBars.buttons[tab.rawValue].tap()
     }
 }

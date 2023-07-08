@@ -21,7 +21,8 @@ class ToDoTabUITests: XCTestCase
     
     // MARK: - Initialization
     
-    override func setUp() {
+    override func setUp()
+    {
         continueAfterFailure = false
         
         // TODO: Because UI tests can't include code from the app,

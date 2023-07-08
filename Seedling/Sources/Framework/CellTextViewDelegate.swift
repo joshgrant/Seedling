@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol CellTextViewDelegate: AnyObject {
+protocol CellTextViewDelegate: AnyObject
+{
 	func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell)
 	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
 	func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell)

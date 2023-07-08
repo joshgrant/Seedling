@@ -11,7 +11,8 @@ struct CheckboxCellView: View
     
     var body: some View
     {
-        SettingsCell(title: title, subtitle: subtitle) {
+        SettingsCell(title: title, subtitle: subtitle)
+        {
             Toggle("", isOn: $isOn)
                 .toggleStyle(CheckboxToggleStyle())
         }

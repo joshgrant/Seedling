@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol CheckBoxDelegate: AnyObject {
+protocol CheckBoxDelegate: AnyObject
+{
     func checkBoxWillTouchUpInside(_ sender: TaskCell)
     func checkBoxDidTouchUpInside(_ sender: TaskCell)
 }
@@ -23,16 +24,17 @@ class TaskCell: UITableViewCell
     weak var checkBoxDelegate: CheckBoxDelegate?
     
     var task: Task?
-    var section: TodoController.Section?
     
-    static var normalTypingAttributes: [NSAttributedString.Key: Any] {
+    static var normalTypingAttributes: [NSAttributedString.Key: Any]
+    {
         return [
             .foregroundColor: TextStyle.textView.textColor,
             .font: TextStyle.textView.font
         ]
     }
     
-    static var strikeThroughTypingAttributes: [NSAttributedString.Key: Any] {
+    static var strikeThroughTypingAttributes: [NSAttributedString.Key: Any]
+    {
         return [
             .foregroundColor: UIColor.placeholderText,
             .strikethroughColor: UIColor.placeholderText,
@@ -45,7 +47,6 @@ class TaskCell: UITableViewCell
     {
         super.prepareForReuse()
         task = nil
-        section = nil
         
         textView.text = nil
         textView.attributedText = nil
@@ -88,13 +89,14 @@ class TaskCell: UITableViewCell
 		textView.configure(with: .textView, delegate: self)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with task: Task, section: TodoController.Section) {
+    func configure(with task: Task)
+    {
         self.task = task
-        self.section = section
 		
 		let content = task.content ?? ""
         
@@ -105,13 +107,16 @@ class TaskCell: UITableViewCell
 		
 		attributedString.addAttribute(.font, value: textStyle.font, range: range)
         
-        if task.completed {
+        if task.completed
+        {
             textView.typingAttributes = Self.strikeThroughTypingAttributes
             checkBox.setImage(SeedlingAsset.orangeBubble.image, for: .normal)
 			attributedString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: range)
 			attributedString.addAttribute(.strikethroughColor, value: UIColor.placeholderText, range: range)
 			attributedString.addAttribute(.foregroundColor, value: UIColor.placeholderText, range: range)
-        } else {
+        }
+        else
+        {
             textView.typingAttributes = Self.normalTypingAttributes
             checkBox.setImage(SeedlingAsset.clearBubble.image, for: .normal)
 			attributedString.addAttribute(.foregroundColor, value: textStyle.textColor, range: range)
@@ -123,90 +128,104 @@ class TaskCell: UITableViewCell
         accessibilityLabel = task.content
         accessibilityTraits = [.adjustable]
         
-        switch section {
-        case .priorities:
-            accessibilityIdentifier = "priority.cell"
-        case .todos:
-            accessibilityIdentifier = "todo.cell"
-        }
+        accessibilityIdentifier = "task.cell"
         
         textView.accessibilityIdentifier = "todo.textView"
         checkBox.accessibilityIdentifier = "todo.checkBox"
     }
     
-    @objc func didTouchUpInsideCheckBox(_ sender: UIButton) {
-        
+    @objc func didTouchUpInsideCheckBox(_ sender: UIButton)
+    {
         checkBoxDelegate?.checkBoxWillTouchUpInside(self)
         
         // Assign the opposite accessibility value
-        if task?.completed ?? false {
-            sender.accessibilityValue = SeedlingStrings.unchecked
-        } else {
-            sender.accessibilityValue = SeedlingStrings.checked
+        if task?.completed ?? false
+        {
+            sender.accessibilityValue = Strings.unchecked
+        }
+        else
+        {
+            sender.accessibilityValue = Strings.checked
         }
         
         database?.context.perform { [unowned self] in
             task?.content = textView.text
             task?.completed.toggle()
-            if let task = task, let section = section {
-                configure(with: task, section: section)
+            if let task = task
+            {
+                configure(with: task)
             }
             database?.save()
             checkBoxDelegate?.checkBoxDidTouchUpInside(self)
         }
     }
     
-    override func accessibilityActivate() -> Bool {
+    override func accessibilityActivate() -> Bool
+    {
         textView.becomeFirstResponder()
         return true
     }
     
-    override func accessibilityIncrement() {
-        checkBox.accessibilityValue = SeedlingStrings.checked
-        database?.context.perform {
+    override func accessibilityIncrement()
+    {
+        checkBox.accessibilityValue = Strings.checked
+        database?.context.perform
+        {
             self.task?.completed = true
-            if let task = self.task, let section = self.section {
-                self.configure(with: task, section: section)
+            if let task = self.task
+            {
+                self.configure(with: task)
             }
             self.database?.save()
         }
     }
     
-    override func accessibilityDecrement() {
-        checkBox.accessibilityValue = SeedlingStrings.unchecked
-        database?.context.perform {
+    override func accessibilityDecrement()
+    {
+        checkBox.accessibilityValue = Strings.unchecked
+        database?.context.perform
+        {
             self.task?.completed = false
-            if let task = self.task, let section = self.section {
-                self.configure(with: task, section: section)
+            if let task = self.task
+            {
+                self.configure(with: task)
             }
             self.database?.save()
         }
     }
 }
 
-extension TaskCell: UITextViewDelegate {
-	
-	func textViewDidBeginEditing(_ textView: UITextView) {
+extension TaskCell: UITextViewDelegate
+{
+	func textViewDidBeginEditing(_ textView: UITextView)
+    {
 		delegate?.textViewDidBeginEditing(textView, in: self)
 	}
     
     // Not called with programmatic changes, just fyi
-    func textViewDidChange(_ textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView)
+    {
         delegate?.textViewDidChange(textView, in: self)
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        database?.context.perform {
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        database?.context.perform
+        {
             self.task?.content = textView.text
             self.database?.save()
         }
 		delegate?.textViewDidEndEditing(textView, in: self)
     }
 	
-	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false {
+	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+		if text == "\n", delegate?.textViewShouldReturn(textView, in: self) ?? false
+        {
 			return false
-		} else {
+		}
+        else
+        {
 			return true
 		}
 	}

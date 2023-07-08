@@ -2,16 +2,22 @@
 
 import SwiftUI
 
-class SettingsController: UIHostingController<SettingsView>
+class SettingsController: UIHostingController<AnyView>
 {
     // MARK: - Initialization
     
-    init()
+    init(context: Context)
     {
-        super.init(rootView: SettingsView())
+        let rootView = SettingsView()
+            .environment(\.managedObjectContext, context)
+        
+        // TODO: Context for some reason is failing here
+        ///Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '+entityForName: nil is not a legal NSPersistentStoreCoordinator for searching for entity name 'MealType''
+        let anyView = AnyView(rootView)
+        super.init(rootView: anyView)
         
         tabBarItem = UITabBarItem(
-            title: SeedlingStrings.settings,
+            title: Strings.settings,
             image: SeedlingAsset.settingsUnselected.image,
             selectedImage: SeedlingAsset.settingsSelected.image)
     }
@@ -27,6 +33,8 @@ struct SettingsView: View
     @ScaledMetric(relativeTo: .body) var iconHeight: CGFloat = 20
     @ScaledMetric(relativeTo: .body) var chevronHeight: CGFloat = 15
     
+    @Environment(\.managedObjectContext) var context
+    
     var body: some View
     {
         ScrollView
@@ -40,81 +48,130 @@ struct SettingsView: View
                 infoSection
             }
         }
+        .environment(\.managedObjectContext, context)
     }
     
     var generalSection: some View
     {
-        Section(header: SectionHeader(title: SeedlingStrings.general))
+        Section(header: SectionHeader(title: Strings.general))
         {
-            CheckboxCellView(isOn: false, title: SeedlingStrings.hideSettings, subtitle: SeedlingStrings.toAccessSettings)
-            CheckboxCellView(isOn: false, title: SeedlingStrings.monospacedFont)
-            CheckboxCellView(isOn: false, title: SeedlingStrings.lowercaseText)
-            CheckboxCellView(isOn: false, title: SeedlingStrings.formatMarkdown)
-            CheckboxCellView(isOn: false, title: SeedlingStrings.hapticFeedback)
+            CheckboxCellView(isOn: false, title: Strings.hideSettings, subtitle: Strings.toAccessSettings)
+            CheckboxCellView(isOn: false, title: Strings.monospacedFont)
+            CheckboxCellView(isOn: false, title: Strings.lowercaseText)
+            CheckboxCellView(isOn: false, title: Strings.formatMarkdown)
+            CheckboxCellView(isOn: false, title: Strings.hapticFeedback)
         }
     }
     
     var tasksSection: some View
     {
-        Section(header: SectionHeader(title: SeedlingStrings.tasks))
+        Section(header: SectionHeader(title: Strings.tasks))
         {
-            CheckboxCellView(isOn: true, title: SeedlingStrings.automaticallyTransfer)
-
             TappableCellView(
-                title: SeedlingStrings.editCustomSections,
+                title: Strings.editSections,
                 label: Image(systemName: "chevron.right")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: chevronHeight),
-                action: {
-                    print("Edit custom sections")
+                destination: {
+                    EntityListEditView<TaskSection>(
+                        configuration: .taskSection,
+                        addEntity: { context in
+                            let numberOfSections = TaskSection.allSections(in: context).count
+                            let newTaskSection = TaskSection(context: context)
+                            newTaskSection.sortIndex = Int32(numberOfSections + 1)
+                            try! context.save()
+                            return newTaskSection
+                        },
+                        deleteEntity: { context, entity in
+                            guard let entity = entity as? TaskSection else
+                            {
+                                assertionFailure("Expected a TaskSection")
+                                return
+                            }
+                            entity.delete(from: context)
+                        },
+                        onDismiss: { context, entity in
+                            guard let entity = entity as? TaskSection else
+                            {
+                                assertionFailure("Expected a TaskSection")
+                                return
+                            }
+                            entity.propagate(to: context)
+                        })
+                    .environment(\.managedObjectContext, context)
                 })
+            
+            CheckboxCellView(isOn: true, title: Strings.automaticallyTransfer)
         }
     }
     
     var scheduleSection: some View
     {
-        Section(header: SectionHeader(title: SeedlingStrings.schedule))
+        Section(header: SectionHeader(title: Strings.schedule))
         {
-            SegmentedCellView(title: SeedlingStrings.sectionDuration, options: SectionDuration.allCases)
+            SegmentedCellView(title: Strings.sectionDuration, options: SectionDuration.allCases)
         }
     }
     
     var extrasSection: some View
     {
-        Section(header: SectionHeader(title: SeedlingStrings.extras))
+        Section(header: SectionHeader(title: Strings.extras))
         {
-            CheckboxCellView(isOn: false, title: SeedlingStrings.pomodoroNotifications)
-            CheckboxCellView(isOn: false, title: SeedlingStrings.showTotalWater)
+            TappableCellView(
+                title: Strings.editMealTypes,
+                label: Image(systemName: "chevron.right")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: chevronHeight),
+                destination: {
+                    EntityListEditView<MealType>(
+                        configuration: .mealType,
+                        addEntity: { context in
+                            let numberOfMeals = try! MealType.totalCount(in: context)
+                            let newMeal = MealType(context: context)
+                            newMeal.sortIndex = Int32(numberOfMeals + 1)
+                            try! context.save()
+                            return newMeal
+                        },
+                        deleteEntity: { context, entity in
+                            context.delete(entity)
+                        })
+                    .environment(\.managedObjectContext, context)
+                })
+            
+            CheckboxCellView(isOn: false, title: Strings.pomodoroNotifications)
+            CheckboxCellView(isOn: false, title: Strings.showTotalWater)
+            
             MenuCellView(
-                title: SeedlingStrings.waterAmount,
+                title: Strings.waterAmount,
                 options: WaterAmountOption.allCases)
         }
     }
     
     var infoSection: some View
     {
-        Section(header: SectionHeader(title: SeedlingStrings.info))
+        Section(header: SectionHeader(title: Strings.info))
         {
             TappableCellView(
-                title: SeedlingStrings.privacyPolicy,
+                title: Strings.privacyPolicy,
                 label: Image(systemName: "rectangle.portrait.and.arrow.forward")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: iconHeight),
-                action: {
-                    print("Privacy policy")
+                destination: {
+                    SettingsCell(title: "Privacy Policy", label: { Text("This should be the privacy policy view") })
                 })
             
             // TODO: Make these labels @ViewBuilders
             TappableCellView(
-                title: SeedlingStrings.dataExport,
+                title: Strings.dataExport,
                 label: Image(systemName: "arrow.down.doc")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: iconHeight),
-                action: {
-                    print("Data export")
+                destination: {
+                    SettingsCell(title: "Data Export", label: { Text("This should be the data export view") })
                 })
             
             CenterButtonCell(
@@ -141,9 +198,9 @@ extension SettingsView
         {
             switch self
             {
-            case .minutes15: return SeedlingStrings.m15
-            case .minutes30: return SeedlingStrings.m30
-            case .hour1: return SeedlingStrings.hr1
+            case .minutes15: return Strings.m15
+            case .minutes30: return Strings.m30
+            case .hour1: return Strings.hr1
             }
         }
     }
@@ -164,13 +221,13 @@ extension SettingsView
         {
             switch self
             {
-            case .ouncesTwo: return SeedlingStrings.ouncesAmount(2)
-            case .ouncesFour: return SeedlingStrings.ouncesAmount(4)
-            case .ouncesSix: return SeedlingStrings.ouncesAmount(6)
-            case .ouncesEight: return SeedlingStrings.ouncesAmount(8)
-            case .ouncesTwelve: return SeedlingStrings.ouncesAmount(12)
-            case .ouncesTwentyFour: return SeedlingStrings.ouncesAmount(24)
-            case .ouncesThirtyTwo: return SeedlingStrings.ouncesAmount(32)
+            case .ouncesTwo: return Strings.ouncesAmount(2)
+            case .ouncesFour: return Strings.ouncesAmount(4)
+            case .ouncesSix: return Strings.ouncesAmount(6)
+            case .ouncesEight: return Strings.ouncesAmount(8)
+            case .ouncesTwelve: return Strings.ouncesAmount(12)
+            case .ouncesTwentyFour: return Strings.ouncesAmount(24)
+            case .ouncesThirtyTwo: return Strings.ouncesAmount(32)
             }
         }
     }
@@ -178,8 +235,14 @@ extension SettingsView
 
 struct SettingsView_Previews: PreviewProvider
 {
+    static let database = Database(containerName: "Seedling")
+    
     static var previews: some View
     {
-        SettingsView()
+        NavigationStack {
+            SettingsView()
+                .environment(\.managedObjectContext, database.context)
+        }
+        .tint(SeedlingAsset.orange.swiftUIColor)
     }
 }

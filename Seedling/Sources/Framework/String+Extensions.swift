@@ -8,10 +8,10 @@
 
 import UIKit
 
-extension String {
-    
-    func height(with style: TextStyle, constrainedTo width: CGFloat) -> CGFloat {
-        
+extension String
+{
+    func height(with style: TextStyle, constrainedTo width: CGFloat) -> CGFloat
+    {
         let size = CGSize(width: width - style.horizontalPadding * 2, height: .greatestFiniteMagnitude)
         let options = NSStringDrawingOptions.usesLineFragmentOrigin
         let attributes = [NSAttributedString.Key.font : style.font]

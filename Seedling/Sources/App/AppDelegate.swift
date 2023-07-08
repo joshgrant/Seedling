@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         handle(arguments: arguments)
         handle(environment: environment)
         
+        configureNavigationBarAppearance()
+        
         return true
     }
 
@@ -57,5 +59,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     
     func handle(environment: [String: String])
     {
+    }
+}
+
+extension AppDelegate
+{
+    private func configureNavigationBarAppearance()
+    {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.clear
+        appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+        appearance.titleTextAttributes = [
+            NSAttributedString.Key.font: TextStyle.navigationBar.font,
+            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
+        ]
+        
+        let compactAppearance = UINavigationBarAppearance()
+        compactAppearance.configureWithTransparentBackground()
+        compactAppearance.backgroundColor = UIColor.clear
+        compactAppearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+        compactAppearance.titleTextAttributes = [
+            NSAttributedString.Key.font: TextStyle.textView.font,
+            NSAttributedString.Key.foregroundColor: TextStyle.navigationBar.textColor
+        ]
+        
+        UINavigationBar.appearance().compactAppearance = compactAppearance
+        UINavigationBar.appearance().compactScrollEdgeAppearance = compactAppearance
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 }

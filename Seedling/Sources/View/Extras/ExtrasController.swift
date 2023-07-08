@@ -37,9 +37,10 @@ class ExtrasController: TabContentController
 		return UITableView()
 	}
 	
-	override class func makeTabBarItem() -> UITabBarItem {
+	override class func makeTabBarItem() -> UITabBarItem
+    {
 		return UITabBarItem(
-            title: SeedlingStrings.extras.localizedCapitalized,
+            title: Strings.extras.localizedCapitalized,
             image: SeedlingAsset.extrasUnselected.image,
             selectedImage: SeedlingAsset.extrasSelected.image)
 	}
@@ -74,7 +75,8 @@ extension ExtrasController: CellTextViewDelegate
 	func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
 	{
 		tableView.performBatchUpdates({
-			UIView.animate(withDuration: 0.0) {
+			UIView.animate(withDuration: 0.0)
+            {
 				cell.contentView.setNeedsLayout()
 				cell.contentView.layoutIfNeeded()
 			}

@@ -12,6 +12,8 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name
 public enum SeedlingStrings {
+  /// add
+  public static let add = SeedlingStrings.tr("Localizable", "add")
   /// Automatically transfer uncompleted tasks to today
   public static let automaticallyTransfer = SeedlingStrings.tr("Localizable", "automatically_transfer")
   /// Breakfast
@@ -20,10 +22,22 @@ public enum SeedlingStrings {
   public static let checked = SeedlingStrings.tr("Localizable", "checked")
   /// Data export
   public static let dataExport = SeedlingStrings.tr("Localizable", "data_export")
+  /// delete
+  public static let delete = SeedlingStrings.tr("Localizable", "delete")
+  /// Delete Meal Type
+  public static let deleteMealType = SeedlingStrings.tr("Localizable", "delete_meal_type")
+  /// You'll lose all meals that are associated with this meal type.
+  public static let deleteMealTypeMessage = SeedlingStrings.tr("Localizable", "delete_meal_type_message")
+  /// Delete Section
+  public static let deleteSection = SeedlingStrings.tr("Localizable", "delete_section")
+  /// You'll lose all tasks that are associated with this section.
+  public static let deleteSectionMessage = SeedlingStrings.tr("Localizable", "delete_section_message")
   /// Dinner
   public static let dinner = SeedlingStrings.tr("Localizable", "dinner")
-  /// Edit custom sections
-  public static let editCustomSections = SeedlingStrings.tr("Localizable", "edit_custom_sections")
+  /// Edit meal types
+  public static let editMealTypes = SeedlingStrings.tr("Localizable", "edit_meal_types")
+  /// Edit sections
+  public static let editSections = SeedlingStrings.tr("Localizable", "edit_sections")
   /// Extras
   public static let extras = SeedlingStrings.tr("Localizable", "extras")
   /// d MMM
@@ -50,6 +64,8 @@ public enum SeedlingStrings {
   public static let m15 = SeedlingStrings.tr("Localizable", "m15")
   /// 30m
   public static let m30 = SeedlingStrings.tr("Localizable", "m30")
+  /// Meal Types
+  public static let mealTypes = SeedlingStrings.tr("Localizable", "meal_types")
   /// Meals
   public static let meals = SeedlingStrings.tr("Localizable", "meals")
   /// Monospaced font
@@ -68,6 +84,8 @@ public enum SeedlingStrings {
   public static let pomodoro = SeedlingStrings.tr("Localizable", "pomodoro")
   /// Pomodoro notifications
   public static let pomodoroNotifications = SeedlingStrings.tr("Localizable", "pomodoro_notifications")
+  /// Previous Tasks
+  public static let previousTasks = SeedlingStrings.tr("Localizable", "previous_tasks")
   /// Priorities
   public static let priorities = SeedlingStrings.tr("Localizable", "priorities")
   /// Privacy policy
@@ -82,6 +100,8 @@ public enum SeedlingStrings {
   public static let settings = SeedlingStrings.tr("Localizable", "settings")
   /// Show total water
   public static let showTotalWater = SeedlingStrings.tr("Localizable", "show_total_water")
+  /// Snack
+  public static let snack = SeedlingStrings.tr("Localizable", "snack")
   /// Tasks
   public static let tasks = SeedlingStrings.tr("Localizable", "tasks")
   /// to do

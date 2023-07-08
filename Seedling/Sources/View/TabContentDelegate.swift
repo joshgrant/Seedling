@@ -15,7 +15,8 @@ class TabContentDelegate: NSObject, UITableViewDelegate
 		54
 	}
 	
-	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
 		let content = titleForHeader(in: section)
 		let header = TabContentHeader(content: content)
 		return header
@@ -36,11 +37,13 @@ class TabContentDelegate: NSObject, UITableViewDelegate
 		return UIView()
 	}
     
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat
+    {
         22
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat
+    {
         54
     }
 }

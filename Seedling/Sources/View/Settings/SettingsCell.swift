@@ -82,7 +82,8 @@ struct SettingsCell_Previews: PreviewProvider
         
         var body: some View
         {
-            SettingsCell(title: "Section duration") {
+            SettingsCell(title: "Section duration")
+            {
                 Picker("", selection: $selection)
                 {
                     Text("15m").tag(0)

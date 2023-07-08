@@ -25,8 +25,10 @@ extension MealsCell: UITextViewDelegate
         // TODO: Not ideal that we're performing database
         // operations in the cell... This should be forwarded to the controller..
 		delegate?.textViewDidEndEditing(textView, in: self)
-        database?.context.perform {
-			switch textView {
+        database?.context.perform
+        {
+			switch textView
+            {
 			case self.breakfastTextView:
 				self.meal?.breakfast = textView.text
 			case self.lunchTextView:

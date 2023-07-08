@@ -10,16 +10,19 @@ import UIKit
 
 // This is just a test
 
-class TableView: UITableView {
-    
+class TableView: UITableView
+{
     // Do we need to consider any safe area insets?
     
-    override var intrinsicContentSize: CGSize {
+    override var intrinsicContentSize: CGSize
+    {
         return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
     }
     
-    override var contentSize: CGSize {
-        didSet {
+    override var contentSize: CGSize
+    {
+        didSet
+        {
             invalidateIntrinsicContentSize()
         }
     }

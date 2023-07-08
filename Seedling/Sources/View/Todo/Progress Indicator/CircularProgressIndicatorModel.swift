@@ -20,14 +20,16 @@ class CircularProgressIndicatorModel: ObservableObject
         didSet { didUpdate(angle: endAngle) }
     }
     
+    @Published var uncompletedCount: Int = 0
+    
     // TODO: Have the scroll view delegate communicate `didEndScrolling` to the
     // progress indicator to reset the state
     var currentState: State = .inactive
-    var didTransition: ((State) -> Void)?
+    var didTransition: ((CircularProgressIndicatorModel, State) -> Void)?
     
     // MARK: - Initialization
     
-    init(didTransition: ((State) -> Void)? = nil)
+    init(didTransition: ((CircularProgressIndicatorModel, State) -> Void)? = nil)
     {
         self.didTransition = didTransition
     }
@@ -90,6 +92,6 @@ extension CircularProgressIndicatorModel: StateMachine
     func didTransition(to state: State)
     {
         print("Did transition to: \(state)")
-        didTransition?(state)
+        didTransition?(self, state)
     }
 }

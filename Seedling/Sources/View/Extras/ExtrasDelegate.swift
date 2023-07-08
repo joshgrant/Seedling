@@ -15,19 +15,20 @@ class ExtrasDelegate: TabContentDelegate
 		switch section
 		{
 		case 0:
-            return SeedlingStrings.meals.localizedCapitalized
+            return Strings.meals.localizedCapitalized
 		case 1:
-            return SeedlingStrings.water.localizedCapitalized
+            return Strings.water.localizedCapitalized
 		case 2:
-            return SeedlingStrings.pomodoro.localizedCapitalized
+            return Strings.pomodoro.localizedCapitalized
 		case 3:
-            return SeedlingStrings.notes.localizedCapitalized
+            return Strings.notes.localizedCapitalized
 		default:
 			return nil
 		}
 	}
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
         switch section
         {
         case 4:
@@ -37,7 +38,8 @@ class ExtrasDelegate: TabContentDelegate
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
         switch section
         {
         case 4:

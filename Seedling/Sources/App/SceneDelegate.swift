@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
+class SceneDelegate: UIResponder, UIWindowSceneDelegate
+{
     var window: UIWindow?
     
     lazy var dayProvider: DayProvider = {
@@ -27,7 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
 
         guard let tabBarController = MainTabBarController(dayProvider: dayProvider, database: AppDelegate.database) else { return }
-        let navigationController = UINavigationController(rootViewController: tabBarController)        
+        let navigationController = UINavigationController(rootViewController: tabBarController)
+        navigationController.navigationBar.tintColor = SeedlingAsset.emerald.color
         
         window.rootViewController = navigationController
         
@@ -40,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene)
     {
 		dayProvider.resetDay()
-        movePreviousTasksToTodayIfNeeded(day: dayProvider.day)
+//        movePreviousTasksToTodayIfNeeded(day: dayProvider.day)
     }
     
     func sceneWillResignActive(_ scene: UIScene)
@@ -59,16 +60,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: - Utility
     
-    func movePreviousTasksToTodayIfNeeded(day: Day)
-    {
-        let allUnfinishedTasks = Task.allUnfinishedHistoricalTasks(in: AppDelegate.database.context)
-        
-        for task in allUnfinishedTasks
-        {
-            task.todoOfDay = day
-        }
-        
-        try? AppDelegate.database.context.save()
-    }
+//    func movePreviousTasksToTodayIfNeeded(day: Day)
+//    {
+//        let allUnfinishedTasks = Task.allUnfinishedHistoricalTasks(in: AppDelegate.database.context)
+//
+//        for task in allUnfinishedTasks
+//        {
+//            task.todoOfDay = day
+//        }
+//
+//        try? AppDelegate.database.context.save()
+//    }
 }
 

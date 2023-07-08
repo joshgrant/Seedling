@@ -10,8 +10,8 @@ import CoreData
 
 typealias Context = NSManagedObjectContext
 
-class Database {
-    
+class Database
+{
     // MARK: - Variables
     
     var containerName: String
@@ -19,7 +19,8 @@ class Database {
     lazy var container: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: containerName)
         container.loadPersistentStores { (description, error) in
-            if let error = error {
+            if let error = error
+            {
                 assertionFailure(error.localizedDescription)
             }
         }
@@ -40,16 +41,14 @@ class Database {
     init(containerName: String)
     {
         self.containerName = containerName
-        Self.testInit()
+        populateWithDefaultData(shouldReset: true)
     }
+}
+
+// MARK: - Database operations
     
-    static func testInit()
-    {
-        print(self)
-    }
-    
-    // MARK: - Database operations
-    
+extension Database
+{
     func save()
     {
         if context.hasChanges
@@ -92,6 +91,8 @@ class Database {
     }
 }
 
+// MARK: - Testable
+
 extension Database: Testable
 {
     func prepare()
@@ -109,4 +110,49 @@ extension Database: Testable
     {
         
     }
+}
+
+// MARK: - Data population
+
+extension Database
+{
+    func populateWithDefaultData(shouldReset: Bool = false)
+    {
+        if shouldReset
+        {
+            reset()
+            Defaults.hasPopulatedDefaultData = false
+        }
+        
+        if Defaults.hasPopulatedDefaultData { return }
+        
+        let todoSection = TaskSection(context: context)
+        todoSection.title = Strings.toDo.localizedCapitalized
+        todoSection.sortIndex = 0
+        
+        let prioritySection = TaskSection(context: context)
+        prioritySection.title = Strings.priorities.localizedCapitalized
+        prioritySection.sortIndex = 1
+        
+        let breakfast = MealType(context: context)
+        breakfast.title = Strings.breakfast
+        breakfast.sortIndex = 0
+        
+        let lunch = MealType(context: context)
+        lunch.title = Strings.lunch
+        lunch.sortIndex = 1
+        
+        let dinner = MealType(context: context)
+        dinner.title = Strings.dinner
+        dinner.sortIndex = 2
+        
+        let snack = MealType(context: context)
+        snack.title = Strings.snack
+        snack.sortIndex = 3
+        
+        save()
+        
+        Defaults.hasPopulatedDefaultData = true
+    }
+    
 }

@@ -8,8 +8,8 @@
 // Hello world!
 import CoreData
 
-class DayProvider {
-    
+class DayProvider
+{
     weak var database: Database?
     
     init(database: Database)
@@ -19,18 +19,22 @@ class DayProvider {
     
     private var _day: Day?
     {
-        willSet {
+        willSet
+        {
             NotificationCenter.default.post(name: .dayProviderWillUpdateDay, object: self, userInfo: ["newDay": newValue as Any])
         }
-        didSet {
+        didSet
+        {
             NotificationCenter.default.post(name: .dayProviderDidUpdateDay, object: self, userInfo: ["day": _day as Any])
         }
     }
     
     var day: Day
     {
-        get {
-            if let day = _day {
+        get
+        {
+            if let day = _day
+            {
                 return day
             }
             
@@ -40,17 +44,22 @@ class DayProvider {
 			
             let first = try? database?.context.fetch(request).first
             
-            if let first = first {
+            if let first = first
+            {
                 _day = first
                 return _day!
-            } else {
+            }
+            else
+            {
                 _day = Day.make(date: Date(), in: database!.context)
                 
                 database?.save()
                 
                 return _day!
             }
-        } set {
+        }
+        set
+        {
             _day = newValue
         }
     }
@@ -65,9 +74,12 @@ class DayProvider {
         
         let result = try? database?.context.fetch(fetchRequest)
         
-        if let tomorrow = result?.first {
+        if let tomorrow = result?.first
+        {
             return tomorrow
-        } else {
+        }
+        else
+        {
             let day = Day.make(date: date.addingTimeInterval(60 * 60 * 24), in: database!.context)
             database?.save()
             return day
@@ -84,9 +96,12 @@ class DayProvider {
         
         let result = try? database?.context.fetch(fetchRequest)
         
-        if let yesterday = result?.first {
+        if let yesterday = result?.first
+        {
             return yesterday
-        } else {
+        }
+        else
+        {
             let day = Day.make(date: date.addingTimeInterval(-60 * 60 * 24), in: database!.context)
             database?.save()
             return day
@@ -105,7 +120,8 @@ class DayProvider {
 	}
 }
 
-extension NSNotification.Name {
+extension NSNotification.Name
+{
     static let dayProviderWillUpdateDay = NSNotification.Name("me.joshgrant.DailyPlanner.dayProviderWillUpdateDay")
     static let dayProviderDidUpdateDay = NSNotification.Name("me.joshgrant.DailyPlanner.dayProviderDidUpdateDay")
 }

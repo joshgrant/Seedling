@@ -23,11 +23,11 @@ class MealsCell: UITableViewCell
             switch self
             {
             case .breakfast:
-                return SeedlingStrings.breakfast.localizedCapitalized
+                return Strings.breakfast.localizedCapitalized
             case .lunch:
-                return SeedlingStrings.lunch.localizedCapitalized
+                return Strings.lunch.localizedCapitalized
             case .dinner:
-                return SeedlingStrings.dinner.localizedCapitalized
+                return Strings.dinner.localizedCapitalized
             }
         }
 	}
@@ -54,9 +54,9 @@ class MealsCell: UITableViewCell
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?)
 	{
-        breakfastTextView = Self.makeTextView(placeholder: SeedlingStrings.breakfast.localizedCapitalized)
-        lunchTextView = Self.makeTextView(placeholder: SeedlingStrings.lunch.localizedCapitalized)
-        dinnerTextView = Self.makeTextView(placeholder: SeedlingStrings.dinner.localizedCapitalized)
+        breakfastTextView = Self.makeTextView(placeholder: Strings.breakfast.localizedCapitalized)
+        lunchTextView = Self.makeTextView(placeholder: Strings.lunch.localizedCapitalized)
+        dinnerTextView = Self.makeTextView(placeholder: Strings.dinner.localizedCapitalized)
 		
 		breakfastStackView = Self.makeMealStackView()
 		lunchStackView = Self.makeMealStackView()
@@ -83,7 +83,8 @@ class MealsCell: UITableViewCell
 		configureTextView(textView: dinnerTextView)
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder: NSCoder)
+    {
         fatalError("init(coder:) has not been implemented")
     }
 	
