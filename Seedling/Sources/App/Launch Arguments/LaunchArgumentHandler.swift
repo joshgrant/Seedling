@@ -18,6 +18,8 @@ class LaunchArgumentMapper
             return LaunchArgumentHandler()
         case .resetDatabase:
             return ResetDatabase()
+        case .populateDatabase:
+            return PopulateDatabase()
         }
     }
 }
@@ -30,4 +32,9 @@ class LaunchArgumentHandler
 class ResetDatabase: LaunchArgumentHandler
 {
     override func handle() { AppDelegate.database.reset() }
+}
+
+class PopulateDatabase: LaunchArgumentHandler
+{
+    override func handle() { AppDelegate.database.populateWithDefaultData(shouldReset: true) }
 }

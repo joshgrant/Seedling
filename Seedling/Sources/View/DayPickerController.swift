@@ -18,6 +18,7 @@ class DayPickerController: UIViewController
         datePicker.locale = .current
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
+        datePicker.tintColor = SeedlingAsset.orange.color
         datePicker.addTarget(self, action: #selector(handleDateSelection), for: .valueChanged)
         return datePicker
     }()
@@ -44,7 +45,6 @@ class DayPickerController: UIViewController
         
         view.embed(view: datePicker)
         view.backgroundColor = .systemBackground
-        // TODO: Set dayPicker color to Seedling tint
         guard let presentationController = presentationController as? UISheetPresentationController else { return }
         presentationController.detents = [.custom(resolver: { context in
             return self.datePickerHeight
