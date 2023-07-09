@@ -114,6 +114,9 @@ class MainTabBarController: UITabBarController
             let tapGesture = createNavigationBarGestureRecognizer()
             navigationBar.addGestureRecognizer(tapGesture)
             
+            let longPressGesture = createNavigationBarLongPressGestureRecognizer()
+            navigationBar.addGestureRecognizer(longPressGesture)
+            
             NSLayoutConstraint.activate([
                 navigationBar.bottomAnchor.constraint(equalTo: line.topAnchor),
                 navigationBar.leadingAnchor.constraint(equalTo: line.leadingAnchor),
@@ -126,6 +129,13 @@ class MainTabBarController: UITabBarController
     {
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.addTarget(self, action: #selector(didTouchUpInsideNavigationBar))
+        return gestureRecognizer
+    }
+    
+    func createNavigationBarLongPressGestureRecognizer() -> UILongPressGestureRecognizer
+    {
+        let gestureRecognizer = UILongPressGestureRecognizer()
+        gestureRecognizer.addTarget(self, action: #selector(didLongPressInsideNavigationBar))
         return gestureRecognizer
     }
     
@@ -144,5 +154,16 @@ class MainTabBarController: UITabBarController
     @objc func didTouchUpInsideNavigationBar(_ sender: UITapGestureRecognizer)
     {
         dayProvider.day = dayProvider.today
+    }
+    
+    @objc func didLongPressInsideNavigationBar(_ sender: UILongPressGestureRecognizer)
+    {
+        switch sender.state
+        {
+        case .began:
+            let viewController = DayPickerController(context: database.context, dayProvider: dayProvider)
+            present(viewController, animated: true, completion: nil)
+        default: break
+        }
     }
 }

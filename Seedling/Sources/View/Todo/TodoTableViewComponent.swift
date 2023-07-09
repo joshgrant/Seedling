@@ -57,6 +57,7 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     
     func updateDay(day: Day)
     {
+        taskToEdit = nil
         fetchRequest = Self.makeDayFetchRequest(day: day)
         fetchController = Self.makeFetchController(with: fetchRequest, context: context)
         fetchController.delegate = self

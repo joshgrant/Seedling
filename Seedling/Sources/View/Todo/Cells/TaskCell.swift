@@ -136,6 +136,7 @@ class TaskCell: UITableViewCell
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton)
     {
+        // TODO: Assign checkBoxDelegate
         checkBoxDelegate?.checkBoxWillTouchUpInside(self)
         
         // Assign the opposite accessibility value

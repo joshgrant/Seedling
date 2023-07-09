@@ -12,4 +12,5 @@ public enum LaunchArgument: String
 {
     case launchArgument
     case resetDatabase
+    case populateDatabase
 }

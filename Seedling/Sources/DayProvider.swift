@@ -67,45 +67,13 @@ class DayProvider
     var tomorrow: Day
     {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
-        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "date > %@", date as NSDate)
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        fetchRequest.fetchLimit = 1
-        
-        let result = try? database?.context.fetch(fetchRequest)
-        
-        if let tomorrow = result?.first
-        {
-            return tomorrow
-        }
-        else
-        {
-            let day = Day.make(date: date.addingTimeInterval(60 * 60 * 24), in: database!.context)
-            database?.save()
-            return day
-        }
+        return DayProvider.findOrMakeDay(date: date.relativeDate(.tomorrow), context: database!.context)
     }
     
     var yesterday: Day
     {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
-        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "date < %@", date as NSDate)
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        fetchRequest.fetchLimit = 1
-        
-        let result = try? database?.context.fetch(fetchRequest)
-        
-        if let yesterday = result?.first
-        {
-            return yesterday
-        }
-        else
-        {
-            let day = Day.make(date: date.addingTimeInterval(-60 * 60 * 24), in: database!.context)
-            database?.save()
-            return day
-        }
+        return DayProvider.findOrMakeDay(date: date.relativeDate(.yesterday), context: database!.context)
     }
     
     var today: Day
@@ -118,6 +86,26 @@ class DayProvider
     {
 		_day = nil
 	}
+    
+    static func findOrMakeDay(date: Date, context: Context) -> Day
+    {
+        
+        let fetchRequest: NSFetchRequest<Day> = Day.fetchRequest()
+        fetchRequest.predicate = date.makeDayPredicate()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        
+        if let result = (try? context.fetch(fetchRequest))?.first
+        {
+            return result
+        }
+        else
+        {
+            let day = Day.make(date: date, in: context)
+            try? context.save()
+            return day
+        }
+    }
 }
 
 extension NSNotification.Name
