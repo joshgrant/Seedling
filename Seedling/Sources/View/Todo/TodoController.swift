@@ -144,28 +144,3 @@ extension TodoController
 //        (dataSource as? TodoDataSource)?.checkBoxDelegate = self
 //	}
 
-//extension TodoController: CheckBoxDelegate {
-//    
-//    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
-//        
-//        // What about the priority array?
-//        
-//        guard let task = sender.task else { return }
-//        guard let row = dayProvider.day.todosArray.firstIndex(of: task) else { return }
-//        previousRows[task] = row
-//    }
-//    
-//    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
-//        
-//        guard let task = sender.task,
-//              let previousRow = previousRows[task],
-//              let currentRow = dayProvider.day.todosArray.firstIndex(of: task) else {
-//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-//            return
-//        }
-//        
-//        tableView.beginUpdates()
-//        tableView.moveRow(at: IndexPath(row: previousRow, section: 1), to: IndexPath(row: currentRow, section: 1))
-//        tableView.endUpdates()
-//    }
-//}

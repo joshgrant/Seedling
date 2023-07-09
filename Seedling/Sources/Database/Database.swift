@@ -149,7 +149,7 @@ extension Database
         let snack = MealType(context: context)
         snack.title = Strings.snack
         snack.sortIndex = 3
-        
+       
         save()
         
         Defaults.hasPopulatedDefaultData = true

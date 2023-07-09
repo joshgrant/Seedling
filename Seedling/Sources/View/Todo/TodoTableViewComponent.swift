@@ -22,6 +22,8 @@ class TodoTableViewComponent: NSObject, TableViewComponent
         {
             cell.configure(with: id)
             cell.delegate = self
+            cell.checkBoxDelegate = self
+            cell.context = self?.context
         }
         return cell
     })
@@ -102,7 +104,7 @@ extension TodoTableViewComponent: NSFetchedResultsControllerDelegate
             
             newSnapshot.appendItems(tasks, toSection: section)
         }
-        dataSource.apply(newSnapshot, animatingDifferences: false)
+        dataSource.apply(newSnapshot, animatingDifferences: true)
     }
     
     func mapSectionIdToSection(sectionId: Any) -> Section?
@@ -194,7 +196,13 @@ extension TodoTableViewComponent
         guard let task = dataSource.itemIdentifier(for: indexPath), task != taskToEdit else { return .none }
         
         return UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: Strings.delete.localizedCapitalized, handler: { [weak self] action, view, result in
+            task
+                .dailyTaskSection?
+                .sortedTasks
+                .filter { $0.sortIndex > task.sortIndex }
+                .forEach { $0.sortIndex -= 1 }
             self?.context.delete(task)
+            try? self?.context.save()
             result(true)
         })])
     }
@@ -240,5 +248,78 @@ extension TodoTableViewComponent: UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         scrollViewDidScroll(scrollView.contentOffset.y)
+    }
+}
+
+//extension TodoController: CheckBoxDelegate {
+//
+//    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
+//
+//        // What about the priority array?
+//
+//        guard let task = sender.task else { return }
+//        guard let row = dayProvider.day.todosArray.firstIndex(of: task) else { return }
+//        previousRows[task] = row
+//    }
+//
+//    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
+//
+//        guard let task = sender.task,
+//              let previousRow = previousRows[task],
+//              let currentRow = dayProvider.day.todosArray.firstIndex(of: task) else {
+//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+//            return
+//        }
+//
+//        tableView.beginUpdates()
+//        tableView.moveRow(at: IndexPath(row: previousRow, section: 1), to: IndexPath(row: currentRow, section: 1))
+//        tableView.endUpdates()
+//    }
+//}
+
+extension TodoTableViewComponent: CheckBoxDelegate
+{
+    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
+        
+    }
+    
+    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
+        guard let task = sender.task else { return }
+        
+        if task.completed
+        {
+            modifySortIndexAfterTaskMarkedComplete(task: task)
+        }
+        else
+        {
+            modifySortIndexAfterTaskMarkedIncomplete(task: task)
+        }
+        
+        try? context.save()
+        try? fetchController.performFetch()
+    }
+    
+    func modifySortIndexAfterTaskMarkedComplete(task: Task)
+    {
+        let sortedTasks = task.dailyTaskSection?.sortedTasks ?? []
+        var index = Int(task.sortIndex + 1)
+        while index < sortedTasks.count && !sortedTasks[index].completed
+        {
+            sortedTasks[index].sortIndex -= 1
+            index += 1
+        }
+        task.sortIndex = Int32(index - 1)
+    }
+    
+    func modifySortIndexAfterTaskMarkedIncomplete(task: Task)
+    {
+        let sortedTasks = task.dailyTaskSection?.sortedTasks ?? []
+        var index = Int(task.sortIndex - 1)
+        while index >= 0 && sortedTasks[index].completed
+        {
+            sortedTasks[index].sortIndex += 1
+            index -= 1
+        }
+        task.sortIndex = Int32(index + 1)
     }
 }

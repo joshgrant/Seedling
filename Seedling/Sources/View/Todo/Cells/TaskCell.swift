@@ -19,7 +19,7 @@ class TaskCell: UITableViewCell
     let checkBox: UIButton
     let textView: TextView
     
-    weak var database: Database?
+    weak var context: Context?
     weak var delegate: CellTextViewDelegate?
     weak var checkBoxDelegate: CheckBoxDelegate?
     
@@ -136,7 +136,6 @@ class TaskCell: UITableViewCell
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton)
     {
-        // TODO: Assign checkBoxDelegate
         checkBoxDelegate?.checkBoxWillTouchUpInside(self)
         
         // Assign the opposite accessibility value
@@ -149,14 +148,14 @@ class TaskCell: UITableViewCell
             sender.accessibilityValue = Strings.checked
         }
         
-        database?.context.perform { [unowned self] in
+        context?.perform { [unowned self] in
             task?.content = textView.text
             task?.completed.toggle()
             if let task = task
             {
                 configure(with: task)
             }
-            database?.save()
+            try? context?.save()
             checkBoxDelegate?.checkBoxDidTouchUpInside(self)
         }
     }
@@ -170,28 +169,28 @@ class TaskCell: UITableViewCell
     override func accessibilityIncrement()
     {
         checkBox.accessibilityValue = Strings.checked
-        database?.context.perform
+        context?.perform
         {
             self.task?.completed = true
             if let task = self.task
             {
                 self.configure(with: task)
             }
-            self.database?.save()
+            try? self.context?.save()
         }
     }
     
     override func accessibilityDecrement()
     {
         checkBox.accessibilityValue = Strings.unchecked
-        database?.context.perform
+        context?.perform
         {
             self.task?.completed = false
             if let task = self.task
             {
                 self.configure(with: task)
             }
-            self.database?.save()
+            try? self.context?.save()
         }
     }
 }
@@ -211,10 +210,10 @@ extension TaskCell: UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
-        database?.context.perform
+        context?.perform
         {
             self.task?.content = textView.text
-            self.database?.save()
+            try? self.context?.save()
         }
 		delegate?.textViewDidEndEditing(textView, in: self)
     }
