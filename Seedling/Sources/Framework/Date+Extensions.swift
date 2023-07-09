@@ -10,6 +10,20 @@ import Foundation
 
 extension Date
 {
+    enum Relative
+    {
+        case yesterday
+        case tomorrow
+        var changeInDay: Int
+        {
+            switch self
+            {
+            case .tomorrow: return 1
+            case .yesterday: return -1
+            }
+        }
+    }
+    
 	// Taken from https://stackoverflow.com/a/39944152/9447565
 	func makeDayPredicate() -> NSPredicate
 	{
@@ -55,23 +69,13 @@ extension Date
         
         return string.contains(am) || string.contains(pm)
     }
+
     
-    var tomorrow: Date
+    func relativeDate(_ relativeDate: Relative) -> Date
     {
         let calendar = Calendar.autoupdatingCurrent
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
-        components.day = components.day! + 1
-        components.hour = 0
-        components.minute = 0
-        components.second = 1
-        return calendar.date(from: components)!
-    }
-    
-    var yesterday: Date
-    {
-        let calendar = Calendar.autoupdatingCurrent
-        var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: self)
-        components.day = components.day! - 1
+        components.day = components.day! + relativeDate.changeInDay
         components.hour = 0
         components.minute = 0
         components.second = 1

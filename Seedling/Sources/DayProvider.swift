@@ -67,13 +67,13 @@ class DayProvider
     var tomorrow: Day
     {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
-        return DayProvider.findOrMakeDay(date: date.tomorrow, context: database!.context)
+        return DayProvider.findOrMakeDay(date: date.relativeDate(.tomorrow), context: database!.context)
     }
     
     var yesterday: Day
     {
         guard let date = day.date else { return Day.make(date: Date(), in: database!.context) }
-        return DayProvider.findOrMakeDay(date: date.yesterday, context: database!.context)
+        return DayProvider.findOrMakeDay(date: date.relativeDate(.yesterday), context: database!.context)
     }
     
     var today: Day

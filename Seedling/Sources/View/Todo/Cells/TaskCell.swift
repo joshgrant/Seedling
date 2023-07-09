@@ -125,12 +125,13 @@ class TaskCell: UITableViewCell
 		textView.attributedText = attributedString
         
         isAccessibilityElement = true
-        accessibilityLabel = "task.cell"
-        accessibilityValue = task.content
+        accessibilityLabel = task.content
         accessibilityTraits = [.adjustable]
         
-        textView.accessibilityLabel = "todo.textView"
-        checkBox.accessibilityLabel = "todo.checkBox"
+        accessibilityIdentifier = "task.cell"
+        
+        textView.accessibilityIdentifier = "todo.textView"
+        checkBox.accessibilityIdentifier = "todo.checkBox"
     }
     
     @objc func didTouchUpInsideCheckBox(_ sender: UIButton)
