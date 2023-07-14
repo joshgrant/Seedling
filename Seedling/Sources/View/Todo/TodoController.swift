@@ -53,6 +53,7 @@ class TodoController: UIViewController
         self.database = database
         
         super.init(nibName: nil, bundle: nil)
+        registerForNotifications()
         tabComponent = .init(tab: .toDo, controller: self)
         
         progressIndicator.view.frame.size.height = Constants.progressIndicatorHeight
@@ -100,6 +101,58 @@ extension TodoController
     {
         static let progressIndicatorHeight: CGFloat = 100
         static let updateTasksScrollMultiplier: CGFloat = 1.8
+    }
+}
+
+extension TodoController
+{
+    func registerForNotifications()
+    {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardNotification),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil)
+    }
+    
+    @objc func handleKeyboardNotification(_ notification: Notification)
+    {
+        guard let userInfo = notification.userInfo else { return }
+
+        // In iOS 16.1 and later, the keyboard notification object is the screen the keyboard appears on.
+        guard let screen = notification.object as? UIScreen,
+              // Get the keyboard’s frame at the end of its animation.
+              let keyboardFrameEnd = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+
+        // Use that screen to get the coordinate space to convert from.
+        let fromCoordinateSpace = screen.coordinateSpace
+
+        // Get your view's coordinate space.
+        let toCoordinateSpace: UICoordinateSpace = view
+
+        // Convert the keyboard's frame from the screen's coordinate space to your view's coordinate space.
+        let convertedKeyboardFrameEnd = fromCoordinateSpace.convert(keyboardFrameEnd, to: toCoordinateSpace)
+
+        // Get the intersection between the keyboard's frame and the view's bounds to work with the
+        // part of the keyboard that overlaps your view.
+        let viewIntersection = view.bounds.intersection(convertedKeyboardFrameEnd)
+
+        // Check whether the keyboard intersects your view before adjusting your offset.
+        if !viewIntersection.isEmpty
+        {
+
+            // Adjust the offset by the difference between the view's height and the height of the
+            // intersection rectangle.
+            additionalSafeAreaInsets = UIEdgeInsets(
+                top: 0,
+                left: 0,
+                bottom: view.bounds.maxY - viewIntersection.minY,
+                right: 0)
+        }
+        else
+        {
+            additionalSafeAreaInsets = .zero
+        }
     }
 }
 //	override class func makeDelegate() -> TabContentDelegate

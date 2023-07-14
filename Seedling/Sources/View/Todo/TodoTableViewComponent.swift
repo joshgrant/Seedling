@@ -137,9 +137,11 @@ extension TodoTableViewComponent
     
     // MARK: - Selectors
     
+// TODO: Fix me !!!
     @objc func didTouchUpInsideButton(_ sender: SectionHeaderButton)
     {
-        guard taskToEdit == nil else { return }
+        if let content = taskToEdit?.content, content.isEmpty { return }
+        tableView.endEditing(true)
         makeTask(section: sender.section)
     }
     
@@ -212,17 +214,28 @@ extension TodoTableViewComponent: CellTextViewDelegate
 {
     func textViewDidBeginEditing(_ textView: UITextView, in cell: UITableViewCell) { }
     
-    func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell) {
+    func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
+    {
         taskToEdit?.content = textView.text
+        tableView.performBatchUpdates({
+            UIView.animate(withDuration: 0.0) {
+                cell.contentView.setNeedsLayout()
+                cell.contentView.layoutIfNeeded()
+            }
+        }, completion: nil)
     }
-    
+    // TODO: Need to fix!!!!
     func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell)
     {
         guard let task = taskToEdit else { return }
-        if task.content == nil || task.content == ""
+        task.content = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if task.content == nil || task.content?.isEmpty ?? false
         {
             context.delete(task)
             taskToEdit = nil
+            DispatchQueue.main.async { [weak self] in
+                try? self?.context.save()
+            }
         }
         else if let section = task.dailyTaskSection
         {
@@ -250,32 +263,6 @@ extension TodoTableViewComponent: UIScrollViewDelegate
         scrollViewDidScroll(scrollView.contentOffset.y)
     }
 }
-
-//extension TodoController: CheckBoxDelegate {
-//
-//    func checkBoxWillTouchUpInside(_ sender: TaskCell) {
-//
-//        // What about the priority array?
-//
-//        guard let task = sender.task else { return }
-//        guard let row = dayProvider.day.todosArray.firstIndex(of: task) else { return }
-//        previousRows[task] = row
-//    }
-//
-//    func checkBoxDidTouchUpInside(_ sender: TaskCell) {
-//
-//        guard let task = sender.task,
-//              let previousRow = previousRows[task],
-//              let currentRow = dayProvider.day.todosArray.firstIndex(of: task) else {
-//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-//            return
-//        }
-//
-//        tableView.beginUpdates()
-//        tableView.moveRow(at: IndexPath(row: previousRow, section: 1), to: IndexPath(row: currentRow, section: 1))
-//        tableView.endUpdates()
-//    }
-//}
 
 extension TodoTableViewComponent: CheckBoxDelegate
 {

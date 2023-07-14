@@ -210,11 +210,6 @@ extension TaskCell: UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView)
     {
-        context?.perform
-        {
-            self.task?.content = textView.text
-            try? self.context?.save()
-        }
 		delegate?.textViewDidEndEditing(textView, in: self)
     }
 	
