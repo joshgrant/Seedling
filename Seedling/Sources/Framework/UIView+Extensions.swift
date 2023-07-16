@@ -34,4 +34,14 @@ extension UIView
         
         return (top, right, bottom, leading)
     }
+    
+    func currentFirstResponder() -> UIResponder?
+    {
+        if isFirstResponder { return self }
+        for view in subviews
+        {
+            if let responder = view.currentFirstResponder() { return responder }
+        }
+        return nil
+    }
 }

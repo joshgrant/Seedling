@@ -14,7 +14,7 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     var tableView: UITableView
     var scrollViewDidScroll: (_ y: CGFloat) -> Void
     
-    private var taskToEdit: Task?
+    private var taskManagerComponent: TaskManagerComponent
     
     lazy var dataSource = DataSource(tableView: tableView, cellProvider: { [weak self] tableView, indexPath, id in
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCellIdentifier", for: indexPath)
@@ -48,6 +48,7 @@ class TodoTableViewComponent: NSObject, TableViewComponent
         let fetchRequest = Self.makeDayFetchRequest(day: day)
         fetchController = Self.makeFetchController(with: fetchRequest, context: context)
         self.fetchRequest = fetchRequest
+        self.taskManagerComponent = TaskManagerComponent(context: context)
         super.init()
         tableView.delegate = self
         // TODO: Duplication
@@ -56,10 +57,10 @@ class TodoTableViewComponent: NSObject, TableViewComponent
     }
     
     // MARK: - Functions
-    
     func updateDay(day: Day)
     {
-        taskToEdit = nil
+        // TODO: Does changing day currently dismiss the task/keyboard
+        taskManagerComponent.state = .inactive
         fetchRequest = Self.makeDayFetchRequest(day: day)
         fetchController = Self.makeFetchController(with: fetchRequest, context: context)
         fetchController.delegate = self
@@ -137,35 +138,33 @@ extension TodoTableViewComponent
     
     // MARK: - Selectors
     
-// TODO: Fix me !!!
     @objc func didTouchUpInsideButton(_ sender: SectionHeaderButton)
     {
-        if let content = taskToEdit?.content, content.isEmpty { return }
-        tableView.endEditing(true)
-        makeTask(section: sender.section)
+        // TODO: Check firstResponder
+//        if let responder = tableView.currentFirstResponder()
+//        {
+//            responder.resignFirstResponder()
+//        }
+        taskManagerComponent.addButtonPressed(section: sender.section)
     }
     
-    func makeTask(section: DailyTaskSection)
-    {
-        let count = section.tasks?.count ?? 0
-        let task = Task.make(in: context)
-        task.sortIndex = Int32(count)
-        section.addToTasks(task)
-        taskToEdit = task
-    }
+    
 }
 
 extension TodoTableViewComponent
 {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        let task = dataSource.itemIdentifier(for: indexPath)
-        if task == taskToEdit
+        switch taskManagerComponent.state
         {
-            if let cell = cell as? TaskCell
+        case .editingEmptyTask(let taskToEdit), .editingTaskWithContent(let taskToEdit):
+            let task = dataSource.itemIdentifier(for: indexPath)
+            if task == taskToEdit, let cell = cell as? TaskCell
             {
                 cell.textView.becomeFirstResponder()
             }
+        case .inactive:
+            break
         }
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -195,8 +194,15 @@ extension TodoTableViewComponent
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
-        guard let task = dataSource.itemIdentifier(for: indexPath), task != taskToEdit else { return .none }
+        guard let task = dataSource.itemIdentifier(for: indexPath) else { return .none }
         
+        switch taskManagerComponent.state
+        {
+        case .inactive:
+            break
+        case .editingEmptyTask(let taskToEdit), .editingTaskWithContent(let taskToEdit):
+            if task == taskToEdit { return .none }
+        }
         return UISwipeActionsConfiguration(actions: [.init(style: .destructive, title: Strings.delete.localizedCapitalized, handler: { [weak self] action, view, result in
             task
                 .dailyTaskSection?
@@ -216,7 +222,7 @@ extension TodoTableViewComponent: CellTextViewDelegate
     
     func textViewDidChange(_ textView: UITextView, in cell: UITableViewCell)
     {
-        taskToEdit?.content = textView.text
+        taskManagerComponent.textViewDidChange(content: textView.text)
         tableView.performBatchUpdates({
             UIView.animate(withDuration: 0.0) {
                 cell.contentView.setNeedsLayout()
@@ -224,28 +230,15 @@ extension TodoTableViewComponent: CellTextViewDelegate
             }
         }, completion: nil)
     }
-    // TODO: Need to fix!!!!
+    
     func textViewDidEndEditing(_ textView: UITextView, in cell: UITableViewCell)
     {
-        guard let task = taskToEdit else { return }
-        task.content = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if task.content == nil || task.content?.isEmpty ?? false
-        {
-            context.delete(task)
-            taskToEdit = nil
-            DispatchQueue.main.async { [weak self] in
-                try? self?.context.save()
-            }
-        }
-        else if let section = task.dailyTaskSection
-        {
-            makeTask(section: section)
-        }
+        taskManagerComponent.textViewEndedEditing()
     }
     
     func textViewShouldReturn(_ textView: UITextView, in cell: UITableViewCell) -> Bool
     {
-        textView.resignFirstResponder()
+        taskManagerComponent.returnButtonPressed()
         return true
     }
 }
@@ -255,7 +248,6 @@ extension TodoTableViewComponent: UIScrollViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     {
         scrollView.endEditing(false)
-        taskToEdit = nil
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
