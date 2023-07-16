@@ -63,9 +63,14 @@ class TaskManagerComponent
     
     func textViewEndedEditing()
     {
+        // TODO: Does this do anything?
+    }
+    
+    func scrollViewEndedEditing()
+    {
         switch state {
         case .inactive:
-            assertionFailure()
+            break
         case .editingEmptyTask(let task):
             context.delete(task)
             saveContext()

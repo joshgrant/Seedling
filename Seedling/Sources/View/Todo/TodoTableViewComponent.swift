@@ -248,6 +248,7 @@ extension TodoTableViewComponent: UIScrollViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView)
     {
         scrollView.endEditing(false)
+        taskManagerComponent.scrollViewEndedEditing()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
